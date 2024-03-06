@@ -1,3 +1,75 @@
 <resources>
     <string name="app_name">BollyHood</string>
+    <string name="str_mobile_verification">Add your phone number. we will send you a verification code so we know you\'re a real.</string>
+    <string name="str_send_otp">Send Otp</string>
+    <string name="str_mobile_number">Mobile Number</string>
+    <string name="str_privarcy_policy">By Providing my phone number, I hereby agree and accept the</string>
+    <string name="str_verification">Verification</string>
+    <string name="str_code_whatsapp">We have sent a code to your mobile number</string>
+    <string name="str_one_time_password">One Time Password</string>
+    <string name="str_code">Code</string>
+    <string name="str_resend"><u>Resend</u></string>
+    <string name="str_verify">Verify</string>
+    <string name="str_dont_have_an_account">Don\'t have an account?</string>
+    <string name="str_signup">Signup</string>
+    <string name="str_already_have_an_account">Already have an account?</string>
+    <string name="str_login">Login</string>
+    <string name="str_enter_below_info">Please enter your below information.</string>
+    <string name="str_name">Name</string>
+    <string name="str_email">Email Address</string>
+    <string name="str_category">Category</string>
+    <string name="str_password">Password</string>
+    <string name="str_new_password">New Password</string>
+    <string name="str_confirm_new_password">Confirm New Password</string>
+    <string name="str_new_forgot_password">Forgot Password</string>
+    <string name="str_reset_password">Reset Password</string>
+    <string name="str_forgot_password">Forgot Password ?</string>
+    <string name="str_confirm_password">Confirm Password</string>
+    <string name="str_next">Next</string>
+    <string name="str_update_profile">Update Profile</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_Logout">Logout</string>
+
+    <string name="str_camera">Camera</string>
+    <string name="str_galery">Gallery</string>
+
+    <string name="str_home">Home</string>
+    <string name="str_bookings">Bookings</string>
+    <string name="str_chat">Chat</string>
+    <string name="str_profile">Profile</string>
+
+    <string name="str_user_profile">User Profile</string>
+    <string name="str_general">General</string>
+    <string name="str_profile_settings">Profile Settings</string>
+    <string name="str_profile_settings_desc">Update and modify your profile</string>
+    <string name="str_privarcy">Privacy</string>
+    <string name="str_privarcy_desc">Change your Password</string>
+    <string name="str_account">Account</string>
+    <string name="str_account_desc">Personalize your account</string>
+    <string name="str_support">Support</string>
+    <string name="str_aboutus">About Us</string>
+    <string name="str_aboutus_desc">Know more about our team and goals</string>
+
+    <string name="str_change_password">Change Password</string>
+    <string name="str_old_password">Old Password</string>
+    <string name="str_my_profile">My Profile</string>
+
+
+    <string name="str_error_internet_connections">Please check your internet connections</string>
+    <string name="str_error_mobile_number">Please enter valid mobile number</string>
+    <string name="str_error_otp">Please enter valid otp</string>
+    <string name="str_error_name">Please enter name</string>
+    <string name="str_error_email_address">Please enter email address</string>
+    <string name="str_error_valid_email_address">Please enter valid email address</string>
+    <string name="str_error_category">Please select category</string>
+    <string name="str_error_password">Please enter password</string>
+    <string name="str_error_old_password">Please enter old password</string>
+    <string name="str_error_confirm_password">Please enter confirm password</string>
+    <string name="str_error_both_password_not_match">Password and confirm password does not match</string>
+    <string name="str_error_new_password">Please enter newPassword</string>
+    <string name="str_error_confirm_new_password">Please enter confirm new password</string>
+    <string name="str_both_new_password_not_match">New password and confirm new password does not match</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
