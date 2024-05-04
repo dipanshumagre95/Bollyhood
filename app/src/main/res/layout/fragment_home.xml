@@ -2,9 +2,18 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="adapter"
             type="com.app.bollyhood.adapter.BannerAdapter" />
+
+        <variable
+            name="categoryAdapter"
+            type="com.app.bollyhood.adapter.CategoryAdapter" />
+
+        <variable
+            name="expertiseAdapter"
+            type="com.app.bollyhood.adapter.ExpertiseAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,14 +22,221 @@
         android:layout_height="match_parent"
         tools:context=".fragment.HomeFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+        <RelativeLayout
+            android:id="@+id/rrMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
             android:padding="@dimen/_5sdp"
-            android:id="@+id/rvBanner"
-            android:adapter="@{adapter}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:id="@+id/llCircle"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_centerVertical="true"
+                android:alpha="0.6"
+                android:background="@drawable/circle"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/menus"
+                    app:tint="@android:color/holo_red_light" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/cvProfile"
+                android:layout_toEndOf="@id/llCircle"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/neueeinstellung_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp">
+
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/neueeinstellung_semibold"
+                    android:gravity="center"
+                    android:text="@string/str_need_some_help_today"
+                    android:textColor="@color/darkgrey"
+                    android:textSize="@dimen/_11sdp" />
+
+
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cvProfile"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_profile" />
+
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/rectangle_grey"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="@color/colorred"
+            android:fontFamily="@font/neueeinstellung_medium"
+            android:hint="@string/str_find_it_here"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/rrMain" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtSearchView">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBanner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{adapter}"
+                    android:padding="@dimen/_5sdp" />
+
+                <RelativeLayout
+                    android:id="@+id/rrCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvBanner">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/neueeinstellung_bold"
+                        android:text="@string/str_category"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAllCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/neueeinstellung_bold"
+                        android:text="@string/str_view_all"
+                        android:textColor="#96d9e6"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{categoryAdapter}"
+                    android:padding="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rrCategory" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rrExpertise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvCategory">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvExpertise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/neueeinstellung_bold"
+                        android:text="@string/str_hand_picked_talent"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAllExpertise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/neueeinstellung_bold"
+                        android:text="@string/str_view_all"
+                        android:textColor="#96d9e6"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvExpertise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{expertiseAdapter}"
+                    android:padding="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rrExpertise" />
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
 
         <ProgressBar

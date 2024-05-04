@@ -1,5 +1,6 @@
 package com.app.bollyhood.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,40 +10,64 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
+import com.app.bollyhood.activity.AllCategoryActivity
+import com.app.bollyhood.activity.AllExpertiseProfileActivity
+import com.app.bollyhood.activity.CastingCallsActivity
+import com.app.bollyhood.activity.MyProfileActivity
+import com.app.bollyhood.activity.ProfileDetailActivity
 import com.app.bollyhood.adapter.BannerAdapter
+import com.app.bollyhood.adapter.CategoryAdapter
+import com.app.bollyhood.adapter.ExpertiseAdapter
 import com.app.bollyhood.databinding.FragmentHomeBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BannerModel
+import com.app.bollyhood.model.CategoryModel
+import com.app.bollyhood.model.ExpertiseModel
+import com.app.bollyhood.util.PrefManager
+import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.onItemClick {
 
     lateinit var binding: FragmentHomeBinding
 
     var bannerList: ArrayList<BannerModel> = arrayListOf()
 
+    var categoryList: ArrayList<CategoryModel> = arrayListOf()
+
+    var experiseList: ArrayList<ExpertiseModel> = arrayListOf()
+
     val viewModel: DataViewModel by viewModels()
 
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
         initUI()
+        addListner()
         return binding.root
     }
 
     private fun initUI() {
 
-        if (isNetworkAvailable(requireContext())){
+        if (isNetworkAvailable(requireContext())) {
             viewModel.getBanner()
-        }else{
-            Toast.makeText(requireContext(),getString(R.string.str_error_internet_connections),Toast.LENGTH_SHORT).show()
+            viewModel.getRecentCategory()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         viewModel.isLoading.observe(requireActivity(), Observer {
@@ -60,16 +85,115 @@ class HomeFragment : Fragment() {
                 setAdapter(bannerList)
             }
         })
+
+        viewModel.categoryLiveData.observe(requireActivity(), Observer {
+            if (it.status == "1") {
+                categoryList.clear()
+                categoryList.addAll(it.result)
+                setCategoryAdapter(categoryList)
+            } else {
+                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.expertiseLiveData.observe(requireActivity(), Observer {
+            if (it.status == "1") {
+                experiseList.clear()
+                experiseList.addAll(it.result)
+
+                if (experiseList.size > 0) {
+                    binding.rrExpertise.visibility = View.VISIBLE
+                    setExpertiseAdapter(experiseList)
+                } else {
+                    binding.rrExpertise.visibility = View.GONE
+                }
+
+            } else {
+                binding.rrExpertise.visibility = View.GONE
+            }
+        })
+
+
     }
+
+
+    private fun addListner() {
+        binding.tvAllCategory.setOnClickListener {
+            startActivity(Intent(requireActivity(), AllCategoryActivity::class.java))
+        }
+        binding.tvAllExpertise.setOnClickListener {
+            startActivity(Intent(requireContext(), AllExpertiseProfileActivity::class.java))
+        }
+
+        binding.cvProfile.setOnClickListener {
+            startActivity(Intent(requireContext(), MyProfileActivity::class.java))
+        }
+    }
+
+    private fun setCategoryAdapter(categoryList: ArrayList<CategoryModel>) {
+        binding.apply {
+            rvCategory.layoutManager =
+                GridLayoutManager(requireContext(), 4)
+            rvCategory.setHasFixedSize(true)
+            categoryAdapter = CategoryAdapter(requireContext(), categoryList, this@HomeFragment)
+            rvCategory.adapter = categoryAdapter
+            categoryAdapter?.notifyDataSetChanged()
+        }
+    }
+
 
     private fun setAdapter(bannerList: ArrayList<BannerModel>) {
         binding.apply {
-            rvBanner.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            rvBanner.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             rvBanner.setHasFixedSize(true)
-            adapter= BannerAdapter(requireContext(),bannerList)
-            rvBanner.adapter=adapter
+            adapter = BannerAdapter(requireContext(), bannerList)
+            rvBanner.adapter = adapter
             adapter?.notifyDataSetChanged()
         }
+    }
+
+    private fun setExpertiseAdapter(experiseList: ArrayList<ExpertiseModel>) {
+        binding.apply {
+            rvExpertise.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvExpertise.setHasFixedSize(true)
+            expertiseAdapter = ExpertiseAdapter(requireActivity(), experiseList, this@HomeFragment)
+            rvExpertise.adapter = expertiseAdapter
+            expertiseAdapter?.notifyDataSetChanged()
+
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.tvUserName.text =
+            "Hi " + PrefManager(requireContext()).getvalue(StaticData.name) + ","
+        if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
+            Glide.with(requireContext())
+                .load(PrefManager(requireContext()).getvalue(StaticData.image))
+                .placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile)
+                .into(binding.cvProfile)
+        }
+
+        viewModel.getRecentExpertise(
+            PrefManager(requireContext()).getvalue(StaticData.id).toString()
+        )
+
+    }
+
+    override fun onClick(pos: Int, expertiseModel: ExpertiseModel) {
+        startActivity(
+            Intent(requireContext(), ProfileDetailActivity::class.java)
+                .putExtra(StaticData.userModel, Gson().toJson(expertiseModel))
+        )
+    }
+
+    override fun onClick(pos: Int, categoryModel: CategoryModel) {
+        if (categoryModel.type == "1") {
+            startActivity(Intent(requireContext(), CastingCallsActivity::class.java))
+        }
+
     }
 
 }

@@ -9,3 +9,4 @@ data class BannerResponse(
 data class BannerModel(
     val banner_image: String
 )
+

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0b0e30"
+        tools:context=".activity.BookRequestActivity">
+
+        <RelativeLayout
+            android:id="@+id/rrTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/neueeinstellung_semibold"
+                android:text="@string/str_send_request"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp" />
+
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_close_24"
+                android:tint="@color/white" />
+
+
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/edtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_full_name"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:inputType="text"
+            android:maxLength="100"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/rrTop" />
+
+
+        <EditText
+            android:id="@+id/edtWhatsappNumber"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_whatsapp_number"
+            android:inputType="number"
+            android:maxLength="10"
+            android:focusable="false"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/edtFullName" />
+
+        <EditText
+            android:id="@+id/edtPurposeOfTheBooking"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_puropose_of_the_booking"
+            android:inputType="text"
+            android:maxLength="100"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/edtWhatsappNumber" />
+
+        <LinearLayout
+            android:id="@+id/rrDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/edtPurposeOfTheBooking">
+
+
+            <EditText
+                android:id="@+id/edtDate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_grey"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/neueeinstellung_regular"
+                android:hint="@string/str_date"
+                android:inputType="none"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorgrey"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@id/edtWhatsappNumber" />
+
+
+            <EditText
+                android:id="@+id/edtTime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_grey"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/neueeinstellung_regular"
+                android:hint="@string/str_time"
+                android:inputType="none"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorgrey"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@id/edtWhatsappNumber" />
+
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chkTerms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/neueeinstellung_medium"
+            android:text="@string/str_accept_terms"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/rrDate" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBookNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rectangle_booknow"
+            android:fontFamily="@font/neueeinstellung_bold"
+            android:gravity="center"
+            android:padding="@dimen/_14sdp"
+            android:paddingStart="@dimen/_50sdp"
+            android:paddingEnd="@dimen/_50sdp"
+            android:text="@string/str_book_now"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chkTerms" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/neueeinstellung_semibold"
+            android:gravity="center"
+            android:text="@string/str_reply"
+            android:textColor="@color/greylight"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

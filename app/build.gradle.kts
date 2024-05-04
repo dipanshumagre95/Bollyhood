@@ -4,6 +4,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -32,18 +33,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
-        exclude("META-INF/LICENSE")
-        exclude("META-INF/LICENSE.txt")
-        exclude("META-INF/license.txt")
-        exclude("META-INF/NOTICE")
-        exclude("META-INF/NOTICE.txt")
-        exclude("META-INF/notice.txt")
-        exclude("META-INF/ASL2.0")
-        exclude("META-INF/*.kotlin_module")
-        exclude("META-INF/androidx.cardview_cardview.version")
-    }
+//    packagingOptions {
+//        exclude("META-INF/DEPENDENCIES")
+//        exclude("META-INF/LICENSE")
+//        exclude("META-INF/LICENSE.txt")
+//        exclude("META-INF/license.txt")
+//        exclude("META-INF/NOTICE")
+//        exclude("META-INF/NOTICE.txt")
+//        exclude("META-INF/notice.txt")
+//        exclude("META-INF/ASL2.0")
+//        exclude("META-INF/*.kotlin_module")
+//        exclude("META-INF/androidx.cardview_cardview.version")
+//    }
 
 
     kotlinOptions {
@@ -88,8 +89,8 @@ dependencies {
 
     //di
     implementation("com.github.bumptech.glide:glide:4.15.0")
-    implementation("com.google.dagger:hilt-android:2.42")
-    kapt("com.google.dagger:hilt-android-compiler:2.42")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.1.0")
 
     //retrofit
@@ -111,6 +112,15 @@ dependencies {
 
     //circleimageview
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    //youtubeplayerview
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.0.0")
+
+    implementation("com.github.colourmoon:readmore-textview:v1.0.2")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation("com.google.firebase:firebase-analytics")
+
+    implementation("com.google.firebase:firebase-messaging:24.0.0")
 
 
 }

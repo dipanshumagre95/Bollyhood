@@ -15,4 +15,6 @@
     <color name="greycolor">#EEEEEE</color>
     <color name="grey">#ECF0F4</color>
     <color name="blackoapcity">#AB000000</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="bgpink">#fcc2c4</color>
 </resources>

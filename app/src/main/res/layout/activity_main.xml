@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_regular"
+                    android:fontFamily="@font/neueeinstellung_regular"
                     android:text="@string/str_home"
                     android:textColor="@color/darkgrey"
                     android:textSize="@dimen/_11sdp" />
@@ -82,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_regular"
+                    android:fontFamily="@font/neueeinstellung_regular"
                     android:text="@string/str_bookings"
                     android:textColor="@color/darkgrey"
                     android:textSize="@dimen/_11sdp" />
@@ -113,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_regular"
+                    android:fontFamily="@font/neueeinstellung_regular"
                     android:text="@string/str_chat"
                     android:textColor="@color/darkgrey"
                     android:textSize="@dimen/_11sdp" />
@@ -143,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_regular"
+                    android:fontFamily="@font/neueeinstellung_regular"
                     android:text="@string/str_profile"
                     android:textColor="@color/darkgrey"
                     android:textSize="@dimen/_11sdp" />

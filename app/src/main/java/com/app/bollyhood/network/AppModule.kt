@@ -1,11 +1,11 @@
 package com.app.bollyhood.network
 
 import com.app.bollyhood.util.StaticData
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -47,9 +47,15 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
+
         return Retrofit.Builder()
             .baseUrl(StaticData.BASE_URL) // Replace with your base URL
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
     }

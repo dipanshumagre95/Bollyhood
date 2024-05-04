@@ -8,16 +8,19 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -25,10 +28,12 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityMyProfileBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isvalidDescriptions
 import com.app.bollyhood.extensions.isvalidEmailAddress
 import com.app.bollyhood.extensions.isvalidMobileNumber
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.model.ProfileModel
+import com.app.bollyhood.model.WorkLinkData
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -38,12 +43,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 @AndroidEntryPoint
 class MyProfileActivity : AppCompatActivity() {
@@ -54,6 +62,8 @@ class MyProfileActivity : AppCompatActivity() {
     private var isCamera = false
     private var isGallery = false
     private var profilePath = ""
+    private var category_Id: String = ""
+    private var workLinkList: ArrayList<WorkLinkData> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,16 +91,23 @@ class MyProfileActivity : AppCompatActivity() {
             ivBack.setOnClickListener {
                 finish()
             }
+
+            tvAddWorkLink.setOnClickListener {
+                addNewView()
+            }
+
             tvUpdateProfile.setOnClickListener {
 
                 if (isNetworkAvailable(mContext)) {
+                    workLinkList.clear()
                     if (isvalidName(
-                            mContext,
-                            binding.edtName.text.toString().trim()
+                            mContext, binding.edtName.text.toString().trim()
                         ) && isvalidEmailAddress(
                             mContext, binding.edtEmailAddress.text.toString().trim()
                         ) && isvalidMobileNumber(
                             mContext, binding.edtMobileNumber.text.toString().trim()
+                        ) && isvalidDescriptions(
+                            mContext, binding.edtDescriptions.text.toString().trim()
                         )
                     ) {
 
@@ -119,6 +136,31 @@ class MyProfileActivity : AppCompatActivity() {
                         )
 
 
+                        val desc: RequestBody = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            binding.edtDescriptions.text.toString().trim()
+                        )
+
+                        val jobsDone: RequestBody = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            binding.edtJobsDone.text.toString().trim()
+                        )
+
+                        val experience: RequestBody = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            binding.edtExperience.text.toString().trim()
+                        )
+
+                        val reviews: RequestBody = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(), "5"
+                        )
+
+
+                        val categoryId: RequestBody = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(), category_Id
+                        )
+
+
                         var profileBody: MultipartBody.Part? = null
                         if (profilePath.isNotEmpty()) {
                             val file = File(profilePath)
@@ -130,8 +172,55 @@ class MyProfileActivity : AppCompatActivity() {
                             )
                         }
 
+
+                        val count = binding.parentLinearLayout.childCount
+                        var v: View?
+
+                        for (i in 0 until count) {
+                            v = binding.parentLinearLayout.getChildAt(i)
+
+                            val edtWorkLinkName: EditText = v.findViewById(R.id.edtWorkLinkName)
+                            val edtWorkLinkUrl: EditText = v.findViewById(R.id.edtAddWorkLink)
+
+                            // create an object of Language class
+                            val workLink = edtWorkLinkName.text.toString().trim()
+                            val url = edtWorkLinkUrl.text.toString().trim()
+
+                            // add the data to arraylist
+                            workLinkList.add(WorkLinkData(workLink, url))
+
+                        }
+
+                        val jsonArray = JSONArray()
+
+                        for (i in 0 until workLinkList.size) {
+                            val jsonObject = JSONObject()
+                            jsonObject.put("worklink_name", workLinkList[i].name)
+                            jsonObject.put("worklink_url", workLinkList[i].workLinkUrl)
+                            jsonArray.put(jsonObject)
+
+                        }
+
+
+                        val workLink: RequestBody = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                        )
+
+
+
                         viewModel.updateProfile(
-                            name, email, user_Id, cat_Id, mobileNumber, profileBody
+                            name,
+                            email,
+                            user_Id,
+                            cat_Id,
+                            mobileNumber,
+                            desc,
+                            jobsDone,
+                            experience,
+                            reviews,
+                            workLink,
+                            categoryId,
+                            profileBody,
                         )
 
 
@@ -158,6 +247,14 @@ class MyProfileActivity : AppCompatActivity() {
 
     }
 
+    private fun addNewView() {
+        // this method inflates the single item layout
+        // inside the parent linear layout
+        val inflater = LayoutInflater.from(this).inflate(R.layout.add_work_link, null)
+        binding.parentLinearLayout.addView(inflater, binding.parentLinearLayout.childCount)
+
+    }
+
     private fun addObserevs() {
         viewModel.isLoading.observe(this, Observer {
             if (it) {
@@ -179,7 +276,6 @@ class MyProfileActivity : AppCompatActivity() {
         viewModel.updateProfileLiveData.observe(this) {
             if (it.status == "1") {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-
                 setPrefData(it.result)
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
@@ -212,6 +308,67 @@ class MyProfileActivity : AppCompatActivity() {
         binding.edtName.setText(profileModel.name)
         binding.edtEmailAddress.setText(profileModel.email)
         binding.edtMobileNumber.setText(profileModel.mobile)
+        binding.edtDescriptions.setText(profileModel.description)
+        binding.edtJobsDone.setText(profileModel.jobs_done)
+        binding.edtExperience.setText(profileModel.experience)
+        binding.edtCategory.setText(profileModel.categories[0].category_name)
+        category_Id = profileModel.categories[0].category_id
+
+
+        // binding.parentLinearLayout.childCount = profileModel.work_links.size
+
+        var v: View
+        // binding.parentLinearLayout.addView(inflater,count)
+
+
+        for (i in 0 until profileModel.work_links.size) {
+            v = LayoutInflater.from(this).inflate(R.layout.add_work_link, null)
+
+            val edtWorkLinkName: EditText = v.findViewById(R.id.edtWorkLinkName)
+            val edtWorkLinkUrl: EditText = v.findViewById(R.id.edtAddWorkLink)
+            val llMain: LinearLayout = v.findViewById(R.id.llMain)
+
+            edtWorkLinkName.setText(profileModel.work_links[i].worklink_name)
+            edtWorkLinkUrl.setText(profileModel.work_links[i].worklink_url)
+
+
+            llMain.layoutParams =
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            llMain.orientation = LinearLayout.HORIZONTAL
+
+            //  textView = TextView(this)
+            // textView.setText(s.get(i))
+            if (edtWorkLinkName.getParent() != null && edtWorkLinkUrl.parent != null) {
+                (edtWorkLinkName.getParent() as LinearLayout).removeView(edtWorkLinkName) // <- fix
+                (edtWorkLinkUrl.getParent() as LinearLayout).removeView(edtWorkLinkUrl) // <- fix
+            }
+
+            llMain.addView(edtWorkLinkName)
+            llMain.addView(edtWorkLinkUrl)
+
+
+            binding.parentLinearLayout.addView(llMain)
+            // tViews.add(textView)
+        }
+
+
+        /*
+                for (i in 0 until count) {
+                    v = binding.parentLinearLayout.getChildAt(i)
+
+                    val edtWorkLinkName: EditText = v.findViewById(R.id.edtWorkLinkName)
+                    val edtWorkLinkUrl: EditText = v.findViewById(R.id.edtAddWorkLink)
+
+                    edtWorkLinkName.setText(profileModel.work_links[i].worklink_name)
+                    edtWorkLinkUrl.setText(profileModel.work_links[i].worklink_url)
+
+                }
+        */
+
+
     }
 
     private fun checkPermission(): Boolean {

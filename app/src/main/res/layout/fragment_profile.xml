@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_semibold"
+                    android:fontFamily="@font/neueeinstellung_semibold"
                     android:gravity="center"
                     android:text="@string/str_user_profile"
                     android:textColor="@color/white"
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:fontFamily="@font/sen_medium"
+            android:fontFamily="@font/neueeinstellung_medium"
             android:gravity="center"
             android:text=""
             android:textColor="@color/black"
@@ -80,308 +80,453 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cvProfile" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvGeneral"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/sen_medium"
-            android:gravity="center"
-            android:text="@string/str_general"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="@dimen/_13sdp"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUserName" />
-
-
-        <RelativeLayout
-            android:id="@+id/rrProfile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_white"
-            android:elevation="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/tvGeneral">
-
+            app:layout_constraintTop_toBottomOf="@id/tvUserName">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvGeneral"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_semibold"
-                    android:text="@string/str_profile_settings"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/neueeinstellung_medium"
+                    android:gravity="center"
+                    android:text="@string/str_general"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="@dimen/_13sdp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rrProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tvGeneral">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_profile_settings"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_profile_settings_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rrprivacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/rrProfile">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_privarcy"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_privarcy_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rrAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/rrprivacy">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_account"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_account_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rrBookMark"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/rrAccount">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_my_bookmark"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_favourites_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp"
+                            android:visibility="visible" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        android:visibility="visible"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rrCastingBookMark"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/rrAccount">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="My Casting BookMark"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_favourites_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp"
+                            android:visibility="visible" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        android:visibility="visible"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rrLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/rrBookMark">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_Logout"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_account_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp"
+                            android:visibility="gone" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        android:visibility="gone"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
+
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvSupport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_medium"
-                    android:text="@string/str_profile_settings_desc"
-                    android:textColor="@color/darkgrey"
-                    android:textSize="@dimen/_10sdp" />
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/neueeinstellung_medium"
+                    android:gravity="center"
+                    android:text="@string/str_support"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rrLogout" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rrAboutUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_white"
+                    android:elevation="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tvSupport">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_aboutus"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_aboutus_desc"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/_10sdp" />
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/baseline_keyboard_arrow_right_24"
+                        app:tint="@color/darkgrey" />
+
+
+                </RelativeLayout>
 
 
             </LinearLayout>
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                app:tint="@color/darkgrey" />
+        </androidx.core.widget.NestedScrollView>
 
 
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rrprivacy"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_white"
-            android:elevation="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/rrProfile">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_semibold"
-                    android:text="@string/str_privarcy"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_medium"
-                    android:text="@string/str_privarcy_desc"
-                    android:textColor="@color/darkgrey"
-                    android:textSize="@dimen/_10sdp" />
-
-
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                app:tint="@color/darkgrey" />
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rrAccount"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_white"
-            android:elevation="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/rrprivacy">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_semibold"
-                    android:text="@string/str_account"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_medium"
-                    android:text="@string/str_account_desc"
-                    android:textColor="@color/darkgrey"
-                    android:textSize="@dimen/_10sdp" />
-
-
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                app:tint="@color/darkgrey" />
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rrLogout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_white"
-            android:elevation="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/rrAccount">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_semibold"
-                    android:text="@string/str_Logout"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_medium"
-                    android:text="@string/str_account_desc"
-                    android:textColor="@color/darkgrey"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="gone" />
-
-
-            </LinearLayout>
-
-
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                app:tint="@color/darkgrey" />
-
-
-        </RelativeLayout>
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvSupport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/sen_medium"
-            android:gravity="center"
-            android:text="@string/str_support"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rrLogout" />
-
-
-        <RelativeLayout
-            android:id="@+id/rrAboutUs"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_white"
-            android:elevation="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/tvSupport">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_semibold"
-                    android:text="@string/str_aboutus"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/sen_medium"
-                    android:text="@string/str_aboutus_desc"
-                    android:textColor="@color/darkgrey"
-                    android:textSize="@dimen/_10sdp" />
-
-
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                app:tint="@color/darkgrey" />
-
-
-        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

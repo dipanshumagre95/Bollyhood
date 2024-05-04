@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.MyProfileActivity">
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/sen_semibold"
+                android:fontFamily="@font/neueeinstellung_semibold"
                 android:gravity="center"
                 android:text="@string/str_my_profile"
                 android:textColor="@color/white"
@@ -42,103 +42,241 @@
 
         </LinearLayout>
 
-
-        <RelativeLayout
-            android:id="@+id/rrProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:gravity="right|center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llTop">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cvProfile"
-                android:layout_width="@dimen/_90sdp"
-                android:layout_height="@dimen/_90sdp"
-                android:src="@drawable/ic_profile"
-                app:civ_border_width="@dimen/_1sdp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivCamera"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignEnd="@id/cvProfile"
-                android:layout_marginBottom="@dimen/_3ssp"
-                android:layout_alignBottom="@id/cvProfile"
-                android:layout_marginEnd="@dimen/_7sdp"
-                android:src="@drawable/edit"
-                android:tint="@color/orangecolor"
-                app:tint="@color/orangecolor" />
-
-
-        </RelativeLayout>
-
-
-        <EditText
-            android:id="@+id/edtName"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/sen_regular"
-            android:hint="@string/str_name"
-            android:inputType="textPersonName"
-            android:maxLength="50"
-            android:maxLines="1"
-            android:paddingStart="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintTop_toBottomOf="@id/rrProfile" />
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:layout_above="@id/tvUpdateProfile"
+            android:layout_below="@id/llTop">
 
-        <EditText
-            android:id="@+id/edtEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/sen_regular"
-            android:hint="@string/str_email"
-            android:inputType="textEmailAddress"
-            android:maxLength="100"
-            android:maxLines="1"
-            android:paddingStart="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintTop_toBottomOf="@id/edtName" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edtMobileNumber"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/sen_regular"
-            android:hint="@string/str_mobile_number"
-            android:inputType="phone"
-            android:maxLength="10"
-            android:focusable="false"
-            android:clickable="false"
-            android:focusableInTouchMode="false"
-            android:maxLines="1"
-            android:paddingStart="@dimen/_10sdp"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintTop_toBottomOf="@id/edtEmailAddress" />
+
+                <RelativeLayout
+                    android:id="@+id/rrProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="right|center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llTop">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cvProfile"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:src="@drawable/ic_profile"
+                        app:civ_border_width="@dimen/_1sdp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCamera"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignEnd="@id/cvProfile"
+                        android:layout_alignBottom="@id/cvProfile"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_3ssp"
+                        android:src="@drawable/edit"
+                        android:tint="@color/orangecolor"
+                        app:tint="@color/orangecolor" />
+
+
+                </RelativeLayout>
+
+
+                <EditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:hint="@string/str_name"
+                    android:inputType="textPersonName"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorgrey"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@id/rrProfile" />
+
+                <EditText
+                    android:id="@+id/edtEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:hint="@string/str_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="100"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorgrey"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@id/edtName" />
+
+                <EditText
+                    android:id="@+id/edtMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:hint="@string/str_mobile_number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorgrey"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@id/edtEmailAddress" />
+
+
+                <EditText
+                    android:id="@+id/edtDescriptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:gravity="start"
+                    android:hint="@string/str_descriptions"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:padding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorgrey"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@id/edtMobileNumber" />
+
+                <EditText
+                    android:id="@+id/edtCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_grey"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:hint="@string/str_category"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorgrey"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@id/edtEmailAddress" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/edtDescriptions">
+
+
+                    <EditText
+                        android:id="@+id/edtJobsDone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_jobs_done"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@id/rrProfile" />
+
+                    <EditText
+                        android:id="@+id/edtExperience"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_experience"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@id/rrProfile" />
+
+
+                </LinearLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvAddWorkLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/rectangle_booknow"
+                    android:fontFamily="@font/neueeinstellung_bold"
+                    android:gravity="center"
+                    android:padding="@dimen/_14sdp"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:text="@string/str_add_new_work_link"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11sdp" />
+
+
+                <LinearLayout
+                    android:id="@+id/parent_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
 
         <TextView
@@ -150,13 +288,14 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:background="@drawable/rectangle_btn"
-            android:fontFamily="@font/sen_bold"
+            android:fontFamily="@font/neueeinstellung_bold"
             android:gravity="center"
             android:padding="@dimen/_14sdp"
             android:text="@string/str_update_profile"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp"
+            android:layout_alignParentBottom="true"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 
@@ -168,12 +307,13 @@
             android:layout_gravity="center"
             android:theme="@style/CircularProgress"
             android:visibility="gone"
+            android:layout_centerInParent="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>
 

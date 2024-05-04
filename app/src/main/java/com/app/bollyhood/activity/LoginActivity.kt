@@ -121,10 +121,9 @@ class LoginActivity : AppCompatActivity() {
         spanTxt.append(" Term of service")
         spanTxt.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                Toast.makeText(
-                    applicationContext, "Term of service Clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+                startActivity(Intent(mContext,CMSActivity::class.java)
+                    .putExtra("mFrom","terms-condition")
+                )
             }
         }, spanTxt.length - " Term of service".length, spanTxt.length, 0)
         // FOR SET TEXT COLOR
@@ -147,10 +146,9 @@ class LoginActivity : AppCompatActivity() {
         spanTxt.append(" Privacy Policy")
         spanTxt.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                Toast.makeText(
-                    applicationContext, "Privacy Policy Clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+                startActivity(Intent(mContext,CMSActivity::class.java)
+                    .putExtra("mFrom","privacy-policy")
+                )
             }
         }, spanTxt.length - " Privacy Policy".length, spanTxt.length, 0)
         // FOR SET TEXT COLOR

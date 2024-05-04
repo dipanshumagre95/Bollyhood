@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.app.bollyhood.adapter.CategoryInnerAdapter" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_3ssp"
+        android:padding="@dimen/_3ssp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvInnerCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adapter="@{adapter}"
+            android:visibility="gone" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivCategoryImage"
+            android:layout_width="@dimen/_50sdp"
+            android:background="@drawable/circle_transparent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivCategoryImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/neueeinstellung_semibold"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:text="fefefefefedgdggsgvfsvfsvds"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp" />
+
+
+    </RelativeLayout>
+</layout>

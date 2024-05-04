@@ -16,8 +16,11 @@
     <string name="str_login">Login</string>
     <string name="str_enter_below_info">Please enter your below information.</string>
     <string name="str_name">Name</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_no">No</string>
     <string name="str_email">Email Address</string>
     <string name="str_category">Category</string>
+    <string name="str_subcategory">SubCategory</string>
     <string name="str_password">Password</string>
     <string name="str_new_password">New Password</string>
     <string name="str_confirm_new_password">Confirm New Password</string>
@@ -29,6 +32,12 @@
     <string name="str_update_profile">Update Profile</string>
     <string name="str_cancel">Cancel</string>
     <string name="str_Logout">Logout</string>
+    <string name="str_my_bookmark">My Favourites</string>
+    <string name="str_add_new_work_link">Add New Work Link</string>
+    <string name="str_add_work_link_url">Add Work Link Url</string>
+    <string name="str_work_link_name">Work Link Name</string>
+
+    <string name="str_descriptions">Descriptions</string>
 
     <string name="str_camera">Camera</string>
     <string name="str_galery">Gallery</string>
@@ -37,6 +46,7 @@
     <string name="str_bookings">Bookings</string>
     <string name="str_chat">Chat</string>
     <string name="str_profile">Profile</string>
+    <string name="str_checkout_now">Checkout Now</string>
 
     <string name="str_user_profile">User Profile</string>
     <string name="str_general">General</string>
@@ -46,18 +56,87 @@
     <string name="str_privarcy_desc">Change your Password</string>
     <string name="str_account">Account</string>
     <string name="str_account_desc">Personalize your account</string>
+    <string name="str_favourites_desc">Added your favourites profile</string>
     <string name="str_support">Support</string>
     <string name="str_aboutus">About Us</string>
     <string name="str_aboutus_desc">Know more about our team and goals</string>
+    <string name="str_purchase_plan">Purchase Plan</string>
+    <string name="str_activate_pro">Activate BollyMolly Pro</string>
+    <string name="str_plan_desc">Access to all paid &amp; locked profiles without any hustle. Plus No Ads.</string>
+    <string name="str_choose_your_plan">Choose your plan</string>
+
+    <string name="str_no_bookings_found">No Bookings Found</string>
+
+    <string name="str_subscriptions">Subscriptions</string>
+    <string name="str_one_time_offer">One Time Offer</string>
+    <string name="str_offer_desc">If you choose bollymolly pro now you will get 50% discount
+    on our most popular subscription.</string>
+
+    <string name="str_title_privacy_policy">Privacy Policy</string>
+    <string name="str_title_terms_and_conditions">Terms &amp; Conditions</string>
+    <string name="str_title_about_us">About Us</string>
 
     <string name="str_change_password">Change Password</string>
     <string name="str_old_password">Old Password</string>
     <string name="str_my_profile">My Profile</string>
+    <string name="str_no_favourites_found">No Favourites Found</string>
+    <string name="str_my_bookings">My Bookings</string>
+    <string name="str_need_some_help_today">Need some help today?</string>
+    <string name="str_find_it_here">Find it here</string>
 
+    <string name="str_view_all">View All</string>
+    <string name="str_our_expertise">Our Experties</string>
+    <string name="str_hand_picked_talent">Hand Picked Talent!</string>
+
+    <string name="str_individual">Individual</string>
+    <string name="str_agency">Agency</string>
+
+    <string name="str_reviews">Reviews</string>
+    <string name="str_jobs_done">Jobs Done</string>
+    <string name="str_experience">Experience</string>
+    <string name="str_work_links">Work Links</string>
+    <string name="str_book">Book</string>
+    <string name="str_call_us">Call</string>
+
+    <string name="str_payment_successfull">Payment Successfull !</string>
+    <string name="str_payment_desc">We received your payment. Now enjoy uninterested bollymolly premium services.</string>
+    <string name="str_go_back">Go Back</string>
+    <string name="str_invoice">Invoice</string>
+
+    <string name="str_send_request">Send a\nrequest</string>
+    <string name="str_full_name">Full Name</string>
+    <string name="str_whatsapp_number">Whatsapp Number</string>
+    <string name="str_puropose_of_the_booking">Purpose of the booking</string>
+    <string name="str_date">Date</string>
+    <string name="str_time">Time</string>
+    <string name="str_accept_terms">Accept Terms &amp; Conditions</string>
+    <string name="str_book_now">Book Now</string>
+    <string name="str_reply">Expect Reply Within 1-2 hr</string>
+    <string name="str_casting_calls">Casting Calls</string>
+    <string name="str_casting_details">Casting Details</string>
+    <string name="str_casting_requirements">Casting Requirement</string>
+    <string name="str_skills">Skills &amp; Requirement</string>
+    <string name="str_your_role">Your Role</string>
+    <string name="str_save_later">Save Later</string>
+    <string name="str_apply_now">Apply Now</string>
+
+    <string name="str_dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+
+    <string name="str_choose_categories">Choose From More Than 15+ Categories</string>
+
+    <string name="str_quick_apply">Quick Apply</string>
+    <string name="str_apply_desc">Submit your video using Our In-App Recording Feature.</string>
+    <string name="str_upload_photos">Upload 3-4 photos for better results</string>
+    <string name="str_add_photos">Add Photos</string>
+    <string name="str_add_video">Add Video</string>
+    <string name="str_upload_auditions">Upload your audition or record one</string>
+    <string name="str_download_script">Download Script</string>
 
     <string name="str_error_internet_connections">Please check your internet connections</string>
     <string name="str_error_mobile_number">Please enter valid mobile number</string>
+    <string name="str_error_descriptions">Please enter descriptions</string>
     <string name="str_error_otp">Please enter valid otp</string>
+    <string name="str_upload_profile_picture">Please upload profile picture</string>
     <string name="str_error_name">Please enter name</string>
     <string name="str_error_email_address">Please enter email address</string>
     <string name="str_error_valid_email_address">Please enter valid email address</string>
@@ -69,6 +148,11 @@
     <string name="str_error_new_password">Please enter newPassword</string>
     <string name="str_error_confirm_new_password">Please enter confirm new password</string>
     <string name="str_both_new_password_not_match">New password and confirm new password does not match</string>
+    <string name="str_error_enter_full_name">Please enter your full name</string>
+    <string name="str_error_enter_whatsapp_number">Please enter your whatsapp number</string>
+    <string name="str_error_enter_booking">Please enter purpose of booking</string>
+    <string name="str_error_select_date">Please select date</string>
+    <string name="str_error_time">Please select time</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

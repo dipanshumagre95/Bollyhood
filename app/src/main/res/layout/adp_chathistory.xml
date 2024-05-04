@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.app.bollyhood.model.ChatModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/llSender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_80sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chat_rectangle_green">
+
+
+                <ImageView
+                    android:padding="@dimen/_4sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:id="@+id/ivSendImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvSender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/neueeinstellung_medium"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:padding="@dimen/_10ssp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp" />
+
+
+
+
+            </LinearLayout>
+
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSenderTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_80sdp"
+                android:fontFamily="@font/neueeinstellung_regular"
+                android:gravity="end"
+                android:padding="@dimen/_10ssp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llReceiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <LinearLayout
+                android:layout_marginEnd="@dimen/_80sdp"
+                android:background="@drawable/chat_rectangle_grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_margin="@dimen/_5sdp"
+                    android:id="@+id/ivReceiverImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:padding="@dimen/_4sdp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvReceiver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/neueeinstellung_medium"
+                    android:gravity="center"
+                    android:padding="@dimen/_10ssp"
+                    android:text=""
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
+
+
+
+
+            </LinearLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvReceiverTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_80sdp"
+                android:fontFamily="@font/neueeinstellung_regular"
+                android:gravity="start"
+                android:padding="@dimen/_10ssp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

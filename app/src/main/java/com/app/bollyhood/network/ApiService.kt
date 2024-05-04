@@ -2,11 +2,23 @@ package com.app.bollyhood.network
 
 import com.app.bollyhood.model.BannerModel
 import com.app.bollyhood.model.BannerResponse
+import com.app.bollyhood.model.BookMarkResponse
+import com.app.bollyhood.model.BookingResponse
+import com.app.bollyhood.model.CMSResponse
+import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
+import com.app.bollyhood.model.ChatResponse
+import com.app.bollyhood.model.ExpertiseResponse
 import com.app.bollyhood.model.LoginResponse
 import com.app.bollyhood.model.OtpResponse
+import com.app.bollyhood.model.PlanModel
+import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
+import com.app.bollyhood.model.SubCategoryResponse
+import com.app.bollyhood.model.SubscriptionModel
+import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
+import com.app.bollyhood.model.castinglist.CastingListResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -23,14 +35,20 @@ interface ApiService {
     @GET("category.php")
     suspend fun getCategory(): Response<CategoryResponse>
 
-    @FormUrlEncoded
+    @GET("recent_category.php")
+    suspend fun getRecentCategory(): Response<CategoryResponse>
+
+    @Multipart
     @POST("sign_up.php")
     suspend fun doSignup(
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("cat_id") cat_id: String,
-        @Field("mobile") mobile: String
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("categories") cat_id: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("user_type") user_type: RequestBody,
+        @Part("sub_categories") sub_categories: RequestBody,
+        @Part image: MultipartBody.Part?,
     ): Response<SuccessResponse>
 
     @FormUrlEncoded
@@ -40,10 +58,18 @@ interface ApiService {
     ): Response<OtpResponse>
 
     @FormUrlEncoded
+    @POST("logout.php")
+    suspend fun doLogout(
+        @Field("uid")uid:String
+    ):Response<SuccessResponse>
+
+    @FormUrlEncoded
     @POST("send_otp.php")
     suspend fun doLogin(
         @Field("mobile") mobile: String,
-        @Field("otp") otp: String
+        @Field("otp") otp: String,
+        @Field("fcmtoken") fcmToken: String,
+        @Field("is_online") is_online: String
     ): Response<LoginResponse>
 
 
@@ -79,11 +105,128 @@ interface ApiService {
         @Part("uid") uid: RequestBody,
         @Part("cat_id") cat_id: RequestBody,
         @Part("mobile") mobile: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("jobs_done") jobs_done: RequestBody,
+        @Part("experience") experience: RequestBody,
+        @Part("reviews") reviews: RequestBody,
+        @Part("worklinks") worklinks: RequestBody?,
+        @Part("categories") category_id: RequestBody?,
         @Part image: MultipartBody.Part?,
     ): Response<ProfileResponse>
 
 
     @GET("banner.php")
     suspend fun getBanner(): Response<BannerResponse>
+
+    @GET("recent_users.php")
+    suspend fun getRecentExpertise(
+        @Query("uid") uid: String
+    ): Response<ExpertiseResponse>
+
+    @GET("all_users.php")
+    suspend fun getAllExpertise(
+        @Query("uid") uid: String
+    ): Response<ExpertiseResponse>
+
+    @FormUrlEncoded
+    @POST("expertise_profile.php")
+    suspend fun getExpertiseProfileDetail(
+        @Field("id") id: String?,
+        @Field("uid") uid: String?
+    ): Response<ExpertiseResponse>
+
+    @FormUrlEncoded
+    @POST("mod_bookmark.php")
+    suspend fun addRemoveBookMark(
+        @Field("uid") uid: String?,
+        @Field("bookmark_uid") bookmark_uid: String?,
+        @Field("bookmark_mode") bookmark_mode: String?
+    ): Response<SuccessResponse>
+
+    @FormUrlEncoded
+    @POST("all_bookmark.php")
+    suspend fun myBookMark(
+        @Field("uid") uid: String?
+    ): Response<BookMarkResponse>
+
+
+    @FormUrlEncoded
+    @POST("mod_casting_bookmark.php")
+    suspend fun castingBookMark(
+        @Field("uid") uid: String?,
+        @Field("casting_id") casting_id: String?,
+        @Field("bookmark_mode") bookmark_mode: String?
+    ): Response<SuccessResponse>
+
+
+    @FormUrlEncoded
+    @POST("mod_booking.php")
+    suspend fun bookProfile(
+        @Field("uid") uid: String?,
+        @Field("w_mobile") w_mobile: String?,
+        @Field("purpose") purpose: String?,
+        @Field("booking_date") booking_date: String?,
+        @Field("booking_time") booking_time: String?,
+        @Field("category_id") category_id: String?,
+        @Field("booking_uid") booking_uid: String?,
+    ): Response<SuccessResponse>
+
+    @FormUrlEncoded
+    @POST("all_booking.php")
+    suspend fun getBooking(
+        @Field("uid") uid: String?
+    ): Response<BookingResponse>
+
+    @GET("plan.php")
+    suspend fun getPlan(
+
+    ): Response<PlanResponse>
+
+    @FormUrlEncoded
+    @POST("check_subscription.php")
+    suspend fun checkSubscription(
+        @Field("uid") uid: String
+    ): Response<SubscriptionResponse>
+
+    @GET("cms_readme.php")
+    suspend fun getCms(@Query("type") type: String): Response<CMSResponse>
+
+    @GET("sub_category.php")
+    suspend fun getSubCategory(
+        @Query("category_id") category_id: String
+    ): Response<SubCategoryResponse>
+
+    @GET("all_casting.php")
+    suspend fun getCastingCalls(
+        @Query("uid") uid: String
+    ): Response<CastingCallResponse>
+
+    @Multipart
+    @POST("casting_apply.php")
+    suspend fun getCastingApply(
+        @Part("uid") uid: RequestBody,
+        @Part("casting_id") casting_id: RequestBody,
+        @Part image: ArrayList<MultipartBody.Part>?,
+        @Part video: MultipartBody.Part?
+    ): Response<SuccessResponse>
+
+    @GET("get_agency.php")
+    suspend fun getAgency(): Response<CastingListResponse>
+
+    @FormUrlEncoded
+    @POST("chat_list.php")
+    suspend fun getChat(
+        @Field("uid") uid: String,
+        @Field("other_uid") other_uid: String
+    ): Response<ChatResponse>
+
+    @Multipart
+    @POST("send_message.php")
+    suspend fun sendMessage(
+        @Part("uid") uid: RequestBody,
+        @Part("other_uid") other_uid: RequestBody,
+        @Part("text") text: RequestBody,
+        @Part image: MultipartBody.Part?
+    ): Response<SuccessResponse>
 
 }

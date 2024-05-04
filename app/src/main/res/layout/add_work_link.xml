@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/llMain"
+    android:orientation="horizontal">
+
+    <EditText
+        android:layout_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/edtWorkLinkName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/rectangle_grey"
+        android:fontFamily="@font/neueeinstellung_regular"
+        android:hint="@string/str_work_link_name"
+        android:inputType="text"
+        android:maxLength="20"
+        android:layout_margin="@dimen/_5sdp"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_10sdp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorgrey"
+        android:textSize="@dimen/_12sdp"
+        />
+
+
+    <EditText
+        android:layout_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/edtAddWorkLink"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/rectangle_grey"
+        android:fontFamily="@font/neueeinstellung_regular"
+        android:hint="@string/str_add_work_link_url"
+        android:inputType="textPersonName"
+        android:maxLength="50"
+        android:layout_margin="@dimen/_5sdp"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_10sdp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorgrey"
+        android:textSize="@dimen/_12sdp"
+        />
+
+</LinearLayout>

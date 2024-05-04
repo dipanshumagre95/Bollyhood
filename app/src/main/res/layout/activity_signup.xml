@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.SignupActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
@@ -16,6 +18,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:layout_gravity="center"
                 android:id="@+id/ivLogo"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
@@ -32,207 +35,341 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/sen_regular"
+                android:fontFamily="@font/neueeinstellung_regular"
                 android:gravity="center"
                 android:text="@string/str_enter_below_info"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
-            <EditText
-                android:id="@+id/edtName"
+
+            <androidx.core.widget.NestedScrollView
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/sen_regular"
-                android:hint="@string/str_name"
-                android:inputType="textPersonName"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorgrey"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:fillViewport="true">
 
-            <EditText
-                android:id="@+id/edtEmailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/sen_regular"
-                android:hint="@string/str_email"
-                android:inputType="textEmailAddress"
-                android:maxLength="100"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorgrey"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/edtName" />
-
-            <EditText
-                android:id="@+id/edtMobileNumber"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/sen_regular"
-                android:hint="@string/str_mobile_number"
-                android:inputType="phone"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorgrey"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/edtEmailAddress" />
-
-
-            <RelativeLayout
-                android:id="@+id/rrCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/edtMobileNumber">
-
-                <AutoCompleteTextView
-                    android:id="@+id/acSelectToday"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:dropDownAnchor="@id/acSelectToday"
-                    android:focusable="false"
-                    android:fontFamily="@font/sen_regular"
-                    android:hint="@string/str_category"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/colorgrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@id/image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-            </RelativeLayout>
+                    android:layout_height="wrap_content">
 
 
-            <EditText
-                android:id="@+id/edtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/sen_regular"
-                android:hint="@string/str_password"
-                android:inputType="textPassword"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorgrey"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/rrCategory" />
+
+                    <RelativeLayout
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/rrProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="right|center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/cvProfile"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:src="@drawable/ic_profile"
+                            app:civ_border_width="@dimen/_1sdp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivCamera"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_alignEnd="@id/cvProfile"
+                            android:layout_alignBottom="@id/cvProfile"
+                            android:layout_marginEnd="@dimen/_7sdp"
+                            android:src="@drawable/edit"
+                            android:tint="@color/orangecolor"
+                            app:tint="@color/orangecolor" />
 
 
-            <EditText
-                android:id="@+id/edtConfirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_grey"
-                android:fontFamily="@font/sen_regular"
-                android:hint="@string/str_confirm_password"
-                android:inputType="textPassword"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_10sdp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorgrey"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/edtPassword" />
-
-            <TextView
-                android:id="@+id/tvSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/rectangle_btn"
-                android:fontFamily="@font/sen_bold"
-                android:gravity="center"
-                android:padding="@dimen/_14sdp"
-                android:text="@string/str_signup"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
-                app:layout_constraintTop_toBottomOf="@id/edtConfirmPassword" />
+                    </RelativeLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/tvSignUp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sen_medium"
-                    android:text="@string/str_already_have_an_account"
-                    android:textColor="@color/colorgrey"
-                    android:textSize="@dimen/_11sdp" />
 
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:fontFamily="@font/sen_semibold"
-                    android:text="@string/str_login"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="@dimen/_11sdp" />
+                    <EditText
+                        app:layout_constraintTop_toBottomOf="@id/rrProfile"
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_name"
+                        android:inputType="textPersonName"
+                        android:maxLength="50"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp" />
 
-            </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edtEmailAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_email"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="100"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@id/edtName" />
+
+                    <EditText
+                        android:id="@+id/edtMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_mobile_number"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@id/edtEmailAddress" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <RelativeLayout
+                        android:id="@+id/rrType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@id/edtMobileNumber">
+
+                        <RadioButton
+                            android:id="@+id/rbIndividual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_regular"
+                            android:text="@string/str_individual"
+                            android:textColor="@color/black"
+                            android:checked="true"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RadioButton
+                            android:id="@+id/rbAgency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/neueeinstellung_regular"
+                            android:text="@string/str_agency"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rrCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/rrType">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/acSelectToday"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:dropDownAnchor="@id/acSelectToday"
+                            android:focusable="false"
+                            android:fontFamily="@font/neueeinstellung_regular"
+                            android:hint="@string/str_category"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_20sdp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/colorgrey"
+                            android:textSize="@dimen/_12sdp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@id/image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/rrSubCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/rrCategory">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/acSubCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:dropDownAnchor="@id/acSelectToday"
+                            android:focusable="false"
+                            android:fontFamily="@font/neueeinstellung_regular"
+                            android:hint="@string/str_subcategory"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_20sdp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/colorgrey"
+                            android:textSize="@dimen/_12sdp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </RelativeLayout>
+
+
+
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_password"
+                        android:inputType="textPassword"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@id/rrSubCategory" />
+
+
+                    <EditText
+                        android:id="@+id/edtConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:hint="@string/str_confirm_password"
+                        android:inputType="textPassword"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorgrey"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintTop_toBottomOf="@id/edtPassword" />
+
+                    <TextView
+                        android:id="@+id/tvSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_btn"
+                        android:fontFamily="@font/neueeinstellung_bold"
+                        android:gravity="center"
+                        android:padding="@dimen/_14sdp"
+                        android:text="@string/str_signup"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        app:layout_constraintTop_toBottomOf="@id/edtConfirmPassword" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/tvSignUp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/neueeinstellung_medium"
+                            android:text="@string/str_already_have_an_account"
+                            android:textColor="@color/colorgrey"
+                            android:textSize="@dimen/_11sdp" />
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvLogin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:text="@string/str_login"
+                            android:textColor="@android:color/holo_red_light"
+                            android:textSize="@dimen/_11sdp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
+
+        </LinearLayout>
 
         <ProgressBar
+            android:layout_centerInParent="true"
             android:id="@+id/pbLoadData"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="@dimen/_35sdp"
@@ -246,5 +383,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

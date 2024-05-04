@@ -1,14 +1,15 @@
 package com.app.bollyhood.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
@@ -19,7 +20,9 @@ import com.app.bollyhood.model.LoginModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class SendOtpActivity : AppCompatActivity() {
@@ -193,7 +196,8 @@ class SendOtpActivity : AppCompatActivity() {
                                 + binding.edtNUmber3.text.toString()
                             .trim() + "" + binding.edtNumber4.text.toString().trim() + ""
                                 + binding.edtNumber5.text.toString()
-                            .trim() + "" + binding.edtNumber6.text.toString().trim()
+                            .trim() + "" + binding.edtNumber6.text.toString().trim(),
+                        PrefManager(mContext).getvalue(StaticData.fcmToken).toString(), "1"
                     )
                 }
 
@@ -232,12 +236,17 @@ class SendOtpActivity : AppCompatActivity() {
     }
 
     private fun setPrefData(result: LoginModel) {
+
         PrefManager(mContext).setvalue(StaticData.isLogin, true)
         PrefManager(mContext).setvalue(StaticData.id, result.id)
         PrefManager(mContext).setvalue(StaticData.name, result.name)
         PrefManager(mContext).setvalue(StaticData.email, result.email)
         PrefManager(mContext).setvalue(StaticData.mobile, result.mobile)
-        //PrefManager(mContext).setvalue(StaticData.image,result.image)
+        PrefManager(mContext).setvalue(StaticData.image, result.image)
+        PrefManager(mContext).setvalue(StaticData.user_type, result.user_type)
+        PrefManager(mContext).setvalue(StaticData.category, Gson().toJson(result.categories))
+        PrefManager(mContext).setvalue(StaticData.subCategory, Gson().toJson(result.sub_categories))
+
 
 
         startActivity(Intent(mContext, MainActivity::class.java))

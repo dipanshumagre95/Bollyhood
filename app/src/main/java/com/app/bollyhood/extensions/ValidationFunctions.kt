@@ -1,12 +1,17 @@
 package com.app.bollyhood.extensions
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Patterns
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.app.bollyhood.R
+
+
 
 
 fun isNetworkAvailable(context: Context): Boolean {
@@ -33,6 +38,20 @@ fun isNetworkAvailable(context: Context): Boolean {
     }
     return false
 }
+
+fun isvalidUploadProfile(context: Context, profilePath: String): Boolean {
+    var isValid = true
+    if (profilePath.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_upload_profile_picture),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }
+    return isValid
+}
+
 
 fun isvalidName(context: Context, edtName: String): Boolean {
     var isValid = true
@@ -94,7 +113,7 @@ fun isvalidPassword(context: Context, edtPassword: String): Boolean {
     return isValid
 }
 
-fun isValidOldPassword(context: Context,edtoldPassword:String):Boolean{
+fun isValidOldPassword(context: Context, edtoldPassword: String): Boolean {
     var isValid = true
     if (edtoldPassword.isEmpty()) {
         Toast.makeText(
@@ -121,8 +140,11 @@ fun isvalidConfirmPassword(context: Context, edtConfirmPassword: String): Boolea
 }
 
 
-
-fun isvalidBothPassword(context: Context,edtPassword:String, edtConfirmPassword: String): Boolean {
+fun isvalidBothPassword(
+    context: Context,
+    edtPassword: String,
+    edtConfirmPassword: String
+): Boolean {
     var isValid = true
     if (edtPassword != edtConfirmPassword) {
         Toast.makeText(
@@ -164,7 +186,11 @@ fun isvalidConfirmNewPassword(context: Context, edtConfirmNewPassword: String): 
 }
 
 
-fun isvalidBothNewPassword(context: Context,edtNewPassword:String, edtConfirmNewPassword: String): Boolean {
+fun isvalidBothNewPassword(
+    context: Context,
+    edtNewPassword: String,
+    edtConfirmNewPassword: String
+): Boolean {
     var isValid = true
     if (edtNewPassword != edtConfirmNewPassword) {
         Toast.makeText(
@@ -191,12 +217,74 @@ fun isvalidMobileNumber(context: Context, edtMobileNumber: String): Boolean {
 }
 
 
+
+fun isvalidDescriptions(context: Context, edtDescription: String): Boolean {
+    var isValid = true
+    if (edtDescription.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_descriptions),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }
+    return isValid
+}
+
 fun isvalidOtp(context: Context, otp: String): Boolean {
     var isValid = true
     if (otp.isEmpty() || otp.length < 6) {
         Toast.makeText(
             context,
             context.getString(R.string.str_error_otp),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }
+    return isValid
+}
+
+fun isvalidBookNow(
+    context: Context,
+    fullName: String,
+    number: String,
+    booking: String,
+    date: String,
+    time: String
+): Boolean {
+    var isValid = true
+    if (fullName.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_enter_full_name),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    } else if (number.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_enter_whatsapp_number),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    } else if (booking.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_enter_booking),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }else if (date.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_select_date),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }else if (time.isEmpty()) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_time),
             Toast.LENGTH_SHORT
         ).show()
         isValid = false

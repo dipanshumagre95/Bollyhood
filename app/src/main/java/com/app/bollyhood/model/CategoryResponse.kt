@@ -8,5 +8,7 @@ data class CategoryResponse(
 
 data class CategoryModel(
     val id: String,
-    val category_name: String
+    val category_name: String,
+    val category_image: String,
+    val type:String
 )
