@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllAgencyActivity
+import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.adapter.AgencyUserAdapter
 import com.app.bollyhood.databinding.FragmentAgencyBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -42,7 +43,7 @@ class AgencyFragment : Fragment(),AgencyUserAdapter.onItemClick {
     private fun initUI() {
 
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getAgency()
+          //  viewModel.getAgency()
         } else {
             Toast.makeText(
                 requireContext(), getString(R.string.str_error_internet_connections),
@@ -63,7 +64,7 @@ class AgencyFragment : Fragment(),AgencyUserAdapter.onItemClick {
         viewModel.agencyLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 list.clear()
-                list.addAll(it.result)
+             //   list.addAll(it.result)
                 if (list.size > 0) {
                     binding.rvBook.visibility = View.VISIBLE
                     binding.tvNoBookings.visibility = View.GONE
@@ -92,5 +93,11 @@ class AgencyFragment : Fragment(),AgencyUserAdapter.onItemClick {
     override fun onClick(castingUserData: CastingUserData, pos: Int) {
         startActivity(Intent(requireContext(),AllAgencyActivity::class.java)
             .putExtra("model",Gson().toJson(castingUserData)))
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).showToolbar(true)
+        (requireActivity() as MainActivity).binding.tvTitle.text = getString(R.string.str_my_bookings)
     }
 }

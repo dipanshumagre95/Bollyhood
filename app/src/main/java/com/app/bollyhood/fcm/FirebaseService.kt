@@ -33,11 +33,6 @@ class FirebaseService : FirebaseMessagingService() {
         PrefManager(this).setvalue(StaticData.fcmToken, token)
     }
 
-    override fun handleIntent(intent: Intent?) {
-        super.handleIntent(intent)
-        val data = intent?.extras as Bundle
-
-    }
 
     override fun onMessageReceived(message: RemoteMessage) {
 
@@ -81,33 +76,32 @@ class FirebaseService : FirebaseMessagingService() {
                         broadCastIntent.putExtra("other_uid", jsonobject.optString("other_uid"))
 
 
-                           LocalBroadcastManager.getInstance(this).sendBroadcast(
-                               broadCastIntent
-                           )
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(
+                            broadCastIntent
+                        )
 
-                           intent = Intent(this, MainActivity::class.java)
-                           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                          /* intent.putExtra(
-                               "id",
-                               jsonobject.optString("uid")
-                           )
-                           intent.putExtra("other_uid", jsonobject.optString("other_uid"))*/
-                           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                               pendingIntent = PendingIntent.getActivity(
-                                   this,
-                                   notificationId,
-                                   intent,
-                                   PendingIntent.FLAG_MUTABLE
-                               )
-                           } else {
-                               pendingIntent = PendingIntent.getActivity(
-                                   this,
-                                   notificationId,
-                                   intent,
-                                   PendingIntent.FLAG_ONE_SHOT
-                               )
-                           }
-                           showNotificationAndClick(pendingIntent, type, jsonobject, notificationId)
+                        intent = Intent(this, ChatActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        intent.putExtra("isNotifications",true)
+                        intent.putExtra("id", jsonobject.optString("uid"))
+                        intent.putExtra("other_uid", jsonobject.optString("other_uid"))
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                            pendingIntent = PendingIntent.getActivity(
+                                this,
+                                notificationId,
+                                intent,
+                                PendingIntent.FLAG_MUTABLE
+                            )
+                        } else {
+                            pendingIntent = PendingIntent.getActivity(
+                                this,
+                                notificationId,
+                                intent,
+                                PendingIntent.FLAG_ONE_SHOT
+                            )
+                        }
+                        showNotificationAndClick(pendingIntent, type, jsonobject, notificationId)
                     } else {
                         val intent = Intent("sendData")
                         intent.putExtra("id", jsonobject.optString("uid"))

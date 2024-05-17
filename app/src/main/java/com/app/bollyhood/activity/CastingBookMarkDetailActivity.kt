@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
+import com.app.bollyhood.databinding.ActivityCastingBookMarkDetailBinding
+import com.app.bollyhood.databinding.ActivityCastingCallDetailsBinding
 import com.app.bollyhood.databinding.ActivityCastingDetailsBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CastingCallModel
@@ -22,17 +24,17 @@ import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CastingDetailsActivity : AppCompatActivity() {
+class CastingBookMarkDetailActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityCastingDetailsBinding
-    lateinit var mContext: CastingDetailsActivity
+    lateinit var binding: ActivityCastingBookMarkDetailBinding
+    lateinit var mContext: CastingBookMarkDetailActivity
     private val viewModel: DataViewModel by viewModels()
     private var type: String? = ""
     lateinit var castingCallModel: CastingCallModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_casting_details)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_casting_book_mark_detail)
         mContext = this
         initUI()
         addListner()
@@ -40,12 +42,6 @@ class CastingDetailsActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        if (PrefManager(mContext).getvalue(StaticData.image)?.isNotEmpty() == true) {
-            Glide.with(mContext).load(PrefManager(mContext).getvalue(StaticData.image))
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(binding.cvProfile)
-        }
 
         if (intent.extras != null) {
             type = intent.getStringExtra("type")
@@ -58,6 +54,12 @@ class CastingDetailsActivity : AppCompatActivity() {
 
 
     private fun addListner() {
+
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+
+
         binding.tvSave.setOnClickListener {
             if (!binding.tvSave.text.toString().trim().equals("Saved")) {
                 if (isNetworkAvailable(mContext)) {
@@ -162,7 +164,7 @@ class CastingDetailsActivity : AppCompatActivity() {
                     .into(ivLogo)
             }
 
-            if (castingCallModel.is_casting_apply == 1) {
+            if (castingCallModel.is_apply == 1) {
 
                 binding.tvApplied.visibility = View.VISIBLE
                 binding.tvApplyNow.visibility = View.GONE

@@ -1,13 +1,13 @@
 package com.app.bollyhood.model
 
 
-data class CastingCallResponse(
+data class CastingBookMarkResponse(
     val status: String,
     val msg: String,
-    val result: ArrayList<CastingCallModel>
+    val result: ArrayList<CastingBookMarkModel>
 )
 
-data class CastingCallModel(
+data class CastingBookMarkModel(
     val id: String,
     val company_logo: String,
     val company_name: String,
@@ -23,8 +23,7 @@ data class CastingCallModel(
     val type: String,
     val price_discussed: String,
     val price: String,
-    val is_apply:Int,
     val is_casting_apply: Int,
     val is_casting_bookmark: Int
 
-    )
+)

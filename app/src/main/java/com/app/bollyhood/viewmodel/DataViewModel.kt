@@ -7,6 +7,7 @@ import com.app.bollyhood.model.BannerResponse
 import com.app.bollyhood.model.BookMarkResponse
 import com.app.bollyhood.model.BookingResponse
 import com.app.bollyhood.model.CMSResponse
+import com.app.bollyhood.model.CastingBookMarkResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
 import com.app.bollyhood.model.ChatResponse
@@ -15,6 +16,7 @@ import com.app.bollyhood.model.LoginResponse
 import com.app.bollyhood.model.OtpResponse
 import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
+import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
@@ -55,10 +57,15 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     var cmsLiveData = MutableLiveData<CMSResponse>()
     var subCategoryLiveData = MutableLiveData<SubCategoryResponse>()
     var castingCallsLiveData = MutableLiveData<CastingCallResponse>()
+
+    var castingBookMarkCallsLiveData = MutableLiveData<CastingCallResponse>()
+
     var castingCallsApplyLiveData = MutableLiveData<SuccessResponse>()
     var agencyLiveData = MutableLiveData<CastingListResponse>()
 
-    var sendMessageLiveData = MutableLiveData<SuccessResponse>()
+    var sendMessageLiveData = MutableLiveData<SendMessageResponse>()
+
+    var sendPaymentLiveData = MutableLiveData<SuccessResponse>()
 
     var chatHistoryLiveData = MutableLiveData<ChatResponse>()
 
@@ -133,6 +140,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                 }
         }
     }
+
 
     fun sendOtp(mobile: String) {
         viewModelScope.launch {
@@ -490,10 +498,26 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
-    fun getAgency() {
+    fun getCastingBookMarkCalls(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getAgency().let {
+            mainRepository.getCastingBookMark(uid).let {
+                if (it.body() != null) {
+                    castingBookMarkCallsLiveData.postValue(it.body())
+                    isLoading.postValue(false)
+                } else {
+                    isLoading.postValue(false)
+                }
+            }
+        }
+
+    }
+
+
+    fun getAgency(uid:String) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            mainRepository.getAgency(uid).let {
                 if (it.body() != null) {
                     agencyLiveData.postValue(it.body())
                     isLoading.postValue(false)
@@ -533,7 +557,25 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             isLoading.postValue(true)
             mainRepository.sendMessage(uid, other_uid, text, image).let {
                 if (it.body() != null) {
-                    sendMessageLiveData.postValue(it.body())
+                    sendMessageLiveData.postValue(it.body() as SendMessageResponse)
+                    isLoading.postValue(false)
+                } else {
+                    isLoading.postValue(false)
+                }
+            }
+        }
+
+    }
+
+    fun sendPayment(
+        payment_id: String, uid: String,
+        plan_id: String
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            mainRepository.sendPayment(payment_id, uid, plan_id).let {
+                if (it.body() != null) {
+                    sendPaymentLiveData.postValue(it.body())
                     isLoading.postValue(false)
                 } else {
                     isLoading.postValue(false)

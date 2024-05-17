@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/str_home" />
+
+
+    <item
+        android:id="@+id/menu_bookings"
+        android:icon="@drawable/ic_bookings"
+        android:title="@string/str_my_bookings" />
+
+
+    <item
+        android:id="@+id/menu_applyjobs"
+        android:icon="@drawable/ic_bookings"
+        android:title="Apply Jobs" />
+
+
+    <item
+        android:id="@+id/menu_chat"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/str_chat" />
+
+    <item
+        android:id="@+id/menu_savejobs"
+        android:icon="@drawable/ic_saved"
+        android:title="@string/str_save_jobs" />
+
+
+
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_newprofile"
+        android:title="My Profile" />
+
+
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/logout"
+        android:title="@string/str_Logout" />
+
+
+</menu>

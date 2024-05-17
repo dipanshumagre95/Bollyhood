@@ -1,21 +1,20 @@
 package com.app.bollyhood.network
 
-import com.app.bollyhood.model.BannerModel
 import com.app.bollyhood.model.BannerResponse
 import com.app.bollyhood.model.BookMarkResponse
 import com.app.bollyhood.model.BookingResponse
 import com.app.bollyhood.model.CMSResponse
+import com.app.bollyhood.model.CastingBookMarkResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
 import com.app.bollyhood.model.ChatResponse
 import com.app.bollyhood.model.ExpertiseResponse
 import com.app.bollyhood.model.LoginResponse
 import com.app.bollyhood.model.OtpResponse
-import com.app.bollyhood.model.PlanModel
 import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
+import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
-import com.app.bollyhood.model.SubscriptionModel
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
 import com.app.bollyhood.model.castinglist.CastingListResponse
@@ -60,8 +59,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("logout.php")
     suspend fun doLogout(
-        @Field("uid")uid:String
-    ):Response<SuccessResponse>
+        @Field("uid") uid: String
+    ): Response<SuccessResponse>
 
     @FormUrlEncoded
     @POST("send_otp.php")
@@ -201,6 +200,12 @@ interface ApiService {
         @Query("uid") uid: String
     ): Response<CastingCallResponse>
 
+    @FormUrlEncoded
+    @POST("all_casting_bookmark.php")
+    suspend fun getCastingBookMark(
+        @Field("uid")uid:String
+    ): Response<CastingCallResponse>
+
     @Multipart
     @POST("casting_apply.php")
     suspend fun getCastingApply(
@@ -210,8 +215,11 @@ interface ApiService {
         @Part video: MultipartBody.Part?
     ): Response<SuccessResponse>
 
-    @GET("get_agency.php")
-    suspend fun getAgency(): Response<CastingListResponse>
+    @FormUrlEncoded
+    @POST("get_agency.php")
+    suspend fun getAgency(
+        @Field("uid")uid:String
+    ): Response<CastingListResponse>
 
     @FormUrlEncoded
     @POST("chat_list.php")
@@ -227,6 +235,17 @@ interface ApiService {
         @Part("other_uid") other_uid: RequestBody,
         @Part("text") text: RequestBody,
         @Part image: MultipartBody.Part?
+    ): Response<SendMessageResponse>
+
+    @FormUrlEncoded
+    @POST("payment.php")
+    suspend fun sendPayment(
+        @Field("payment_id") payment_id: String,
+        @Field("uid") uid: String,
+        @Field("plan_id") plan_id: String
     ): Response<SuccessResponse>
+
+
+
 
 }

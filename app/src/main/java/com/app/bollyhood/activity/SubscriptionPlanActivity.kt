@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,8 @@ import com.app.bollyhood.adapter.PlanAdapter
 import com.app.bollyhood.databinding.ActivitySubscriptionPlanBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.PlanModel
+import com.app.bollyhood.util.PrefManager
+import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +26,8 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick {
     lateinit var mContext: SubscriptionPlanActivity
     private val viewModel: DataViewModel by viewModels()
     private val planList: ArrayList<PlanModel> = arrayListOf()
+
+    var plan_id: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_subscription_plan)
@@ -47,6 +52,21 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick {
         binding.ivBack.setOnClickListener {
             finish()
         }
+
+        binding.tvCheckOut.setOnClickListener {
+
+            if (plan_id.isEmpty()) {
+                Toast.makeText(mContext, "Please select plan", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.sendPayment(
+                    System.currentTimeMillis().toString(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString(),
+                    plan_id
+                )
+
+            }
+
+        }
     }
 
     private fun addObsereves() {
@@ -59,12 +79,22 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick {
         })
 
         viewModel.subscriptionPlanLiveData.observe(this, Observer {
-            if (it.status.equals("1")){
+            if (it.status.equals("1")) {
                 planList.clear()
                 planList.addAll(it.result)
                 setAdapter(planList)
-            }else{
-                Toast.makeText(mContext,it.msg,Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.sendPaymentLiveData.observe(this, Observer {
+            if (it.status.equals("1")) {
+                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                startActivity(Intent(mContext, PaymentSuccessActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -81,6 +111,6 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick {
     }
 
     override fun onClick(position: Int, planModel: PlanModel) {
-
+        plan_id = planModel.plan_id
     }
 }

@@ -59,11 +59,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:ellipsize="end"
-                        android:fontFamily="@font/neueeinstellung_semibold"
+                        android:fontFamily="@font/neueeinstellung_regular"
                         android:maxLines="1"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_13sdp" />
+                        android:textSize="@dimen/_11sdp" />
 
                     <ImageView
                         android:id="@+id/ivBookMark"
@@ -91,8 +91,8 @@
                     android:maxLines="2"
                     android:singleLine="false"
                     android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textColor="@color/darkgrey"
+                    android:textSize="@dimen/_9sdp" />
 
             </LinearLayout>
 

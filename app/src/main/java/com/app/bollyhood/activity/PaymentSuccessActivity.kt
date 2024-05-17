@@ -28,14 +28,16 @@ class PaymentSuccessActivity : AppCompatActivity() {
 
         binding.tvGoBack.setOnClickListener {
             startActivity(Intent(mContext, MainActivity::class.java))
-            finish()
+            finishAffinity()
         }
+
+
 
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(mContext, MainActivity::class.java))
-        finish()
+        finishAffinity()
     }
 }

@@ -12,7 +12,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -63,7 +67,16 @@ class MyProfileActivity : AppCompatActivity() {
     private var isGallery = false
     private var profilePath = ""
     private var category_Id: String = ""
+    private var height: String = ""
+    private var skinColor: String = ""
+    private var bodyType: String = ""
+    private var passport: String = ""
     private var workLinkList: ArrayList<WorkLinkData> = arrayListOf()
+    private var heightList: ArrayList<String> = arrayListOf()
+    private var skinColorList: ArrayList<String> = arrayListOf()
+    private var bodyTypeList: ArrayList<String> = arrayListOf()
+    private var passPortList: ArrayList<String> = arrayListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +84,10 @@ class MyProfileActivity : AppCompatActivity() {
         mContext = this
         initUI()
         addListner()
+        setHeightData()
+        setSkinColorData()
+        setBodyTypeData()
+        setPassPortData()
         addObserevs()
     }
 
@@ -88,6 +105,29 @@ class MyProfileActivity : AppCompatActivity() {
     private fun addListner() {
 
         binding.apply {
+            acheight.setOnTouchListener { v, event ->
+                acheight.showDropDown()
+                false
+            }
+
+            acSkinColor.setOnTouchListener { v, event ->
+                acSkinColor.showDropDown()
+                false
+            }
+
+
+            acBodyType.setOnTouchListener { v, event ->
+                acBodyType.showDropDown()
+                false
+            }
+
+            acPassPort.setOnTouchListener { v, event ->
+                acPassPort.showDropDown()
+                false
+            }
+
+
+
             ivBack.setOnClickListener {
                 finish()
             }
@@ -246,6 +286,118 @@ class MyProfileActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun setHeightData() {
+        heightList.clear()
+        heightList.add("4.2 Ft")
+        heightList.add("4.3 Ft")
+        heightList.add("4.4 Ft")
+        heightList.add("4.5 Ft")
+        heightList.add("4.6 Ft")
+        heightList.add("4.7 Ft")
+        heightList.add("4.8 Ft")
+        heightList.add("4.9 Ft")
+        heightList.add("5.0 Ft")
+        heightList.add("5.1 Ft")
+        heightList.add("5.2 Ft")
+        heightList.add("5.3 Ft")
+        heightList.add("5.4 Ft")
+        heightList.add("5.5 Ft")
+        heightList.add("5.6 Ft")
+        heightList.add("5.7 Ft")
+        heightList.add("5.8 Ft")
+        heightList.add("5.9 Ft")
+        heightList.add("6.0 Ft")
+        heightList.add("6.1 Ft")
+        heightList.add("6.2 Ft")
+        heightList.add("6.3 Ft")
+        heightList.add("6.4 Ft")
+        heightList.add("6.5 Ft")
+        heightList.add("6.6 Ft")
+        heightList.add("6.7 Ft")
+
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(mContext, R.layout.dropdown, heightList)
+        binding.acheight.threshold = 0
+        binding.acheight.dropDownVerticalOffset = 0
+        binding.acheight.setAdapter(arrayAdapter)
+
+        binding.acheight.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                height = heightList[position]
+            }
+
+
+    }
+
+
+    private fun setSkinColorData() {
+        skinColorList.clear()
+        skinColorList.add("Light Brown")
+        skinColorList.add("Medium Brown")
+        skinColorList.add("Dark Brown")
+        skinColorList.add("Fair")
+        skinColorList.add("Wheatish")
+
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(mContext, R.layout.dropdown, skinColorList)
+        binding.acSkinColor.threshold = 0
+        binding.acSkinColor.dropDownVerticalOffset = 0
+        binding.acSkinColor.setAdapter(arrayAdapter)
+
+        binding.acSkinColor.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                skinColor = skinColorList[position]
+            }
+
+
+    }
+
+    private fun setBodyTypeData() {
+        bodyTypeList.clear()
+        bodyTypeList.add("Thin")
+        bodyTypeList.add("Average Build")
+        bodyTypeList.add("Muscular or Fit ( Gym-Goer )")
+        bodyTypeList.add("Big or Healthy")
+
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(mContext, R.layout.dropdown, bodyTypeList)
+        binding.acBodyType.threshold = 0
+        binding.acBodyType.dropDownVerticalOffset = 0
+        binding.acBodyType.setAdapter(arrayAdapter)
+
+        binding.acBodyType.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                bodyType = bodyTypeList[position]
+            }
+
+
+    }
+
+
+    private fun setPassPortData() {
+        passPortList.clear()
+        passPortList.add("Yes")
+        passPortList.add("No")
+
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(mContext, R.layout.dropdown, passPortList)
+        binding.acPassPort.threshold = 0
+        binding.acPassPort.dropDownVerticalOffset = 0
+        binding.acPassPort.setAdapter(arrayAdapter)
+
+        binding.acPassPort.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                passport = passPortList[position]
+            }
+
+
+    }
+
 
     private fun addNewView() {
         // this method inflates the single item layout

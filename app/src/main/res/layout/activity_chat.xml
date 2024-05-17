@@ -69,7 +69,7 @@
                         android:fontFamily="@font/neueeinstellung_bold"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@string/app_name"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
 
@@ -86,7 +86,7 @@
                             android:fontFamily="@font/neueeinstellung_regular"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:text="@string/app_name"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp" />
 
@@ -95,8 +95,7 @@
                             android:layout_width="@dimen/_8sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_3sdp"
-                            android:src="@drawable/circle_grey" />
+                            android:layout_marginStart="@dimen/_3sdp" />
 
                     </LinearLayout>
 
@@ -151,22 +150,22 @@
 
 
         <RelativeLayout
-            android:padding="@dimen/_5sdp"
             android:id="@+id/rrBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/rectangle_lightwhite_bottom"
             android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent">
 
 
             <RelativeLayout
-                android:padding="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/rectangle_chatwhite">
+                android:background="@drawable/rectangle_chatwhite"
+                android:padding="@dimen/_8sdp">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edtMessage"
@@ -179,9 +178,9 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/neueeinstellung_medium"
                     android:hint="Type here..."
-                    android:textSize="@dimen/_12sdp"
+                    android:paddingStart="@dimen/_8sdp"
                     android:textColor="@color/black"
-                    android:paddingStart="@dimen/_8sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivCamera"

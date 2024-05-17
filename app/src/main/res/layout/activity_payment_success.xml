@@ -59,6 +59,27 @@
                 app:layout_constraintTop_toBottomOf="@id/tvPaymentSuccess" />
 
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGoBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/rectangle_blue"
+                android:fontFamily="@font/neueeinstellung_bold"
+                android:gravity="center"
+                android:padding="@dimen/_12sdp"
+                android:paddingStart="@dimen/_40sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:text="@string/str_home"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPaymentDesc" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,34 +89,20 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/tvPaymentDesc">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvGoBack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rectangle_blue"
-                    android:fontFamily="@font/neueeinstellung_bold"
-                    android:gravity="center"
-                    android:padding="@dimen/_12sdp"
-                    android:text="@string/str_go_back"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvInvoice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_weight="1"
                     android:background="@drawable/rectangle_work2"
                     android:fontFamily="@font/neueeinstellung_bold"
                     android:gravity="center"
                     android:padding="@dimen/_12sdp"
                     android:text="@string/str_invoice"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
 
 
             </LinearLayout>

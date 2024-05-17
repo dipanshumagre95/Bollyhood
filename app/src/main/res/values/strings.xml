@@ -18,6 +18,9 @@
     <string name="str_name">Name</string>
     <string name="str_yes">Yes</string>
     <string name="str_no">No</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+    <string name="str_save_jobs">Save Jobs</string>
     <string name="str_email">Email Address</string>
     <string name="str_category">Category</string>
     <string name="str_subcategory">SubCategory</string>
@@ -119,6 +122,13 @@
     <string name="str_your_role">Your Role</string>
     <string name="str_save_later">Save Later</string>
     <string name="str_apply_now">Apply Now</string>
+
+    <string name="str_location">Location</string>
+    <string name="str_age">Age</string>
+    <string name="str_height">Height</string>
+    <string name="str_skin_color">Skin Color</string>
+    <string name="str_body_type">Body Type</string>
+    <string name="str_passport">Passport</string>
 
     <string name="str_dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
 

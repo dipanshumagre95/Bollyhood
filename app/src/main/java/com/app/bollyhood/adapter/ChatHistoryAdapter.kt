@@ -14,6 +14,10 @@ import java.util.Locale
 
 class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayList<ChatModel>) :
     RecyclerView.Adapter<ChatHistoryAdapter.MyViewHolder>() {
+
+
+
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -33,7 +37,7 @@ class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayLis
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding.model = chatModel[position]
 
-        if (chatModel[position].user_type == "1") {
+        if (chatModel[position].user_type == 1) {
             holder.binding.llSender.visibility = View.VISIBLE
             holder.binding.llReceiver.visibility = View.GONE
 
@@ -66,7 +70,7 @@ class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayLis
             }
 
 
-        } else {
+        } else if (chatModel[position].user_type == 2) {
             holder.binding.llReceiver.visibility = View.VISIBLE
             holder.binding.llSender.visibility = View.GONE
 

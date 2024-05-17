@@ -11,4 +11,11 @@
         <item name="colorAccent">@android:color/holo_red_light</item>
     </style>
 
+    <style name="NavigationFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/neueeinstellung_medium</item>
+    </style>
+
+
+
+
 </resources>

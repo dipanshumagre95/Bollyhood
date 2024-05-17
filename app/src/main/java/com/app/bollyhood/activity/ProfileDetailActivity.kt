@@ -96,8 +96,7 @@ class ProfileDetailActivity : AppCompatActivity(), WorkAdapter.onItemClick {
 
         binding.rrChat.setOnClickListener {
             startActivity(Intent(mContext, ChatActivity::class.java)
-                .putExtra("profileId",expertiseModel.id)
-                .putExtra("model",Gson().toJson(expertiseModel)))
+                .putExtra("profileId",expertiseModel.id))
         }
 
         binding.llCall.setOnClickListener {
@@ -157,6 +156,14 @@ class ProfileDetailActivity : AppCompatActivity(), WorkAdapter.onItemClick {
             if (it.status == "1") {
                 if (it.result.is_subscription == "0") {
                     startActivity(Intent(mContext, SubscriptionPlanActivity::class.java))
+                }else{
+                    if (expertiseModel.mobile.isNotEmpty()) {
+                        val intent =
+                            Intent(Intent.ACTION_DIAL, Uri.fromParts("tel",
+                                expertiseModel.mobile, null))
+                        startActivity(intent)
+                    }
+
                 }
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()

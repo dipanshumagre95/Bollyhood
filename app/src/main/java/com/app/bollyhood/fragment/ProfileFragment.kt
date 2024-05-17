@@ -16,6 +16,7 @@ import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.ChangePasswordActivity
 import com.app.bollyhood.activity.LoginActivity
+import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.MyBookMarkActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.databinding.FragmentProfileBinding
@@ -81,6 +82,11 @@ class ProfileFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).showToolbar(false)
     }
 
     private fun addObsereves() {

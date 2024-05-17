@@ -3,7 +3,7 @@ package com.app.bollyhood.model.castinglist
 data class CastingListResponse(
     val status:String,
     val msg:String,
-    val result:ArrayList<CastingUserData>
+    val result:ArrayList<CastingDataModel>
 )
 data class CastingUserData(
     val id:String,

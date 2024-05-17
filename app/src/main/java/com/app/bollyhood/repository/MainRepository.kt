@@ -128,6 +128,8 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
 
     suspend fun getCastingCalls(uid: String) = apiService.getCastingCalls(uid)
 
+    suspend fun getCastingBookMark(uid: String) = apiService.getCastingBookMark(uid)
+
     suspend fun getCastingApply(
         uid: RequestBody, casting_id: RequestBody,
         images: ArrayList<MultipartBody.Part>?,
@@ -136,7 +138,9 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         uid, casting_id, images, video
     )
 
-    suspend fun getAgency() = apiService.getAgency()
+    suspend fun getAgency(uid:String) = apiService.getAgency(
+        uid
+    )
 
     suspend fun getChat(uid: String, other_uid: String) = apiService.getChat(
         uid, other_uid
@@ -149,5 +153,10 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     ) = apiService.sendMessage(
         uid, other_uid, text, image
     )
+
+    suspend fun sendPayment(payment_id: String, uid: String, plan_id: String) =
+        apiService.sendPayment(
+            payment_id, uid, plan_id
+        )
 
 }

@@ -15,7 +15,7 @@ class PlanAdapter(
 ) :
     RecyclerView.Adapter<PlanAdapter.MyViewHolder>() {
 
-    var checkedPosition = 0
+    var checkedPosition = -1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             AdpPlanBinding.inflate(
@@ -48,6 +48,7 @@ class PlanAdapter(
 
         holder.binding.rrMain.setOnClickListener {
             checkedPosition = position
+            onclick.onClick(position,planModel)
             notifyDataSetChanged()
         }
     }

@@ -16,6 +16,7 @@ import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllCategoryActivity
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
 import com.app.bollyhood.activity.CastingCallsActivity
+import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.ProfileDetailActivity
 import com.app.bollyhood.adapter.BannerAdapter
@@ -125,9 +126,6 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
             startActivity(Intent(requireContext(), AllExpertiseProfileActivity::class.java))
         }
 
-        binding.cvProfile.setOnClickListener {
-            startActivity(Intent(requireContext(), MyProfileActivity::class.java))
-        }
     }
 
     private fun setCategoryAdapter(categoryList: ArrayList<CategoryModel>) {
@@ -169,17 +167,17 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
         super.onResume()
         binding.tvUserName.text =
             "Hi " + PrefManager(requireContext()).getvalue(StaticData.name) + ","
-        if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
-            Glide.with(requireContext())
-                .load(PrefManager(requireContext()).getvalue(StaticData.image))
-                .placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile)
-                .into(binding.cvProfile)
-        }
 
         viewModel.getRecentExpertise(
             PrefManager(requireContext()).getvalue(StaticData.id).toString()
         )
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).showToolbar(true)
+        (requireActivity() as MainActivity).binding.tvTitle.text = getString(R.string.str_home)
     }
 
     override fun onClick(pos: Int, expertiseModel: ExpertiseModel) {

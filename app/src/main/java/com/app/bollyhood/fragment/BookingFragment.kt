@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.BookingDetailActivity
+import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.adapter.BookAdapter
 import com.app.bollyhood.databinding.FragmentBookingBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -51,6 +52,13 @@ class BookingFragment : Fragment(), BookAdapter.onItemClick {
             ).show()
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).showToolbar(true)
+        (requireActivity() as MainActivity).binding.tvTitle.text = getString(R.string.str_my_bookings)
+    }
+
 
     private fun addObserevs() {
 

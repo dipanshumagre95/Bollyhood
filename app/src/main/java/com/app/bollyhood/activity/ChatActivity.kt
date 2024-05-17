@@ -33,13 +33,12 @@ import com.app.bollyhood.adapter.ChatHistoryAdapter
 import com.app.bollyhood.databinding.ActivityChatBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ChatModel
-import com.app.bollyhood.model.ExpertiseModel
+import com.app.bollyhood.model.SenderDetails
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -62,7 +61,8 @@ class ChatActivity : AppCompatActivity() {
     private var isCamera = false
     private var isGallery = false
     private var profilePath = ""
-    lateinit var expertiseModel: ExpertiseModel
+    private var senderDetails: SenderDetails? = null
+    private var isNotification: Boolean? = false
 
     companion object {
         private const val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
@@ -76,7 +76,7 @@ class ChatActivity : AppCompatActivity() {
                 val uid = intent.getStringExtra("id")
                 val other_uid = intent.getStringExtra("other_uid")
 
-                viewModel.getChatHistory(other_uid.toString(),uid.toString())
+                viewModel.getChatHistory(other_uid.toString(), uid.toString())
 
             }
         }
@@ -106,50 +106,42 @@ class ChatActivity : AppCompatActivity() {
 
         if (intent.extras != null) {
             profileId = intent.getStringExtra("profileId")
-            expertiseModel =
-                Gson().fromJson(intent.getStringExtra("model"), ExpertiseModel::class.java)
-            setData(expertiseModel)
+
+
         }
 
 
         if (isNetworkAvailable(mContext)) {
-            viewModel.getChatHistory(
-                PrefManager(this@ChatActivity).getvalue(StaticData.id).toString(),
-                profileId.toString()
-            )
+            isNotification = intent.getBooleanExtra("isNotifications", false)
+            if (!isNotification!!) {
+                viewModel.getChatHistory(
+                    PrefManager(this@ChatActivity).getvalue(StaticData.id).toString(),
+                    profileId.toString()
+                )
+
+            } else {
+                val uid = intent.getStringExtra("id")
+                val other_uid = intent.getStringExtra("other_uid")
+                viewModel.getChatHistory(other_uid.toString(), uid.toString())
+            }
         } else {
             Toast.makeText(
-                mContext,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
+                mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
             ).show()
         }
 
         binding.ivCall.setOnClickListener {
-            val intent =
-                Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", expertiseModel.mobile, null))
-            startActivity(intent)
+            if (!senderDetails?.mobile.isNullOrEmpty()) {
+                val intent =
+                    Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", senderDetails?.mobile, null))
+                startActivity(intent)
+            }
 
             /*val intent = Intent(Intent.ACTION_CALL)
             intent.data = Uri.parse("tel:${expertiseModel.mobile}")
             startActivity(intent)*/
         }
 
-    }
-
-    private fun setData(expertiseModel: ExpertiseModel) {
-        Glide.with(mContext).load(expertiseModel.image).placeholder(R.drawable.ic_profile)
-            .error(R.drawable.ic_profile).into(binding.cvProfile)
-
-        binding.tvName.text = expertiseModel.name
-
-        if (expertiseModel.is_online == "1") {
-            binding.tvStatus.text = "Online"
-            binding.ivStatus.setImageResource(R.drawable.circle_green)
-        } else {
-            binding.tvStatus.text = "Offline"
-            binding.ivStatus.setImageResource(R.drawable.circle_grey)
-        }
     }
 
     private fun addListner() {
@@ -197,13 +189,11 @@ class ChatActivity : AppCompatActivity() {
         )
 
         val other_uid: RequestBody = RequestBody.create(
-            "multipart/form-data".toMediaTypeOrNull(),
-            profileId.toString()
+            "multipart/form-data".toMediaTypeOrNull(), profileId.toString()
         )
 
         val text: RequestBody = RequestBody.create(
-            "multipart/form-data".toMediaTypeOrNull(),
-            binding.edtMessage.text.toString().trim()
+            "multipart/form-data".toMediaTypeOrNull(), binding.edtMessage.text.toString().trim()
         )
 
 
@@ -211,8 +201,7 @@ class ChatActivity : AppCompatActivity() {
         if (profilePath.isNotEmpty()) {
             val file = File(profilePath)
             // create RequestBody instance from file
-            val requestFile =
-                RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
             profileBody = MultipartBody.Part.createFormData(
                 "image", file.name, requestFile
             )
@@ -233,7 +222,8 @@ class ChatActivity : AppCompatActivity() {
 
         viewModel.chatHistoryLiveData.observe(this, Observer {
             if (it.status == "1") {
-                binding.edtMessage.setText("")
+                senderDetails = it.sender_details
+                setData(senderDetails!!)
                 chatModel.clear()
                 chatModel.addAll(it.result)
 
@@ -249,6 +239,8 @@ class ChatActivity : AppCompatActivity() {
 
 
             } else {
+                senderDetails = it.sender_details
+                setData(senderDetails!!)
                 binding.rvChatHistory.visibility = View.GONE
                 binding.tvNoChatHistory.visibility = View.VISIBLE
             }
@@ -256,24 +248,55 @@ class ChatActivity : AppCompatActivity() {
 
         viewModel.sendMessageLiveData.observe(this, Observer {
             if (it.status == "1") {
+                val result = it.result
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-                viewModel.getChatHistory(
-                    PrefManager(mContext).getvalue(StaticData.id).toString(),
-                    profileId.toString()
+                binding.edtMessage.setText("")
+                profilePath = ""
+                val insertChatItem = ChatModel(
+                    result.id,
+                    result.uid,
+                    result.other_uid,
+                    result.text,
+                    result.image,
+                    result.added_on,
+                    result.user_type
                 )
+                chatModel.add(insertChatItem)
+                val position = chatModel.size - 1
+                binding.adapter?.notifyItemInserted(position)
+                if (chatModel.size > 2) {
+                    binding.rvChatHistory.scrollToPosition(binding.adapter?.itemCount!!.toInt() - 1)
+                }
+
+
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
+    private fun setData(senderDetails: SenderDetails) {
+        Glide.with(mContext).load(senderDetails.image).placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile).into(binding.cvProfile)
+        binding.tvName.setText(senderDetails.name)
+
+        if (senderDetails.is_online == "1") {
+            binding.tvStatus.text = "Online"
+            binding.ivStatus.setImageResource(R.drawable.circle_green)
+        } else {
+            binding.tvStatus.text = "Offline"
+            binding.ivStatus.setImageResource(R.drawable.circle_grey)
+        }
+
+    }
+
     private fun setAdapter(chatModel: ArrayList<ChatModel>) {
-        chatModel.reverse()
         binding.apply {
             rvChatHistory.layoutManager = LinearLayoutManager(this@ChatActivity)
             rvChatHistory.setHasFixedSize(true)
             adapter = ChatHistoryAdapter(this@ChatActivity, chatModel)
             rvChatHistory.adapter = adapter
+            adapter?.notifyDataSetChanged()
             rvChatHistory.scrollToPosition(adapter?.itemCount!!.toInt() - 1)
         }
     }
@@ -325,8 +348,7 @@ class ChatActivity : AppCompatActivity() {
 
         if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
-                this, listPermissionsNeeded.toTypedArray(),
-                REQUEST_ID_MULTIPLE_PERMISSIONS
+                this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS
             )
             return false
         }
@@ -456,8 +478,6 @@ class ChatActivity : AppCompatActivity() {
         txtcamera.setOnClickListener { v: View? ->
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startForProfileImageResult.launch(intent)
-
-
             isCamera = true
             isGallery = false
             dialogView.dismiss()
@@ -480,6 +500,4 @@ class ChatActivity : AppCompatActivity() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
         super.onDestroy()
     }
-
-
 }

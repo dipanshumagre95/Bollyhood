@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AdpChatitemBinding
 import com.app.bollyhood.databinding.AdpExpertiseBinding
 import com.app.bollyhood.model.ExpertiseModel
@@ -46,6 +47,8 @@ class ChatAdapter(val requireContext: Context, val chatList: ArrayList<Expertise
 
         if (model.image.isNotEmpty()) {
             Glide.with(requireContext).load(chatList[position].image)
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
                 .into(holder.binding.ivImage)
         }
 

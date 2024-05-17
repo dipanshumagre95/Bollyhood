@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.ChatActivity
+import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.adapter.ChatAdapter
 import com.app.bollyhood.databinding.FragmentChatBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -24,7 +25,7 @@ import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ChatFragment : Fragment(),ChatAdapter.onItemClick {
+class ChatFragment : Fragment(), ChatAdapter.onItemClick {
 
     lateinit var binding: FragmentChatBinding
     private val viewModel: DataViewModel by viewModels()
@@ -74,17 +75,17 @@ class ChatFragment : Fragment(),ChatAdapter.onItemClick {
                 if (chatList.size > 0) {
                     binding.rvExpertise.visibility = View.VISIBLE
                     binding.tvNoChatHistory.visibility = View.GONE
-                    binding.tvMyChats.visibility=View.VISIBLE
+                    binding.tvMyChats.visibility = View.GONE
                     setAdapter(chatList)
 
                 } else {
-                    binding.tvMyChats.visibility=View.GONE
+                    binding.tvMyChats.visibility = View.GONE
                     binding.rvExpertise.visibility = View.GONE
                     binding.tvNoChatHistory.visibility = View.VISIBLE
                 }
 
             } else {
-                binding.tvMyChats.visibility=View.GONE
+                binding.tvMyChats.visibility = View.GONE
                 binding.rvExpertise.visibility = View.GONE
                 binding.tvNoChatHistory.visibility = View.VISIBLE
             }
@@ -96,18 +97,25 @@ class ChatFragment : Fragment(),ChatAdapter.onItemClick {
             rvExpertise.layoutManager =
                 LinearLayoutManager(requireContext())
             rvExpertise.setHasFixedSize(true)
-            adapter = ChatAdapter(requireContext(), chatList,this@ChatFragment)
+            adapter = ChatAdapter(requireContext(), chatList, this@ChatFragment)
             rvExpertise.adapter = adapter
             adapter?.notifyDataSetChanged()
 
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).showToolbar(true)
+        (requireActivity() as MainActivity).binding.tvTitle.text = "My Chats"
+    }
+
+
     override fun onClick(pos: Int, expertiseModel: ExpertiseModel) {
         startActivity(
             Intent(requireContext(), ChatActivity::class.java)
-            .putExtra("profileId",expertiseModel.id)
-            .putExtra("model", Gson().toJson(expertiseModel)))
+                .putExtra("profileId", expertiseModel.id)
+        )
 
     }
 
