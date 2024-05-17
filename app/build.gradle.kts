@@ -122,5 +122,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-messaging:24.0.0")
 
+    implementation ("com.hbb20:ccp:2.5.0")
+
 
 }

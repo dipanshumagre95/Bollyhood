@@ -3,7 +3,7 @@
     <string name="str_mobile_verification">Add your phone number. we will send you a verification code so we know you\'re a real.</string>
     <string name="str_send_otp">Send Otp</string>
     <string name="str_mobile_number">Mobile Number</string>
-    <string name="str_privarcy_policy">By Providing my phone number, I hereby agree and accept the</string>
+    <string name="str_privarcy_policy">By continuing , you agree to our</string>
     <string name="str_verification">Verification</string>
     <string name="str_code_whatsapp">We have sent a code to your mobile number</string>
     <string name="str_one_time_password">One Time Password</string>
@@ -163,6 +163,7 @@
     <string name="str_error_enter_booking">Please enter purpose of booking</string>
     <string name="str_error_select_date">Please select date</string>
     <string name="str_error_time">Please select time</string>
+    <string name="str_login_msg">Log in or Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

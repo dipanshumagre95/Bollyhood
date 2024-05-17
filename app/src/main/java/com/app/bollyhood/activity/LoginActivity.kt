@@ -8,6 +8,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.View.OnClickListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -25,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(),OnClickListener {
 
     lateinit var mContext: LoginActivity
     lateinit var binding: ActivityLoginBinding
@@ -41,38 +42,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addlistner() {
-        binding.apply {
-            tvSendOtp.setOnClickListener {
-
-                if (isNetworkAvailable(mContext)) {
-                    if (isvalidMobileNumber(
-                            mContext,
-                            binding.edtMobileNumber.text.toString().trim()
-                        )
-                    ) {
-
-                        viewModel.sendOtp(binding.edtMobileNumber.text.toString().trim())
-
-                    }
-
-                } else {
-                    Toast.makeText(
-                        mContext, getString(R.string.str_error_internet_connections),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-
-            }
-
-            tvSignUp.setOnClickListener {
-                startActivity(Intent(mContext, SignupActivity::class.java))
-            }
-            tvForgotPassword.setOnClickListener {
-                startActivity(Intent(mContext, ForgotPasswordActivity::class.java))
-            }
-
-        }
+        binding.tvSendOtp.setOnClickListener(this)
     }
 
     private fun addobsereves() {
@@ -99,6 +69,12 @@ class LoginActivity : AppCompatActivity() {
                         )
                 )
 
+            } else if(it.status=="0" && it.msg.equals("User is not exist")){
+                startActivity(Intent(mContext, SignupActivity::class.java)
+                    .putExtra(
+                        StaticData.mobileNumber,
+                        binding.edtMobileNumber.text.toString().trim()
+                    ))
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
@@ -106,17 +82,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setSpannableString() {
-        val spanTxt = SpannableStringBuilder(
-            getString(R.string.str_privarcy_policy)
-        )
-        spanTxt.setSpan(
-            ForegroundColorSpan(getColor(R.color.colorgrey)),
-            spanTxt.length - getString(R.string.str_privarcy_policy).length,
-            spanTxt.length,
-            0
-        )
-
-        //  binding.tvPrivarcyPolicy.setText(spanTxt, TextView.BufferType.NORMAL)
+        val spanTxt = SpannableStringBuilder()
 
         spanTxt.append(" Term of service")
         spanTxt.setSpan(object : ClickableSpan() {
@@ -129,16 +95,8 @@ class LoginActivity : AppCompatActivity() {
         // FOR SET TEXT COLOR
         // FOR SET TEXT COLOR
         spanTxt.setSpan(
-            ForegroundColorSpan(Color.RED),
+            ForegroundColorSpan(Color.GRAY),
             spanTxt.length - " Term of service".length,
-            spanTxt.length,
-            0
-        )
-
-        spanTxt.append(" and")
-        spanTxt.setSpan(
-            ForegroundColorSpan(getColor(R.color.colorgrey)),
-            spanTxt.length - " and".length,
             spanTxt.length,
             0
         )
@@ -154,25 +112,37 @@ class LoginActivity : AppCompatActivity() {
         // FOR SET TEXT COLOR
         // FOR SET TEXT COLOR
         spanTxt.setSpan(
-            ForegroundColorSpan(Color.RED),
+            ForegroundColorSpan(Color.GRAY),
             spanTxt.length - " Privacy Policy".length,
             spanTxt.length,
             0
         )
 
-
-        spanTxt.append(" in use of the app.")
-        spanTxt.setSpan(
-            ForegroundColorSpan(getColor(R.color.colorgrey)),
-            spanTxt.length - " in use of the app.".length,
-            spanTxt.length,
-            0
-        )
-
-
         binding.tvPrivarcyPolicy.setMovementMethod(LinkMovementMethod.getInstance())
         binding.tvPrivarcyPolicy.setText(spanTxt, TextView.BufferType.SPANNABLE)
 
 
+    }
+
+    override fun onClick(item: View?) {
+        when(item?.id){
+            R.id.tvSendOtp ->{
+                if (isNetworkAvailable(mContext)) {
+                    if (isvalidMobileNumber(
+                            mContext,
+                            binding.edtMobileNumber.text.toString().trim()
+                        )
+                    ) {
+                        viewModel.sendOtp(binding.edtMobileNumber.text.toString().trim())
+                    }
+
+                } else {
+                    Toast.makeText(
+                        mContext, getString(R.string.str_error_internet_connections),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 }
