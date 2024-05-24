@@ -22,8 +22,8 @@
     <string name="close_drawer">Close drawer</string>
     <string name="str_save_jobs">Save Jobs</string>
     <string name="str_email">Email Address</string>
-    <string name="str_category">Category</string>
-    <string name="str_subcategory">SubCategory</string>
+    <string name="str_category">Select Category</string>
+    <string name="str_subcategory">Select SubCategory</string>
     <string name="str_password">Password</string>
     <string name="str_new_password">New Password</string>
     <string name="str_confirm_new_password">Confirm New Password</string>
@@ -154,6 +154,7 @@
     <string name="str_error_password">Please enter password</string>
     <string name="str_error_old_password">Please enter old password</string>
     <string name="str_error_confirm_password">Please enter confirm password</string>
+    <string name="str_error_teamsNcondition_checkbox">Please select teams &amp; condition box</string>
     <string name="str_error_both_password_not_match">Password and confirm password does not match</string>
     <string name="str_error_new_password">Please enter newPassword</string>
     <string name="str_error_confirm_new_password">Please enter confirm new password</string>

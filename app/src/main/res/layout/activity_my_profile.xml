@@ -245,7 +245,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/rectangle_grey"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/rrType">
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/acheight"
@@ -296,7 +296,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/rectangle_grey"
                         android:orientation="horizontal"
-                        app:layout_constraintTop_toBottomOf="@id/rrType">
+                        >
 
                         <AutoCompleteTextView
                             android:id="@+id/acSkinColor"
@@ -376,7 +376,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/rectangle_grey"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/rrType">
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/acPassPort"

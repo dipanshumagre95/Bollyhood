@@ -139,6 +139,19 @@ fun isvalidConfirmPassword(context: Context, edtConfirmPassword: String): Boolea
     return isValid
 }
 
+fun isvalidTeamNCondition(context: Context, isChecked: Boolean): Boolean {
+    var isValid = true
+    if (!isChecked) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.str_error_teamsNcondition_checkbox),
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }
+    return isValid
+}
+
 
 fun isvalidBothPassword(
     context: Context,
