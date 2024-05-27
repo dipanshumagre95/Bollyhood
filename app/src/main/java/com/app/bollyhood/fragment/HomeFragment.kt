@@ -17,7 +17,6 @@ import com.app.bollyhood.activity.AllCategoryActivity
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
 import com.app.bollyhood.activity.CastingCallsActivity
 import com.app.bollyhood.activity.MainActivity
-import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.ProfileDetailActivity
 import com.app.bollyhood.adapter.BannerAdapter
 import com.app.bollyhood.adapter.CategoryAdapter
@@ -30,7 +29,6 @@ import com.app.bollyhood.model.ExpertiseModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
-import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -165,8 +163,6 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
 
     override fun onResume() {
         super.onResume()
-        binding.tvUserName.text =
-            "Hi " + PrefManager(requireContext()).getvalue(StaticData.name) + ","
 
         viewModel.getRecentExpertise(
             PrefManager(requireContext()).getvalue(StaticData.id).toString()
@@ -177,7 +173,7 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).showToolbar(true)
-        (requireActivity() as MainActivity).binding.tvTitle.text = getString(R.string.str_home)
+      //  (requireActivity() as MainActivity).binding.tvTitle.text = getString(R.string.str_home)
     }
 
     override fun onClick(pos: Int, expertiseModel: ExpertiseModel) {

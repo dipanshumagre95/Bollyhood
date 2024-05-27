@@ -4,27 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        tools:context=".activity.MainActivity"
-        tools:openDrawer="start">
-
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationview"
-            android:layout_width="@dimen/_220sdp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/white"
-            app:headerLayout="@layout/nav_header"
-            app:itemIconTint="@color/darkgrey"
-            app:itemTextAppearance="@style/NavigationFont"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/nav_menu" />
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,50 +11,70 @@
             tools:context=".activity.MainActivity">
 
 
+
             <RelativeLayout
                 android:id="@+id/rrMain"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
-                android:background="@android:color/holo_red_light"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginRight="@dimen/_16sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <ImageView
-                    android:id="@+id/ivMenu"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/menus"
-                    app:tint="@android:color/white" />
+                <RelativeLayout
+                    android:id="@+id/llcvprofile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/circle_gradient_background_profile">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cvProfile"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_margin="@dimen/_1sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_profile" />
+
+                </RelativeLayout>
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvusername"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/llcvprofile"
+                    android:text="Hi Akshay,"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/neueeinstellung_bold"
-                    android:gravity="center"
-                    android:text="@string/str_home"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp" />
+                    android:textSize="@dimen/_20sdp"/>
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/llcvprofile"
+                    android:layout_alignParentBottom="true"
+                    android:text="Showing Results From Mumbai"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:textColor="#444A6D"
+                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:textSize="@dimen/_12sdp"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/cvProfile"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/ic_profile" />
-
+                    android:layout_marginTop="@dimen/_9sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/notification"
+                    android:background="@drawable/rectangle_app_background"
+                    />
 
             </RelativeLayout>
 
@@ -243,9 +242,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 </layout>

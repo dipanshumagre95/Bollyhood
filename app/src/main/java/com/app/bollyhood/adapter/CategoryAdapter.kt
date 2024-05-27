@@ -34,14 +34,6 @@ class CategoryAdapter(val requireContext: Context, val categoryList: ArrayList<C
             .error(R.drawable.ic_profile).into(holder.binding.ivCategoryImage)
         holder.binding.tvCategoryName.text = model.category_name
 
-        if (position % 2 == 0) {
-            holder.binding.llImage.setBackgroundResource(R.drawable.circle_lightorange)
-        } else {
-            holder.binding.llImage.setBackgroundResource(R.drawable.circle_lightblue)
-
-
-        }
-
         holder.itemView.setOnClickListener {
             onclick.onClick(position, categoryModel = categoryList[position])
         }

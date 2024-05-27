@@ -9,20 +9,20 @@
             type="com.app.bollyhood.model.ExpertiseModel" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="@dimen/_140sdp"
         android:layout_height="@dimen/_190sdp"
-        android:layout_margin="@dimen/_3ssp">
-
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:background="@drawable/rectangle_app_background">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:elevation="5dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="10dp"
-            app:cardUseCompatPadding="true">
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
 
                     />
 
@@ -54,12 +54,14 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -68,22 +70,22 @@
                         android:maxLines="1"
                         android:singleLine="true"
                         android:text="@{model.name}"
-                        android:textColor="@color/white"
+                        android:textColor="#FFFFFF"
                         android:textSize="@dimen/_12sdp" />
 
                     <ImageView
                         android:id="@+id/ivBookMark"
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:adjustViewBounds="true"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_toRightOf="@+id/tvname"
                         android:contentDescription="@string/app_name"
                         android:scaleType="fitCenter"
                         android:src="@drawable/verified" />
-
-
-                </LinearLayout>
+                </RelativeLayout>
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -91,18 +93,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:fontFamily="@font/neueeinstellung_semibold"
                     android:gravity="start"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp" />
+                    android:textSize="@dimen/_10sdp" />
 
 
             </LinearLayout>
 
+
+
+
+
+
         </androidx.cardview.widget.CardView>
 
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

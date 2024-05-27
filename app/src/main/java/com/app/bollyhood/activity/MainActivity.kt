@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         addListner()
         addObsereves()
         setHomeColor()
-        setNavigationDrawer()
     }
 
 
@@ -104,14 +103,7 @@ class MainActivity : AppCompatActivity() {
                 .into(binding.cvProfile)
         }
 
-
-
         binding.apply {
-
-            ivMenu.setOnClickListener {
-                binding.drawerlayout.openDrawer(GravityCompat.START)
-            }
-
 
             binding.cvProfile.setOnClickListener {
                 startActivity(Intent(this@MainActivity, MyProfileActivity::class.java))
@@ -149,20 +141,6 @@ class MainActivity : AppCompatActivity() {
                 binding.pbLoadData.visibility = View.GONE
             }
         })
-
-        viewModel.logoutLiveData.observe(this, Observer {
-            if (it.status == "1") {
-                val fcmToken = PrefManager(this).getvalue(StaticData.fcmToken)
-                PrefManager(this).clearValue()
-                PrefManager(this).setvalue(StaticData.fcmToken, fcmToken)
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, LoginActivity::class.java))
-                finishAffinity()
-            } else {
-                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
-            }
-        })
-
     }
 
     fun showToolbar(isVisible: Boolean) {
@@ -173,126 +151,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setNavigationDrawer() {
-        val menu = binding.navigationview.menu
-        binding.navigationview.bringToFront()
-        binding.navigationview.setNavigationItemSelectedListener { item ->
-            val id = item.itemId
-            when (id) {
-                R.id.menu_home -> {
-                    if (isOpenScreen != "Home") {
-                        setHomeColor()
-                    }
-
-                }
-
-                R.id.menu_bookings -> {
-                    if (isOpenScreen != "Bookings") {
-                        setBookingColor()
-                    }
-
-                }
-
-                R.id.menu_chat -> {
-                    if (isOpenScreen != "Chat") {
-                        setChatColor()
-                    }
-
-
-                }
-
-                R.id.menu_profile -> {
-                    startActivity(
-                        Intent(
-                            mContext, MyProfileActivity::class.java
-                        )
-                    )
-                }
-
-                R.id.menu_savejobs -> {
-                    startActivity(Intent(mContext, CastingBookMarkActivity::class.java))
-                }
-
-                R.id.menu_applyjobs -> {
-                    startActivity(Intent(mContext, AllAgencyActivity::class.java))
-                }
-
-                R.id.menu_logout -> {
-                    logoutDialog()
-                }
-
-            }
-            binding.drawerlayout.closeDrawer(GravityCompat.START)
-            true
-        }
-        actionBarDrawerToggle = object : ActionBarDrawerToggle(
-            this,
-            binding.drawerlayout,
-            null,
-            R.string.open_drawer,
-            R.string.close_drawer
-        ) {
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                binding.drawerlayout.openDrawer(GravityCompat.START)
-                setHeaderData()
-            }
-
-            override fun onDrawerClosed(drawerView: View) {
-                super.onDrawerClosed(drawerView)
-                binding.drawerlayout.closeDrawer(GravityCompat.START)
-            }
-        }
-        binding.drawerlayout.setDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle?.syncState()
-    }
-
-    private fun logoutDialog() {
-        val builder = android.app.AlertDialog.Builder(this)
-        builder.setTitle("Logout")
-        builder.setMessage("Are you sure you want to Logout?")
-
-        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-
-            if (isNetworkAvailable(this)) {
-                viewModel.doLogout(PrefManager(this).getvalue(StaticData.id).toString())
-
-
-            } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.str_error_internet_connections),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-
-        }
-
-        builder.setNegativeButton(android.R.string.no) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        builder.show()
-    }
-
-
-    private fun setHeaderData() {
-        val hView = binding.navigationview.getHeaderView(0)
-        val cvProfile = hView.findViewById<CircleImageView>(R.id.ivImage)
-        val name = hView.findViewById<TextView>(R.id.tvName)
-        if (PrefManager(mContext).getvalue(StaticData.image)?.isNotEmpty() == true) {
-            Glide.with(mContext)
-                .load(PrefManager(mContext).getvalue(StaticData.image))
-                .placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile)
-                .into(cvProfile)
-        }
-
-        name.setText(PrefManager(mContext).getvalue(StaticData.name))
-
-        val tvVersion = hView.findViewById<TextView>(R.id.tvAppVersion)
-        tvVersion.text = "Version:- " + "1.0"
-    }
 
 
     private fun setHomeColor() {
@@ -349,8 +207,6 @@ class MainActivity : AppCompatActivity() {
             loadFragment(BookingFragment())
 
         }
-
-
     }
 
     override fun onBackPressed() {
@@ -395,7 +251,6 @@ class MainActivity : AppCompatActivity() {
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
         }
         loadFragment(ChatFragment())
-
     }
 
     private fun setProfileColor() {
@@ -420,6 +275,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         loadFragment(ProfileFragment())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.tvusername.text =
+            "Hi " + PrefManager(this).getvalue(StaticData.name) + ","
     }
 
     private fun loadFragment(fragment: Fragment) {

@@ -23,6 +23,7 @@
     <string name="str_save_jobs">Save Jobs</string>
     <string name="str_email">Email Address</string>
     <string name="str_category">Select Category</string>
+    <string name="str_normal_category">Categories</string>
     <string name="str_subcategory">Select SubCategory</string>
     <string name="str_password">Password</string>
     <string name="str_new_password">New Password</string>
@@ -85,11 +86,12 @@
     <string name="str_no_favourites_found">No Favourites Found</string>
     <string name="str_my_bookings">My Bookings</string>
     <string name="str_need_some_help_today">Need some help today?</string>
-    <string name="str_find_it_here">Find it here</string>
+    <string name="str_find_it_here">Search “actors in mumbai”</string>
 
     <string name="str_view_all">View All</string>
+    <string name="str_see_more">See More</string>
     <string name="str_our_expertise">Our Experties</string>
-    <string name="str_hand_picked_talent">Hand Picked Talent!</string>
+    <string name="str_hand_picked_talent">Talent Of The Week</string>
 
     <string name="str_individual">Individual</string>
     <string name="str_agency">Agency</string>
@@ -165,6 +167,10 @@
     <string name="str_error_select_date">Please select date</string>
     <string name="str_error_time">Please select time</string>
     <string name="str_login_msg">Log in or Sign Up</string>
+    <string name="exclusive_u">Exclusive.\nUnlimited.\nFeatures.</string>
+    <string name="introducing">Introducing Bollyhood Exclusive \nSubscription Plan at special launch price</string>
+    <string name="our_members">Our Membership Benefits 🎁</string>
+    <string name="beware_of_f">Beware of Fraudulent Profiles. Stay vigilant and avoid engaging with suspicious accounts. \nProtect your safety and privacy by verifying the authenticity of profiles before sharing personal \ninformation or participating in transactions.\n Report any suspicious activity to our support team immediately. \n Stay safe and trust only verified profiles.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
