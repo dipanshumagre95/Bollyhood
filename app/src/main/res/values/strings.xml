@@ -47,7 +47,7 @@
     <string name="str_galery">Gallery</string>
 
     <string name="str_home">Home</string>
-    <string name="str_bookings">Bookings</string>
+    <string name="str_bookings">Explore</string>
     <string name="str_chat">Chat</string>
     <string name="str_profile">Profile</string>
     <string name="str_checkout_now">Checkout Now</string>
@@ -87,6 +87,7 @@
     <string name="str_my_bookings">My Bookings</string>
     <string name="str_need_some_help_today">Need some help today?</string>
     <string name="str_find_it_here">Search “actors in mumbai”</string>
+    <string name="search_cate">Search category here...</string>
 
     <string name="str_view_all">View All</string>
     <string name="str_see_more">See More</string>
@@ -171,6 +172,8 @@
     <string name="introducing">Introducing Bollyhood Exclusive \nSubscription Plan at special launch price</string>
     <string name="our_members">Our Membership Benefits 🎁</string>
     <string name="beware_of_f">Beware of Fraudulent Profiles. Stay vigilant and avoid engaging with suspicious accounts. \nProtect your safety and privacy by verifying the authenticity of profiles before sharing personal \ninformation or participating in transactions.\n Report any suspicious activity to our support team immediately. \n Stay safe and trust only verified profiles.</string>
+    <string name="load_more_c">Load More Categories</string>
+    <string name="trending_ca">Trending Categories</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

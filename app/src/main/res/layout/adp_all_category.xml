@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,41 +10,69 @@
             type="com.app.bollyhood.adapter.CategoryInnerAdapter" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_3ssp"
-        android:padding="@dimen/_3ssp">
+        android:layout_height="@dimen/_90sdp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvInnerCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adapter="@{adapter}"
-            android:visibility="gone" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/_5sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivCategoryImage"
-            android:layout_width="@dimen/_50sdp"
-            android:background="@drawable/circle_transparent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvCategoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ivCategoryImage"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:fontFamily="@font/neueeinstellung_semibold"
-            android:maxLength="15"
-            android:maxLines="1"
-            android:text="fefefefefedgdggsgvfsvfsvds"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_11sdp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/ivCategoryImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_3ssp"
+                android:layout_marginEnd="@dimen/_3ssp"
+                android:alpha="0.9"
+                android:background="@drawable/rectangle_black"
+                android:orientation="vertical"
+                android:padding="@dimen/_2sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvCategoryName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Production Houses"
+                    android:singleLine="true"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

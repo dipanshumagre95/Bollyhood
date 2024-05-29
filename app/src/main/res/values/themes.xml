@@ -15,6 +15,14 @@
         <item name="android:fontFamily">@font/neueeinstellung_medium</item>
     </style>
 
+    <style name="roundedCornersImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">15dp</item>
+        <item name="cornerSizeTopRight">15dp</item>
+        <item name="cornerSizeBottomLeft">30dp</item>
+        <item name="cornerSizeBottomRight">15dp</item>
+    </style>
+
 
 
 

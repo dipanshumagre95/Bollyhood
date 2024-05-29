@@ -3,16 +3,13 @@ package com.app.bollyhood.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AdpAllCategoryBinding
-import com.app.bollyhood.databinding.AdpCategpryBinding
 import com.app.bollyhood.model.CategoryModel
 import com.bumptech.glide.Glide
 
-class AllCategoryAdapter(val requireContext: Context, val categoryList: ArrayList<CategoryModel>,
-    val onClick:onItemClick) :
+class AllCategoryAdapter(val requireContext: Context, var categoryList: ArrayList<CategoryModel>,
+                         val onClick:onItemClick) :
     RecyclerView.Adapter<AllCategoryAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -49,6 +46,11 @@ class AllCategoryAdapter(val requireContext: Context, val categoryList: ArrayLis
                 }
         */
 
+    }
+
+    fun updateList(newCategoryList: ArrayList<CategoryModel>) {
+        categoryList = newCategoryList
+        notifyDataSetChanged()
     }
 
     class MyViewHolder(val binding: AdpAllCategoryBinding) : RecyclerView.ViewHolder(binding.root)

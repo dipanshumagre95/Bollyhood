@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
-import com.app.bollyhood.activity.AllCategoryActivity
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
 import com.app.bollyhood.activity.CastingCallsActivity
 import com.app.bollyhood.activity.MainActivity
@@ -31,6 +30,7 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.onItemClick {
@@ -118,7 +118,9 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
 
     private fun addListner() {
         binding.tvAllCategory.setOnClickListener {
-            startActivity(Intent(requireActivity(), AllCategoryActivity::class.java))
+          //  startActivity(Intent(requireActivity(), AllCategoryActivity::class.java))
+            (activity as MainActivity?)!!.loadFragment(AllCategoryFragment())
+
         }
         binding.tvAllExpertise.setOnClickListener {
             startActivity(Intent(requireContext(), AllExpertiseProfileActivity::class.java))

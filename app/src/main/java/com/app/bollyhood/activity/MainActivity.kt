@@ -163,15 +163,19 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             tvHome.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            vHome.visibility=View.VISIBLE
 
             ivBookings.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvBookings.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vBooking.visibility=View.GONE
 
             ivChat.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvChat.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vChat.visibility=View.GONE
 
             ivProfile.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vProfile.visibility=View.GONE
         }
 
         loadFragment(HomeFragment())
@@ -183,6 +187,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             ivHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvHome.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vHome.visibility=View.GONE
 
             ivBookings.setColorFilter(
                 ContextCompat.getColor(
@@ -191,12 +196,15 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             tvBookings.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            vBooking.visibility=View.VISIBLE
 
             ivChat.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvChat.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vChat.visibility=View.GONE
 
             ivProfile.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vProfile.visibility=View.GONE
         }
 
 
@@ -235,9 +243,11 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             ivHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvHome.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vHome.visibility=View.GONE
 
             ivBookings.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvBookings.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vBooking.visibility=View.GONE
 
             ivChat.setColorFilter(
                 ContextCompat.getColor(
@@ -246,9 +256,11 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             tvChat.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            vChat.visibility=View.VISIBLE
 
             ivProfile.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vBooking.visibility=View.GONE
         }
         loadFragment(ChatFragment())
     }
@@ -258,12 +270,15 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             ivHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvHome.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vHome.visibility=View.GONE
 
             ivBookings.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvBookings.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vBooking.visibility=View.GONE
 
             ivChat.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvChat.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
+            vChat.visibility=View.GONE
 
             ivProfile.setColorFilter(
                 ContextCompat.getColor(
@@ -272,6 +287,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.black))
+            vProfile.visibility=View.VISIBLE
         }
 
         loadFragment(ProfileFragment())
@@ -283,7 +299,7 @@ class MainActivity : AppCompatActivity() {
             "Hi " + PrefManager(this).getvalue(StaticData.name) + ","
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    fun loadFragment(fragment: Fragment) {
         // load fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
