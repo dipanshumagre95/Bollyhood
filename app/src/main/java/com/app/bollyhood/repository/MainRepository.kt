@@ -14,16 +14,15 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     suspend fun getRecentCategory() = apiService.getRecentCategory()
 
     suspend fun doSignup(
-        name: RequestBody, email: RequestBody,
-        password: RequestBody,
-        cat_id: RequestBody,
-        mobile: RequestBody,
-        user_type: RequestBody,
-        subcatgory_Id: RequestBody,
-        profilePath: MultipartBody.Part?
+        name: String,
+        password: String,
+        cat_id: String,
+        mobile: String,
+        user_type: String,
+        subcatgory_Id: String,
     ) = apiService.doSignup(
-        name, email, password, cat_id, mobile, user_type,
-        subcatgory_Id, profilePath
+        name, password, cat_id, mobile, user_type,
+        subcatgory_Id
     )
 
     suspend fun sendOtp(id: String) = apiService.doSendOtp(id)

@@ -40,17 +40,15 @@ interface ApiService {
     @GET("recent_category.php")
     suspend fun getRecentCategory(): Response<CategoryResponse>
 
-    @Multipart
+    @FormUrlEncoded
     @POST("sign_up.php")
     suspend fun doSignup(
-        @Part("name") name: RequestBody,
-        @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody,
-        @Part("categories") cat_id: RequestBody,
-        @Part("mobile") mobile: RequestBody,
-        @Part("user_type") user_type: RequestBody,
-        @Part("sub_categories") sub_categories: RequestBody,
-        @Part image: MultipartBody.Part?,
+        @Field("name") name: String,
+        @Field("password") password: String,
+        @Field("categories") cat_id: String,
+        @Field("mobile") mobile: String,
+        @Field("user_type") user_type: String,
+        @Field("sub_categories") sub_categories: String,
     ): Response<SuccessResponse>
 
     @FormUrlEncoded

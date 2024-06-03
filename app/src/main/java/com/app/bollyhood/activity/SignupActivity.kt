@@ -31,10 +31,6 @@ import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
 
 @AndroidEntryPoint
 class SignupActivity : AppCompatActivity(),OnClickListener {
@@ -249,64 +245,22 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                     mContext,binding.cbteamNcondition.isChecked)
 
             ) {
-                val name: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtName.text.toString().trim()+" "+binding.edtLastName.text.toString().trim()
-                )
-                val email: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    ""
-                )
+                val name = binding.edtName.text.toString().trim()+" "+binding.edtLastName.text.toString().trim()
+                val password = binding.edtPassword.text.toString().trim()
+                val cat_id = categoryId
+                val subCatId= subCategoryId
+                val mobileNumber= mobileNumber!!
+                val type = user_type
 
-                val password: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtPassword.text.toString().trim()
-                )
-
-                val cat_id: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    categoryId
-                )
-
-                val subCatId: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    subCategoryId
-                )
-
-
-                val mobileNumber: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    mobileNumber!!
-                )
-
-
-                val type: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    user_type
-                )
-
-
-                var profileBody: MultipartBody.Part? = null
-                if (profilePath.isNotEmpty()) {
-                    val file = File(profilePath)
-                    // create RequestBody instance from file
-                    val requestFile =
-                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                    profileBody = MultipartBody.Part.createFormData(
-                        "image", file.name, requestFile
-                    )
-                }
 
 
                 viewModel.doSignup(
                     name,
-                    email,
                     password,
                     cat_id,
                     mobileNumber,
                     type,
-                    subCatId,
-                    profileBody
+                    subCatId
                 )
             }
 

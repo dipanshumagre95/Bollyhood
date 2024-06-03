@@ -1,17 +1,12 @@
 package com.app.bollyhood.extensions
 
-import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Patterns
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.app.bollyhood.R
-
-
 
 
 fun isNetworkAvailable(context: Context): Boolean {
@@ -89,7 +84,7 @@ fun isvalidEmailAddress(context: Context, edtEmail: String): Boolean {
 
 fun isvalidCategory(context: Context, edtCategory: String): Boolean {
     var isValid = true
-    if (edtCategory.isEmpty()) {
+    if (edtCategory.isEmpty() || edtCategory.equals("Select Category")) {
         Toast.makeText(
             context,
             context.getString(R.string.str_error_category),

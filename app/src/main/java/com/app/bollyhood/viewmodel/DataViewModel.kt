@@ -125,26 +125,22 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
 
     fun doSignup(
-        name: RequestBody,
-        email: RequestBody,
-        password: RequestBody,
-        cat_id: RequestBody,
-        mobile: RequestBody,
-        user_type: RequestBody,
-        subCategroyId: RequestBody,
-        profilePath: MultipartBody.Part?
+        name: String,
+        password: String,
+        cat_id: String,
+        mobile: String,
+        user_type: String,
+        subCategroyId: String
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
             mainRepository.doSignup(
                 name,
-                email,
                 password,
                 cat_id,
                 mobile,
                 user_type,
-                subCategroyId,
-                profilePath
+                subCategroyId
             )
                 .let {
                     if (it.body() != null) {
