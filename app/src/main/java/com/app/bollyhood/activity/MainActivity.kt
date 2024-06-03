@@ -25,6 +25,7 @@ import com.app.bollyhood.fragment.AgencyFragment
 import com.app.bollyhood.fragment.BookingFragment
 import com.app.bollyhood.fragment.ChatFragment
 import com.app.bollyhood.fragment.HomeFragment
+import com.app.bollyhood.fragment.ProfileDetailFragment
 import com.app.bollyhood.fragment.ProfileFragment
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData

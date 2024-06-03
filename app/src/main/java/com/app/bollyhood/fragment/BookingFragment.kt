@@ -18,7 +18,6 @@ import com.app.bollyhood.adapter.BookAdapter
 import com.app.bollyhood.databinding.FragmentBookingBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BookingModel
-import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.google.gson.Gson
@@ -44,7 +43,7 @@ class BookingFragment : Fragment(), BookAdapter.onItemClick {
     private fun initUI() {
 
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getBooking(PrefManager(requireContext()).getStringValue(StaticData.id))
+           // viewModel.getBooking(PrefManager(requireContext()).getStringValue(StaticData.id))
         } else {
             Toast.makeText(
                 requireContext(), getString(R.string.str_error_internet_connections),

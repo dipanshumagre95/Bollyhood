@@ -30,12 +30,12 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="2"
+                    android:visibility="visible"
                     android:text="India's #1 Entertainment \n       Recruitment App"
                     android:textColor="@color/text_color"
-                    android:textSize="30dp"
+                    android:textSize="28dp"
                     android:fontFamily="@font/urbanist_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/urbanist_semibold"
                     android:text="@string/str_login_msg"
                     android:textSize="@dimen/_13sdp"
@@ -120,7 +120,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/urbanist_semibold"
                     android:text="or"
                     android:textSize="@dimen/_13sdp"
@@ -134,11 +134,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="@dimen/_25ssp"
                     android:layout_marginEnd="@dimen/_45sdp"
                     android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/textView8"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5">
 
@@ -147,34 +147,34 @@
                         android:id="@+id/img_google"
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/_20ssp"
                         android:layout_marginLeft="@dimen/_25sdp"
+                        android:layout_marginRight="@dimen/_20ssp"
+                        android:layout_weight="1"
                         android:background="@drawable/border_gray"
                         android:scaleType="center"
-                        android:layout_weight="1"
-                        android:src="@drawable/google_icon"/>
+                        android:src="@drawable/google_icon" />
 
                     <ImageView
                         android:id="@+id/imageView4"
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:layout_weight="1"
                         android:background="@drawable/border_gray"
                         android:scaleType="center"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_weight="1"
-                        android:src="@drawable/fackbook"/>
+                        android:src="@drawable/fackbook" />
 
                     <ImageView
                         android:id="@+id/imageView5"
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:layout_weight="1"
                         android:background="@drawable/border_gray"
                         android:scaleType="center"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_weight="1"
-                        android:src="@drawable/more_icon"/>
+                        android:src="@drawable/more_icon" />
 
 
                 </LinearLayout>
@@ -194,7 +194,7 @@
                     android:id="@+id/tvPrivarcyPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/urbanist_semibold"
                     android:gravity="center"
                     android:textSize="@dimen/_11sdp"

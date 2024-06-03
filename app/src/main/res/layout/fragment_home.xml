@@ -107,12 +107,11 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategory"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:adapter="@{categoryAdapter}"
-                    android:padding="@dimen/_5sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rrCategory" />
 
@@ -241,11 +240,9 @@
                     android:id="@+id/rvExpertise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:adapter="@{expertiseAdapter}"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:padding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rrExpertise" />
 
@@ -488,11 +485,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginTop="-90dp">
-
-
 
                     <LinearLayout
                         android:layout_width="@dimen/_65sdp"
@@ -778,6 +773,7 @@
                     android:layout_marginStart="@dimen/_18sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_18sdp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:background="@drawable/white_with_blackbackground"
                     >
@@ -787,7 +783,6 @@
                         android:layout_height="match_parent"
                         android:text="Our Official Partners"
                         android:gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_20sdp"
                         android:fontFamily="@font/urbanist_semibold"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"/>
@@ -796,7 +791,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:src="@drawable/bollywood_artis"/>
 
                     <ImageView
@@ -812,6 +807,8 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/iftda"/>
+
+
 
 
                 </LinearLayout>

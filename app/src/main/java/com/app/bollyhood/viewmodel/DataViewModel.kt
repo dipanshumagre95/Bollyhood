@@ -7,7 +7,6 @@ import com.app.bollyhood.model.BannerResponse
 import com.app.bollyhood.model.BookMarkResponse
 import com.app.bollyhood.model.BookingResponse
 import com.app.bollyhood.model.CMSResponse
-import com.app.bollyhood.model.CastingBookMarkResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
 import com.app.bollyhood.model.ChatResponse
@@ -20,6 +19,7 @@ import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
+import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import com.app.bollyhood.repository.MainRepository
 import com.app.bollyhood.util.StaticData
@@ -71,6 +71,8 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     var castingBookmark = MutableLiveData<SuccessResponse>()
 
+    var actorsList = MutableLiveData<ActorsresponseModel>()
+
     fun splashTime() {
 
         viewModelScope.launch {
@@ -87,6 +89,20 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     categoryLiveData.postValue(it.body())
                     isLoading.postValue(false)
                 } else {
+                    isLoading.postValue(false)
+                }
+            }
+        }
+    }
+
+    fun getAllActors(){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            mainRepository.getAllActors().let{
+                if (it.body()!=null){
+                    actorsList.postValue(it.body())
+                    isLoading.postValue(false)
+                }else{
                     isLoading.postValue(false)
                 }
             }

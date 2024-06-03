@@ -6,14 +6,16 @@
     <data>
 
         <variable
-            name="categoryAdapter"
-            type="com.app.bollyhood.adapter.AllCategoryAdapter" />
+            name="actorsAdapter"
+            type="com.app.bollyhood.adapter.AllActorsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FBF6FF"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="#FDE2E2"
+        android:background="@drawable/actors_background_gradient"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,7 +95,7 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_toRightOf="@id/ivBack"
                     android:fontFamily="@font/urbanist_regular"
-                    android:text="Explore More Than 30+ Categories"
+                    android:text="Explore 500+ Actors From Mumbai"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp" />
 
@@ -122,7 +124,7 @@
             android:drawableStart="@drawable/baseline_search_24"
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/urbanist_medium"
-            android:hint="@string/search_cate"
+            android:hint="@string/search_actors"
             android:maxLines="1"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
@@ -134,23 +136,67 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
+        <RelativeLayout
+            android:id="@+id/llFilter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edsearch">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/str_result"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/str_result"
+                android:textSize="@dimen/_15sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist_semibold"/>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="123 recent profiles found"
+                android:textSize="@dimen/_9sdp"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/str_result"/>
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/setup_1"/>
+
+
+        </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategory"
+            android:id="@+id/rvprofilesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:padding="@dimen/_5sdp"
             app:layout_constraintBottom_toTopOf="@+id/materialTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edsearch" />
+            app:layout_constraintTop_toBottomOf="@+id/llFilter" />
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
@@ -158,7 +204,7 @@
             android:background="@drawable/rectangle_app_background"
             android:fontFamily="@font/urbanist_semibold"
             android:gravity="center"
-            android:text="@string/load_more_c"
+            android:text="@string/load_more_a"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"

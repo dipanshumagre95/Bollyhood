@@ -4,7 +4,6 @@ import com.app.bollyhood.model.BannerResponse
 import com.app.bollyhood.model.BookMarkResponse
 import com.app.bollyhood.model.BookingResponse
 import com.app.bollyhood.model.CMSResponse
-import com.app.bollyhood.model.CastingBookMarkResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
 import com.app.bollyhood.model.ChatResponse
@@ -17,6 +16,7 @@ import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
+import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -33,6 +33,9 @@ interface ApiService {
 
     @GET("category.php")
     suspend fun getCategory(): Response<CategoryResponse>
+
+    @GET("all_category_users.php")
+    suspend fun getAllActors(@Query("category_type") category_type: String) : Response<ActorsresponseModel>
 
     @GET("recent_category.php")
     suspend fun getRecentCategory(): Response<CategoryResponse>

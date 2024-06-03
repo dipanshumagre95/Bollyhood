@@ -16,7 +16,6 @@ import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
 import com.app.bollyhood.activity.CastingCallsActivity
 import com.app.bollyhood.activity.MainActivity
-import com.app.bollyhood.activity.ProfileDetailActivity
 import com.app.bollyhood.adapter.BannerAdapter
 import com.app.bollyhood.adapter.CategoryAdapter
 import com.app.bollyhood.adapter.ExpertiseAdapter
@@ -179,10 +178,12 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     }
 
     override fun onClick(pos: Int, expertiseModel: ExpertiseModel) {
-        startActivity(
-            Intent(requireContext(), ProfileDetailActivity::class.java)
-                .putExtra(StaticData.userModel, Gson().toJson(expertiseModel))
-        )
+        val bundle = Bundle()
+        bundle.putString(StaticData.userModel, Gson().toJson(expertiseModel))
+
+        val profileDetailFragment = ProfileDetailFragment()
+        profileDetailFragment.arguments = bundle
+        (activity as MainActivity).loadFragment(profileDetailFragment)
     }
 
     override fun onClick(pos: Int, categoryModel: CategoryModel) {

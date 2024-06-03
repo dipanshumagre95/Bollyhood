@@ -10,9 +10,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/_140sdp"
-        android:layout_height="@dimen/_190sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:background="@drawable/rectangle_app_background">
 
         <androidx.cardview.widget.CardView
@@ -35,7 +37,7 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
 
                     />
 
@@ -103,11 +105,6 @@
 
 
             </LinearLayout>
-
-
-
-
-
 
         </androidx.cardview.widget.CardView>
 

@@ -15,7 +15,7 @@
         <item name="android:fontFamily">@font/neueeinstellung_medium</item>
     </style>
 
-    <style name="roundedCornersImageView" parent="">
+    <style name="roundedCornerBanner" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">15dp</item>
         <item name="cornerSizeTopRight">15dp</item>
@@ -23,6 +23,27 @@
         <item name="cornerSizeBottomRight">15dp</item>
     </style>
 
+    <style name="roundedCornersImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeTopRight">10dp</item>
+        <item name="cornerSizeBottomLeft">10dp</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+    </style>
+
+    <style name="TextInputLayoutHintText" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">10dp</item>
+        <item name="android:fontFamily">@font/urbanist_regular</item>
+        <item name="android:textColor">#757575</item>
+    </style>
+
+    <style name="style_sec_sec" parent="">
+        <item name="android:fontFamily">@font/urbanist_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@color/black</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColorHint">#757575</item>
+    </style>
 
 
 

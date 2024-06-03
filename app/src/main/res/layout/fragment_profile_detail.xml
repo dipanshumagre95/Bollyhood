@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/actors_background_gradient">
+
+
+        <RelativeLayout
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_35sdp"
+            android:background="@drawable/circle_profilebackground"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/_7sdp"
+            android:background="@drawable/circle_profilebackground"
+            android:backgroundTint="#FFCAC2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/llBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rectangle_app_background"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:src="@drawable/icon_back" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rectangle_bookmark"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBookMark"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:src="@drawable/ic_bookmark"
+                android:tint="#48b8d8"/>
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivImage"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="-5dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="350dp"
+            android:background="@drawable/rectangle_lightcornerwhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_3sdp"
+                android:layout_marginTop="8dp"
+                android:background="#505050"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/urbanist_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <ImageView
+                android:id="@+id/ivVerified"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginTop="17dp"
+                android:visibility="gone"
+                android:src="@drawable/right_icon"
+                app:layout_constraintStart_toEndOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/urbanist_regular"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/llCall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/tvCategory">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="26dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/_2sdp"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RelativeLayout
+                        android:id="@+id/relativelayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center_horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+
+
+                        <LinearLayout
+                            android:id="@+id/lllocation"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/rectangle_sky"
+                            android:orientation="vertical"
+                            >
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Location"
+                                android:textColor="@color/black"
+                                android:textSize="10dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="Mumbai, Delhi"
+                                android:textColor="@color/black"
+                                android:textSize="11dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/llage"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:orientation="vertical"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_toRightOf="@+id/lllocation"
+                            android:background="@drawable/rectangle_pink"
+                            >
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Age"
+                                android:textColor="@color/black"
+                                android:textSize="10dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="28 Years"
+                                android:textColor="@color/black"
+                                android:textSize="11dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout4"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/ractangle_cream"
+                            android:orientation="vertical"
+                            android:layout_toRightOf="@+id/llage"
+                            >
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Height"
+                                android:textColor="@color/black"
+                                android:textSize="10dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="5’.7”"
+                                android:textColor="@color/black"
+                                android:textSize="11dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+
+                        </LinearLayout>
+
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relativesecond"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center_horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/relativelayout">
+
+                        <LinearLayout
+                            android:id="@+id/llskincolor"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/rectangle_skincolor"
+                            android:orientation="vertical"
+                            >
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Skin Color"
+                                android:textColor="@color/black"
+                                android:textSize="10dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="Dusky, Brown"
+                                android:textColor="@color/black"
+                                android:textSize="11dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/llpassport"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:orientation="vertical"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:layout_toRightOf="@+id/llskincolor"
+                            android:background="@drawable/ractangle_passport"
+                            >
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Passport"
+                                android:textColor="@color/black"
+                                android:textSize="10dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="11dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linearLayou"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/ractangle_bodytype"
+                            android:orientation="vertical"
+                            android:layout_toRightOf="@+id/llpassport"
+                            >
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Body Type"
+                                android:textColor="@color/black"
+                                android:textSize="10dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="Average (Build)"
+                                android:textColor="@color/black"
+                                android:textSize="11dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llmediaNphoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center_horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/relativesecond"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="60sp"
+                            android:layout_height="match_parent"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:src="@drawable/right_line"/>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MEDIA &amp; PHOTOS"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:padding="@dimen/_5sdp"
+                            android:fontFamily="@font/urbanist_bold"
+                            />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:src="@drawable/left_line"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/llmediaNphoto" />
+
+                    <LinearLayout
+                        android:id="@+id/llworkLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center_horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/recyclerview_photos"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="60sp"
+                            android:layout_height="match_parent"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:src="@drawable/right_line"/>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WORK LINKS"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:padding="@dimen/_5sdp"
+                            android:fontFamily="@font/urbanist_bold"
+                            />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:src="@drawable/left_line"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvWorkLinks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/llworkLink" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </ScrollView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/llCall"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rectangle_app_background"
+                android:fontFamily="@font/urbanist_bold"
+                android:gravity="center"
+                android:text="Hire Me / Message"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

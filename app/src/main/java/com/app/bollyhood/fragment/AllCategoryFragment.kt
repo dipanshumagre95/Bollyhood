@@ -138,11 +138,23 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
         }
     }
 
-    override fun onClick(pos: Int, categoryModel: CategoryModel) {
-        if (categoryModel.type == "1"){
-            startActivity(Intent(requireContext(), CastingCallsActivity::class.java))
-        }
+    override fun onItemClick(pos: Int, categoryModel: CategoryModel) {
 
+        when(categoryModel.type){
+            "1" ->{
+                startActivity(Intent(requireContext(), CastingCallsActivity::class.java))
+            }
+
+            "0" ->{
+                val bundle = Bundle()
+                  bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
+
+                 val allActorsFragment = AllActorsFragment()
+                 allActorsFragment.arguments = bundle
+                 (activity as MainActivity).loadFragment(allActorsFragment)
+            }
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

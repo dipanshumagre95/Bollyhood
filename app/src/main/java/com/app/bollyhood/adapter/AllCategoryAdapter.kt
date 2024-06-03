@@ -33,7 +33,7 @@ class AllCategoryAdapter(val requireContext: Context, var categoryList: ArrayLis
         holder.binding.tvCategoryName.text = model.category_name
 
         holder.itemView.setOnClickListener {
-            onClick.onClick(position, categoryModel = categoryList[position])
+            onClick.onItemClick(position, categoryModel = categoryList[position])
         }
 
         /*
@@ -56,6 +56,6 @@ class AllCategoryAdapter(val requireContext: Context, var categoryList: ArrayLis
     class MyViewHolder(val binding: AdpAllCategoryBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface onItemClick{
-        fun onClick(pos:Int,categoryModel: CategoryModel)
+        fun onItemClick(pos:Int,categoryModel: CategoryModel)
     }
 }

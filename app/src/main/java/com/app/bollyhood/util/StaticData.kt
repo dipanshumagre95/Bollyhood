@@ -17,6 +17,7 @@ class StaticData {
         const val image = "image"
         const val otp = "otp"
         const val userModel = "userModel"
+        const val previousFragment="previousFragment"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"

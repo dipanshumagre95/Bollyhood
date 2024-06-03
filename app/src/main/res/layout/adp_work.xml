@@ -6,7 +6,7 @@
         android:layout_width="@dimen/_130sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/rectangle_work1">
+        android:background="@drawable/rectangle_black_button">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,12 +29,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/neueeinstellung_medium"
+                android:fontFamily="@font/urbanist_medium"
                 android:maxLines="1"
                 android:id="@+id/tvName"
                 android:singleLine="true"
                 android:text="Hello Youtube"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
