@@ -35,12 +35,6 @@ class ImagesAdapter(
             Glide.with(context).load(imageList[position].url)
                 .into(holder.binding.ivImage)
         }
-
-        holder.binding.ivRemoveImage.setOnClickListener {
-            onclick.onRemoveImage(position, imageList[position])
-        }
-
-
     }
 
     class MyViewHolder(val binding: AdpImageItemBinding) : RecyclerView.ViewHolder(binding.root)

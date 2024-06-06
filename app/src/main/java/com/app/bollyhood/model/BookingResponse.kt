@@ -17,12 +17,12 @@ data class BookingModel(
     val reviews: String,
     val jobs_done: String,
     val experience: String,
-    val work_links: ArrayList<WorkLinks>,
+    val work_links: ArrayList<WorkLinkProfileData>,
     val is_verify: String,
     val status: String,
     val catt:String,
     var is_bookmarked: Int,
     val is_book: Int,
-    val new_work_links: ArrayList<WorkLinks>,
+    val new_work_links: ArrayList<WorkLinkProfileData>,
     val categories: ArrayList<ExpertiseCategories>
 )

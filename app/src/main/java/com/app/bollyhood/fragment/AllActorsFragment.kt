@@ -76,11 +76,6 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
                 .into(binding.cvProfile)
         }
 
-        val bundle = arguments
-        if (bundle != null) {
-            previousFragment= bundle.getString(StaticData.previousFragment).toString()
-        }
-
         if (isNetworkAvailable(requireContext())) {
             viewModel.getAllActors()
         } else {
@@ -98,18 +93,15 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
     override fun onResume() {
         super.onResume()
-        binding.tvusername.text =
-            "Hi " + PrefManager(requireContext()).getvalue(StaticData.name) + ","
+        binding.tvusername.text = "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
 
+        (requireActivity() as MainActivity).showToolbar(false)
     }
 
     override fun onClick(item: View?) {
         when(item?.id) {
             R.id.ivBack -> {
-                if (previousFragment.equals("AllCategoryFragment"))
                     backpress(AllCategoryFragment())
-                else
-                    backpress(HomeFragment())
             }
 
             R.id.cvProfile -> {

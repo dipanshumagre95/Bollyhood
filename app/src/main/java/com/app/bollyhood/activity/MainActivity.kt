@@ -6,34 +6,27 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityMainBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.fragment.AgencyFragment
 import com.app.bollyhood.fragment.BookingFragment
 import com.app.bollyhood.fragment.ChatFragment
 import com.app.bollyhood.fragment.HomeFragment
-import com.app.bollyhood.fragment.ProfileDetailFragment
 import com.app.bollyhood.fragment.ProfileFragment
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
-
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -48,12 +41,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mContext = this
-        askNotificationPermission()
-        addListner()
-        addObsereves()
-        setHomeColor()
+        if (isNetworkAvailable(this)){
+            askNotificationPermission()
+            addListner()
+            addObsereves()
+            setHomeColor()
+        }else{
+            binding.noInternetPage.visibility=View.VISIBLE
+        }
     }
-
 
     private fun askNotificationPermission() {
         // This is only necessary for API level >= 33 (TIRAMISU)
@@ -64,8 +60,8 @@ class MainActivity : AppCompatActivity() {
                 ) ==
                 PackageManager.PERMISSION_GRANTED
             ) {
-//                Log.e(TAG, "PERMISSION_GRANTED")
-                // FCM SDK (and your app) can post notifications.
+               // Log.e(TAG, "PERMISSION_GRANTED")
+              // FCM SDK (and your app) can post notifications.
             } else {
 //                Log.e(TAG, "NO_PERMISSION")
                 // Directly ask for the permission
@@ -296,8 +292,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.tvusername.text =
-            "Hi " + PrefManager(this).getvalue(StaticData.name) + ","
+        binding.tvusername.text = "Hi " + (PrefManager(this).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
     }
 
     fun loadFragment(fragment: Fragment) {

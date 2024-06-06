@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:background="@color/greylight"
-        android:orientation="vertical">
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_85sdp"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/rectangle_app_background">
 
-        <RelativeLayout
-            android:id="@+id/frameButton"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/_5sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_margin="@dimen/_1sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivImage"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/ivRemoveImage"
-                android:layout_width="@dimen/_12sdp"
-                android:layout_height="@dimen/_12sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="top|end"
-                android:layout_margin="@dimen/_3sdp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/img_arrowdown_gray_900_7x8"
-                android:tint="@android:color/holo_red_dark" />
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
 
+                    />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </layout>

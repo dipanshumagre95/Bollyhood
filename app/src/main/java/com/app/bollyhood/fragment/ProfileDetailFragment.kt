@@ -21,16 +21,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.SubscriptionPlanActivity
 import com.app.bollyhood.activity.YoutubeActivity
+import com.app.bollyhood.adapter.ImagesAdapter
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentProfileDetailBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ExpertiseModel
-import com.app.bollyhood.model.WorkLinks
+import com.app.bollyhood.model.PhotoModel
+import com.app.bollyhood.model.SingleCategoryModel
+import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -39,13 +43,15 @@ import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener {
+class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener,ImagesAdapter.onItemClick {
 
     lateinit var binding: FragmentProfileDetailBinding
     private val viewModel: DataViewModel by viewModels()
     private var is_bookmark: Int = 0
-    lateinit var expertiseModel: ExpertiseModel
+    private var expertiseModel: ExpertiseModel?=null
+    private var singleCategoryModel: SingleCategoryModel? =null
     lateinit var previousFragment:String
+    private var photolist:ArrayList<PhotoModel> = arrayListOf()
     var expanded:Boolean=true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,23 +74,32 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
 
     private fun initUI() {
         val bundle = arguments
-        if (bundle != null){
-            expertiseModel = Gson().fromJson(
+        if (bundle!=null&&bundle?.getString(StaticData.previousFragment)=="AllActosFragment"){
+            singleCategoryModel = Gson().fromJson(
                 bundle.getString(StaticData.userModel),
-                ExpertiseModel::class.java
+                SingleCategoryModel::class.java
             )
-            previousFragment= bundle.getString(StaticData.previousFragment).toString()
-            setData(expertiseModel)
+            previousFragment = bundle.getString(StaticData.previousFragment).toString()
+            setDataforProfile(singleCategoryModel)
+        }else {
+            if (bundle != null) {
+                expertiseModel = Gson().fromJson(
+                    bundle.getString(StaticData.userModel),
+                    ExpertiseModel::class.java
+                )
+                previousFragment = bundle.getString(StaticData.previousFragment).toString()
+                setData(expertiseModel)
+            }
         }
 
     }
 
-    private fun setData(expertiseModel: ExpertiseModel) {
+    private fun setData(expertiseModel: ExpertiseModel?) {
 
         binding.apply {
-            Glide.with(requireContext()).load(expertiseModel.image).into(ivImage)
-            tvName.text = expertiseModel.name
-            if (expertiseModel.is_verify == "1") {
+            Glide.with(requireContext()).load(expertiseModel?.image).placeholder(R.drawable.ic_profile).into(ivImage)
+            tvName.text = expertiseModel?.name
+            if (expertiseModel?.is_verify == "1") {
                 ivVerified.visibility = View.VISIBLE
             } else {
                 ivVerified.visibility = View.GONE
@@ -93,8 +108,8 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
 
             val stringList = arrayListOf<String>()
 
-            for (i in 0 until expertiseModel.categories.size) {
-                stringList.add(expertiseModel.categories[i].category_name)
+            for (i in 0 until expertiseModel?.categories?.size!!) {
+                stringList.add(expertiseModel?.categories?.get(i)?.category_name!!)
             }
             tvCategory.text = stringList.joinToString(separator = " / ")
 
@@ -124,7 +139,69 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
         }
     }
 
-    override fun onClick(pos: Int, work: WorkLinks) {
+    private fun setDataforProfile(singleCategoryModel: SingleCategoryModel?) {
+
+        binding.apply {
+            Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(ivImage)
+            tvName.text = singleCategoryModel?.name
+            tvage.text=singleCategoryModel?.age
+            tvbodytype.text=singleCategoryModel?.body_type
+            tvheight.text=singleCategoryModel?.height
+            skinColor.text=singleCategoryModel?.skin_color
+            tvpassport.text=singleCategoryModel?.passport
+            tvlocation.text=singleCategoryModel?.location
+            if (singleCategoryModel?.is_verify == "1") {
+                ivVerified.visibility = View.VISIBLE
+            } else {
+                ivVerified.visibility = View.GONE
+            }
+
+
+            val stringList = arrayListOf<String>()
+
+            for (i in 0 until singleCategoryModel?.categories?.size!!) {
+                stringList.add(singleCategoryModel?.categories?.get(i)?.category_name!!)
+            }
+            tvCategory.text = stringList.joinToString(separator = " / ")
+
+            if (singleCategoryModel.description.length > 150){
+                val shorttext=singleCategoryModel.description.substring(0,150)
+                setSpannableString(shorttext,"read more",singleCategoryModel.description)
+            }else{
+                binding.tvDescription.text = singleCategoryModel.description
+            }
+
+
+
+            is_bookmark = singleCategoryModel.is_bookmarked
+
+            if (singleCategoryModel.is_bookmarked == 1) {
+                ivBookMark.setImageResource(R.drawable.ic_addedbookmark)
+            } else {
+                ivBookMark.setImageResource(R.drawable.ic_bookmark)
+            }
+
+
+            for (i in 0 until singleCategoryModel.imagefile.size){
+                 photolist.add(PhotoModel(i, singleCategoryModel.imagefile.get(i)))
+            }
+
+            recyclerviewPhotos.layoutManager = GridLayoutManager(requireContext(),3)
+            recyclerviewPhotos.setHasFixedSize(true)
+            adapter = ImagesAdapter(requireContext(), photolist, this@ProfileDetailFragment)
+            recyclerviewPhotos.adapter = adapter
+            adapter?.notifyDataSetChanged()
+
+            rvWorkLinks.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvWorkLinks.setHasFixedSize(true)
+            val adapter =
+                WorkAdapter(requireContext(), singleCategoryModel.work_links, this@ProfileDetailFragment)
+            rvWorkLinks.adapter = adapter
+        }
+    }
+
+    override fun onitemClick(pos: Int, work: WorkLinkProfileData) {
         startActivity(
             Intent(requireContext(), YoutubeActivity::class.java).putExtra("videoId", work.worklink_url)
         )
@@ -132,7 +209,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
 
     private fun addListner() {
         binding.llBack.setOnClickListener(this)
-        binding.ivBookMark.setOnClickListener(this)
+        binding.llbookmark.setOnClickListener(this)
         binding.llCall.setOnClickListener(this)
     }
 
@@ -164,10 +241,10 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 if (it.result.is_subscription == "0") {
                     startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
                 }else{
-                    if (expertiseModel.mobile.isNotEmpty()) {
+                    if (expertiseModel?.mobile?.isNotEmpty()!!) {
                         val intent =
                             Intent(Intent.ACTION_DIAL, Uri.fromParts("tel",
-                                expertiseModel.mobile, null))
+                                expertiseModel?.mobile, null))
                         startActivity(intent)
                     }
 
@@ -186,7 +263,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
             if (isNetworkAvailable(requireContext())) {
                 viewModel.addRemoveBookMark(
                     PrefManager(requireContext()).getvalue(StaticData.id),
-                    expertiseModel.id,
+                    expertiseModel?.id,
                     "2"
                 )
             } else {
@@ -216,7 +293,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                     setSpannableString(fulltext, "read less", text)
                     expanded=false
                 }else{
-                    setSpannableString(fulltext, "read less", text)
+                    setSpannableString(fulltext, "read more", text)
                     expanded=true
                 }
             }
@@ -238,18 +315,18 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
         when(item?.id){
 
             R.id.llBack ->{
-                if (previousFragment.equals("AllActorsFragment")){
+                if (previousFragment.equals("AllActosFragment")){
                     (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
                 }else {
                     (requireActivity() as MainActivity).loadFragment(HomeFragment())
                 }
             }
 
-            R.id.ivBookMark ->{
+            R.id.llbookmark ->{
                 if (isNetworkAvailable(requireContext())) {
-                    if (expertiseModel.is_bookmarked == 0) {
+                    if (singleCategoryModel?.is_bookmarked == 0) {
                         viewModel.addRemoveBookMark(
-                            PrefManager(requireContext()).getvalue(StaticData.id), expertiseModel.id, "1"
+                            PrefManager(requireContext()).getvalue(StaticData.id), expertiseModel?.id, "1"
                         )
                     } else {
                         removeBookMarkDialog()
@@ -266,7 +343,6 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                     viewModel.checkSubscriptions(
                         PrefManager(requireContext()).getvalue(StaticData.id).toString()
                     )
-
                 } else {
                     Toast.makeText(
                         requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
@@ -274,6 +350,10 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 }
             }
         }
+    }
+
+    override fun onRemoveImage(pos: Int, photoModel: PhotoModel) {
+
     }
 
 }

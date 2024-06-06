@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/button"
+                android:background="@drawable/rectangle_app_background"
                 android:fontFamily="@font/neueeinstellung_semibold"
                 android:gravity="center"
                 android:letterSpacing="0.1"

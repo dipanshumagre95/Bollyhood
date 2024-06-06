@@ -27,7 +27,7 @@
                     app:shapeAppearance="@style/roundedCornersImageView"
                     android:src="@drawable/anchors"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                      />
 
                 <LinearLayout

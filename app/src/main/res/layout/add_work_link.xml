@@ -1,50 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/llMain"
-    android:orientation="horizontal">
+    >
 
-    <EditText
-        android:layout_weight="1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/edtWorkLinkName"
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:padding="@dimen/_7sdp"
+        android:layout_margin="@dimen/_15sdp"
+        android:src="@drawable/img_arrowdown_gray_900_7x8"
+        android:layout_alignParentEnd="true"/>
+
+    <LinearLayout
+        android:id="@+id/link1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/rectangle_grey"
-        android:fontFamily="@font/neueeinstellung_regular"
-        android:hint="@string/str_work_link_name"
-        android:inputType="text"
-        android:maxLength="20"
-        android:layout_margin="@dimen/_5sdp"
-        android:maxLines="1"
-        android:paddingStart="@dimen/_10sdp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="@color/colorgrey"
-        android:textSize="@dimen/_12sdp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/close"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/edtWorkLinkName1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_work_link_name"
+            android:inputType="text"
+            android:maxLength="20"
+            android:layout_margin="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            />
 
 
-    <EditText
-        android:layout_weight="1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/edtAddWorkLink"
+        <EditText
+            android:layout_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/edtAddWorkLink1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_add_work_link_url"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:layout_margin="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/link2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/rectangle_grey"
-        android:fontFamily="@font/neueeinstellung_regular"
-        android:hint="@string/str_add_work_link_url"
-        android:inputType="textPersonName"
-        android:maxLength="50"
-        android:layout_margin="@dimen/_5sdp"
-        android:maxLines="1"
-        android:paddingStart="@dimen/_10sdp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="@color/colorgrey"
-        android:textSize="@dimen/_12sdp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/link1"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <EditText
+            android:layout_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/edtWorkLinkName2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_work_link_name"
+            android:inputType="text"
+            android:maxLength="20"
+            android:layout_margin="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            />
+
+
+        <EditText
+            android:layout_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/edtAddWorkLink2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_add_work_link_url"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:layout_margin="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/link3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/link2"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/edtWorkLinkName3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_work_link_name"
+            android:inputType="text"
+            android:maxLength="20"
+            android:layout_margin="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            />
+
+
+        <EditText
+            android:layout_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/edtAddWorkLink3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/rectangle_grey"
+            android:fontFamily="@font/neueeinstellung_regular"
+            android:hint="@string/str_add_work_link_url"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:layout_margin="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorgrey"
+            android:textSize="@dimen/_12sdp"
+            />
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvAddLinks"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/link3"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rectangle_app_background"
+        android:fontFamily="@font/urbanist_semibold"
+        android:gravity="center"
+        android:text="Add Links"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</RelativeLayout>

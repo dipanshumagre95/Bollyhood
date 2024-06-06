@@ -17,7 +17,7 @@ data class ExpertiseModel(
     val jobs_done: String,
     val experience: String,
     val category_type: String,
-    val work_links: ArrayList<WorkLinks>,
+    val work_links: ArrayList<WorkLinkProfileData>,
     val is_verify: String,
     val status: String,
     val catt: String,
@@ -25,7 +25,7 @@ data class ExpertiseModel(
     var is_online: String,
     val is_book: Int,
     val last_message:String,
-    val new_work_links: ArrayList<WorkLinks>,
+    val new_work_links: ArrayList<WorkLinkProfileData>,
     val categories: ArrayList<ExpertiseCategories>
 )
 

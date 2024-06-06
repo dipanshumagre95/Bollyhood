@@ -54,12 +54,16 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         uid: RequestBody, cat_id: RequestBody,
         mobileNumber: RequestBody,
         description: RequestBody,
-        jobs_done: RequestBody,
-        experince: RequestBody,
-        reviews: RequestBody,
+        height: RequestBody,
+        passport: RequestBody,
+        body_type: RequestBody,
+        skin_color: RequestBody,
+        age: RequestBody,
+        location: RequestBody,
         work_Link: RequestBody?,
         categories: RequestBody?,
-        profile_image: MultipartBody.Part?
+        profile_image: MultipartBody.Part?,
+        imagefile:ArrayList<MultipartBody.Part>
     ) =
         apiService.updateProfile(
             name,
@@ -68,12 +72,16 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
             cat_id,
             mobileNumber,
             description,
-            jobs_done,
-            experince,
-            reviews,
+            height,
+            passport,
+            body_type,
+            skin_color,
+            age,
+            location,
             work_Link,
             categories,
-            profile_image
+            profile_image,
+            imagefile
         )
 
     suspend fun getBanner() = apiService.getBanner()

@@ -1,5 +1,6 @@
 package com.app.bollyhood.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -248,6 +249,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             isLoading.postValue(true)
             mainRepository.getProfile(uid).let {
                 if (it.body() != null) {
+                    Log.d("okhttptt",it.body().toString())
                     profileLiveData.postValue(it.body())
                     isLoading.postValue(false)
                 } else {
@@ -265,26 +267,49 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         cat_id: RequestBody,
         mobile: RequestBody,
         description: RequestBody,
-        jobs_done: RequestBody,
-        experience: RequestBody,
-        reviews: RequestBody,
+        height: RequestBody,
+        passport: RequestBody,
+        body_type: RequestBody,
+        skin_color: RequestBody,
+        age: RequestBody,
+        location: RequestBody,
         work_Link: RequestBody?,
         categories: RequestBody?,
-        profile_image: MultipartBody.Part?
+        profile_image: MultipartBody.Part?,
+        imagefile:ArrayList<MultipartBody.Part>
     ) {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            mainRepository.updateProfile(
-                name, email, uid, cat_id, mobile, description, jobs_done, experience, reviews,
-                work_Link, categories, profile_image
-            ).let {
-                if (it.body() != null) {
-                    updateProfileLiveData.postValue(it.body() as ProfileResponse)
-                    isLoading.postValue(false)
-                } else {
-                    isLoading.postValue(false)
+        try {
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                mainRepository.updateProfile(
+                    name,
+                    email,
+                    uid,
+                    cat_id,
+                    mobile,
+                    description,
+                    height,
+                    passport,
+                    body_type,
+                    skin_color,
+                    age,
+                    location,
+                    work_Link,
+                    categories,
+                    profile_image,
+                    imagefile
+                ).let {
+                    if (it.body() != null) {
+                        Log.d("okhttp",it.body().toString())
+                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
+                        isLoading.postValue(false)
+                    } else {
+                        isLoading.postValue(false)
+                    }
                 }
             }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
     }
 

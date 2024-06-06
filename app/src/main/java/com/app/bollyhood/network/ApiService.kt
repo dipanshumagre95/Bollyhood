@@ -106,12 +106,16 @@ interface ApiService {
         @Part("cat_id") cat_id: RequestBody,
         @Part("mobile") mobile: RequestBody,
         @Part("description") description: RequestBody,
-        @Part("jobs_done") jobs_done: RequestBody,
-        @Part("experience") experience: RequestBody,
-        @Part("reviews") reviews: RequestBody,
+        @Part("height") height: RequestBody,
+        @Part("passport") passport: RequestBody,
+        @Part("body_type") body_type: RequestBody,
+        @Part("skin_color") skinColor: RequestBody,
+        @Part("age") age: RequestBody,
+        @Part("location") location: RequestBody,
         @Part("worklinks") worklinks: RequestBody?,
         @Part("categories") category_id: RequestBody?,
         @Part image: MultipartBody.Part?,
+        @Part imagefile : ArrayList<MultipartBody.Part>
     ): Response<ProfileResponse>
 
 

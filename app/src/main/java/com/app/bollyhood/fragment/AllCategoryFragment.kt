@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CastingCallsActivity
 import com.app.bollyhood.activity.MainActivity
+import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.adapter.AllCategoryAdapter
 import com.app.bollyhood.databinding.FragmentAllCategoryBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -105,6 +106,10 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
         binding.ivBack.setOnClickListener {
             backpress()
         }
+
+        binding.cvProfile.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(requireContext(), MyProfileActivity::class.java))
+        })
     }
 
     private fun addObserevs() {
@@ -166,8 +171,7 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
         super.onResume()
 
         binding.tvusername.text =
-            "Hi " + PrefManager(requireContext()).getvalue(StaticData.name) + ","
-
+            "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
     }
 
     fun backpress(){

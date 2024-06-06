@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AdapterAllActorsBinding
 import com.app.bollyhood.model.SingleCategoryModel
 import com.bumptech.glide.Glide
@@ -28,7 +29,7 @@ class AllActorsAdapter(val context: Context, var list: ArrayList<SingleCategoryM
 
     override fun onBindViewHolder(holder: ActoreViewHolder, position: Int) {
         val model=list[position]
-        Glide.with(context).load(model.image).into(holder.binding.ivImage)
+        Glide.with(context).load(model.image).placeholder(R.drawable.ic_profile).centerCrop().into(holder.binding.ivImage)
         holder.binding.txActorsName.text=model.name
         holder.binding.txrole.text=model.category_name
 

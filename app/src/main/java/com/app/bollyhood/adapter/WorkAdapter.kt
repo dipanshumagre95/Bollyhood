@@ -4,12 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AdpWorkBinding
-import com.app.bollyhood.model.WorkLinks
+import com.app.bollyhood.model.WorkLinkProfileData
 
 class WorkAdapter(
-    val mContext: Context, val workLinks: ArrayList<WorkLinks>,
+    val mContext: Context, val workLinks: ArrayList<WorkLinkProfileData>,
     val onclick: onItemClick
 ) :
     RecyclerView.Adapter<WorkAdapter.MyViewHolder>() {
@@ -31,14 +30,14 @@ class WorkAdapter(
 
         holder.binding.tvName.text = model.worklink_name
 
-        if (position % 2 == 0) {
+        /*if (position % 2 == 0) {
             holder.binding.rrMain.setBackgroundResource(R.drawable.rectangle_work1)
         } else {
             holder.binding.rrMain.setBackgroundResource(R.drawable.rectangle_work2)
-        }
+        }*/
 
         holder.itemView.setOnClickListener {
-            onclick.onClick(position, work = workLinks[position])
+            onclick.onitemClick(position, work = workLinks[position])
         }
     }
 
@@ -46,6 +45,6 @@ class WorkAdapter(
     }
 
     interface onItemClick {
-        fun onClick(pos: Int, work: WorkLinks)
+        fun onitemClick(pos: Int, work: WorkLinkProfileData)
     }
 }

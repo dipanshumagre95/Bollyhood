@@ -115,14 +115,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rrCategory" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_60sdp"
-                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:orientation="horizontal"
+                    android:layout_weight="3"
                     android:background="@drawable/rectangle_app_background"
-                    android:layout_marginTop="@dimen/_5sdp">
+                    android:layout_marginTop="@dimen/_10sdp">
 
                     <TextView
                         android:id="@+id/exclusive"
@@ -131,9 +133,9 @@
                         android:text="@string/exclusive_u"
                         android:textColor="#FEF5F2"
                         android:gravity="center"
-                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_weight="1"
                         android:padding="@dimen/_5sdp"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:fontFamily="@font/urbanist_bold"/>
 
 
@@ -143,63 +145,68 @@
                         android:layout_height="match_parent"
                         android:layout_toRightOf="@id/exclusive"
                         android:text="@string/introducing"
-                        android:textSize="@dimen/_7sdp"
+                        android:textSize="@dimen/_6sdp"
                         android:lineSpacingExtra="-2sp"
+                        android:layout_weight="1"
                         android:textColor="@color/white"
                         android:fontFamily="@font/urbanist_regular"
                         android:gravity="center_vertical"
                         />
 
-                    
+
                     <RelativeLayout
-                        android:id="@+id/llgetpremuim"
-                        android:layout_width="@dimen/_85sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_toRightOf="@+id/introducing"
-                        android:gravity="center"
-                        android:focusable="true"
-                        android:defaultFocusHighlightEnabled="true"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:layout_marginTop="@dimen/_13sdp"
-                        android:background="@drawable/background_with_blackborder"
-                        android:layout_marginRight="@dimen/_3sdp"
-                        >
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:id="@+id/llgetpremuim"
+                            android:layout_width="@dimen/_85sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:focusable="true"
+                            android:defaultFocusHighlightEnabled="true"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/background_with_blackborder"
+                            android:layout_marginRight="@dimen/_3sdp"
+                            >
+
+                            <TextView
+                                android:id="@+id/tvgetpremium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Get Premium"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_8sdp"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/tvgetpremium"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/subtract"/>
+
+                        </RelativeLayout>
 
                         <TextView
-                            android:id="@+id/tvgetpremium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Get Premium"
-                            android:gravity="center"
-                            android:fontFamily="@font/urbanist_bold"
+                            android:text="Billed Monthly*"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"/>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/tvgetpremium"
-                            android:layout_marginStart="@dimen/_1sdp"
-                            android:src="@drawable/subtract"/>
+                            android:layout_below="@+id/llgetpremuim"
+                            android:layout_marginStart="@dimen/_33sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:textSize="@dimen/_4sdp"
+                            />
 
                     </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/introducing"
-                        android:text="Billed Monthly*"
-                        android:textColor="@color/white"
-                        android:layout_below="@+id/llgetpremuim"
-                        android:layout_marginStart="@dimen/_33sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:fontFamily="@font/urbanist_regular"
-                        android:textSize="@dimen/_4sdp"
-                        />
 
-
-                </RelativeLayout>
+                </LinearLayout>
 
 
                 <RelativeLayout
@@ -250,9 +257,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_6sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/firstjob_background">
 
 
@@ -319,12 +326,13 @@
                     android:gravity="center_horizontal"
                     android:textColor="@color/black"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_70sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="4"
                     android:background="@drawable/white_with_blackbackground"
                     >
 
@@ -332,7 +340,8 @@
                         android:id="@+id/llfirst"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_8sdp"
                         >
 
                         <ImageView
@@ -364,7 +373,8 @@
                         android:id="@+id/llsecond"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_weight="1"
                         android:layout_toRightOf="@+id/llfirst"
                         >
 
@@ -397,7 +407,8 @@
                         android:id="@+id/llthird"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_weight="1"
                         android:layout_toRightOf="@+id/llsecond"
                         >
 
@@ -431,7 +442,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_weight="1"
                         android:layout_toRightOf="@+id/llthird"
                         >
 
@@ -461,7 +473,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -487,12 +499,14 @@
                     android:layout_height="@dimen/_80sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="4"
                     android:layout_marginTop="-90dp">
 
                     <LinearLayout
                         android:layout_width="@dimen/_65sdp"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_weight="1"
                         android:background="@drawable/rectangle_app_background">
 
                         <androidx.cardview.widget.CardView
@@ -562,6 +576,7 @@
                         android:layout_width="@dimen/_65sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
                         android:background="@drawable/rectangle_app_background">
 
                     <androidx.cardview.widget.CardView
@@ -630,6 +645,7 @@
                         android:layout_width="@dimen/_65sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
                         android:background="@drawable/rectangle_app_background">
 
 
@@ -699,6 +715,7 @@
                         android:layout_width="@dimen/_65sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
                         android:background="@drawable/rectangle_app_background">
 
                     <androidx.cardview.widget.CardView
@@ -850,8 +867,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <ImageView

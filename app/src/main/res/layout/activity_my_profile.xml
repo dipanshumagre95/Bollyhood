@@ -186,20 +186,25 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
+                <RelativeLayout
                     android:id="@+id/llDescriptions"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_below="@+id/llCategory"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
                     android:background="@drawable/rectangle_gray_with_black_border"
-                    android:gravity="center"
-                    android:padding="@dimen/_5sdp"
-                    app:hintAnimationEnabled="true"
-                    app:hintEnabled="false"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText">
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_below="@+id/llCategory">
+
+                    <TextView
+                        android:id="@+id/discriptionhint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        style="@style/TextInputLayoutHintText"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:text="About You"/>
+
 
                     <EditText
                         android:id="@+id/edtDescriptions"
@@ -207,20 +212,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_below="@+id/discriptionhint"
                         android:background="@android:color/transparent"
-                        android:hint="About You"
                         android:inputType="textMultiLine"
-                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:scrollbars="vertical"
+                        android:maxLength="250"
                         android:paddingStart="@dimen/_10sdp"
                         android:singleLine="true" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llDescriptions"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:visibility="gone"
+                    android:textColor="#757575"
+                    android:textSize="@dimen/_7sdp"
+                    android:layout_alignParentEnd="true"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/llEmail"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_below="@+id/llDescriptions"
+                    android:layout_below="@+id/textcount"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
@@ -232,7 +252,7 @@
                     app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                     <EditText
-                        android:id="@+id/edtEmail"
+                        android:id="@+id/edtEmailAddress"
                         style="@style/style_sec_sec"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -557,7 +577,7 @@
                                 android:textSize="10sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/edtAge"
+                                android:id="@+id/acage"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/txage"
@@ -639,7 +659,7 @@
 
                     <RelativeLayout
                         android:id="@+id/tvAddWorkLink"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_below="@+id/ageNpasspod"
                         android:layout_gravity="center_horizontal"
@@ -677,6 +697,15 @@
                         </LinearLayout>
 
                     </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/worklinkrecyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        />
 
                     <LinearLayout
                         android:id="@+id/llworkLink"
@@ -742,18 +771,32 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
+                                        android:id="@+id/firstImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
+                                        android:scaleType="centerCrop"
                                         />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar1"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -781,18 +824,32 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
+                                        android:id="@+id/secondImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
+                                        android:scaleType="centerCrop"
                                         />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar2"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -820,18 +877,32 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
+                                        android:id="@+id/thirdImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
+                                        android:scaleType="centerCrop"
                                         />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar3"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -869,18 +940,32 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
+                                        android:id="@+id/fourthImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
+                                        android:scaleType="centerCrop"
                                         />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar4"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -909,18 +994,32 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
+                                        android:id="@+id/fifthimage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
+                                        android:scaleType="centerCrop"
                                         />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar5"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -948,18 +1047,32 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
+                                        android:id="@+id/siximage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
+                                        android:scaleType="centerCrop"
                                         />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar6"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -1256,7 +1369,8 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
@@ -1265,8 +1379,6 @@
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
                                         android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
                                         />
 
                                 </RelativeLayout>
@@ -1295,7 +1407,8 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
@@ -1304,8 +1417,6 @@
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
                                         android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
-
                                         />
 
                                 </RelativeLayout>
@@ -1334,7 +1445,8 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
 
 
                                     <ImageView
@@ -1343,7 +1455,6 @@
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
                                         android:scaleType="center"
-                                        android:src="@drawable/upload_to_the_cloud"
 
                                         />
 

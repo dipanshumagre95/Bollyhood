@@ -29,6 +29,8 @@ object AppModule {
     @Provides
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder().apply {
+
+            addInterceptor(httpLoggingInterceptor)
 /*
             addInterceptor(
                 Interceptor { chain ->
