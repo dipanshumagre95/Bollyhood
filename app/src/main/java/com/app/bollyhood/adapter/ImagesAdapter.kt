@@ -2,6 +2,7 @@ package com.app.bollyhood.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.AdpImageItemBinding
@@ -35,6 +36,10 @@ class ImagesAdapter(
             Glide.with(context).load(imageList[position].url)
                 .into(holder.binding.ivImage)
         }
+
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            onclick.onRemoveImage(position,imageList[position])
+        })
     }
 
     class MyViewHolder(val binding: AdpImageItemBinding) : RecyclerView.ViewHolder(binding.root)

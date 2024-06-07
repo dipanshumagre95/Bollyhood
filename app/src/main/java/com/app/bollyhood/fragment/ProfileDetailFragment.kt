@@ -1,6 +1,7 @@
 package com.app.bollyhood.fragment
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -15,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -355,7 +357,21 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
     }
 
     override fun onRemoveImage(pos: Int, photoModel: PhotoModel) {
+        addWorkLinksDialog(photoModel)
+    }
 
+    private fun addWorkLinksDialog(photoModel: PhotoModel){
+        val dialogView = Dialog(requireContext())
+        dialogView.setContentView(R.layout.show_image_layout)
+
+        val image=dialogView.findViewById<ImageView>(R.id.ivImage)
+
+        Glide.with(requireContext()).load(photoModel.url)
+            .centerCrop()
+            .into(image)
+
+
+        dialogView.show()
     }
 
 }
