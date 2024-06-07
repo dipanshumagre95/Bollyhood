@@ -76,7 +76,7 @@ class CastingApplyActivity : AppCompatActivity(), ImagesAdapter.onItemClick {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_casting_apply)
         mContext = this
         initUI()
-        addListner()
+      //  addListner()
         addObserevs()
     }
 
@@ -201,7 +201,7 @@ class CastingApplyActivity : AppCompatActivity(), ImagesAdapter.onItemClick {
         viewModel.castingCallsApplyLiveData.observe(this, Observer {
             if (it.status == "1") {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-                startActivity(Intent(mContext, CastingCallsActivity::class.java))
+       //         startActivity(Intent(mContext, CastingCallsActivity::class.java))
                 finishAffinity()
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
@@ -213,7 +213,7 @@ class CastingApplyActivity : AppCompatActivity(), ImagesAdapter.onItemClick {
     private fun openVideo() {
         val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         pickIntent.type = "video/*"
-        startVideoResult.launch(pickIntent)
+       // startVideoResult.launch(pickIntent)
     }
 
 

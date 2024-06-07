@@ -8,153 +8,244 @@
             type="com.app.bollyhood.model.CastingCallModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="vertical">
+        android:padding="@dimen/_10sdp"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/llMain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_castingcall1"
-            android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:fontFamily="@font/neueeinstellung_semibold"
-                android:text="View"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
+            android:background="@drawable/main_blue"
+            android:layout_height="80sp">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:id="@+id/tvView"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_38sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:background="@drawable/castingcall_viewbutton"
+                android:layout_alignParentEnd="true"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvviewname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp"
+                    />
 
                 <ImageView
-                    android:id="@+id/ivLogo"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/logo" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/ivLogo"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/neueeinstellung_semibold"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="@{model.organization}"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp" />
-
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/neueeinstellung_regular"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="@{model.company_name}"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp" />
-
-
-                </LinearLayout>
-
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/view"
+                    android:layout_toRightOf="@id/tvviewname"
+                    />
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/llheader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_toLeftOf="@+id/tvView"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/singer"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:layout_marginStart="@dimen/_8sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivLogo"
+                    android:textSize="15sp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvcompanyname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivLogo"
+                    android:textSize="12sp"
+                    android:layout_below="@+id/tvName"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lldescriptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="0.5dp"
+            android:background="@drawable/description_blue"
+            android:layout_below="@+id/llMain">
+
             <LinearLayout
+                android:id="@+id/lllocationNverified"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:orientation="horizontal">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/lllocation"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:layout_weight="1"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
                     android:background="@drawable/rectangle_loc_blue"
-                    android:fontFamily="@font/neueeinstellung_regular"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:padding="@dimen/_6sdp"
-                    android:singleLine="true"
-                    android:text="@{model.location}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
+                    >
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvVerified"
-                    android:layout_width="match_parent"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/location_on_white_24dp_1"
+                        />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="@{model.location}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llverified"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rectangle_loc_blue"
-                    android:fontFamily="@font/neueeinstellung_regular"
                     android:gravity="center"
-                    android:maxLines="1"
-                    android:padding="@dimen/_6sdp"
-                    android:singleLine="true"
-                    android:text="Verified"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:background="@drawable/rectangle_loc_blue"
+                    >
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/verified_castingcall"
+                        />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvShift"
-                    android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvVerified"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="Verified Listing"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llshift"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rectangle_loc_blue"
-                    android:fontFamily="@font/neueeinstellung_regular"
                     android:gravity="center"
-                    android:maxLines="1"
-                    android:padding="@dimen/_6sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:background="@drawable/rectangle_loc_blue"
+                    >
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/watch"
+                        />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvShift"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="12hr Shift"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <com.colormoon.readmoretextview.ReadMoreTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:inputType="textMultiLine"
+                android:layout_below="@+id/lllocationNverified"
+                android:paddingEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:fontFamily="@font/neueeinstellung_regular"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:background="@drawable/rectangle_curve_white"
-            android:orientation="vertical">
+            android:layout_below="@+id/lldescriptions">
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/history_white"
+                android:paddingStart="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDate"
@@ -162,9 +253,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:alpha="0.5"
-                android:fontFamily="@font/neueeinstellung_regular"
-                android:paddingStart="@dimen/_20sdp"
+                android:text="Posted 2 days ago"
+                android:layout_toRightOf="@+id/imageview"
+                android:fontFamily="@font/urbanist_semibold"
                 android:textColor="@color/black"
+                android:paddingStart="@dimen/_5sdp"
                 android:textSize="@dimen/_10sdp" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -174,14 +267,12 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/neueeinstellung_bold"
-                android:paddingStart="@dimen/_20sdp"
-                android:paddingEnd="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_20sdp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="18dp" />
 
 
         </RelativeLayout>
 
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

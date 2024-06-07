@@ -42,6 +42,8 @@ class AgencyFragment : Fragment(),AgencyUserAdapter.onItemClick {
 
     private fun initUI() {
 
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
+
         if (isNetworkAvailable(requireContext())) {
           //  viewModel.getAgency()
         } else {

@@ -2,14 +2,11 @@ package com.app.bollyhood.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CastingBookMarkDetailActivity
-import com.app.bollyhood.activity.CastingCallsActivity
-import com.app.bollyhood.activity.CastingDetailsActivity
 import com.app.bollyhood.databinding.AdpCastingCallsBinding
 import com.app.bollyhood.model.CastingCallModel
 import com.bumptech.glide.Glide
@@ -79,13 +76,13 @@ class CastingBookMarkAdapter(
             holder.binding.tvSalary.text = "₹" + castingModels[position].price
         }
 
-        holder.binding.tvDesc.setCollapsedText("Read More")
+        /*holder.binding.tvDesc.setCollapsedText("Read More")
         holder.binding.tvDesc.setExpandedText("Read Less")
 
         holder.binding.tvDesc.setCollapsedTextColor(R.color.white)
         holder.binding.tvDesc.setExpandedTextColor(R.color.white)
 
-        holder.binding.tvDesc.setTrimLines(2) //By Default it will be only 2 lines
+        holder.binding.tvDesc.setTrimLines(2) //By Default it will be only 2 lines*/
 
 
         when (castingModels[position].type) {
@@ -112,10 +109,6 @@ class CastingBookMarkAdapter(
             }
         }
 
-
-
-        holder.binding.tvView.paintFlags =
-            holder.binding.tvView.paintFlags or Paint.UNDERLINE_TEXT_FLAG;
 
 
         holder.itemView.setOnClickListener {

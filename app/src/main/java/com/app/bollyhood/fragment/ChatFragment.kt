@@ -36,6 +36,8 @@ class ChatFragment : Fragment(), ChatAdapter.onItemClick {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)
+
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
         addObserevs()
         return binding.root
     }

@@ -1,0 +1,19 @@
+<!-- res/drawable/rounded_corners_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base layer to cover the entire background -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/carbenblack" />
+        </shape>
+    </item>
+
+    <!-- Top layer with rounded corners -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners
+                android:topLeftRadius="@dimen/_20sdp"
+                android:topRightRadius="@dimen/_20sdp" />
+            <solid android:color="@color/black" />
+        </shape>
+    </item>
+</layer-list>

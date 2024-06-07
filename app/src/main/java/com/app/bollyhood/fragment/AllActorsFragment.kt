@@ -69,6 +69,14 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
     private fun initUI() {
 
+        val bundle = arguments
+
+        if (bundle!=null) {
+            previousFragment = bundle.getString(StaticData.previousFragment).toString()
+        }
+
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
+
         if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
             Glide.with(requireContext())
                 .load(PrefManager(requireContext()).getvalue(StaticData.image))
@@ -101,7 +109,11 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
     override fun onClick(item: View?) {
         when(item?.id) {
             R.id.ivBack -> {
+                if (previousFragment.equals("AllCategoryFragment")) {
                     backpress(AllCategoryFragment())
+                }else{
+                    backpress(HomeFragment())
+                }
             }
 
             R.id.cvProfile -> {

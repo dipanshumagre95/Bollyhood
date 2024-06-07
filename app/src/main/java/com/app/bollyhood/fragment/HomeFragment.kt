@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
-import com.app.bollyhood.activity.CastingCallsActivity
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.adapter.BannerAdapter
 import com.app.bollyhood.adapter.CategoryAdapter
@@ -56,6 +55,8 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     }
 
     private fun initUI() {
+
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
 
         if (isNetworkAvailable(requireContext())) {
             viewModel.getBanner()
@@ -191,7 +192,7 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
         when(categoryModel.type){
             "0" ->{
                 val bundle = Bundle()
-                bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
+                bundle.putString(StaticData.previousFragment, "HomeFragment")
 
                 val allActorsFragment = AllActorsFragment()
                 allActorsFragment.arguments = bundle
@@ -199,7 +200,13 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
             }
 
             "1" ->{
-                startActivity(Intent(requireContext(), CastingCallsActivity::class.java))
+
+                val bundle = Bundle()
+                bundle.putString(StaticData.previousFragment, "HomeFragment")
+
+                val castingCallFragment = CastingCallFragment()
+                castingCallFragment.arguments = bundle
+                (activity as MainActivity).loadFragment(castingCallFragment)
             }
         }
     }

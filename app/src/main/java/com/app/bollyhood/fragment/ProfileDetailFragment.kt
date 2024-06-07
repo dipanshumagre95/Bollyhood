@@ -73,6 +73,8 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
     }
 
     private fun initUI() {
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
+
         val bundle = arguments
         if (bundle!=null&&bundle?.getString(StaticData.previousFragment)=="AllActosFragment"){
             singleCategoryModel = Gson().fromJson(

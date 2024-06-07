@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.bollyhood.R
-import com.app.bollyhood.activity.CastingCallsActivity
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.adapter.AllCategoryAdapter
@@ -51,6 +50,7 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
 
     private fun initUI() {
 
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
 
         if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
             Glide.with(requireContext())
@@ -147,7 +147,12 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
 
         when(categoryModel.type){
             "1" ->{
-                startActivity(Intent(requireContext(), CastingCallsActivity::class.java))
+                val bundle = Bundle()
+                bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
+
+                val castingCallFragment = CastingCallFragment()
+                castingCallFragment.arguments = bundle
+                (activity as MainActivity).loadFragment(castingCallFragment)
             }
 
             "0" ->{

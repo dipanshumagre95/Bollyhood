@@ -42,6 +42,8 @@ class BookingFragment : Fragment(), BookAdapter.onItemClick {
 
     private fun initUI() {
 
+        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
+
         if (isNetworkAvailable(requireContext())) {
            // viewModel.getBooking(PrefManager(requireContext()).getStringValue(StaticData.id))
         } else {
