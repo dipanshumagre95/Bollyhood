@@ -2,16 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/llMain"
+    android:layout_height="match_parent"
+    android:background="#80000000"
     >
+
+    <RelativeLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rectangle_white_with_blackborder">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Worklink's"
+            android:textSize="@dimen/_16sdp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/urbanist_bold"
+            android:padding="@dimen/_7sdp"/>
 
     <ImageView
         android:id="@+id/close"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
         android:padding="@dimen/_7sdp"
-        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         android:src="@drawable/img_arrowdown_gray_900_7x8"
         android:layout_alignParentEnd="true"/>
 
@@ -177,6 +199,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

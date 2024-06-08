@@ -124,8 +124,8 @@
     <string name="str_casting_details">Casting Details</string>
     <string name="str_casting_requirements">Casting Requirement</string>
     <string name="str_skills">Skills &amp; Requirement</string>
-    <string name="str_your_role">Your Role</string>
-    <string name="str_save_later">Save Later</string>
+    <string name="str_your_role">What’s The Role ?</string>
+    <string name="str_save_later">Save</string>
     <string name="str_apply_now">Apply Now</string>
 
     <string name="str_location">Location</string>
@@ -135,7 +135,7 @@
     <string name="str_body_type">Body Type</string>
     <string name="str_passport">Passport</string>
 
-    <string name="str_dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+    <string name="str_dummy_text">Strong and determined. Burdened by a sense of obligation to her family due to a past medical situation. Intelligent and ambitious Suppressed by her conservative upbringing Witty and resourceful. Location: Mumbai (Filming starts May 3rd onwards. .</string>
 
     <string name="str_choose_categories">Choose From More Than 15+ Categories</string>
 

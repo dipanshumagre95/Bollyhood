@@ -32,7 +32,7 @@ class CastingCallFragment : Fragment(),OnClickListener {
     lateinit var binding: FragmentCastingCallBinding
     private val castingModels: ArrayList<CastingCallModel> = arrayListOf()
     private val viewModel: DataViewModel by viewModels()
-    private lateinit var previousFragment:String
+    private var previousFragment:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -121,7 +121,7 @@ class CastingCallFragment : Fragment(),OnClickListener {
         binding.apply {
             rvCastingCalls.layoutManager = LinearLayoutManager(requireContext())
             rvCastingCalls.setHasFixedSize(true)
-            adapter = CastingCallsAdapter(requireContext(), castingModels)
+            adapter = CastingCallsAdapter(requireActivity(), castingModels)
             rvCastingCalls.adapter = adapter
             adapter?.notifyDataSetChanged()
         }

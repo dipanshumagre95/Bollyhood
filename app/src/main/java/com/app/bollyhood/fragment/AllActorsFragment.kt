@@ -32,7 +32,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
     lateinit var binding:FragmentAllActorsBinding
     private val viewModel: DataViewModel by viewModels()
-    private lateinit var previousFragment:String
+    private var previousFragment:String=""
 
 
     override fun onCreateView(

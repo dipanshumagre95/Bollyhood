@@ -18,6 +18,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -214,7 +215,6 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
             tvUpdateProfile.setOnClickListener {
 
                 if (isNetworkAvailable(mContext)) {
-                    workLinkList.clear()
                     if (isvalidName(
                             mContext, binding.edtName.text.toString().trim()
                         ) && isvalidEmailAddress(
@@ -890,34 +890,50 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     private fun addWorkLinksDialog(){
         val dialogView = Dialog(this)
         dialogView.setContentView(R.layout.add_work_link)
-        val workLinkName1=dialogView.findViewById<EditText>(R.id.edtWorkLinkName1)
-        val workLinkName2=dialogView.findViewById<EditText>(R.id.edtWorkLinkName2)
-        val workLinkName3=dialogView.findViewById<EditText>(R.id.edtWorkLinkName3)
-        val linkName1=dialogView.findViewById<TextView>(R.id.edtAddWorkLink1)
-        val linkName2=dialogView.findViewById<TextView>(R.id.edtAddWorkLink2)
-        val linkName3=dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
-        val addbutton=dialogView.findViewById<TextView>(R.id.tvAddLinks)
-        val closebutton=dialogView.findViewById<ImageView>(R.id.close)
 
-        if (workLinkList.size==3){
-            Toast.makeText(this,"You have already add three workLinks",Toast.LENGTH_SHORT).show()
-            dialogView.dismiss()
-        }else if(workLinkList.size==2){
-            workLinkName3.visibility=View.GONE
-            linkName3.visibility=View.GONE
-            workLinkName2.visibility=View.GONE
-            linkName2.visibility=View.GONE
-        }else if (workLinkList.size==1){
-            workLinkName3.visibility=View.GONE
-            linkName3.visibility=View.GONE
+        // Make the dialog full screen
+        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val workLinkName1 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName1)
+        val workLinkName2 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName2)
+        val workLinkName3 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName3)
+        val linkName1 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink1)
+        val linkName2 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink2)
+        val linkName3 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
+        val addbutton = dialogView.findViewById<TextView>(R.id.tvAddLinks)
+        val closebutton = dialogView.findViewById<ImageView>(R.id.close)
+
+        if (workLinkList.size > 0)
+        {
+            for (index in 0 until workLinkList.size) {
+                val worklink = workLinkList[index]
+                when(index){
+                    0 ->{
+                        workLinkName1.setText(worklink.worklink_name)
+                        linkName1.setText(worklink.worklink_url)
+                    }
+
+                    1->{
+                        workLinkName2.setText(worklink.worklink_name)
+                        linkName2.setText(worklink.worklink_url)
+                    }
+
+                    2->{
+                        workLinkName3.setText(worklink.worklink_name)
+                        linkName3.setText(worklink.worklink_url)
+                    }
+                }
+            }
         }
 
-        closebutton.setOnClickListener(View.OnClickListener {
+        closebutton.setOnClickListener {
             dialogView.dismiss()
-        })
+        }
 
-        addbutton.setOnClickListener(View.OnClickListener {
-            if (!workLinkName1.text.isNullOrEmpty()|| !workLinkName2.text.isNullOrEmpty()|| !workLinkName3.text.isNullOrEmpty()) {
+        addbutton.setOnClickListener {
+            workLinkList.clear()
+            if (!workLinkName1.text.isNullOrEmpty() || !workLinkName2.text.isNullOrEmpty() || !workLinkName3.text.isNullOrEmpty()) {
                 if (!workLinkName1.text.isNullOrEmpty() && !linkName1.text.isNullOrEmpty()) {
                     workLinkList.add(
                         WorkLinkProfileData(
@@ -936,7 +952,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     )
                 }
 
-                if (!workLinkName2.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
+                if (!workLinkName3.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
                     workLinkList.add(
                         WorkLinkProfileData(
                             workLinkName3.text.toString(),
@@ -946,13 +962,14 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 }
                 worklinkAdapter()
                 dialogView.dismiss()
-            }else{
-                Toast.makeText(this,"Add Atlest One WorkLink",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Add at least one work link", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
 
         dialogView.show()
     }
+
 
     private fun alertDialogForImagePicker() {
         val dialogView = Dialog(this)

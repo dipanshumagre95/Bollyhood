@@ -1,8 +1,8 @@
 package com.app.bollyhood.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
@@ -15,9 +15,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
-import com.app.bollyhood.activity.CastingDetailsActivity
+import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.databinding.AdpCastingCallsBinding
+import com.app.bollyhood.fragment.CastingDetailsFragment
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.StaticData
 import com.bumptech.glide.Glide
 import com.google.android.material.textview.MaterialTextView
 import com.google.gson.Gson
@@ -113,22 +115,22 @@ class CastingCallsAdapter(
 
         holder.binding.tvShift.text = castingModels[position].shifting + " Hr Shift"
 
-        if (castingModels[position].organization.length > 27){
+        if (castingModels[position].organization.length > 24){
             val name=castingModels[position].organization
             holder.binding.tvName.text = name.split(" ").get(0)+" "+name.split(" ").get(1)
         }else {
             holder.binding.tvName.text = castingModels[position].organization
         }
 
-        if (castingModels[position].company_name.length > 35){
+        if (castingModels[position].company_name.length > 30){
             val name=castingModels[position].company_name
-            holder.binding.tvcompanyname.text = name?.take(35)
+            holder.binding.tvcompanyname.text = name?.take(30)
         }else {
             holder.binding.tvcompanyname.text = castingModels[position].company_name
         }
 
-        if (castingModels[position].description.length > 150){
-            val shorttext=castingModels[position].description.substring(0,150)
+        if (castingModels[position].description.length > 100){
+            val shorttext=castingModels[position].description.substring(0,100)
             setSpannableString(shorttext,"read more",castingModels[position].description,holder.binding.tvDesc)
         }else{
             holder.binding.tvDesc.text = castingModels[position].description
@@ -177,11 +179,13 @@ class CastingCallsAdapter(
 
 
         holder.binding.tvView.setOnClickListener {
-            mContext.startActivity(
-                Intent(mContext, CastingDetailsActivity::class.java)
-                    .putExtra("type", castingModels[position].type)
-                    .putExtra("model", Gson().toJson(castingModels[position]))
-            )
+            val bundle = Bundle()
+            bundle.putString(StaticData.userModel, Gson().toJson(castingModels[position]))
+            bundle.putString("type", castingModels[position].type)
+
+            val castingDetailsFragment = CastingDetailsFragment()
+            castingDetailsFragment.arguments = bundle
+            (mContext as MainActivity).loadFragment(castingDetailsFragment)
         }
     }
 

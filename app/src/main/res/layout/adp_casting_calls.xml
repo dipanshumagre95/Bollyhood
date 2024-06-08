@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -17,15 +18,13 @@
             android:id="@+id/llMain"
             android:layout_width="match_parent"
             android:background="@drawable/main_blue"
-            android:layout_height="80sp">
+            android:layout_height="70sp">
 
             <RelativeLayout
                 android:id="@+id/tvView"
                 android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_38sdp"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_height="@dimen/_34sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:background="@drawable/castingcall_viewbutton"
                 android:layout_alignParentEnd="true"
                 >
@@ -35,14 +34,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
+                    android:layout_centerInParent="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp"
                     />
 
                 <ImageView
                     android:layout_width="@dimen/_10sdp"
-                    android:layout_height="@dimen/_18sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/view"
+                    android:layout_centerInParent="true"
                     android:layout_toRightOf="@id/tvviewname"
                     />
 
@@ -57,22 +58,31 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 >
 
-                <ImageView
-                    android:id="@+id/ivLogo"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:src="@drawable/singer"
-                    android:layout_centerVertical="true"
-                    android:scaleType="centerCrop"
-                    android:layout_marginStart="@dimen/_8sdp"/>
+                <RelativeLayout
+                    android:id="@+id/lllogo"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/rectangle_white"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivLogo"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:src="@drawable/singer"
+                        android:padding="@dimen/_5sdp"
+                        app:shapeAppearance="@style/roundedCornersImageView"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerCrop" />
+
+                </RelativeLayout>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/ivLogo"
+                    android:layout_toRightOf="@+id/lllogo"
                     android:textSize="15sp"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
                     android:fontFamily="@font/urbanist_semibold"
@@ -82,11 +92,11 @@
                     android:id="@+id/tvcompanyname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/ivLogo"
+                    android:layout_toRightOf="@+id/lllogo"
                     android:textSize="12sp"
                     android:layout_below="@+id/tvName"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/urbanist_regular"
                     android:layout_marginStart="@dimen/_5sdp"/>
