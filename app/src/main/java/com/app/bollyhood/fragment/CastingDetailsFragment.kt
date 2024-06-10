@@ -99,8 +99,8 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
 
             if (castingCallModel.is_casting_apply == 1) {
 
-                binding.tvApplied.visibility = View.VISIBLE
-                binding.tvApplyNow.visibility = View.GONE
+                binding.tvApplied.visibility = View.GONE
+                binding.tvApplyNow.visibility = View.VISIBLE
                 /*
                 binding.tvApplyNow.text = "Applied"
                 binding.tvApplyNow.isFocusable = false
@@ -112,12 +112,12 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
             }
 
 
-            if (castingCallModel.is_casting_bookmark == 1) {
+            /*if (castingCallModel.is_casting_bookmark == 1) {
                 binding.tvSave.text = "Saved"
                 binding.tvSave.isFocusable = false
                 binding.tvSave.isFocusableInTouchMode = false
                 binding.tvSave.isClickable = false
-            }
+            }*/
 
 
         }

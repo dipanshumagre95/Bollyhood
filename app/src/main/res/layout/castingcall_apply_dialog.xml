@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000">
+
+        <RelativeLayout
+            android:id="@+id/llMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:background="@drawable/multicolor_button">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_2sdp"
+                android:background="@drawable/rectangle_chatwhite">
+
+                <ImageView
+                    android:id="@+id/ivimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/success_casting_call"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/cong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Congratulations!"
+                    android:textColor="#FE885B"
+                    android:layout_below="@+id/ivimage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_17sdp"
+                    android:fontFamily="@font/urbanist_bold"/>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your application has been\nsuccessfully submitted. You track\nthe progress the applications menu. "
+                    android:textColor="@color/black"
+                    android:layout_below="@+id/cong"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/urbanist_regular"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/Go_to_My_Applications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:background="@drawable/rectangle_apply_button"
+                    android:layout_centerInParent="true"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_below="@+id/text"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_15sdp"
+                    android:text="Go to My Applications"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:background="@drawable/multicolor_button"
+                    android:layout_below="@+id/Go_to_My_Applications">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/Explore_More"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:background="@drawable/rectangle_chatwhite"
+                        android:paddingStart="@dimen/_50sdp"
+                        android:paddingTop="@dimen/_11sdp"
+                        android:layout_margin="@dimen/_1sdp"
+                        android:paddingBottom="@dimen/_11sdp"
+                        android:paddingEnd="@dimen/_50sdp"
+                        android:text="Explore More"
+                        android:textColor="#FE885B"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,6 +43,7 @@ import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONArray
 
 @AndroidEntryPoint
 class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener,ImagesAdapter.onItemClick {
@@ -53,6 +54,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
     private var expertiseModel: ExpertiseModel?=null
     private var singleCategoryModel: SingleCategoryModel? =null
     lateinit var previousFragment:String
+    private var workLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
     private var photolist:ArrayList<PhotoModel> = arrayListOf()
     var expanded:Boolean=true
 
@@ -134,12 +136,16 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 ivBookMark.setImageResource(R.drawable.ic_bookmark)
             }
 
-            rvWorkLinks.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            rvWorkLinks.setHasFixedSize(true)
-            val adapter =
-                WorkAdapter(requireContext(), expertiseModel.work_links, this@ProfileDetailFragment)
-            rvWorkLinks.adapter = adapter
+            if (!expertiseModel.work_links.isNullOrEmpty()) {
+                val innerArrayStr = expertiseModel.work_links[0].worklink_url
+                val innerArray = JSONArray(innerArrayStr)
+                for (i in 0 until innerArray.length()) {
+                    val item = innerArray.getJSONObject(i)
+                    val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                    workLinkList.add(workLink)
+                }
+                setWorkLinksAdapter(workLinkList)
+            }
         }
     }
 
@@ -196,15 +202,31 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
             recyclerviewPhotos.adapter = adapter
             adapter?.notifyDataSetChanged()
 
-            rvWorkLinks.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            rvWorkLinks.setHasFixedSize(true)
-            val adapter =
-                WorkAdapter(requireContext(), singleCategoryModel.work_links, this@ProfileDetailFragment)
-            rvWorkLinks.adapter = adapter
+
+
+            if (!singleCategoryModel.work_links.isNullOrEmpty()) {
+                val innerArrayStr = singleCategoryModel.work_links[0].worklink_url
+                val innerArray = JSONArray(innerArrayStr)
+                for (i in 0 until innerArray.length()) {
+                    val item = innerArray.getJSONObject(i)
+                    val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                    workLinkList.add(workLink)
+                }
+                setWorkLinksAdapter(workLinkList)
+            }
+
         }
     }
 
+    private fun setWorkLinksAdapter(worklinklist:ArrayList<WorkLinkProfileData>)
+    {
+        binding.rvWorkLinks.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvWorkLinks.setHasFixedSize(true)
+        val adapter =
+            WorkAdapter(requireContext(), worklinklist, this@ProfileDetailFragment)
+                binding.rvWorkLinks.adapter = adapter
+    }
     override fun onitemClick(pos: Int, work: WorkLinkProfileData) {
         startActivity(
             Intent(requireContext(), YoutubeActivity::class.java).putExtra("videoId", work.worklink_url)

@@ -696,7 +696,13 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         binding.acPassPort.setText(profileModel.passport)
 
         if (!profileModel.work_links.isNullOrEmpty()) {
-            workLinkList.addAll(profileModel.work_links)
+            val innerArrayStr = profileModel.work_links[0].worklink_url
+            val innerArray = JSONArray(innerArrayStr)
+            for (i in 0 until innerArray.length()) {
+                val item = innerArray.getJSONObject(i)
+                val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                workLinkList.add(workLink)
+            }
             worklinkAdapter()
         }
 
@@ -1109,7 +1115,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     setImage(imageNumber, Uri.parse(image))
                 } else if (isGallery) {
                     val uri = data?.data
-                    imagesurl.add(uri?.path.toString())
+                    imagesurl.add(PathUtils.getRealPath(this, uri!!).toString())
                     setImage(imageNumber, uri)
                 }
             }
