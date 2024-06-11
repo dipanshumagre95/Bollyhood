@@ -25,6 +25,7 @@ data class ExpertiseModel(
     var is_online: String,
     val is_book: Int,
     val last_message:String,
+    val last_time:String,
     val new_work_links: ArrayList<WorkLinkProfileData>,
     val categories: ArrayList<ExpertiseCategories>
 )

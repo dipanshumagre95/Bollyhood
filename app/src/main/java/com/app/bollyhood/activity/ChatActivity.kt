@@ -11,10 +11,11 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -22,6 +23,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -51,7 +53,7 @@ import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : AppCompatActivity(),TextWatcher {
 
     lateinit var binding: ActivityChatBinding
     lateinit var mContext: ChatActivity
@@ -100,6 +102,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initUI() {
 
+        binding.edtMessage.addTextChangedListener(this)
         val localBroadcastManager = LocalBroadcastManager.getInstance(this)
         localBroadcastManager.registerReceiver(receiver, IntentFilter("sendData"))
 
@@ -230,7 +233,7 @@ class ChatActivity : AppCompatActivity() {
                 if (chatModel.size > 0) {
                     binding.rvChatHistory.visibility = View.VISIBLE
                     binding.tvNoChatHistory.visibility = View.GONE
-                    setAdapter(chatModel)
+                    setAdapter(chatModel,senderDetails!!)
 
                 } else {
                     binding.rvChatHistory.visibility = View.GONE
@@ -249,7 +252,6 @@ class ChatActivity : AppCompatActivity() {
         viewModel.sendMessageLiveData.observe(this, Observer {
             if (it.status == "1") {
                 val result = it.result
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
                 binding.edtMessage.setText("")
                 profilePath = ""
                 val insertChatItem = ChatModel(
@@ -264,6 +266,9 @@ class ChatActivity : AppCompatActivity() {
                 chatModel.add(insertChatItem)
                 val position = chatModel.size - 1
                 binding.adapter?.notifyItemInserted(position)
+                if (binding.tvNoChatHistory.visibility==View.VISIBLE) {
+                    binding.tvNoChatHistory.visibility = View.GONE
+                }
                 if (chatModel.size > 2) {
                     binding.rvChatHistory.scrollToPosition(binding.adapter?.itemCount!!.toInt() - 1)
                 }
@@ -290,11 +295,11 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    private fun setAdapter(chatModel: ArrayList<ChatModel>) {
+    private fun setAdapter(chatModel: ArrayList<ChatModel>,senderDetails: SenderDetails) {
         binding.apply {
             rvChatHistory.layoutManager = LinearLayoutManager(this@ChatActivity)
             rvChatHistory.setHasFixedSize(true)
-            adapter = ChatHistoryAdapter(this@ChatActivity, chatModel)
+            adapter = ChatHistoryAdapter(this@ChatActivity, chatModel,senderDetails)
             rvChatHistory.adapter = adapter
             adapter?.notifyDataSetChanged()
             rvChatHistory.scrollToPosition(adapter?.itemCount!!.toInt() - 1)
@@ -499,5 +504,30 @@ class ChatActivity : AppCompatActivity() {
         // Unregister broadcast
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
         super.onDestroy()
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        if (charSequence != null && charSequence.length >= 1) {
+            binding.apply {
+                ivattechment.visibility=View.GONE
+                ivCamera.visibility=View.GONE
+                ivMicrophone.visibility=View.GONE
+                ivSend.visibility=View.VISIBLE
+            }
+        }else if (charSequence?.length!! <= 0) {
+            binding.apply {
+                ivattechment.visibility=View.VISIBLE
+                ivCamera.visibility=View.VISIBLE
+                ivMicrophone.visibility=View.VISIBLE
+                ivSend.visibility=View.GONE
+            }
+        }
+    }
+    override fun afterTextChanged(p0: Editable?) {
+
     }
 }

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AdpChatitemBinding
-import com.app.bollyhood.databinding.AdpExpertiseBinding
 import com.app.bollyhood.model.ExpertiseModel
+import com.app.bollyhood.util.DateUtils
 import com.bumptech.glide.Glide
 
 class ChatAdapter(val requireContext: Context, val chatList: ArrayList<ExpertiseModel>,
@@ -33,7 +33,17 @@ class ChatAdapter(val requireContext: Context, val chatList: ArrayList<Expertise
         holder.binding.tvName.text = model.name
 
         if (!model.categories.isNullOrEmpty()){
-            holder.binding.tvCategory.text = model.categories[0].category_name
+          //  holder.binding.tvCategory.text = model.categories[0].category_name
+        }
+
+        if (!model.last_time.isNullOrEmpty()){
+            holder.binding.tvtime.text=DateUtils.getConvertDateTiemFormatForList(model.last_time)
+        }
+
+        if (model.is_online == "1") {
+            holder.binding.ivStatus.setImageResource(R.drawable.circle_green)
+        } else {
+            holder.binding.ivStatus.setImageResource(R.drawable.circle_grey)
         }
 
 
@@ -41,7 +51,7 @@ class ChatAdapter(val requireContext: Context, val chatList: ArrayList<Expertise
             holder.binding.tvLastMessage.visibility=View.VISIBLE
             holder.binding.tvLastMessage.text = model.last_message
         }else{
-            holder.binding.tvLastMessage.visibility=View.GONE
+            holder.binding.tvLastMessage.visibility=View.INVISIBLE
         }
 
 
@@ -59,7 +69,7 @@ class ChatAdapter(val requireContext: Context, val chatList: ArrayList<Expertise
         }
 
         holder.itemView.setOnClickListener {
-            onclick.onClick(position, expertiseModel = chatList[position])
+            onclick.onChatItemClick(position, expertiseModel = chatList[position])
         }
 
     }
@@ -71,6 +81,6 @@ class ChatAdapter(val requireContext: Context, val chatList: ArrayList<Expertise
     }
 
     interface onItemClick{
-        fun onClick(pos:Int,expertiseModel: ExpertiseModel)
+        fun onChatItemClick(pos:Int,expertiseModel: ExpertiseModel)
     }
 }

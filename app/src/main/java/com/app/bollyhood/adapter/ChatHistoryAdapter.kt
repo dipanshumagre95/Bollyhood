@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bollyhood.R
 import com.app.bollyhood.activity.ChatActivity
-import com.app.bollyhood.databinding.AdpBannerlistBinding
 import com.app.bollyhood.databinding.AdpChathistoryBinding
 import com.app.bollyhood.model.ChatModel
+import com.app.bollyhood.model.SenderDetails
+import com.app.bollyhood.util.DateUtils
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Locale
 
-class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayList<ChatModel>) :
+class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayList<ChatModel>,val senderDetails: SenderDetails) :
     RecyclerView.Adapter<ChatHistoryAdapter.MyViewHolder>() {
 
 
@@ -42,7 +42,7 @@ class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayLis
             holder.binding.llReceiver.visibility = View.GONE
 
             holder.binding.tvSenderTime.text =
-                getConvertDateTiemFormat(chatModel[position].added_on)
+                DateUtils.getConvertDateTiemFormat(chatModel[position].added_on)
 
 
             if (chatModel[position].text.isNotEmpty() && chatModel[position].image.isEmpty()) {
@@ -73,9 +73,12 @@ class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayLis
         } else if (chatModel[position].user_type == 2) {
             holder.binding.llReceiver.visibility = View.VISIBLE
             holder.binding.llSender.visibility = View.GONE
+            Glide.with(chatActivity).load(senderDetails.image).placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile).into(holder.binding.ivImage)
+            holder.binding.tvName.text=senderDetails.name
 
             holder.binding.tvReceiverTime.text =
-                getConvertDateTiemFormat(chatModel[position].added_on)
+                DateUtils.getConvertDateTiemFormat(chatModel[position].added_on)
 
             if (chatModel[position].text.isNotEmpty() && chatModel[position].image.isEmpty()) {
                 holder.binding.ivReceiverImage.visibility = View.GONE
@@ -113,10 +116,4 @@ class ChatHistoryAdapter(val chatActivity: ChatActivity, val chatModel: ArrayLis
 
     }
 
-    fun getConvertDateTiemFormat(dateFormat: String): String? {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val date = simpleDateFormat.parse(dateFormat)
-            ?.let { SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(it) }
-        return date
-    }
 }

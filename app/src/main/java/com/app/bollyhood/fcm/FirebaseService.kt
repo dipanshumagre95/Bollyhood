@@ -1,5 +1,6 @@
 package com.app.bollyhood.fcm
 
+import android.Manifest
 import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -7,17 +8,17 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.os.Build
-import android.os.Bundle
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.ChatActivity
-import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -81,7 +82,7 @@ class FirebaseService : FirebaseMessagingService() {
                         )
 
                         intent = Intent(this, ChatActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         intent.putExtra("isNotifications",true)
                         intent.putExtra("id", jsonobject.optString("uid"))
                         intent.putExtra("other_uid", jsonobject.optString("other_uid"))
@@ -91,14 +92,14 @@ class FirebaseService : FirebaseMessagingService() {
                                 this,
                                 notificationId,
                                 intent,
-                                PendingIntent.FLAG_MUTABLE
+                                PendingIntent.FLAG_UPDATE_CURRENT
                             )
                         } else {
                             pendingIntent = PendingIntent.getActivity(
                                 this,
                                 notificationId,
                                 intent,
-                                PendingIntent.FLAG_ONE_SHOT
+                                PendingIntent.FLAG_UPDATE_CURRENT
                             )
                         }
                         showNotificationAndClick(pendingIntent, type, jsonobject, notificationId)
@@ -169,7 +170,15 @@ class FirebaseService : FirebaseMessagingService() {
             )
             notificationManager.createNotificationChannel(channel)
         }
-        notificationManager.notify(notificationId, notificationBuilder.build())
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }else {
+            notificationManager.notify(notificationId, notificationBuilder.build())
+        }
     }
 
 
@@ -222,6 +231,13 @@ class FirebaseService : FirebaseMessagingService() {
                 400
             )
             notificationManager.createNotificationChannel(channel)
+        }
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
         }
         notificationManager.notify(notificationId, notificationBuilder.build())
     }

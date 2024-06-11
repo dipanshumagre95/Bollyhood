@@ -28,7 +28,7 @@
                 android:layout_marginStart="@dimen/_80sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/chat_rectangle_green">
+                android:background="@drawable/chat_history_background">
 
 
                 <ImageView
@@ -70,9 +70,10 @@
                 android:layout_marginStart="@dimen/_80sdp"
                 android:fontFamily="@font/neueeinstellung_regular"
                 android:gravity="end"
-                android:padding="@dimen/_10ssp"
+                android:padding="@dimen/_1ssp"
                 android:text=""
-                android:textColor="@color/black"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="#80797C7B"
                 android:textSize="@dimen/_10ssp" />
 
 
@@ -86,6 +87,30 @@
             android:layout_margin="@dimen/_8sdp"
             android:orientation="vertical"
             android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/urbanist_semibold"/>
+            </LinearLayout>
 
 
             <LinearLayout
@@ -122,8 +147,6 @@
                     android:textSize="@dimen/_13sdp" />
 
 
-
-
             </LinearLayout>
 
 
@@ -131,12 +154,13 @@
                 android:id="@+id/tvReceiverTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_80sdp"
                 android:fontFamily="@font/neueeinstellung_regular"
                 android:gravity="start"
-                android:padding="@dimen/_10ssp"
+                android:padding="@dimen/_1ssp"
                 android:text=""
-                android:textColor="@color/black"
+                android:textColor="#80797C7B"
                 android:textSize="@dimen/_10ssp" />
 
 

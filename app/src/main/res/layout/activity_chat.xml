@@ -10,206 +10,237 @@
             type="com.app.bollyhood.adapter.ChatHistoryAdapter" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".activity.ChatActivity">
-
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/llTop"
+            android:id="@+id/relativeLayout5"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:background="@drawable/rectangle_curve_lightwhite"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivBack"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/app_name"
-                android:paddingStart="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/baseline_keyboard_backspace_24" />
 
-            <RelativeLayout
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cvProfile"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_toRightOf="@+id/ivBack" />
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_toStartOf="@id/ivCall"
-                android:layout_toEndOf="@id/ivBack">
+                android:layout_toLeftOf="@+id/ivCall"
+                android:layout_toRightOf="@+id/cvProfile"
+                android:orientation="vertical">
 
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/cvProfile"
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="@dimen/_45sdp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:id="@+id/llName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_toEndOf="@id/cvProfile"
-                    android:orientation="vertical">
+                    android:layout_toStartOf="@+id/tvtime">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvName"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/neueeinstellung_bold"
-                        android:maxLines="1"
-                        android:singleLine="true"
+                        android:fontFamily="@font/urbanist_semibold"
                         android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/ivBookMark"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_toRightOf="@+id/tvName"
+                        android:src="@drawable/right_icon"
+                        android:visibility="visible" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cvProfile">
+
+                    <ImageView
+                        android:id="@+id/ivStatus"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:layout_toRightOf="@+id/ivStatus"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:text=""
+                        android:textColor="#80797C7B"
+                        android:textSize="@dimen/_10sdp" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tvStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/neueeinstellung_regular"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp" />
-
-                        <ImageView
-                            android:id="@+id/ivStatus"
-                            android:layout_width="@dimen/_8sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_3sdp" />
-
-                    </LinearLayout>
+                </RelativeLayout>
 
 
-                </LinearLayout>
-
-            </RelativeLayout>
-
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivCall"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:src="@drawable/ic_calling" />
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_toLeftOf="@+id/iv_video_call"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/ic_call" />
 
+            <ImageView
+                android:id="@+id/iv_video_call"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/video_icon" />
 
         </RelativeLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvChatHistory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/rrBottom"
-            android:layout_below="@id/llTop"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:adapter="@{adapter}"
-            android:padding="@dimen/_5sdp" />
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout5" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvNoChatHistory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/rrBottom"
-            android:layout_below="@id/llTop"
+            android:layout_height="0dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/neueeinstellung_semibold"
             android:gravity="center"
             android:text="No Chat History Found"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout5" />
 
 
         <RelativeLayout
-            android:id="@+id/rrBottom"
+            android:id="@+id/relativeLayout6"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/rectangle_lightwhite_bottom"
-            android:orientation="vertical"
-            android:padding="@dimen/_5sdp"
+            android:layout_height="@dimen/_60sdp"
             app:layout_constraintBottom_toBottomOf="parent">
 
+            <ImageView
+                android:id="@+id/ivattechment"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:padding="@dimen/_8sdp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/attachment"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtMessage"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ivattechment"
+                android:background="@drawable/rectangle_gray_with_black_border"
+                android:layout_toLeftOf="@+id/ivCamera"
+                android:fontFamily="@font/neueeinstellung_medium"
+                android:hint="Write your message"
+                android:paddingStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textColorHint="#80797C7B"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+
+            <ImageView
+                android:id="@+id/ivCamera"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/llsendNaudio"
+                android:src="@drawable/camera_border"/>
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llsendNaudio"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/rectangle_chatwhite"
-                android:padding="@dimen/_8sdp">
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edtMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                <ImageView
+                    android:id="@+id/iv_microphone"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_3sdp"
+                    android:paddingEnd="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:visibility="visible"
+                    android:src="@drawable/microphone"/>
+
+                <ImageView
+                    android:id="@+id/ivSend"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:visibility="gone"
+                    android:background="@drawable/rectangle_app_background"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_toStartOf="@id/ivCamera"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/neueeinstellung_medium"
-                    android:hint="Type here..."
-                    android:paddingStart="@dimen/_8sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivCamera"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_3ssp"
-                    android:layout_toStartOf="@id/ivSend"
-                    android:src="@drawable/ic_camera"
-                    android:tint="@color/darkgrey" />
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivSend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/baseline_send_24"
-                    android:tint="@color/darkgrey" />
-
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_3sdp"
+                    android:paddingEnd="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:src="@drawable/baseline_send_24"/>
 
             </RelativeLayout>
-
 
         </RelativeLayout>
 
@@ -228,6 +259,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
