@@ -56,7 +56,6 @@ class FirebaseService : FirebaseMessagingService() {
         }
 
         super.onMessageReceived(message)
-
     }
 
 
@@ -68,10 +67,8 @@ class FirebaseService : FirebaseMessagingService() {
 
         when (type) {
 
-
             "chat" -> {
                 try {
-                    if (appStatus == StaticData.killed) {
                         val broadCastIntent = Intent("sendData")
                         broadCastIntent.putExtra("id", jsonobject.optString("uid"))
                         broadCastIntent.putExtra("other_uid", jsonobject.optString("other_uid"))
@@ -92,7 +89,7 @@ class FirebaseService : FirebaseMessagingService() {
                                 this,
                                 notificationId,
                                 intent,
-                                PendingIntent.FLAG_UPDATE_CURRENT
+                                PendingIntent.FLAG_UPDATE_CURRENT or  PendingIntent.FLAG_IMMUTABLE
                             )
                         } else {
                             pendingIntent = PendingIntent.getActivity(
@@ -103,22 +100,10 @@ class FirebaseService : FirebaseMessagingService() {
                             )
                         }
                         showNotificationAndClick(pendingIntent, type, jsonobject, notificationId)
-                    } else {
-                        val intent = Intent("sendData")
-                        intent.putExtra("id", jsonobject.optString("uid"))
-                        intent.putExtra("other_uid", jsonobject.optString("other_uid"))
-                        showNotification(type, jsonobject, notificationId)
-                        LocalBroadcastManager.getInstance(this).sendBroadcast(
-                            intent
-                        )
-                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
             }
-
-
             else -> {
                 showNotification(type, jsonobject, notificationId)
             }

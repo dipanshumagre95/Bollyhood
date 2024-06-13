@@ -17,8 +17,10 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -36,6 +38,7 @@ import com.app.bollyhood.databinding.ActivityChatBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ChatModel
 import com.app.bollyhood.model.SenderDetails
+import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -53,7 +56,7 @@ import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
-class ChatActivity : AppCompatActivity(),TextWatcher {
+class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHistoryInterface {
 
     lateinit var binding: ActivityChatBinding
     lateinit var mContext: ChatActivity
@@ -62,6 +65,7 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
     private var profileId: String? = ""
     private var isCamera = false
     private var isGallery = false
+    private var isclick=""
     private var profilePath = ""
     private var senderDetails: SenderDetails? = null
     private var isNotification: Boolean? = false
@@ -145,17 +149,22 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
             startActivity(intent)*/
         }
 
+        binding.ivattechment.setOnClickListener(View.OnClickListener {
+            attechmentDialog()
+        })
+
     }
 
     private fun addListner() {
         binding.ivBack.setOnClickListener {
-            finish()
+            BackPressed()
         }
 
         binding.ivCamera.setOnClickListener {
             if (checkPermission()) {
-                alertDialogForImagePicker()
+                imagePickerFromCamera()
             } else {
+                isclick="camera"
                 checkPermission()
             }
         }
@@ -209,8 +218,6 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
                 "image", file.name, requestFile
             )
         }
-
-
         viewModel.sendMessage(uid, other_uid, text, profileBody)
     }
 
@@ -239,8 +246,6 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
                     binding.rvChatHistory.visibility = View.GONE
                     binding.tvNoChatHistory.visibility = View.VISIBLE
                 }
-
-
             } else {
                 senderDetails = it.sender_details
                 setData(senderDetails!!)
@@ -299,7 +304,7 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
         binding.apply {
             rvChatHistory.layoutManager = LinearLayoutManager(this@ChatActivity)
             rvChatHistory.setHasFixedSize(true)
-            adapter = ChatHistoryAdapter(this@ChatActivity, chatModel,senderDetails)
+            adapter = ChatHistoryAdapter(this@ChatActivity, chatModel,senderDetails,this@ChatActivity)
             rvChatHistory.adapter = adapter
             adapter?.notifyDataSetChanged()
             rvChatHistory.scrollToPosition(adapter?.itemCount!!.toInt() - 1)
@@ -386,8 +391,15 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
                     for (i in permissions.indices) perms[permissions[i]] = grantResults[i]
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                         if (perms[Manifest.permission.CAMERA] == PackageManager.PERMISSION_GRANTED && perms[Manifest.permission.READ_MEDIA_IMAGES] == PackageManager.PERMISSION_GRANTED) {
+                            when(isclick){
+                                "camera" ->{
+                                    imagePickerFromCamera()
+                                }
 
-                            alertDialogForImagePicker()
+                                "gellery" ->{
+                                    imagePickerFromGallery()
+                                }
+                            }
                         } else {
 
                             if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -404,7 +416,15 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
                     } else {
                         if (perms[Manifest.permission.CAMERA] == PackageManager.PERMISSION_GRANTED && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE] == PackageManager.PERMISSION_GRANTED) {
 
-                            alertDialogForImagePicker()
+                            when(isclick){
+                                "camera" ->{
+                                    imagePickerFromCamera()
+                                }
+
+                                "gellery" ->{
+                                    imagePickerFromGallery()
+                                }
+                            }
                         } else {
 
                             if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -420,11 +440,9 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
 
                     }
 
-
                 }
             }
         }
-
     }
 
     private val startForProfileImageResult =
@@ -440,7 +458,11 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
                         mNetworkCallSendMessageAPI()
                     } else if (isGallery) {
                         val uri = data!!.data
-                        profilePath = uri!!.path.toString()
+                        profilePath = PathUtils.getRealPath(this, uri!!).toString()
+                        mNetworkCallSendMessageAPI()
+                    }else{
+                        val uri = data!!.data
+                        profilePath = PathUtils.getRealPath(this, uri!!).toString()
                         mNetworkCallSendMessageAPI()
                     }
                 }
@@ -472,36 +494,96 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
         }
     }
 
+     fun BackPressed() {
+        if (isNotification == true) {
+            // If started from notification, navigate to MainActivity
+            val intent = Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(intent)
+            finish()
+        } else {
+            onBackPressed()
+        }
+    }
 
-    private fun alertDialogForImagePicker() {
+
+    private fun imagePickerFromCamera()
+    {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startForProfileImageResult.launch(intent)
+        isCamera = true
+        isGallery = false
+    }
+
+    private fun documentPicker() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "*/*"  // Allow all types of files
+        startForProfileImageResult.launch(intent)
+        isCamera = false
+        isGallery = false
+    }
+
+    private fun imagePickerFromGallery()
+    {
+        ImagePicker.with(mContext).compress(1024).maxResultSize(1080, 1080).galleryOnly()
+            .createIntent {
+                startForProfileImageResult.launch(it)
+            }
+        isCamera = false
+        isGallery = true
+    }
+
+
+    private fun attechmentDialog(){
         val dialogView = Dialog(this)
-        dialogView.setContentView(R.layout.image_picker)
-        dialogView.setCancelable(false)
-        val txtcamera = dialogView.findViewById<TextView>(R.id.txtcamera)
-        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
-        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
-        txtcamera.setOnClickListener { v: View? ->
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startForProfileImageResult.launch(intent)
-            isCamera = true
-            isGallery = false
+        dialogView.setContentView(R.layout.attechment_dialog)
+
+        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val close=dialogView.findViewById<ImageView>(R.id.close)
+        val doc=dialogView.findViewById<RelativeLayout>(R.id.iv_doc)
+        val camera=dialogView.findViewById<RelativeLayout>(R.id.iv_camera)
+        val gallery=dialogView.findViewById<RelativeLayout>(R.id.iv_gallery)
+
+        close.setOnClickListener(View.OnClickListener {
             dialogView.dismiss()
-        }
-        txtGallery.setOnClickListener { v: View? ->
-            ImagePicker.with(mContext).compress(1024).maxResultSize(1080, 1080).galleryOnly()
-                .createIntent {
-                    startForProfileImageResult.launch(it)
-                }
-            isCamera = false
-            isGallery = true
+        })
+
+        doc.setOnClickListener(View.OnClickListener {
+            documentPicker()
             dialogView.dismiss()
-        }
-        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
+        })
+
+        camera.setOnClickListener(View.OnClickListener {
+            if (checkPermission()) {
+                imagePickerFromCamera()
+            } else {
+                isclick="camera"
+                checkPermission()
+            }
+            dialogView.dismiss()
+        })
+
+        gallery.setOnClickListener(View.OnClickListener {
+
+            if (checkPermission()) {
+                imagePickerFromGallery()
+            } else {
+                isclick="gellery"
+                checkPermission()
+            }
+            dialogView.dismiss()
+        })
+
+
+
         dialogView.show()
     }
 
     override fun onDestroy() {
-        // Unregister broadcast
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
         super.onDestroy()
     }
@@ -527,7 +609,18 @@ class ChatActivity : AppCompatActivity(),TextWatcher {
             }
         }
     }
+
+    override fun isDestroyed(): Boolean {
+        return super.isDestroyed()
+        binding.adapter?.unregisterReceiver()
+    }
+
     override fun afterTextChanged(p0: Editable?) {
+
+    }
+
+
+    override fun download(fileName: String) {
 
     }
 }

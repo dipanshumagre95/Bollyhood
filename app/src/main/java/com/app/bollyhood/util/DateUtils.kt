@@ -25,24 +25,32 @@ class DateUtils {
                     val diffInHours = diffInMinutes / 60
 
                     if (diffInHours > 0) {
-                        "$diffInHours hours old"
+                        "$diffInHours hours ago"
                     } else if (diffInMinutes > 0) {
-                        val diffInMinutesRemainder = diffInMinutes % 60
-                        val amPm =
-                            if (dateCalendar.get(Calendar.AM_PM) == Calendar.AM) "AM" else "PM"
-                        "${dateCalendar.get(Calendar.HOUR)}:${
-                            String.format(
-                                "%02d",
-                                diffInMinutesRemainder
-                            )
-                        } $amPm"
+                        val amPm = if (dateCalendar.get(Calendar.AM_PM) == Calendar.AM) "AM" else "PM"
+                        SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(date)
                     } else {
                         "Just now"
                     }
                 } else if (calendar.get(Calendar.MONTH) == dateCalendar.get(Calendar.MONTH)) {
                     val diffInMillis = today.time - date.time
                     val diffInDays = diffInMillis / (1000 * 60 * 60 * 24)
-                    "$diffInDays days old"
+                    if (diffInDays > 0) {
+                        "$diffInDays Days ago"
+                    } else {
+                        val diffInMillis = today.time - date.time
+                        val diffInMinutes = diffInMillis / (1000 * 60)
+                        val diffInHours = diffInMinutes / 60
+
+                        if (diffInHours > 0) {
+                            "$diffInHours hours ago"
+                        } else if (diffInMinutes > 0) {
+                            val amPm = if (dateCalendar.get(Calendar.AM_PM) == Calendar.AM) "AM" else "PM"
+                            SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(date)
+                        } else {
+                            "Just now"
+                        }
+                    }
                 } else {
                     SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
                 }
@@ -50,6 +58,7 @@ class DateUtils {
                 SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
             }
         }
+
 
         fun getConvertDateTiemFormatForList(dateFormat: String): String? {
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -75,14 +84,28 @@ class DateUtils {
                 } else if (calendar.get(Calendar.MONTH) == dateCalendar.get(Calendar.MONTH)) {
                     val diffInMillis = today.time - date.time
                     val diffInDays = diffInMillis / (1000 * 60 * 60 * 24)
-                    "$diffInDays days ago"
+
+                    if (diffInDays > 0) {
+                        "$diffInDays days ago"
+                    } else {
+                        val diffInMinutes = diffInMillis / (1000 * 60)
+                        val diffInHours = diffInMinutes / 60
+
+                        if (diffInHours > 0) {
+                            "$diffInHours hours ago"
+                        } else {
+                            "$diffInMinutes minutes ago"
+                        }
+                    }
                 } else {
-                    SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(date)
+                    SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
                 }
             } else {
-                SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(date)
+                SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
             }
         }
+
+
 
     }
 }

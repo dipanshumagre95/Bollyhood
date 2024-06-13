@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:background="@drawable/rectangle_topcorner_down"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:padding="@dimen/_7sdp"
+        android:src="@drawable/img_arrowdown_gray_900_7x8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/close">
+
+
+        <RelativeLayout
+            android:id="@+id/iv_doc"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@drawable/circle_profilebackground">
+
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/docs"
+                android:layout_centerInParent="true"
+                android:backgroundTint="@color/white"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/iv_camera"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_toRightOf="@+id/iv_doc"
+            android:layout_weight="1"
+            android:background="@drawable/circle_profilebackground">
+
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/ic_camera"
+                android:layout_centerInParent="true"
+                android:backgroundTint="@color/white"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/iv_gallery"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_toRightOf="@+id/iv_camera"
+            android:layout_weight="1"
+            android:background="@drawable/circle_profilebackground">
+
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/ic_gallery"
+                android:layout_centerInParent="true"
+                android:backgroundTint="@color/white"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
