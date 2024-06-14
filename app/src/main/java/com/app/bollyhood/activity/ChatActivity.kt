@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +17,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -39,10 +41,12 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ChatModel
 import com.app.bollyhood.model.SenderDetails
 import com.app.bollyhood.util.PathUtils
+import com.app.bollyhood.util.PermissionUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
+import com.devlomi.record_view.OnRecordListener
 import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -54,6 +58,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 @AndroidEntryPoint
 class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHistoryInterface {
@@ -69,6 +74,8 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
     private var profilePath = ""
     private var senderDetails: SenderDetails? = null
     private var isNotification: Boolean? = false
+    private var mediaRecorder:MediaRecorder?=null
+    private var audioPath=""
 
     companion object {
         private const val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
@@ -105,6 +112,93 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
     }
 
     private fun initUI() {
+
+        binding.ivMicrophone.setRecordView(binding.recordingview)
+        binding.ivMicrophone.isListenForRecord=false
+
+        binding.ivMicrophone.setOnClickListener(View.OnClickListener {
+            if (PermissionUtils.isRecording(this)){
+                binding.ivMicrophone.isListenForRecord=true
+            }else{
+                PermissionUtils.requestRecordingPermission(this)
+            }
+        })
+
+        binding.recordingview.setOnRecordListener(object : OnRecordListener {
+            override fun onStart() {
+
+                setUpForMediaRecorder()
+                try {
+                    mediaRecorder?.prepare()
+                    mediaRecorder?.start()
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
+                binding.ivattechment.visibility=View.GONE
+                binding.edtMessage.visibility=View.GONE
+                binding.ivCamera.visibility=View.GONE
+                binding.recordingview.visibility=View.VISIBLE
+            }
+
+            override fun onCancel() {
+                try {
+                    mediaRecorder?.reset()
+                    mediaRecorder?.release()
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
+                val file=File(audioPath)
+                if (file.exists())
+                    file.delete()
+
+                binding.ivattechment.visibility=View.VISIBLE
+                binding.edtMessage.visibility=View.VISIBLE
+                binding.ivCamera.visibility=View.VISIBLE
+                binding.recordingview.visibility=View.GONE
+            }
+
+            override fun onFinish(recordTime: Long, limitReached: Boolean) {
+
+
+                try {
+                    mediaRecorder?.stop()
+                    mediaRecorder?.release()
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
+                binding.ivattechment.visibility=View.VISIBLE
+                binding.edtMessage.visibility=View.VISIBLE
+                binding.ivCamera.visibility=View.VISIBLE
+                binding.recordingview.visibility=View.GONE
+                sendAudioFile()
+            }
+
+            override fun onLessThanSecond() {
+                try {
+                    mediaRecorder?.reset()
+                    mediaRecorder?.release()
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
+                val file=File(audioPath)
+                if (file.exists())
+                    file.delete()
+
+                binding.ivattechment.visibility=View.VISIBLE
+                binding.edtMessage.visibility=View.VISIBLE
+                binding.ivCamera.visibility=View.VISIBLE
+                binding.recordingview.visibility=View.GONE
+            }
+
+            override fun onLock() {
+                //When Lock gets activated
+                Log.d("RecordView", "onLock")
+            }
+        })
 
         binding.edtMessage.addTextChangedListener(this)
         val localBroadcastManager = LocalBroadcastManager.getInstance(this)
@@ -221,6 +315,34 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
         viewModel.sendMessage(uid, other_uid, text, profileBody)
     }
 
+
+    private fun AudioMessageCallSendMessageAPI() {
+        val uid: RequestBody = RequestBody.create(
+            "multipart/form-data".toMediaTypeOrNull(),
+            PrefManager(mContext).getvalue(StaticData.id).toString()
+        )
+
+        val other_uid: RequestBody = RequestBody.create(
+            "multipart/form-data".toMediaTypeOrNull(), profileId.toString()
+        )
+
+        val text: RequestBody = RequestBody.create(
+            "multipart/form-data".toMediaTypeOrNull(), binding.edtMessage.text.toString().trim()
+        )
+
+
+        var profileBody: MultipartBody.Part? = null
+        if (audioPath.isNotEmpty()) {
+            val file = File(audioPath)
+            // create RequestBody instance from file
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+            profileBody = MultipartBody.Part.createFormData(
+                "image", file.name, requestFile
+            )
+        }
+        viewModel.sendMessage(uid, other_uid, text, profileBody)
+    }
+
     private fun addObserevs() {
         viewModel.isLoading.observe(this, Observer {
             if (it) {
@@ -311,59 +433,48 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
         }
     }
 
+
     private fun checkPermission(): Boolean {
-        val writePermission: Int
         val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-
-
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            writePermission =
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
-
-
-        } else {
-            writePermission =
-                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-        }
-
+        val audioPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
 
         val listPermissionsNeeded = ArrayList<String>()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (writePermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES)
-            }
-
-            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.CAMERA)
-            }
-
+        // Determine the storage permission based on Android version
+        val storagePermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
         } else {
-            if (writePermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-
-            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.CAMERA)
-            }
-
-
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
 
+        // Check permissions and add to list if not granted
+        if (storagePermission != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                listPermissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES)
+            } else {
+                listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
 
+        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA)
+        }
 
+        if (audioPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.RECORD_AUDIO)
+        }
 
+        // Request permissions if needed
         if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS
             )
             return false
         }
+
         return true
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray
@@ -516,6 +627,12 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
         isGallery = false
     }
 
+    private fun sendAudioFile(){
+        val uri=Uri.fromFile(File(audioPath))
+        audioPath= PathUtils.getRealPath(this,uri).toString()
+        AudioMessageCallSendMessageAPI()
+    }
+
     private fun documentPicker() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
@@ -610,8 +727,34 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
         }
     }
 
+    private fun setUpForMediaRecorder() {
+        mediaRecorder = MediaRecorder()
+        mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
+        // Use getExternalFilesDir() to get the directory for your app's private external files
+        val directory = File(
+            getExternalFilesDir(Environment.DIRECTORY_MUSIC),
+            "BollyHood/Media/Recording"
+        )
+
+        if (!directory.exists()) {
+            directory.mkdirs()
+        }
+
+        audioPath = "${directory.absolutePath}${File.separator}${System.currentTimeMillis()}.mp3"
+        mediaRecorder?.setOutputFile(audioPath)
+    }
+
     override fun isDestroyed(): Boolean {
         return super.isDestroyed()
+        try {
+            mediaRecorder?.stop()
+            mediaRecorder?.release()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         binding.adapter?.unregisterReceiver()
     }
 

@@ -4,6 +4,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,10 +56,19 @@ class ChatHistoryAdapter(
         }
 
         holder.binding.ivdownload.setOnClickListener {
-            if (isDocumentFile(holder.binding.tvReceiver.text.toString())) {
+            if (!isFileAvailableInDirectory(holder.binding.tvReceiver.text.toString())) {
+                if (isDocumentFile(holder.binding.tvReceiver.text.toString())) {
+                    holder.binding.ivdownload.visibility = View.GONE
+                    holder.binding.pbLoadData.visibility = View.VISIBLE
+                    downloadFile(
+                        chatModel[position].image,
+                        holder.binding.tvReceiver.text.toString(),
+                        holder
+                    )
+                }
+            }else{
                 holder.binding.ivdownload.visibility = View.GONE
-                holder.binding.pbLoadData.visibility = View.VISIBLE
-                downloadFile(chatModel[position].image, holder.binding.tvReceiver.text.toString(), holder)
+                Toast.makeText(context,"File already downloaded",Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -140,9 +150,8 @@ class ChatHistoryAdapter(
             holder.binding.tvReceiver.visibility = View.VISIBLE
             holder.binding.recevierChatBackground.setBackgroundResource(R.drawable.chat_rectangle_grey)
             holder.binding.tvReceiver.text = getLastName(chatModel[position].image)
-            if (!isFileAvailableInAllDirectories(getLastName(chatModel[position].image))) {
                 holder.binding.ivdownload.visibility = View.VISIBLE
-            }
+
         }
     }
 
@@ -162,21 +171,11 @@ class ChatHistoryAdapter(
         return url.substringAfterLast('/')
     }
 
-    fun isFileAvailableInAllDirectories(fileName: String): Boolean {
-        val rootDirectory = Environment.getExternalStorageDirectory()
-        return searchFileRecursively(rootDirectory, fileName)
-    }
-
-    fun searchFileRecursively(directory: File, fileName: String): Boolean {
-        val files = directory.listFiles() ?: return false
-        for (file in files) {
-            if (file.isDirectory) {
-                if (searchFileRecursively(file, fileName)) {
-                    return true
-                }
-            } else if (file.name.equals(fileName, ignoreCase = true)) {
-                return true
-            }
+    fun isFileAvailableInDirectory(fileName: String): Boolean {
+        val directory = File("/storage/emulated/0/Download")
+        if (directory.exists() && directory.isDirectory) {
+            val file = File(directory, fileName)
+            return file.exists()
         }
         return false
     }
@@ -191,15 +190,26 @@ class ChatHistoryAdapter(
         val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         downloadId = downloadManager.enqueue(request)
 
-        // Register the BroadcastReceiver
         if (downloadReceiver == null) {
             downloadReceiver = DownloadReceiver { id ->
                 if (id == downloadId) {
                     holder.binding.pbLoadData.visibility = View.GONE
                     Toast.makeText(context, "Download Complete", Toast.LENGTH_SHORT).show()
+                    // Unregister receiver once download is complete
+                    context.unregisterReceiver(downloadReceiver)
+                    downloadReceiver = null
                 }
             }
-            context.registerReceiver(downloadReceiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.registerReceiver(downloadReceiver,  IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE),
+                    Context.RECEIVER_EXPORTED
+                );
+            } else {
+                context.registerReceiver(
+                    downloadReceiver,
+                    IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+                )
+            }
         }
     }
 

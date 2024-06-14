@@ -175,6 +175,7 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:padding="@dimen/_8sdp"
+                android:visibility="visible"
                 android:layout_centerVertical="true"
                 android:src="@drawable/attachment"/>
 
@@ -189,6 +190,7 @@
                 android:fontFamily="@font/neueeinstellung_medium"
                 android:hint="Write your message"
                 android:paddingStart="@dimen/_10sdp"
+                android:visibility="visible"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:textColorHint="#80797C7B"
                 android:textColor="@color/black"
@@ -202,10 +204,28 @@
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
+                android:visibility="visible"
                 android:paddingBottom="@dimen/_5sdp"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/llsendNaudio"
                 android:src="@drawable/camera_border"/>
+
+
+            <com.devlomi.record_view.RecordView
+                android:id="@+id/recordingview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:slide_to_cancel_text="Slide to cancel"
+                android:background="@drawable/rectangle_app_background"
+                android:visibility="gone"
+                android:gravity="center"
+                app:slide_to_cancel_arrow="@drawable/recv_ic_arrow"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_toLeftOf="@+id/llsendNaudio"/>
 
             <RelativeLayout
                 android:id="@+id/llsendNaudio"
@@ -215,7 +235,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true">
 
-                <ImageView
+                <com.devlomi.record_view.RecordButton
                     android:id="@+id/iv_microphone"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"

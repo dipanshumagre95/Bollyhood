@@ -124,5 +124,9 @@ dependencies {
 
     implementation ("com.hbb20:ccp:2.5.0")
 
+    implementation ("com.github.3llomi:RecordView:3.1.3")
+
+    implementation ("com.github.JobGetabu:KaziChatVoicePlayer:1.0.0")
+
 
 }
