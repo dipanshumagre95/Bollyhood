@@ -82,12 +82,14 @@ class ChatHistoryAdapter(
             holder.binding.llsenderImage.visibility = View.GONE
             holder.binding.senderchatBackground.setBackgroundResource(R.drawable.chat_history_background)
             holder.binding.tvSender.visibility = View.VISIBLE
+            holder.binding.sendervoicePlayerView.visibility=View.GONE
             holder.binding.tvSender.text = chatModel[position].text
         } else if (chatModel[position].image.isNotEmpty() && chatModel[position].text.isEmpty()) {
             handleSenderImage(holder, position)
         } else if (chatModel[position].image.isNotEmpty() && chatModel[position].text.isNotEmpty()) {
             holder.binding.tvSender.visibility = View.VISIBLE
             holder.binding.llsenderImage.visibility = View.VISIBLE
+            holder.binding.sendervoicePlayerView.visibility=View.GONE
             holder.binding.senderchatBackground.setBackgroundResource(R.drawable.chat_history_background)
             Glide.with(context).load(chatModel[position].image).into(holder.binding.ivSendImage)
             holder.binding.tvSender.text = chatModel[position].text
@@ -98,13 +100,21 @@ class ChatHistoryAdapter(
         if (isImageUrl(chatModel[position].image)) {
             holder.binding.tvSender.visibility = View.GONE
             holder.binding.llsenderImage.visibility = View.VISIBLE
+            holder.binding.sendervoicePlayerView.visibility=View.GONE
             holder.binding.senderchatBackground.setBackgroundResource(R.drawable.rectangle_app_background)
             Glide.with(context).load(chatModel[position].image).into(holder.binding.ivSendImage)
         } else if (isDocumentFile(chatModel[position].image)) {
             holder.binding.llsenderImage.visibility = View.GONE
             holder.binding.senderchatBackground.setBackgroundResource(R.drawable.chat_history_background)
             holder.binding.tvSender.visibility = View.VISIBLE
+            holder.binding.sendervoicePlayerView.visibility=View.GONE
             holder.binding.tvSender.text = getLastName(chatModel[position].image)
+        } else if (chatModel[position].image.contains("mp3")){
+            holder.binding.llsenderImage.visibility = View.GONE
+            holder.binding.senderchatBackground.setBackgroundResource(R.drawable.chat_history_background)
+            holder.binding.tvSender.visibility = View.GONE
+            holder.binding.sendervoicePlayerView.visibility=View.VISIBLE
+            holder.binding.sendervoicePlayerView.setAudio(chatModel[position].image)
         }
     }
 
@@ -124,6 +134,7 @@ class ChatHistoryAdapter(
             holder.binding.tvReceiver.visibility = View.VISIBLE
             holder.binding.llrecevierImage.visibility = View.VISIBLE
             holder.binding.ivdownload.visibility = View.GONE
+            holder.binding.receviervoicePlayerView.visibility=View.GONE
             holder.binding.recevierChatBackground.setBackgroundResource(R.drawable.chat_rectangle_grey)
             Glide.with(context).load(chatModel[position].image).into(holder.binding.ivReceiverImage)
             holder.binding.tvReceiver.text = chatModel[position].text
@@ -134,6 +145,7 @@ class ChatHistoryAdapter(
         holder.binding.llrecevierImage.visibility = View.GONE
         holder.binding.ivdownload.visibility = View.GONE
         holder.binding.tvReceiver.visibility = View.VISIBLE
+        holder.binding.receviervoicePlayerView.visibility=View.GONE
         holder.binding.recevierChatBackground.setBackgroundResource(R.drawable.chat_rectangle_grey)
         holder.binding.tvReceiver.text = chatModel[position].text
     }
@@ -143,15 +155,24 @@ class ChatHistoryAdapter(
             holder.binding.tvReceiver.visibility = View.GONE
             holder.binding.ivdownload.visibility = View.GONE
             holder.binding.llrecevierImage.visibility = View.VISIBLE
+            holder.binding.receviervoicePlayerView.visibility=View.GONE
             holder.binding.recevierChatBackground.setBackgroundResource(R.drawable.rectangle_app_background)
             Glide.with(context).load(chatModel[position].image).into(holder.binding.ivReceiverImage)
         } else if (isDocumentFile(chatModel[position].image)) {
             holder.binding.llrecevierImage.visibility = View.GONE
             holder.binding.tvReceiver.visibility = View.VISIBLE
+            holder.binding.receviervoicePlayerView.visibility=View.GONE
             holder.binding.recevierChatBackground.setBackgroundResource(R.drawable.chat_rectangle_grey)
             holder.binding.tvReceiver.text = getLastName(chatModel[position].image)
                 holder.binding.ivdownload.visibility = View.VISIBLE
-
+        }else if (chatModel[position].image.contains("mp3")){
+            holder.binding.llrecevierImage.visibility = View.GONE
+            holder.binding.tvReceiver.visibility = View.GONE
+            holder.binding.recevierChatBackground.setBackgroundResource(R.drawable.chat_rectangle_grey)
+            holder.binding.tvReceiver.text = getLastName(chatModel[position].image)
+            holder.binding.ivdownload.visibility = View.GONE
+            holder.binding.receviervoicePlayerView.visibility=View.VISIBLE
+            holder.binding.receviervoicePlayerView.setAudio(chatModel[position].image)
         }
     }
 
