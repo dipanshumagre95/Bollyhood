@@ -43,6 +43,9 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
     private var user_type: String = "1"
     private var mobileNumber: String? = ""
     private var profilePath = ""
+    private var isindiviual=false
+    private var indiviaulList:ArrayList<CategoryModel>?= arrayListOf()
+    private var companyList:ArrayList<CategoryModel>?= arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +77,8 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
     private fun addObserevs() {
 
         if (isNetworkAvailable(mContext)) {
-            viewModel.getCategory()
+            viewModel.getSignupCategory("1")
+            isindiviual=true
         } else {
             Toast.makeText(
                 mContext, getString(R.string.str_error_internet_connections),
@@ -92,9 +96,16 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
         })
 
 
-        viewModel.categoryLiveData.observe(this, Observer { res ->
+        viewModel.categoryLiveDataforSignup.observe(this, Observer { res ->
             if (res.status == "1") {
-                setCategoryAdapter(res.result)
+                if (isindiviual){
+                    indiviaulList?.addAll(res.result)
+                    setCategoryAdapter(indiviaulList!!)
+                    isindiviual=false
+                    viewModel.getSignupCategory("2")
+                }else{
+                  companyList?.addAll(res.result)
+                }
             } else {
                 Toast.makeText(mContext, res?.msg, Toast.LENGTH_SHORT).show()
             }
@@ -130,16 +141,6 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
         binding.acSelectToday.onItemClickListener =
             OnItemClickListener { parent, view, position, id ->
                 categoryId = result[position].id
-                subCategoryId = ""
-              //  binding.acSubCategory.setText("")
-                if (isNetworkAvailable(mContext)) {
-                    viewModel.getSubCategory(categoryId)
-                } else {
-                    Toast.makeText(
-                        mContext, getString(R.string.str_error_internet_connections),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             }
 
     }
@@ -189,6 +190,9 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                 binding.tvindividual.setTextColor(Color.BLACK)
                 binding.tvcompany.setTextColor(Color.WHITE)
                 user_type = "2"
+                binding.acSelectToday.setText("Select Category")
+                categoryId=""
+                setCategoryAdapter(companyList!!)
             }
 
             R.id.lyindividual -> {
@@ -198,7 +202,10 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                 binding.redbtnCompany.visibility=View.GONE
                 binding.tvcompany.setTextColor(Color.BLACK)
                 binding.tvindividual.setTextColor(Color.WHITE)
+                binding.acSelectToday.setText("Select Category")
+                categoryId=""
                 user_type = "1"
+                setCategoryAdapter(indiviaulList!!)
             }
 
             R.id.tvSignUp  ->{

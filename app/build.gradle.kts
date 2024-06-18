@@ -58,6 +58,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.activity:activity:1.8.0")
     val lifecycle_version = "2.6.2"
     val glideVersion = "4.11.0"
 
@@ -127,6 +128,7 @@ dependencies {
     implementation ("com.github.3llomi:RecordView:3.1.3")
 
     implementation ("com.github.JobGetabu:KaziChatVoicePlayer:1.0.0")
+    implementation ("com.android.support:appcompat-v7:22.2.0")
 
 
 }

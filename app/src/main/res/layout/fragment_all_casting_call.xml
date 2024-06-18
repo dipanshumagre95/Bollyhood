@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.app.bollyhood.adapter.AllCastingCallListAdapter" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/app_background_gradient"
+        >
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_140sdp"
+            android:background="@drawable/pattern"
+            android:layout_marginTop="@dimen/_30sdp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/pattern"
+            android:layout_marginTop="@dimen/_55sdp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/white_border"
+                android:paddingStart="@dimen/_6sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_6sdp"
+                android:src="@drawable/icon_back" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/urbanist_semibold"
+                android:text="Casting Calls"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_19sdp" />
+
+            <RelativeLayout
+                android:id="@+id/llcvprofile"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@drawable/circle_gradient_background_profile">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cvProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:src="@drawable/ic_profile" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/llPostCastingCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/rectangle_black_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvpostcastingcall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post Casting Call"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/urbanist_semibold"/>
+
+            <ImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:src="@drawable/plus__1_"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circle_transparent"
+                android:layout_toRightOf="@+id/tvpostcastingcall"/>
+
+
+        </RelativeLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/rectangle_lightcornerwhite"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llPostCastingCall">
+
+           <RelativeLayout
+               android:id="@+id/llbuttons"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:layout_marginTop="@dimen/_15sdp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               >
+
+               <com.google.android.material.textview.MaterialTextView
+                   android:id="@+id/tvActive"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Active"
+                   android:textSize="@dimen/_17sdp"
+                   android:elevation="@dimen/_10sdp"
+                   android:fontFamily="@font/urbanist_semibold"
+                   android:background="@drawable/rectangle_black_button"
+                   android:textColor="@color/white"
+                   android:paddingStart="@dimen/_25sdp"
+                   android:paddingEnd="@dimen/_25sdp"
+                   android:paddingTop="@dimen/_8sdp"
+                   android:paddingBottom="@dimen/_8sdp"/>
+
+
+               <com.google.android.material.textview.MaterialTextView
+                   android:id="@+id/tvClose"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Close"
+                   android:layout_toRightOf="@+id/tvActive"
+                   android:fontFamily="@font/urbanist_semibold"
+                   android:textSize="@dimen/_17sdp"
+                   android:elevation="@dimen/_10sdp"
+                   android:layout_marginStart="@dimen/_30sdp"
+                   android:background="@drawable/whitebackground"
+                   android:textColor="@color/black"
+                   android:paddingStart="@dimen/_25sdp"
+                   android:paddingEnd="@dimen/_25sdp"
+                   android:paddingTop="@dimen/_8sdp"
+                   android:paddingBottom="@dimen/_8sdp"/>
+
+
+
+           </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_all_catingcall"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:adapter="@{adapter}"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llbuttons" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNoChatHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/neueeinstellung_semibold"
+                android:gravity="center"
+                android:text="No Data Found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

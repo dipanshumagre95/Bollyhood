@@ -37,6 +37,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     val isLoading = MutableLiveData(false)
     val splashLiveData = MutableLiveData(false)
     var categoryLiveData = MutableLiveData<CategoryResponse>()
+    var categoryLiveDataforSignup = MutableLiveData<CategoryResponse>()
     var signupLiveData = MutableLiveData<SuccessResponse>()
     var otpLiveData = MutableLiveData<OtpResponse>()
     var logoutLiveData = MutableLiveData<SuccessResponse>()
@@ -620,6 +621,20 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             }
         }
 
+    }
+
+    fun getSignupCategory(category_type:String) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            mainRepository.getSignupCategory(category_type).let {
+                if (it.body() != null) {
+                    categoryLiveDataforSignup.postValue(it.body())
+                    isLoading.postValue(false)
+                } else {
+                    isLoading.postValue(false)
+                }
+            }
+        }
     }
 
 

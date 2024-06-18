@@ -33,6 +33,8 @@ interface ApiService {
 
     @GET("category.php")
     suspend fun getCategory(): Response<CategoryResponse>
+    @GET("category_type.php")
+    suspend fun getSignupCategory(@Query("category_type") category_type: String): Response<CategoryResponse>
 
     @GET("all_category_users.php")
     suspend fun getAllActors(@Query("category_type") category_type: String) : Response<ActorsresponseModel>
