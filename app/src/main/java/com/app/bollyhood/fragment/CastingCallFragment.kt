@@ -56,8 +56,8 @@ class CastingCallFragment : Fragment(),OnClickListener {
             previousFragment = bundle.getString(StaticData.previousFragment).toString()
         }
 
-        binding.tvusername.text = "Hello " + PrefManager(requireContext()).getvalue(StaticData.name)+" \uD83D\uDC4B"
-        if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
+        binding.tvusername.text = "Hello " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User")+" \uD83D\uDC4B"
+       if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
             Glide.with(requireContext()).load(PrefManager(requireContext()).getvalue(StaticData.image))
                 .placeholder(R.drawable.ic_profile)
                 .error(R.drawable.ic_profile)

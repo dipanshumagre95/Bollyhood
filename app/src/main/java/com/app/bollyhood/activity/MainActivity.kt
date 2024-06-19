@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityMainBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.fragment.AllCategoryFragment
 import com.app.bollyhood.fragment.BookingFragment
 import com.app.bollyhood.fragment.ChatFragment
 import com.app.bollyhood.fragment.HomeFragment
@@ -150,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun setHomeColor() {
+     fun setHomeColor() {
         isOpenScreen = "Home"
         binding.apply {
             ivHome.setColorFilter(
@@ -206,10 +207,9 @@ class MainActivity : AppCompatActivity() {
 
 
         if (PrefManager(mContext).getvalue(StaticData.user_type).equals("2")) {
-            loadFragment(BookingFragment())
-
+            loadFragment(AllCategoryFragment())
         } else {
-            loadFragment(BookingFragment())
+            loadFragment(AllCategoryFragment())
 
         }
     }

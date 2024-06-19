@@ -128,7 +128,7 @@ dependencies {
     implementation ("com.github.3llomi:RecordView:3.1.3")
 
     implementation ("com.github.JobGetabu:KaziChatVoicePlayer:1.0.0")
-    implementation ("com.android.support:appcompat-v7:22.2.0")
+    implementation ("com.google.android.material:material:1.4.0")
 
 
 }

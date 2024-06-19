@@ -136,15 +136,22 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 ivBookMark.setImageResource(R.drawable.ic_bookmark)
             }
 
-            if (!expertiseModel.work_links.isNullOrEmpty()) {
-                val innerArrayStr = expertiseModel.work_links[0].worklink_url
-                val innerArray = JSONArray(innerArrayStr)
-                for (i in 0 until innerArray.length()) {
-                    val item = innerArray.getJSONObject(i)
-                    val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
-                    workLinkList.add(workLink)
+            try {
+                if (!expertiseModel.work_links.isNullOrEmpty()) {
+                    val innerArrayStr = expertiseModel.work_links[0].worklink_url
+                    val innerArray = JSONArray(innerArrayStr)
+                    for (i in 0 until innerArray.length()) {
+                        val item = innerArray.getJSONObject(i)
+                        val workLink = WorkLinkProfileData(
+                            item.getString("worklink_name"),
+                            item.getString("worklink_url")
+                        )
+                        workLinkList.add(workLink)
+                    }
+                    setWorkLinksAdapter(workLinkList)
                 }
-                setWorkLinksAdapter(workLinkList)
+            }catch (e:Exception){
+                e.printStackTrace()
             }
         }
     }
@@ -204,15 +211,22 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
 
 
 
-            if (!singleCategoryModel.work_links.isNullOrEmpty()) {
-                val innerArrayStr = singleCategoryModel.work_links[0].worklink_url
-                val innerArray = JSONArray(innerArrayStr)
-                for (i in 0 until innerArray.length()) {
-                    val item = innerArray.getJSONObject(i)
-                    val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
-                    workLinkList.add(workLink)
+            try {
+                if (!singleCategoryModel.work_links.isNullOrEmpty()) {
+                    val innerArrayStr = singleCategoryModel.work_links[0].worklink_url
+                    val innerArray = JSONArray(innerArrayStr)
+                    for (i in 0 until innerArray.length()) {
+                        val item = innerArray.getJSONObject(i)
+                        val workLink = WorkLinkProfileData(
+                            item.getString("worklink_name"),
+                            item.getString("worklink_url")
+                        )
+                        workLinkList.add(workLink)
+                    }
+                    setWorkLinksAdapter(workLinkList)
                 }
-                setWorkLinksAdapter(workLinkList)
+            }catch (e:Exception){
+                e.printStackTrace()
             }
 
         }

@@ -26,6 +26,7 @@ import com.app.bollyhood.model.ExpertiseModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,6 +56,13 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     }
 
     private fun initUI() {
+
+        if (PrefManager(requireContext()).getvalue(StaticData.image)?.isNotEmpty() == true) {
+            Glide.with(requireContext())
+                .load(PrefManager(requireContext()).getvalue(StaticData.image))
+                .placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile)
+                .into(binding.cvProfile)
+        }
 
         (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
 
@@ -170,11 +178,13 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
             PrefManager(requireContext()).getvalue(StaticData.id).toString()
         )
 
+        binding.tvusername.text = "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as MainActivity).showToolbar(true)
+        (requireActivity() as MainActivity).showToolbar(false)
       //  (requireActivity() as MainActivity).binding.tvTitle.text = getString(R.string.str_home)
     }
 
