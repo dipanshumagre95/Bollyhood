@@ -96,9 +96,13 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
         viewModel.categoryLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 categoryList.clear()
+                binding.llMain.visibility=View.VISIBLE
+                binding.tvNodata.visibility=View.GONE
                 categoryList.addAll(it.result)
                 setCategoryAdapter(categoryList)
             } else {
+                binding.llMain.visibility=View.GONE
+                binding.tvNodata.visibility=View.VISIBLE
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
             }
         })

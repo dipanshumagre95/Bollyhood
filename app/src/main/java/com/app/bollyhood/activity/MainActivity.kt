@@ -18,15 +18,18 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityMainBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.fragment.AllCastingCallFragment
 import com.app.bollyhood.fragment.AllCategoryFragment
-import com.app.bollyhood.fragment.BookingFragment
 import com.app.bollyhood.fragment.ChatFragment
 import com.app.bollyhood.fragment.HomeFragment
 import com.app.bollyhood.fragment.ProfileFragment
+import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mContext: MainActivity
     private var isOpenScreen = "Home"
     private val viewModel: DataViewModel by viewModels()
+    private var fragment:Fragment=HomeFragment()
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +47,31 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mContext = this
         if (isNetworkAvailable(this)){
+            setFragment()
             askNotificationPermission()
             addListner()
             addObsereves()
             setHomeColor()
         }else{
             binding.noInternetPage.visibility=View.VISIBLE
+        }
+    }
+
+    private fun setFragment() {
+        if (PrefManager(mContext).getvalue(StaticData.category)?.isNotEmpty()==true){
+            val gson = Gson()
+            val categoryListType = object : TypeToken<List<CategoryModel>>() {}.type
+            val categories: List<CategoryModel> = gson.fromJson(PrefManager(mContext).getvalue(StaticData.category), categoryListType)
+
+            when(categories[0].category_name){
+                "Casting Calls" ->{
+                    fragment=AllCastingCallFragment()
+                }
+
+                else ->{
+                    fragment=HomeFragment()
+                }
+            }
         }
     }
 
@@ -176,7 +199,7 @@ class MainActivity : AppCompatActivity() {
             vProfile.visibility=View.GONE
         }
 
-        loadFragment(HomeFragment())
+        loadFragment(fragment)
 
     }
 

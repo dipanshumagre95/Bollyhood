@@ -81,6 +81,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
         binding.edtWhatYouRole.addTextChangedListener(this)
         binding.llverifiedProfile.setOnClickListener(this)
         binding.llanyoneApply.setOnClickListener(this)
+        binding.ivBack.setOnClickListener(this)
 
     }
 
@@ -289,16 +290,20 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
             R.id.llverified_profile ->{
                 binding.llverifiedProfile.setBackgroundResource(R.drawable.rectangle_black_button)
-                binding.llanyoneApply.setBackgroundResource(R.drawable.rectangle_white)
+                binding.llanyoneApply.setBackgroundResource(R.drawable.border_gray)
                 binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.black))
             }
 
             R.id.llanyone_apply ->{
                 binding.llanyoneApply.setBackgroundResource(R.drawable.rectangle_black_button)
-                binding.llverifiedProfile.setBackgroundResource(R.drawable.rectangle_white)
+                binding.llverifiedProfile.setBackgroundResource(R.drawable.border_gray)
                 binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.black))
                 binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+
+            R.id.ivBack ->{
+                finish()
             }
         }
     }

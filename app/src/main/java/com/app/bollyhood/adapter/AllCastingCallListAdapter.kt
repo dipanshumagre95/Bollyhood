@@ -1,14 +1,16 @@
 package com.app.bollyhood.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.AllcastingcalllAdapterBinding
 
-class AllCastingCallListAdapter: RecyclerView.Adapter<AllCastingCallListAdapter.MyViewHolder>() {
+class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingCallListAdapter.OnClickInterface): RecyclerView.Adapter<AllCastingCallListAdapter.MyViewHolder>() {
 
 
-    class MyViewHolder(val bindfing:AllcastingcalllAdapterBinding) :RecyclerView.ViewHolder(bindfing.root){
+    class MyViewHolder(val binding:AllcastingcalllAdapterBinding) :RecyclerView.ViewHolder(binding.root){
 
     }
 
@@ -26,5 +28,13 @@ class AllCastingCallListAdapter: RecyclerView.Adapter<AllCastingCallListAdapter.
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
+        holder.binding.llmain.setOnClickListener(View.OnClickListener {
+            onitemclick.onItemClick()
+        })
+    }
+
+    interface OnClickInterface
+    {
+        fun onItemClick()
     }
 }
