@@ -138,10 +138,9 @@ class CastingCallFragment : Fragment(),OnClickListener {
                 if (previousFragment.equals("AllCategoryFragment")) {
                     backpress(AllCategoryFragment())
                 }else{
-                    backpress(HomeFragment())
+                    (requireActivity() as MainActivity).setHomeColor()
                 }
             }
-
         }
     }
 

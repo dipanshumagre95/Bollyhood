@@ -20,6 +20,7 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.databinding.FragmentCastingDetailsBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DateUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -77,24 +78,48 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
     }
 
     private fun setData(castingCallModel: CastingCallModel) {
-        binding.apply {
-            tvOrganization.text = castingCallModel.organization
-            tvCompunyName.text = castingCallModel.company_name
-            tvLocation.text = castingCallModel.location
-            tvShift.text = castingCallModel.shifting + "Hr Shift"
-            tvDate.text = castingCallModel.date
-            tvCastingRequirement.text = castingCallModel.requirement
-            tvSkillRequirement.text = castingCallModel.skill
-            tvRole.text = castingCallModel.role
+        binding.let {
+            if (!castingCallModel.role.isNullOrEmpty()) {
+                it.tvtitle.text = castingCallModel.role
+            }
+
+            if (!castingCallModel.company_name.isNullOrEmpty()) {
+                it.tvCompunyName.text = castingCallModel.company_name
+            }
+
+            if (!castingCallModel.location.isNullOrEmpty()) {
+                it.tvLocation.text = castingCallModel.location
+            }
+
+            if (!castingCallModel.shifting.isNullOrEmpty()) {
+                it.tvShift.text = castingCallModel.shifting + " Shift"
+            }
+
+            if (!castingCallModel.modify_date.isNullOrEmpty()) {
+                it.tvDate.text = DateUtils.getConvertDateTiemFormat(castingCallModel.modify_date)
+            }
+
+            if (!castingCallModel.requirement.isNullOrEmpty()) {
+                it.tvCastingRequirement.text = castingCallModel.requirement
+            }
+
+            if (!castingCallModel.requirement.isNullOrEmpty()) {
+                it.tvSkillRequirement.text = castingCallModel.requirement
+            }
+
+            if (!castingCallModel.organization.isNullOrEmpty()) {
+                it.tvRole.text = castingCallModel.organization
+            }
+
             if (castingCallModel.price_discussed == "1") {
-                tvSalary.text = "T B D"
+                it.tvprice.text = "T B D"
             } else {
-                tvSalary.text = "₹" + castingCallModel.price_discussed+"/pd"
+                it.tvprice.text = "₹" + castingCallModel.price+"/pd"
             }
 
             if (castingCallModel.company_logo.isNotEmpty()) {
                 Glide.with(requireContext()).load(castingCallModel.company_logo)
-                    .into(ivLogo)
+                    .into(it.ivLogo)
             }
 
             if (castingCallModel.is_casting_apply == 1) {

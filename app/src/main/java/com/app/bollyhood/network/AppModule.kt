@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -31,19 +32,22 @@ object AppModule {
         OkHttpClient.Builder().apply {
 
             addInterceptor(httpLoggingInterceptor)
-/*
-            addInterceptor(
-                Interceptor { chain ->
-                    val builder = chain.request().newBuilder()
-                    builder.header("Authorization", "Bearer " + BaseApplication.context?.let {
-                        PrefManager(
-                            it
-                        ).getvalue(StaticData.token)
-                    })
-                    return@Interceptor chain.proceed(builder.build())
-                }
-            )
-*/
+            connectTimeout(60, TimeUnit.SECONDS)
+            readTimeout(60, TimeUnit.SECONDS)
+            writeTimeout(60, TimeUnit.SECONDS)
+            /*
+                        addInterceptor(
+                            Interceptor { chain ->
+                                val builder = chain.request().newBuilder()
+                                builder.header("Authorization", "Bearer " + BaseApplication.context?.let {
+                                    PrefManager(
+                                        it
+                                    ).getvalue(StaticData.token)
+                                })
+                                return@Interceptor chain.proceed(builder.build())
+                            }
+                        )
+            */
         }.build()
 
     @Provides

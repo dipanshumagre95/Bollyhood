@@ -51,6 +51,38 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
 
     suspend fun getProfile(uid: String) = apiService.getProfile(uid)
 
+    suspend fun uploadCastingCall(
+        uid:RequestBody,
+        company_name:RequestBody,
+        organization:RequestBody,
+        requirement:RequestBody,
+        shifting:RequestBody,
+        gender:RequestBody,
+        location:RequestBody,
+        height:RequestBody,
+        passport:RequestBody,
+        body_type:RequestBody,
+        skin_clor:RequestBody,
+        age:RequestBody,
+        price:RequestBody,
+        role:RequestBody,
+        company_logo:MultipartBody.Part?
+    )=apiService.uploadCasting(uid,
+        company_name,
+        organization,
+        requirement,
+        shifting,
+        gender,
+        location,
+        height,
+        passport,
+        body_type,
+        skin_clor,
+        age,
+        price,
+        role,
+        company_logo)
+
     suspend fun updateProfile(
         name: RequestBody, email: RequestBody,
         uid: RequestBody, cat_id: RequestBody,

@@ -18,6 +18,7 @@ data class CastingCallModel(
     val requirement: String,
     val skill: String,
     val role: String,
+    val modify_date: String,
     val location: String,
     val document: String,
     val type: String,
@@ -26,5 +27,4 @@ data class CastingCallModel(
     val is_apply:Int,
     val is_casting_apply: Int,
     val is_casting_bookmark: Int
-
     )

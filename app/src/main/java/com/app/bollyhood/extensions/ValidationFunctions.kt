@@ -61,6 +61,32 @@ fun isvalidName(context: Context, edtName: String): Boolean {
     return isValid
 }
 
+fun isvalidProductionHouseName(context: Context, edtName: String): Boolean {
+    var isValid = true
+    if (edtName.isEmpty()) {
+        Toast.makeText(
+            context,
+            "Please enter Production House Name",
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }
+    return isValid
+}
+
+fun isvalidField(context: Context, edtName: String ,msg:String): Boolean {
+    var isValid = true
+    if (edtName.isEmpty()) {
+        Toast.makeText(
+            context,
+            msg,
+            Toast.LENGTH_SHORT
+        ).show()
+        isValid = false
+    }
+    return isValid
+}
+
 
 fun isvalidEmailAddress(context: Context, edtEmail: String): Boolean {
     var isValid = true

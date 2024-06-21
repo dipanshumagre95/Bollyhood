@@ -45,6 +45,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     var resetPasswordLiveData = MutableLiveData<SuccessResponse>()
     var loginLiveData = MutableLiveData<LoginResponse>()
     var changePasswordLiveData = MutableLiveData<SuccessResponse>()
+    var castingUploadedLiveData = MutableLiveData<SuccessResponse>()
     var profileLiveData = MutableLiveData<ProfileResponse>()
     var updateProfileLiveData = MutableLiveData<ProfileResponse>()
     var bannerLiveData = MutableLiveData<BannerResponse>()
@@ -257,6 +258,57 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     isLoading.postValue(false)
                 }
             }
+        }
+    }
+
+
+    fun uploadCastingCall(
+        uid:RequestBody,
+        company_name:RequestBody,
+        organization:RequestBody,
+        requirement:RequestBody,
+        shifting:RequestBody,
+        gender:RequestBody,
+        location:RequestBody,
+        height:RequestBody,
+        passport:RequestBody,
+        body_type:RequestBody,
+        skin_clor:RequestBody,
+        age:RequestBody,
+        price:RequestBody,
+        role:RequestBody,
+        company_logo:MultipartBody.Part?
+    ){
+        try {
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                mainRepository.uploadCastingCall(
+                    uid,
+                    company_name,
+                    organization,
+                    requirement,
+                    shifting,
+                    gender,
+                    location,
+                    height,
+                    passport,
+                    body_type,
+                    skin_clor,
+                    age,
+                    price,
+                    role,
+                    company_logo
+                ).let {
+                    if (it.body() != null) {
+                        isLoading.postValue(false)
+                        castingUploadedLiveData.postValue(it.body())
+                    } else {
+                        isLoading.postValue(false)
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
     }
 

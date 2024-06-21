@@ -131,15 +131,14 @@
                                 android:orientation="vertical">
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvOrganization"
+                                    android:id="@+id/tvtitle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@+id/ivLogo"
-                                    android:textSize="15sp"
+                                    android:textSize="12sp"
                                     android:maxLines="1"
-                                    android:text="Female Lead Actor OTT "
+                                    android:text=""
                                     android:singleLine="true"
-                                    android:gravity="center_vertical"
                                     android:textColor="@color/white"
                                     android:fontFamily="@font/urbanist_semibold"
                                     />
@@ -150,13 +149,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@+id/ivLogo"
-                                    android:textSize="12sp"
+                                    android:textSize="10sp"
                                     android:layout_below="@+id/tvName"
                                     android:maxLines="1"
                                     android:text="Netflix India Private Limited"
                                     android:singleLine="true"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginTop="@dimen/_3sdp"
                                     android:textColor="@color/white"
                                     android:fontFamily="@font/urbanist_regular"
                                    />
@@ -323,7 +320,7 @@
                             android:textSize="@dimen/_10sdp" />
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tvSalary"
+                            android:id="@+id/tvprice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"

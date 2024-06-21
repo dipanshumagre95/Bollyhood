@@ -121,6 +121,27 @@ interface ApiService {
     ): Response<ProfileResponse>
 
 
+    @Multipart
+    @POST("create_casting.php")
+    suspend fun uploadCasting(
+        @Part("uid") uid: RequestBody,
+        @Part("company_name") company_name: RequestBody,
+        @Part("organization") organization: RequestBody,
+        @Part("requirement") requirement: RequestBody,
+        @Part("shifting") shifting: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part("height") height: RequestBody,
+        @Part("passport") passport: RequestBody,
+        @Part("body_type") body_type: RequestBody,
+        @Part("skin_clor") skin_clor: RequestBody,
+        @Part("age") age: RequestBody,
+        @Part("price") price: RequestBody?,
+        @Part("role") role: RequestBody?,
+        @Part company_logo: MultipartBody.Part?,
+    ): Response<SuccessResponse>
+
+
     @GET("banner.php")
     suspend fun getBanner(): Response<BannerResponse>
 

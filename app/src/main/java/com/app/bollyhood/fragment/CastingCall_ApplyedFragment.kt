@@ -44,6 +44,18 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener {
 
         (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
 
+        val bundle = arguments
+        if (bundle!=null) {
+            binding.tvcastingName.text=bundle.getString("name").toString()
+            binding.tvTime.text=bundle.getString("time").toString()
+            if (bundle.getString("count").toString().isNullOrEmpty())
+            {
+                binding.tvcount.text="0"
+            }else {
+                binding.tvcount.text = bundle.getString("count").toString()
+            }
+        }
+
         binding.ivBack.setOnClickListener(this)
         binding.cvProfile.setOnClickListener(this)
 
@@ -74,6 +86,10 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener {
 
             R.id.llPostCastingCall ->{
                 startActivity(Intent(requireContext(), Upload_CastingCall::class.java))
+            }
+
+            R.id.ivBack ->{
+                (requireActivity() as MainActivity).setHomeColor()
             }
         }
     }

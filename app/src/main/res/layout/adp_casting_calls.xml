@@ -18,7 +18,7 @@
             android:id="@+id/llMain"
             android:layout_width="match_parent"
             android:background="@drawable/main_blue"
-            android:layout_height="60sp">
+            android:layout_height="65sp">
 
             <RelativeLayout
                 android:id="@+id/tvView"
@@ -83,6 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/lllogo"
                     android:textSize="12sp"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
                     android:fontFamily="@font/urbanist_semibold"

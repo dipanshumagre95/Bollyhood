@@ -19,6 +19,7 @@ import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.databinding.AdpCastingCallsBinding
 import com.app.bollyhood.fragment.CastingDetailsFragment
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DateUtils
 import com.app.bollyhood.util.StaticData
 import com.bumptech.glide.Glide
 import com.google.android.material.textview.MaterialTextView
@@ -113,67 +114,83 @@ class CastingCallsAdapter(
                 .into(holder.binding.ivLogo)
         }
 
-        holder.binding.tvShift.text = castingModels[position].shifting + " Hr Shift"
-
-        if (castingModels[position].organization.length > 24){
-            val name=castingModels[position].organization
-            holder.binding.tvName.text = name.split(" ").get(0)+" "+name.split(" ").get(1)
-        }else {
-            holder.binding.tvName.text = castingModels[position].organization
+        if (!castingModels[position].shifting.isNullOrEmpty()) {
+            holder.binding.tvShift.text = castingModels[position].shifting + " Shift"
         }
 
-        if (castingModels[position].company_name.length > 30){
-            val name=castingModels[position].company_name
-            holder.binding.tvcompanyname.text = name?.take(30)
-        }else {
-            holder.binding.tvcompanyname.text = castingModels[position].company_name
+        if (!castingModels[position].role.isNullOrEmpty()) {
+           holder.binding.tvName.text = castingModels[position].role
         }
 
-        if (castingModels[position].description.length > 100){
-            val shorttext=castingModels[position].description.substring(0,100)
-            setSpannableString(shorttext,"read more",castingModels[position].description,holder.binding.tvDesc)
-        }else{
-            holder.binding.tvDesc.text = castingModels[position].description
-        }
-        holder.binding.tvDate.text = castingModels[position].date
-
-        if (castingModels[position].price_discussed.equals("1")) {
-            holder.binding.tvSalary.text = "T B D"
-        } else {
-            holder.binding.tvSalary.text = "₹" + castingModels[position].price+"/pd"
-        }
-
-        when (castingModels[position].type) {
-            "blue" -> {
-                holder.binding.llMain.setBackgroundResource(R.drawable.main_blue)
-                holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_blue)
-                holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_blue)
-                holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_blue)
-                holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_blue)
-
+        if (!castingModels[position].company_name.isNullOrEmpty()) {
+            if (castingModels[position].company_name.length > 30) {
+                val name = castingModels[position].company_name
+                holder.binding.tvcompanyname.text = name?.take(30)
+            } else {
+                holder.binding.tvcompanyname.text = castingModels[position].company_name
             }
-            "red" -> {
-                holder.binding.llMain.setBackgroundResource(R.drawable.main_red)
-                holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_red)
-                holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_red)
-                holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_red)
-                holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_red)
-            }
+        }
 
-            "black" ->{
-                holder.binding.llMain.setBackgroundResource(R.drawable.main_black)
-                holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_black)
-                holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_black)
-                holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_black)
-                holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_black)
+        if (!castingModels[position].organization.isNullOrEmpty()) {
+            if (castingModels[position].organization.length > 100) {
+                val shorttext = castingModels[position].organization.substring(0, 100)
+                setSpannableString(
+                    shorttext,
+                    "read more",
+                    castingModels[position].organization,
+                    holder.binding.tvDesc
+                )
+            } else {
+                holder.binding.tvDesc.text = castingModels[position].organization
             }
+        }
 
-            else -> {
-                holder.binding.llMain.setBackgroundResource(R.drawable.main_yellow)
-                holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_yellow)
-                holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_yellow)
-                holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_yellow)
-                holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_yellow)
+        if (!castingModels[position].modify_date.isNullOrEmpty()) {
+            holder.binding.tvDate.text = DateUtils.getConvertDateTiemFormat(castingModels[position].modify_date)
+        }
+
+        if (!castingModels[position].price_discussed.isNullOrEmpty()) {
+            if (castingModels[position].price_discussed.equals("1")) {
+                holder.binding.tvSalary.text = "T B D"
+            } else {
+                holder.binding.tvSalary.text = "₹" + castingModels[position].price + "/pd"
+            }
+        }
+
+        if (!castingModels[position].type.isNullOrEmpty()) {
+            when (castingModels[position].type) {
+                "blue" -> {
+                    holder.binding.llMain.setBackgroundResource(R.drawable.main_blue)
+                    holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_blue)
+                    holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_blue)
+                    holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_blue)
+                    holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_blue)
+
+                }
+
+                "red" -> {
+                    holder.binding.llMain.setBackgroundResource(R.drawable.main_red)
+                    holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_red)
+                    holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_red)
+                    holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_red)
+                    holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_red)
+                }
+
+                "black" -> {
+                    holder.binding.llMain.setBackgroundResource(R.drawable.main_black)
+                    holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_black)
+                    holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_black)
+                    holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_black)
+                    holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_black)
+                }
+
+                else -> {
+                    holder.binding.llMain.setBackgroundResource(R.drawable.main_yellow)
+                    holder.binding.lldescriptions.setBackgroundResource(R.drawable.description_yellow)
+                    holder.binding.lllocation.setBackgroundResource(R.drawable.rectangle_loc_yellow)
+                    holder.binding.llverified.setBackgroundResource(R.drawable.rectangle_loc_yellow)
+                    holder.binding.llshift.setBackgroundResource(R.drawable.rectangle_loc_yellow)
+                }
             }
         }
 

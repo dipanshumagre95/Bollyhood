@@ -1,56 +1,130 @@
 package com.app.bollyhood.activity
 
+import ImagePickerUtil
+import android.Manifest
+import android.app.Activity
+import android.app.Dialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityUploadCastingCallBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isvalidField
+import com.app.bollyhood.extensions.isvalidProductionHouseName
+import com.app.bollyhood.extensions.isvalidUploadProfile
+import com.app.bollyhood.util.PrefManager
+import com.app.bollyhood.util.StaticData
+import com.app.bollyhood.viewmodel.DataViewModel
+import com.github.dhaval2404.imagepicker.ImagePicker
+import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
+@AndroidEntryPoint
 class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
     lateinit var binding:ActivityUploadCastingCallBinding
+    private val viewModel: DataViewModel by viewModels()
     private var heightList: ArrayList<String> = arrayListOf()
+    private var shiftTimeList: ArrayList<String> = arrayListOf()
+    private var genderList: ArrayList<String> = arrayListOf()
     private var skinColorList: ArrayList<String> = arrayListOf()
     private var bodyTypeList: ArrayList<String> = arrayListOf()
     private var passPortList: ArrayList<String> = arrayListOf()
     private var ageList: ArrayList<String> = arrayListOf()
     private var height: String = ""
+    private var gender: String = ""
+    private var shift: String = ""
     private var skinColor: String = ""
     private var bodyType: String = ""
     private var passport: String = ""
     private var age: String = ""
+    private var isCamera = false
+    private var isGallery = false
+    private var profilePath = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        binding=DataBindingUtil.setContentView(this, R.layout.activity_upload_casting_call)
 
         intiUi()
         addLisnter()
+        addObserver()
+    }
+
+    private fun addObserver() {
+        viewModel.isLoading.observe(this, Observer {
+            if (it) {
+                binding.pbLoadData.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadData.visibility = View.GONE
+            }
+        })
+
+        viewModel.castingUploadedLiveData.observe(this, Observer{
+            if (it.status == "1") {
+                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun intiUi()
     {
-        binding.edtproductionHouse.addTextChangedListener(this)
-        binding.edtSkillNRequiment.addTextChangedListener(this)
-        binding.edtWhatYouRole.addTextChangedListener(this)
-
         setHeightData()
         setSkinColorData()
         setBodyTypeData()
         setPassPortData()
         setAgeData()
+        setShiftTimeData()
+        setGenderData()
     }
 
     private fun addLisnter()
     {
         binding.acheight.setOnTouchListener { v, event ->
             binding.acheight.showDropDown()
+            false
+        }
+
+        binding.acshift.setOnTouchListener { v, event ->
+            binding.acshift.showDropDown()
+            false
+        }
+
+        binding.acgender.setOnTouchListener { v, event ->
+            binding.acgender.showDropDown()
             false
         }
 
@@ -75,13 +149,15 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             false
         }
 
-
         binding.edtproductionHouse.addTextChangedListener(this)
+        binding.edttitle.addTextChangedListener(this)
         binding.edtSkillNRequiment.addTextChangedListener(this)
         binding.edtWhatYouRole.addTextChangedListener(this)
         binding.llverifiedProfile.setOnClickListener(this)
         binding.llanyoneApply.setOnClickListener(this)
         binding.ivBack.setOnClickListener(this)
+        binding.tvUpdateProfile.setOnClickListener(this)
+        binding.rrProfile.setOnClickListener(this)
 
     }
 
@@ -96,6 +172,10 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     binding.lledtProductionHouse.setHintEnabled(true)
                 }
 
+                binding.edttitle.getText().hashCode() ->{
+                    binding.lltitle.setHintEnabled(true)
+                }
+
                 binding.edtWhatYouRole.text.hashCode() ->{
                     binding.textcount.visibility=View.VISIBLE
                     val value = 500 - binding.edtWhatYouRole.text.toString().length
@@ -103,7 +183,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                 }
 
                 binding.edtSkillNRequiment.text.hashCode() ->{
-                    binding.textcount.visibility=View.VISIBLE
+                    binding.textcountforskillNrequiment.visibility=View.VISIBLE
                     val value = 500 - binding.edtSkillNRequiment.text.toString().length
                     binding.textcountforskillNrequiment.text="$value/500"
                 }
@@ -113,6 +193,10 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                 binding.edtproductionHouse.getText().hashCode() ->{
                     binding.lledtProductionHouse.setHintEnabled(false)
                 }
+
+                binding.edttitle.getText().hashCode() ->{
+                    binding.lltitle.setHintEnabled(false)
+                }
             }
         }
     }
@@ -121,6 +205,40 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
     }
 
+
+    private fun setShiftTimeData() {
+        shiftTimeList.clear()
+        shiftTimeList.add("6Hr")
+        shiftTimeList.add("7Hr")
+        shiftTimeList.add("8Hr")
+        shiftTimeList.add("9Hr")
+        shiftTimeList.add("10Hr")
+        shiftTimeList.add("11Hr")
+        shiftTimeList.add("12Hr")
+        shiftTimeList.add("13Hr")
+        shiftTimeList.add("14Hr")
+        shiftTimeList.add("15Hr")
+        shiftTimeList.add("16Hr")
+        shiftTimeList.add("17Hr")
+        shiftTimeList.add("18Hr")
+        shiftTimeList.add("19Hr")
+        shiftTimeList.add("20Hr")
+        shiftTimeList.add("21Hr")
+        shiftTimeList.add("22Hr")
+        shiftTimeList.add("23Hr")
+        shiftTimeList.add("24Hr")
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, R.layout.dropdown, shiftTimeList)
+        binding.acshift.threshold = 0
+        binding.acshift.dropDownVerticalOffset = 0
+        binding.acshift.setAdapter(arrayAdapter)
+
+        binding.acshift.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                shift = shiftTimeList[position]
+            }
+    }
 
     private fun setHeightData() {
         heightList.clear()
@@ -157,8 +275,6 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 height = heightList[position]
             }
-
-
     }
 
     private fun setSkinColorData() {
@@ -223,8 +339,24 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 passport = passPortList[position]
             }
+    }
+
+    private fun setGenderData() {
+        genderList.clear()
+        genderList.add("Male")
+        genderList.add("Female")
 
 
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, R.layout.dropdown, genderList)
+        binding.acgender.threshold = 0
+        binding.acgender.dropDownVerticalOffset = 0
+        binding.acgender.setAdapter(arrayAdapter)
+
+        binding.acgender.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                gender = genderList[position]
+            }
     }
 
     private fun setAgeData(){
@@ -305,6 +437,287 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             R.id.ivBack ->{
                 finish()
             }
+
+            R.id.tvUpdateProfile ->{
+                createCastingCallApi()
+            }
+
+            R.id.rrProfile ->{
+                if (checkPermission()) {
+                    alertDialogForImagePicker()
+                } else {
+                    checkPermission()
+                }
+            }
+        }
+    }
+
+    private fun checkPermission(): Boolean {
+        val writePermission: Int
+        val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+
+
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            writePermission =
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+
+
+        } else {
+            writePermission =
+                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        }
+
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (writePermission != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES)
+            }
+
+            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(Manifest.permission.CAMERA)
+            }
+
+        } else {
+            if (writePermission != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+
+            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(Manifest.permission.CAMERA)
+            }
+
+        }
+
+
+
+
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this, listPermissionsNeeded.toTypedArray(),
+                MyProfileActivity.REQUEST_ID_MULTIPLE_PERMISSIONS
+            )
+            return false
+        }
+        return true
+    }
+
+    private fun createCastingCallApi() {
+        if (isNetworkAvailable(this)) {
+            if (isvalidProductionHouseName(
+                    this, binding.edtproductionHouse.text.toString().trim()
+                )&& isvalidField(
+                    this,binding.edttitle.text.toString().trim(),
+                    "Please enter Casting Title"
+                )&&isvalidUploadProfile(
+                    this,profilePath
+                ) &&isvalidField(
+                    this,binding.edtSkillNRequiment.text.toString().trim()
+                    ,"Please enter Skill & Requiment"
+                )&&isvalidField(
+                    this,binding.edtWhatYouRole.text.toString().trim()
+                    ,"Please enter Role"
+                )
+            ) {
+
+                val uid: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(this).getvalue(StaticData.id).toString()
+                )
+
+                val company_name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtproductionHouse.text.toString().trim()
+                )
+
+                val role: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edttitle.text.toString().trim()
+                )
+
+                val organization: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtWhatYouRole.text.toString().trim()
+                )
+
+                val requirement: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtSkillNRequiment.text.toString().trim()
+                )
+
+
+                val shifting: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acshift.text.toString().trim()
+                )
+
+                val gender: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acgender.text.toString().trim()
+                )
+
+
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLocation.text.toString().trim()
+                )
+
+                val height: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acheight.text.toString().trim()
+                )
+
+                val passport: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acPassPort.text.toString().trim()
+                )
+
+                val body_type: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acBodyType.text.toString().trim()
+                )
+
+                val age: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acage.text.toString().trim()
+                )
+
+                val skin_clor: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acSkinColor.text.toString().trim()
+                )
+
+                val price: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtperday.text.toString().trim()
+                )
+
+
+                var company_logo: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    // create RequestBody instance from file
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    company_logo = MultipartBody.Part.createFormData(
+                        "company_logo", file.name, requestFile
+                    )
+                }
+
+                viewModel.uploadCastingCall(
+                    uid,
+                    company_name,
+                    organization,
+                    requirement,
+                    shifting,
+                    gender,
+                    location,
+                    height,
+                    passport,
+                    body_type,
+                    skin_clor,
+                    age,
+                    price,
+                    role,
+                    company_logo
+                )
+            }
+        } else {
+            Toast.makeText(
+                this,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun alertDialogForImagePicker() {
+        val dialogView = Dialog(this)
+        dialogView.setContentView(R.layout.image_picker)
+        dialogView.setCancelable(false)
+        val txtcamera = dialogView.findViewById<TextView>(R.id.txtcamera)
+        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
+        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
+        txtcamera.setOnClickListener { v: View? ->
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startForProfileImageResult.launch(intent)
+            isCamera = true
+            isGallery = false
+            dialogView.dismiss()
+        }
+        txtGallery.setOnClickListener { v: View? ->
+            ImagePickerUtil.pickImageFromGallery(this,startForProfileImageResult)
+            isCamera = false
+            isGallery = true
+            dialogView.dismiss()
+        }
+        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
+        dialogView.show()
+    }
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    if (isCamera) {
+                        val imageBitmap = result.data?.extras?.get("data") as Bitmap
+                        profilePath = saveImageToStorage(imageBitmap).toString()
+                        binding.cvProfile.setImageURI(Uri.parse(profilePath))
+                    } else if (isGallery) {
+                        val uri = data!!.data
+                        profilePath = getPath( uri!!)
+                        binding.cvProfile.setImageURI(uri)
+                    }
+                }
+
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    fun getPath(uri: Uri): String {
+        var result = ""
+        if (uri.toString().startsWith("file:")) {
+            result = uri.path!!
+        } else {
+            val projections = arrayOf(MediaStore.Images.Media.DATA)
+           contentResolver.query(uri, projections, null, null, null)?.let { cursor ->
+                if (cursor.moveToFirst()) {
+                    val index = cursor.getColumnIndex(projections.first())
+                    if (index != -1) result = cursor.getString(index)?.let { it } ?: kotlin.run { "" }
+                }
+                cursor.close()
+            }
+        }
+        return result
+    }
+
+    private fun saveImageToStorage(bitmap: Bitmap): String? {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageFileName = "JPEG_$timeStamp.jpg"
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        return try {
+            val imageFile = File(storageDir, imageFileName)
+            val fos = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+            fos.close()
+            imageFile.absolutePath
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
         }
     }
 }

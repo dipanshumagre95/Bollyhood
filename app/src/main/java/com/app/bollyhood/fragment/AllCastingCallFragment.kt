@@ -58,16 +58,16 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
 
 
 
-        setActiveAdapter()
+        setActiveAdapter(1)
     }
 
-    private fun setActiveAdapter()
+    private fun setActiveAdapter(type:Int)
     {
         binding.apply {
             rvAllCatingcall.layoutManager =
                 LinearLayoutManager(requireContext())
             rvAllCatingcall.setHasFixedSize(true)
-            adapter = AllCastingCallListAdapter(requireContext(),this@AllCastingCallFragment)
+            adapter = AllCastingCallListAdapter(requireContext(),this@AllCastingCallFragment,type)
             rvAllCatingcall.adapter = adapter
             adapter?.notifyDataSetChanged()
 
@@ -89,6 +89,7 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
                 binding.tvClose.setBackgroundResource(R.drawable.border_gray)
                 binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                setActiveAdapter(1)
             }
 
             R.id.tvClose ->{
@@ -96,11 +97,19 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
                 binding.tvClose.setBackgroundResource(R.drawable.rectangle_black_button)
                 binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                setActiveAdapter(2)
             }
         }
     }
 
-    override fun onItemClick() {
-       (requireActivity() as MainActivity).loadFragment(CastingCall_ApplyedFragment())
+    override fun onItemClick(name:String,count:String,time:String) {
+        val bundle = Bundle()
+        bundle.putString("name", name)
+        bundle.putString("count", count)
+        bundle.putString("time", time)
+
+        val castingDetailsFragment = CastingCall_ApplyedFragment()
+        castingDetailsFragment.arguments = bundle
+       (requireActivity() as MainActivity).loadFragment(castingDetailsFragment)
     }
 }

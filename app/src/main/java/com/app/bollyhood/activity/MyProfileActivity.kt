@@ -107,7 +107,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     }
 
     companion object {
-        private const val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
+         const val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
 
     }
 
