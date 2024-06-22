@@ -112,7 +112,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
                 if (previousFragment.equals("AllCategoryFragment")) {
                     backpress(AllCategoryFragment())
                 }else{
-                    backpress(HomeFragment())
+                    (requireActivity() as MainActivity).setHomeColor()
                 }
             }
 

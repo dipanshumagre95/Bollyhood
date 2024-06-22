@@ -76,6 +76,7 @@
                     android:visibility="visible" />
 
                 <RelativeLayout
+                    android:id="@+id/tvexlpore_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"

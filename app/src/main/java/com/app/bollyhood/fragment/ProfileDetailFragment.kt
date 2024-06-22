@@ -358,7 +358,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 if (previousFragment.equals("AllActosFragment")){
                     (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
                 }else {
-                    (requireActivity() as MainActivity).loadFragment(HomeFragment())
+                    (requireActivity() as MainActivity).setHomeColor()
                 }
             }
 

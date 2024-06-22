@@ -15,6 +15,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -29,6 +30,7 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityCastingApplyBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
@@ -167,61 +169,51 @@ class CastingApplyActivity : AppCompatActivity() {
 
     private fun callApi(){
         if (isNetworkAvailable(mContext)) {
-            val uid: RequestBody = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                PrefManager(mContext).getvalue(StaticData.id).toString()
-            )
+            if (isvalidTeamNCondition(this,binding.cbteamNcondition.isChecked)) {
+                val uid: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
 
-            val casting_id: RequestBody = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                castingCallModel.id
-            )
+                val casting_id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    castingCallModel.id
+                )
 
-            val parts: ArrayList<MultipartBody.Part> = arrayListOf()
+                val parts: ArrayList<MultipartBody.Part> = arrayListOf()
 
-            for (i in photoList.indices) {
-                if (!photoList[i].startsWith("https")) {
-                    val file = File(photoList[i])
-                    if (file.exists()) {
-                        val imageBody =
-                            RequestBody.create("image/*".toMediaTypeOrNull(), file)
-                        parts.add(
-                            MultipartBody.Part.createFormData(
-                                "images[]", file.name, imageBody
+                for (i in photoList.indices) {
+                    if (!photoList[i].startsWith("https")) {
+                        val file = File(photoList[i])
+                        if (file.exists()) {
+                            val imageBody =
+                                RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                            parts.add(
+                                MultipartBody.Part.createFormData(
+                                    "images[]", file.name, imageBody
+                                )
                             )
-                        )
-                        Log.e("UploadImage>>filepath", file.path)
-                    } else {
-                        file.mkdirs()
-                        val imageBody =
-                            RequestBody.create("image/*".toMediaTypeOrNull(), file)
-                        parts.add(
-                            MultipartBody.Part.createFormData(
-                                "images[]", file.name, imageBody
+                            Log.e("UploadImage>>filepath", file.path)
+                        } else {
+                            file.mkdirs()
+                            val imageBody =
+                                RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                            parts.add(
+                                MultipartBody.Part.createFormData(
+                                    "images[]", file.name, imageBody
+                                )
                             )
-                        )
-                        Log.e("UploadImage>>filepath", file.path)
+                            Log.e("UploadImage>>filepath", file.path)
+                        }
                     }
+
+                    Log.e("photoList", "=" + photoList[i])
                 }
 
-                Log.e("photoList", "=" + photoList[i])
+
+                var videoBody: MultipartBody.Part? = null
+                viewModel.getCastingCallApply(uid, casting_id, parts, videoBody)
             }
-
-
-            var videoBody: MultipartBody.Part? = null
-
-            /* if (currentPhotoPath?.isNotEmpty()!!) {
-                 val requestFile: RequestBody =
-                     File(currentPhotoPath).asRequestBody("multipart/form-data".toMediaTypeOrNull())
-                 videoBody = MultipartBody.Part.createFormData(
-                     "video", File(currentPhotoPath).name, requestFile
-                 )
-             }*/
-
-            Log.e("photoList", "=$currentPhotoPath")
-
-
-            viewModel.getCastingCallApply(uid, casting_id, parts,  videoBody)
         } else {
             Toast.makeText(
                 mContext,
@@ -398,6 +390,15 @@ class CastingApplyActivity : AppCompatActivity() {
     private fun castingCallSuccessDialog(){
         val dialogView = Dialog(this)
         dialogView.setContentView(R.layout.castingcall_apply_dialog)
+
+        val goToMyApplication=dialogView.findViewById<TextView>(R.id.Go_to_My_Applications)
+        val exploreMore=dialogView.findViewById<RelativeLayout>(R.id.tvexlpore_more)
+
+        goToMyApplication.setOnClickListener(View.OnClickListener {
+            dialogView.dismiss()
+            setResult(Activity.RESULT_OK)
+            finish()
+        })
 
 
         dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
