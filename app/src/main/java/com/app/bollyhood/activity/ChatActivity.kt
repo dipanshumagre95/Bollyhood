@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import ImagePickerUtil
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
@@ -47,7 +48,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.devlomi.record_view.OnRecordListener
-import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -578,9 +578,6 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
                     }
                 }
 
-                ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-                }
 
                 else -> {
                     Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
@@ -644,10 +641,7 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
 
     private fun imagePickerFromGallery()
     {
-        ImagePicker.with(mContext).compress(1024).maxResultSize(1080, 1080).galleryOnly()
-            .createIntent {
-                startForProfileImageResult.launch(it)
-            }
+        ImagePickerUtil.pickImageFromGallery(this,startForProfileImageResult)
         isCamera = false
         isGallery = true
     }

@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import ImagePickerUtil
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
@@ -33,7 +34,6 @@ import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -322,10 +322,7 @@ class CastingApplyActivity : AppCompatActivity() {
         }
 
         txtGallery.setOnClickListener { v: View? ->
-            ImagePicker.with(mContext).compress(1024).maxResultSize(1080, 1080).galleryOnly()
-                .createIntent {
-                    imageResultLaunchers[imageNumber]?.launch(it)
-                }
+            ImagePickerUtil.pickImageFromGallery(this,imageResultLaunchers[imageNumber] ?: return@setOnClickListener)
 
             showProgressBar(imageNumber, true)
             isCamera = false
@@ -390,10 +387,6 @@ class CastingApplyActivity : AppCompatActivity() {
                     photoList.add(PathUtils.getRealPath(this, uri!!).toString())
                     setImage(imageNumber, uri)
                 }
-            }
-
-            ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
             }
 
             else -> {

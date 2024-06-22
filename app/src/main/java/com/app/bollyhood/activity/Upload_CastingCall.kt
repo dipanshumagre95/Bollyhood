@@ -37,7 +37,6 @@ import com.app.bollyhood.extensions.isvalidUploadProfile
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
-import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -677,9 +676,6 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     }
                 }
 
-                ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-                }
 
                 else -> {
                     Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()

@@ -104,7 +104,6 @@ dependencies {
     //imagepicker
     implementation("androidx.activity:activity-ktx:1.8.1")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("com.github.dhaval2404:imagepicker:2.1")
 
 
     //Dimen
