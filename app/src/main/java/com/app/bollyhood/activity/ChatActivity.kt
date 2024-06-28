@@ -207,8 +207,10 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
 
         if (intent.extras != null) {
             profileId = intent.getStringExtra("profileId")
+        }
 
-
+        if (intent.hasExtra("msg")){
+            binding.edtMessage.setText(intent.getStringExtra("msg"))
         }
 
 

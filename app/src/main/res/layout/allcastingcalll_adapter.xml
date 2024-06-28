@@ -76,7 +76,7 @@
                         android:id="@+id/ivBookMark"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
-                        android:layout_toRightOf="@+id/tvName"
+                        android:layout_toRightOf="@+id/tvcasting_name"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_centerVertical="true"

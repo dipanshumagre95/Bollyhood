@@ -572,6 +572,21 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
+    fun getAllCastingCalls(uid: String){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            mainRepository.getAllCastingCalls(uid).let {
+                if (it.body() != null) {
+                    castingCallsLiveData.postValue(it.body())
+                    isLoading.postValue(false)
+                } else {
+                    isLoading.postValue(false)
+                }
+            }
+        }
+    }
+
+
     fun getCastingCalls(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)

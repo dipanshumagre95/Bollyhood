@@ -19,6 +19,8 @@ data class CastingCallModel(
     val skill: String,
     val role: String,
     val modify_date: String,
+    val users:ArrayList<UserModel>,
+    val apply_casting_count: String,
     val location: String,
     val document: String,
     val type: String,

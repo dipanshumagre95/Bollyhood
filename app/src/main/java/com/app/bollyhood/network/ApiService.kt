@@ -228,6 +228,12 @@ interface ApiService {
         @Query("uid") uid: String
     ): Response<CastingCallResponse>
 
+
+    @GET("get_all_post.php")
+    suspend fun getAllCastingCalls(
+        @Query("uid") uid: String
+    ): Response<CastingCallResponse>
+
     @FormUrlEncoded
     @POST("all_casting_bookmark.php")
     suspend fun getCastingBookMark(

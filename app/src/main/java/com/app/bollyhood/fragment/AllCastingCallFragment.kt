@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.MainActivity
@@ -16,14 +19,21 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.Upload_CastingCall
 import com.app.bollyhood.adapter.AllCastingCallListAdapter
 import com.app.bollyhood.databinding.FragmentAllCastingCallBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
+import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdapter.OnClickInterface {
 
     lateinit var binding:FragmentAllCastingCallBinding
-
+    private val viewModel: DataViewModel by viewModels()
+    private val castingModels: ArrayList<CastingCallModel> = arrayListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +42,26 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
 
         initUi()
         addListner()
+        addObserver()
         return binding.root
+    }
+
+    private fun addObserver() {
+        viewModel.isLoading.observe(requireActivity(), Observer {
+            if (it) {
+                binding.pbLoadData.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadData.visibility = View.GONE
+            }
+        })
+
+        viewModel.castingCallsLiveData.observe(requireActivity(), Observer {
+            if (it.status.equals("1")) {
+                castingModels.clear()
+                castingModels.addAll(it.result)
+                setActiveAdapter(castingModels)
+            }
+        })
     }
 
     private fun addListner() {
@@ -54,23 +83,31 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
         }
 
         (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
-
-
-
-
-        setActiveAdapter(1)
     }
 
-    private fun setActiveAdapter(type:Int)
+    private fun setActiveAdapter(castingModels: ArrayList<CastingCallModel>)
     {
         binding.apply {
             rvAllCatingcall.layoutManager =
                 LinearLayoutManager(requireContext())
             rvAllCatingcall.setHasFixedSize(true)
-            adapter = AllCastingCallListAdapter(requireContext(),this@AllCastingCallFragment,type)
+            adapter = AllCastingCallListAdapter(requireContext(),this@AllCastingCallFragment,castingModels)
             rvAllCatingcall.adapter = adapter
             adapter?.notifyDataSetChanged()
 
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getAllCastingCalls(PrefManager(requireContext()).getvalue(StaticData.id).toString())
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -89,7 +126,6 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
                 binding.tvClose.setBackgroundResource(R.drawable.border_gray)
                 binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                setActiveAdapter(1)
             }
 
             R.id.tvClose ->{
@@ -97,16 +133,13 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
                 binding.tvClose.setBackgroundResource(R.drawable.rectangle_black_button)
                 binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                setActiveAdapter(2)
             }
         }
     }
 
-    override fun onItemClick(name:String,count:String,time:String) {
+    override fun onItemClick(castingModel:CastingCallModel) {
         val bundle = Bundle()
-        bundle.putString("name", name)
-        bundle.putString("count", count)
-        bundle.putString("time", time)
+        bundle.putString(StaticData.userModel, Gson().toJson(castingModel))
 
         val castingDetailsFragment = CastingCall_ApplyedFragment()
         castingDetailsFragment.arguments = bundle

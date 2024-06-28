@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AllcastingcalllAdapterBinding
+import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DateUtils
+import com.bumptech.glide.Glide
 
-class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingCallListAdapter.OnClickInterface,val type:Int): RecyclerView.Adapter<AllCastingCallListAdapter.MyViewHolder>() {
+class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingCallListAdapter.OnClickInterface,val castingModels: ArrayList<CastingCallModel>): RecyclerView.Adapter<AllCastingCallListAdapter.MyViewHolder>() {
 
 
     class MyViewHolder(val binding:AllcastingcalllAdapterBinding) :RecyclerView.ViewHolder(binding.root){
@@ -25,53 +26,39 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
     }
 
     override fun getItemCount(): Int {
-       return 3
+       return castingModels.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val castingModel=castingModels[position]
 
-        when(position){
-            0 ->{
-                if (type==2){
-                    holder.binding.tvcastingStatus.text="Casting Call is Closed"
-                    holder.binding.tvcastingStatus.setTextColor(ContextCompat.getColor(context, R.color.colorred))
-                    holder.binding.ivstatusIcon.visibility=View.GONE
-                }
-                holder.binding.tvcastingName.text="Duet Dance Reality Show"
-                holder.binding.tvapplyCount.text="100+"
-                holder.binding.tvtime.text="10 min ago"
-            }
+        if (castingModels[position].company_logo.isNotEmpty()) {
+            Glide.with(context).load(castingModels[position].company_logo)
+                .into(holder.binding.ivImage)
+        }
 
-            1 ->{
-                if (type==2){
-                    holder.binding.tvcastingStatus.text="Casting Call is Closed"
-                    holder.binding.tvcastingStatus.setTextColor(ContextCompat.getColor(context, R.color.colorred))
-                    holder.binding.ivstatusIcon.visibility=View.GONE
-                }
-                holder.binding.tvcastingName.text="Actors For Drama Film"
-                holder.binding.tvapplyCount.text="10"
-                holder.binding.tvtime.text="2 days ago"
-            }
+        if (!castingModel.role.isNullOrEmpty()){
+            holder.binding.tvcastingName.text=castingModel.role
+        }
 
-            2 ->{
-                if (type==2){
-                    holder.binding.tvcastingStatus.text="Casting Call is Closed"
-                    holder.binding.tvcastingStatus.setTextColor(ContextCompat.getColor(context, R.color.colorred))
-                    holder.binding.ivstatusIcon.visibility=View.GONE
-                }
-                holder.binding.tvcastingName.text="Female Actors Crime Thriller "
-                holder.binding.tvapplyCount.visibility=View.GONE
-                holder.binding.tvtime.text="1 month ago"
-            }
+        if (!castingModels[position].modify_date.isNullOrEmpty()) {
+            holder.binding.tvtime.text = DateUtils.getConvertDateTiemFormat(castingModels[position].modify_date)
+        }
+
+        if (!castingModel.apply_casting_count.isNullOrEmpty()&&castingModel.apply_casting_count!="0"){
+            holder.binding.tvapplyCount.visibility=View.VISIBLE
+            holder.binding.tvapplyCount.text=castingModel.apply_casting_count
+        }else{
+            holder.binding.tvapplyCount.visibility=View.GONE
         }
 
         holder.binding.llmain.setOnClickListener(View.OnClickListener {
-            onitemclick.onItemClick(holder.binding.tvcastingName.text.toString(),holder.binding.tvapplyCount.text.toString(),holder.binding.tvtime.text.toString())
+            onitemclick.onItemClick(castingModel)
         })
     }
 
     interface OnClickInterface
     {
-        fun onItemClick(name:String,count:String,time:String)
+        fun onItemClick(castingModel:CastingCallModel)
     }
 }

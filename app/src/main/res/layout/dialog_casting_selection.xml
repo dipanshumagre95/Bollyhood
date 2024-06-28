@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000">
+
+        <RelativeLayout
+            android:id="@+id/llMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/multicolor_button">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_2sdp"
+                android:background="@drawable/rectangle_chatwhite">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvuser_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/urbanist_semibold"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_below="@+id/tvuser_name"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_below="@+id/rv_photo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_10sdp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_below="@+id/tvtext"
+                    android:weightSum="3">
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvfit"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:text="Fit"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_skincolor"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvNotfit"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:text="Not Fit"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_pink"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvMaybe"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:text="Maybe"
+                        android:textColor="@color/black"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_gray"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

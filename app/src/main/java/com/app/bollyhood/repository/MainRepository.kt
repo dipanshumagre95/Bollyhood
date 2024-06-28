@@ -170,6 +170,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     ) = apiService.getSubCategory(category_Id)
 
     suspend fun getCastingCalls(uid: String) = apiService.getCastingCalls(uid)
+    suspend fun getAllCastingCalls(uid: String) = apiService.getAllCastingCalls(uid)
 
     suspend fun getCastingBookMark(uid: String) = apiService.getCastingBookMark(uid)
 

@@ -114,6 +114,23 @@
                 app:layout_constraintTop_toBottomOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvno_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="7dp"
+                android:text="No data found"
+                android:visibility="gone"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"/>
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvNoChatHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -148,7 +165,7 @@
                 android:id="@+id/iv_image"
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
-                android:src="@drawable/rectangle_1092" />
+                 />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvcasting_name"
@@ -159,7 +176,6 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:fontFamily="@font/urbanist_semibold"
-                android:text="Policeman Role"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp" />
 
@@ -167,7 +183,6 @@
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2 days ago"
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:textColor="#80797C7B"
