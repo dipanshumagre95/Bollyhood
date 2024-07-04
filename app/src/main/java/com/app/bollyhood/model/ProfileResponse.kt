@@ -15,6 +15,17 @@ data class ProfileModel(
     val description: String,
     val is_verify: String,
     val status: String,
+    val collaborate: String,
+    val promotion: String,
+    val average_like: String,
+    val average_reel_like: String,
+    val instagram_link: String,
+    val facebook_link: String,
+    val youtube_link: String,
+    val achievements: String,
+    val languages: String,
+    val genre: String,
+    val events: String,
     var is_bookmarked: Int,
     val category_name: String,
     val skin_color:String,
@@ -25,6 +36,7 @@ data class ProfileModel(
     val passport:String,
     val imagefile:ArrayList<String>,
     val work_links: ArrayList<WorkLinkProfileData>,
+   // val video_url: ArrayList<WorkLinkProfileData>,
     val categories: ArrayList<ProfileCategoryModel>
 )
 

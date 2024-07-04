@@ -122,6 +122,49 @@ interface ApiService {
 
 
     @Multipart
+    @POST("update_profile.php")
+    suspend fun updateSingerProfile(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("uid") uid: RequestBody,
+        @Part("cat_id") cat_id: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("achievements") achievements: RequestBody,
+        @Part("languages") languages: RequestBody,
+        @Part("events") events: RequestBody,
+        @Part("genre") genre: RequestBody,
+        @Part("video_url") showreel: RequestBody,
+        @Part("worklinks") worklinks: RequestBody?,
+        @Part("categories") category_id: RequestBody?,
+        @Part image: MultipartBody.Part?,
+        @Part imagefile : ArrayList<MultipartBody.Part>
+    ): Response<ProfileResponse>
+
+    @Multipart
+    @POST("update_profile.php")
+    suspend fun updateInfluencerProfile(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("uid") uid: RequestBody,
+        @Part("cat_id") cat_id: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("collaborate") collaborate: RequestBody,
+        @Part("promotion") promotion: RequestBody,
+        @Part("average_like") average_like: RequestBody,
+        @Part("average_reel_like") average_reel_like: RequestBody,
+        @Part("instagram_link") instagram_link: RequestBody,
+        @Part("facebook_link") facebook_link: RequestBody?,
+        @Part("youtube_link") youtube_link: RequestBody?,
+        @Part("workLink") workLink: RequestBody?,
+        @Part("categories") category_id: RequestBody?,
+        @Part image: MultipartBody.Part?,
+        @Part imagefile : ArrayList<MultipartBody.Part>
+    ): Response<ProfileResponse>
+
+
+    @Multipart
     @POST("create_casting.php")
     suspend fun uploadCasting(
         @Part("uid") uid: RequestBody,

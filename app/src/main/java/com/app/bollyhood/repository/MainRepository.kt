@@ -118,6 +118,80 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
             imagefile
         )
 
+
+    suspend fun updateSingerProfile(
+        name: RequestBody, email: RequestBody,
+        uid: RequestBody, cat_id: RequestBody,
+        mobileNumber: RequestBody,
+        description: RequestBody,
+        achievements: RequestBody,
+        languages: RequestBody,
+        events: RequestBody,
+        genre: RequestBody,
+        showreel: RequestBody,
+        work_Link: RequestBody?,
+        categories: RequestBody?,
+        profile_image: MultipartBody.Part?,
+        imagefile:ArrayList<MultipartBody.Part>
+    ) =
+        apiService.updateSingerProfile(
+            name,
+            email,
+            uid,
+            cat_id,
+            mobileNumber,
+            description,
+            achievements,
+            languages,
+            events,
+            genre,
+            showreel,
+            work_Link,
+            categories,
+            profile_image,
+            imagefile
+        )
+
+
+    suspend fun updateInfluencerProfile(
+        name: RequestBody,
+        email: RequestBody,
+        uid: RequestBody,
+        cat_id: RequestBody,
+        mobileNumber: RequestBody,
+        description: RequestBody,
+        collaborate: RequestBody,
+        promotion: RequestBody,
+        average_like: RequestBody,
+        average_reel_like: RequestBody,
+        instagram_link: RequestBody,
+        facebook_link: RequestBody?,
+        youtube_link: RequestBody?,
+        workLink: RequestBody?,
+        categories: RequestBody?,
+        profile_image: MultipartBody.Part?,
+        imagefile:ArrayList<MultipartBody.Part>
+    ) =
+        apiService.updateInfluencerProfile(
+            name,
+            email,
+            uid,
+            cat_id,
+            mobileNumber,
+            description,
+            collaborate,
+            promotion,
+            average_like,
+            average_reel_like,
+            instagram_link,
+            facebook_link,
+            youtube_link,
+            workLink,
+            categories,
+            profile_image,
+            imagefile
+        )
+
     suspend fun getBanner() = apiService.getBanner()
 
     suspend fun getRecentExpertise(uid: String?) = apiService.getRecentExpertise(uid.toString())

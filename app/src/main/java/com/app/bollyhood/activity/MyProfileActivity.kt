@@ -19,6 +19,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -36,6 +37,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.ActivityMyProfileBinding
@@ -45,13 +47,17 @@ import com.app.bollyhood.extensions.isvalidEmailAddress
 import com.app.bollyhood.extensions.isvalidMobileNumber
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
+import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.InbuildLIsts
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -66,8 +72,20 @@ import java.util.Date
 import java.util.Locale
 
 
+enum class Categorie(val categorie: String) {
+    ACTOR("Actor"),
+    SINGER("Singer"),
+    DANCER("Dancer's"),
+    INFLUENCER("Influencer's"),
+    DJ("Dj's");
+
+    override fun toString(): String {
+        return categorie
+    }
+}
+
 @AndroidEntryPoint
-class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemClick{
+class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemClick,OnClickListener{
 
     lateinit var binding: ActivityMyProfileBinding
     lateinit var mContext: MyProfileActivity
@@ -76,25 +94,19 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     private var isGallery = false
     private var profilePath = ""
     private var category_Id: String = ""
-    private var height: String = ""
-    private var skinColor: String = ""
-    private var bodyType: String = ""
-    private var passport: String = ""
+    private var categories:String=""
     private var workLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
+    private var showreelLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
     private var imagesurl: ArrayList<String> = arrayListOf()
-    private var heightList: ArrayList<String> = arrayListOf()
-    private var skinColorList: ArrayList<String> = arrayListOf()
-    private var bodyTypeList: ArrayList<String> = arrayListOf()
     private var passPortList: ArrayList<String> = arrayListOf()
-    private var ageList: ArrayList<String> = arrayListOf()
     private val imageResultLaunchers = mutableMapOf<Int, ActivityResultLauncher<Intent>>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_profile)
         mContext = this
+
+        setProfileUi()
         initUI()
         addListner()
         setHeightData()
@@ -106,9 +118,44 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         setSpannableString()
     }
 
+    private fun setProfileUi() {
+        if (PrefManager(mContext).getvalue(StaticData.category)?.isNotEmpty()==true) {
+            val gson = Gson()
+            val categoryListType = object : TypeToken<List<CategoryModel>>() {}.type
+            val categoriesList: List<CategoryModel> =
+                gson.fromJson(PrefManager(mContext).getvalue(StaticData.category), categoryListType)
+            categories=categoriesList[0].category_name
+            when(categories){
+                Categorie.SINGER.toString(),Categorie.DJ.toString()->{
+                    binding.profileActors.visibility=View.GONE
+                    binding.profileSinger.visibility=View.VISIBLE
+                    binding.profileInfluencer.visibility=View.GONE
+                }
+
+                Categorie.ACTOR.toString() ->{
+                    binding.profileActors.visibility=View.VISIBLE
+                    binding.profileSinger.visibility=View.GONE
+                    binding.profileInfluencer.visibility=View.GONE
+                }
+
+                Categorie.DANCER.toString() ->{
+                    binding.profileActors.visibility=View.GONE
+                    binding.profileSinger.visibility=View.VISIBLE
+                    binding.profileInfluencer.visibility=View.GONE
+                    binding.tvsingerShowreel.setText("Update Dance Videos")
+                }
+
+                Categorie.INFLUENCER.toString() ->{
+                    binding.profileActors.visibility=View.GONE
+                    binding.profileSinger.visibility=View.GONE
+                    binding.profileInfluencer.visibility=View.VISIBLE
+                }
+            }
+        }
+    }
+
     companion object {
          const val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
-
     }
 
 
@@ -130,253 +177,241 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
         binding.apply {
             acheight.setOnTouchListener { v, event ->
+                setHeightData()
                 acheight.showDropDown()
                 false
             }
 
             acSkinColor.setOnTouchListener { v, event ->
+                setSkinColorData()
                 acSkinColor.showDropDown()
                 false
             }
 
 
             acBodyType.setOnTouchListener { v, event ->
+                setBodyTypeData()
                 acBodyType.showDropDown()
                 false
             }
 
             acPassPort.setOnTouchListener { v, event ->
+                setPassPortData()
                 acPassPort.showDropDown()
                 false
             }
 
             acage.setOnTouchListener { v, event ->
+                setAgeData()
                 acage.showDropDown()
                 false
             }
 
-            ivBack.setOnClickListener {
+            ivBack.setOnClickListener(this@MyProfileActivity)
+            tvAddWorkLink.setOnClickListener(this@MyProfileActivity)
+            tvAddShowreel.setOnClickListener(this@MyProfileActivity)
+            tvAddSingerWorkLink.setOnClickListener(this@MyProfileActivity)
+            tvinfluencerAddWorkLink.setOnClickListener(this@MyProfileActivity)
+            firstImage.setOnClickListener(this@MyProfileActivity)
+            secondImage.setOnClickListener(this@MyProfileActivity)
+            thirdImage.setOnClickListener(this@MyProfileActivity)
+            fourthImage.setOnClickListener(this@MyProfileActivity)
+            fifthimage.setOnClickListener(this@MyProfileActivity)
+            siximage.setOnClickListener(this@MyProfileActivity)
+            tvUpdateProfile.setOnClickListener(this@MyProfileActivity)
+            rrProfile.setOnClickListener(this@MyProfileActivity)
+            singerfirstImage.setOnClickListener(this@MyProfileActivity)
+            singersecondimage.setOnClickListener(this@MyProfileActivity)
+            singerthirdimage.setOnClickListener(this@MyProfileActivity)
+            influencerFirstImage.setOnClickListener(this@MyProfileActivity)
+            influencerSecondImage.setOnClickListener(this@MyProfileActivity)
+            influencerThirdImage.setOnClickListener(this@MyProfileActivity)
+            influencerFourthImage.setOnClickListener(this@MyProfileActivity)
+            influencerFifthimage.setOnClickListener(this@MyProfileActivity)
+            influencerSiximage.setOnClickListener(this@MyProfileActivity)
+
+        }
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+
+            R.id.ivBack ->{
                 finish()
             }
 
-            tvAddWorkLink.setOnClickListener {
+            R.id.tvAddShowreel->{
+                when(categories){
+                    Categorie.DANCER.toString() ->{
+                        addShowreelDialog(true)
+                    }
+
+                    else ->{
+                        addShowreelDialog(false)
+                    }
+                }
+            }
+
+            R.id.tvAddWorkLink->{
                 addWorkLinksDialog()
             }
 
-            binding.firstImage.setOnClickListener(View.OnClickListener {
+            R.id.tvAddSingerWorkLink->{
+                addWorkLinksDialog()
+            }
+
+            R.id.tvinfluencerAddWorkLink ->{
+                addWorkLinksDialog()
+            }
+
+            R.id.singerfirstImage->{
                 if (checkPermission()){
-                dialogForImage(1)
+                    dialogForImage(1)
                 }else{
                     checkPermission()
                 }
-            })
+            }
 
-            binding.secondImage.setOnClickListener(View.OnClickListener {
+            R.id.singersecondimage->{
                 if (checkPermission()){
                     dialogForImage(2)
                 }else{
                     checkPermission()
                 }
-            })
+            }
 
-            binding.thirdImage.setOnClickListener(View.OnClickListener {
+            R.id.singerthirdimage->{
                 if (checkPermission()){
                     dialogForImage(3)
                 }else{
                     checkPermission()
                 }
-            })
+            }
 
-            binding.fourthImage.setOnClickListener(View.OnClickListener {
+            R.id.firstImage->{
+                if (checkPermission()){
+                    dialogForImage(1)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.secondImage ->{
+                if (checkPermission()){
+                    dialogForImage(2)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.thirdImage ->{
+                if (checkPermission()){
+                    dialogForImage(3)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.fourthImage->{
                 if (checkPermission()){
                     dialogForImage(4)
                 }else{
                     checkPermission()
                 }
-            })
+            }
 
-            binding.fifthimage.setOnClickListener(View.OnClickListener {
+            R.id.fifthimage ->{
                 if (checkPermission()){
                     dialogForImage(5)
                 }else{
                     checkPermission()
                 }
-            })
+            }
 
-            binding.siximage.setOnClickListener(View.OnClickListener {
+            R.id.siximage ->{
                 if (checkPermission()){
                     dialogForImage(6)
                 }else{
                     checkPermission()
                 }
-            })
-
-
-            tvUpdateProfile.setOnClickListener {
-
-                if (isNetworkAvailable(mContext)) {
-                    if (isvalidName(
-                            mContext, binding.edtName.text.toString().trim()
-                        ) && isvalidEmailAddress(
-                            mContext, binding.edtEmailAddress.text.toString().trim()
-                        ) && isvalidMobileNumber(
-                            mContext, binding.edtMobileNumber.text.toString().trim()
-                        ) && isvalidDescriptions(
-                            mContext, binding.edtDescriptions.text.toString().trim()
-                        )&& isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
-                    ) {
-
-                        val name: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.edtName.text.toString().trim()
-                        )
-                        val email: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.edtEmailAddress.text.toString().trim()
-                        )
-
-                        val mobileNumber: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.edtMobileNumber.text.toString().trim()
-                        )
-
-
-                        val user_Id: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            PrefManager(mContext).getvalue(StaticData.id).toString()
-                        )
-
-                        val cat_Id: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(), "1"
-                        )
-
-
-                        val desc: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.edtDescriptions.text.toString().trim()
-                        )
-
-                        val categoryId: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(), category_Id
-                        )
-
-                        val location:RequestBody=RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.edtLocation.text.toString().trim()
-                        )
-
-                        val height:RequestBody=RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.acheight.text.toString().trim()
-                        )
-
-                        val passport:RequestBody=RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.acPassPort.text.toString().trim()
-                        )
-
-                        val body_type:RequestBody=RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.acBodyType.text.toString().trim()
-                        )
-
-                        val age:RequestBody=RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.acage.text.toString().trim()
-                        )
-
-                        val skin_color:RequestBody=RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            binding.acSkinColor.text.toString().trim()
-                        )
-
-
-                        var profileBody: MultipartBody.Part? = null
-                        if (profilePath.isNotEmpty()) {
-                            val file = File(profilePath)
-                            // create RequestBody instance from file
-                            val requestFile =
-                                RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                            profileBody = MultipartBody.Part.createFormData(
-                                "image", file.name, requestFile
-                            )
-                        }
-
-                        var imageBody:MultipartBody.Part?=null
-                        val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
-                        for (image in imagesurl){
-                            if (image.isNotEmpty()) {
-                                val file = File(image)
-                                if (file != null) {
-                                    val requestFile =
-                                        RequestBody.create(
-                                            "multipart/form-data".toMediaTypeOrNull(),
-                                            file
-                                        )
-
-                                    imageBody = MultipartBody.Part.createFormData(
-                                        "imagefile[]", file.name, requestFile
-                                    )
-                                    imagefile.add(imageBody)
-                                }
-                            }
-                        }
-
-                        val jsonArray = JSONArray()
-
-                        for (i in 0 until workLinkList.size) {
-                            val jsonObject = JSONObject()
-                            jsonObject.put("worklink_name", workLinkList[i].worklink_name)
-                            jsonObject.put("worklink_url", workLinkList[i].worklink_url)
-                            jsonArray.put(jsonObject)
-                        }
-
-
-                        val workLink: RequestBody = RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
-                        )
-
-                        viewModel.updateProfile(
-                            name,
-                            email,
-                            user_Id,
-                            cat_Id,
-                            mobileNumber,
-                            desc,
-                            height,
-                            passport,
-                            body_type,
-                            skin_color,
-                            age,
-                            location,
-                            workLink,
-                            categoryId,
-                            profileBody,
-                            imagefile
-                        )
-
-
-                    }
-                } else {
-                    Toast.makeText(
-                        mContext,
-                        getString(R.string.str_error_internet_connections),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
             }
 
-            rrProfile.setOnClickListener {
+            R.id.influencer_firstImage->{
+                if (checkPermission()){
+                    dialogForImage(1)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.influencer_secondImage ->{
+                if (checkPermission()){
+                    dialogForImage(2)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.influencer_thirdImage ->{
+                if (checkPermission()){
+                    dialogForImage(3)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.influencer_fourthImage->{
+                if (checkPermission()){
+                    dialogForImage(4)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.influencer_fifthimage ->{
+                if (checkPermission()){
+                    dialogForImage(5)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.influencer_siximage ->{
+                if (checkPermission()){
+                    dialogForImage(6)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.tvUpdateProfile->{
+                when(categories){
+                    Categorie.SINGER.toString(),Categorie.DJ.toString()->{
+                        updateSingerProfile()
+                    }
+
+                    Categorie.ACTOR.toString() ->{
+                        updateActorProfile()
+                    }
+
+                    Categorie.DANCER.toString() ->{
+                        updateSingerProfile()
+                    }
+
+                    Categorie.INFLUENCER.toString() ->{
+                        updateInfluencerProfile()
+                    }
+                }
+            }
+
+            R.id.rrProfile->{
                 if (checkPermission()) {
                     alertDialogForImagePicker()
                 } else {
                     checkPermission()
                 }
             }
-
         }
-
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -470,88 +505,43 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     }
 
     private fun setHeightData() {
-        heightList.clear()
-        heightList.add("4.7 Ft")
-        heightList.add("4.8 Ft")
-        heightList.add("4.9 Ft")
-        heightList.add("5.0 Ft")
-        heightList.add("5.1 Ft")
-        heightList.add("5.2 Ft")
-        heightList.add("5.3 Ft")
-        heightList.add("5.4 Ft")
-        heightList.add("5.5 Ft")
-        heightList.add("5.6 Ft")
-        heightList.add("5.7 Ft")
-        heightList.add("5.8 Ft")
-        heightList.add("5.9 Ft")
-        heightList.add("6.0 Ft")
-        heightList.add("6.1 Ft")
-        heightList.add("6.2 Ft")
-        heightList.add("6.3 Ft")
-        heightList.add("6.4 Ft")
-        heightList.add("6.5 Ft")
-        heightList.add("6.6 Ft")
-        heightList.add("6.7 Ft")
-
 
         val arrayAdapter: ArrayAdapter<String> =
-            ArrayAdapter<String>(mContext, R.layout.dropdown, heightList)
+            ArrayAdapter<String>(mContext, R.layout.dropdown, InbuildLIsts.getHeightList())
         binding.acheight.threshold = 0
         binding.acheight.dropDownVerticalOffset = 0
         binding.acheight.setAdapter(arrayAdapter)
 
         binding.acheight.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                height = heightList[position]
             }
-
-
     }
 
 
     private fun setSkinColorData() {
-        skinColorList.clear()
-        skinColorList.add("Light Brown")
-        skinColorList.add("Medium Brown")
-        skinColorList.add("Dark Brown")
-        skinColorList.add("Fair")
-        skinColorList.add("Wheatish")
-
 
         val arrayAdapter: ArrayAdapter<String> =
-            ArrayAdapter<String>(mContext, R.layout.dropdown, skinColorList)
+            ArrayAdapter<String>(mContext, R.layout.dropdown, InbuildLIsts.getSkinColorList())
         binding.acSkinColor.threshold = 0
         binding.acSkinColor.dropDownVerticalOffset = 0
         binding.acSkinColor.setAdapter(arrayAdapter)
 
         binding.acSkinColor.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                skinColor = skinColorList[position]
             }
-
-
     }
 
     private fun setBodyTypeData() {
-        bodyTypeList.clear()
-        bodyTypeList.add("Thin")
-        bodyTypeList.add("Average Build")
-        bodyTypeList.add("Muscular or Fit ( Gym-Goer )")
-        bodyTypeList.add("Big or Healthy")
-
 
         val arrayAdapter: ArrayAdapter<String> =
-            ArrayAdapter<String>(mContext, R.layout.dropdown, bodyTypeList)
+            ArrayAdapter<String>(mContext, R.layout.dropdown, InbuildLIsts.getBodyType())
         binding.acBodyType.threshold = 0
         binding.acBodyType.dropDownVerticalOffset = 0
         binding.acBodyType.setAdapter(arrayAdapter)
 
         binding.acBodyType.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                bodyType = bodyTypeList[position]
             }
-
-
     }
 
 
@@ -559,7 +549,6 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         passPortList.clear()
         passPortList.add("Yes")
         passPortList.add("No")
-
 
         val arrayAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(mContext, R.layout.dropdown, passPortList)
@@ -569,67 +558,19 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
         binding.acPassPort.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                passport = passPortList[position]
             }
-
-
     }
 
     private fun setAgeData(){
-        ageList.clear()
-        ageList.add("18")
-        ageList.add("19")
-        ageList.add("20")
-        ageList.add("21")
-        ageList.add("22")
-        ageList.add("23")
-        ageList.add("24")
-        ageList.add("25")
-        ageList.add("26")
-        ageList.add("27")
-        ageList.add("28")
-        ageList.add("29")
-        ageList.add("30")
-        ageList.add("31")
-        ageList.add("32")
-        ageList.add("33")
-        ageList.add("34")
-        ageList.add("35")
-        ageList.add("36")
-        ageList.add("37")
-        ageList.add("38")
-        ageList.add("39")
-        ageList.add("40")
-        ageList.add("41")
-        ageList.add("42")
-        ageList.add("43")
-        ageList.add("44")
-        ageList.add("45")
-        ageList.add("46")
-        ageList.add("47")
-        ageList.add("48")
-        ageList.add("49")
-        ageList.add("50")
-        ageList.add("51")
-        ageList.add("52")
-        ageList.add("53")
-        ageList.add("54")
-        ageList.add("55")
-        ageList.add("56")
-        ageList.add("57")
-        ageList.add("58")
-        ageList.add("59")
-        ageList.add("60")
 
         val arrayAdapter: ArrayAdapter<String> =
-            ArrayAdapter<String>(mContext, R.layout.dropdown, ageList)
+            ArrayAdapter<String>(mContext, R.layout.dropdown, InbuildLIsts.getAgeList())
         binding.acage.threshold = 0
         binding.acage.dropDownVerticalOffset = 0
         binding.acage.setAdapter(arrayAdapter)
 
         binding.acage.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                passport = ageList[position]
             }
     }
 
@@ -645,7 +586,23 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         viewModel.profileLiveData.observe(this, Observer {
             if (it.status == "1") {
                 val profileModel = it.result
-                setProfileData(profileModel)
+                when(categories){
+                    Categorie.SINGER.toString(),Categorie.DJ.toString()->{
+                        setSingerProfileData(profileModel)
+                    }
+
+                    Categorie.ACTOR.toString() ->{
+                        setProfileData(profileModel)
+                    }
+
+                    Categorie.DANCER.toString() ->{
+                        setSingerProfileData(profileModel)
+                    }
+
+                    Categorie.INFLUENCER.toString() ->{
+                        setInfluencerProfileData(profileModel)
+                    }
+                }
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
@@ -675,7 +632,6 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         finish()
     }
 
-
     private fun setProfileData(profileModel: ProfileModel) {
         if (!profileModel.image.isNullOrEmpty()) {
             Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
@@ -703,11 +659,106 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
                 workLinkList.add(workLink)
             }
-            worklinkAdapter()
+            worklinkAdapter(binding.worklinkrecyclerview)
         }
 
         if (!profileModel.imagefile.isNullOrEmpty()) {
             val imageViews = listOf(binding.firstImage, binding.secondImage, binding.thirdImage, binding.fourthImage, binding.fifthimage, binding.siximage)
+
+            for (i in 0 until profileModel.imagefile.size) {
+                Glide.with(mContext).load(profileModel.imagefile[i])
+                    .error(R.drawable.upload_to_the_cloud_svg)
+                    .centerCrop()
+                    .into(imageViews[i])
+            }
+        }
+    }
+
+    private fun setInfluencerProfileData(profileModel: ProfileModel) {
+        if (!profileModel.image.isNullOrEmpty()) {
+            Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile).into(binding.cvProfile)
+        }
+
+        binding.edtName.setText(profileModel.name)
+        binding.edtEmailAddress.setText(profileModel.email)
+        binding.edtMobileNumber.setText(profileModel.mobile)
+        binding.edtDescriptions.setText(profileModel.description)
+        binding.edtCategory.setText(profileModel.categories[0].category_name)
+        category_Id = profileModel.categories[0].category_id
+        binding.edtcollaboratedWith.setText(profileModel.collaborate)
+        binding.edtpromotionType.setText(profileModel.promotion)
+        binding.edtaverageLikes.setText(profileModel.average_like)
+        binding.edtaverageReelViews.setText(profileModel.average_reel_like)
+        binding.edtlinkInstagram.setText(profileModel.instagram_link)
+        binding.edtlinkFacebook.setText(profileModel.facebook_link)
+        binding.edtlinkYoutube.setText(profileModel.youtube_link)
+
+
+        if (!profileModel.work_links.isNullOrEmpty()) {
+            val innerArrayStr = profileModel.work_links[0].worklink_url
+            val innerArray = JSONArray(innerArrayStr)
+            for (i in 0 until innerArray.length()) {
+                val item = innerArray.getJSONObject(i)
+                val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                workLinkList.add(workLink)
+            }
+            worklinkAdapter(binding.worklinkrecyclerview)
+        }
+
+        if (!profileModel.imagefile.isNullOrEmpty()) {
+            val imageViews = listOf(binding.influencerFirstImage, binding.influencerSecondImage, binding.influencerThirdImage, binding.influencerFourthImage, binding.influencerFifthimage, binding.influencerSiximage)
+
+            for (i in 0 until profileModel.imagefile.size) {
+                Glide.with(mContext).load(profileModel.imagefile[i])
+                    .error(R.drawable.upload_to_the_cloud_svg)
+                    .centerCrop()
+                    .into(imageViews[i])
+            }
+        }
+    }
+
+    private fun setSingerProfileData(profileModel: ProfileModel) {
+        if (!profileModel.image.isNullOrEmpty()) {
+            Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile).into(binding.cvProfile)
+        }
+
+        binding.edtName.setText(profileModel.name)
+        binding.edtEmailAddress.setText(profileModel.email)
+        binding.edtMobileNumber.setText(profileModel.mobile)
+        binding.edtDescriptions.setText(profileModel.description)
+        binding.edtCategory.setText(profileModel.categories[0].category_name)
+        category_Id = profileModel.categories[0].category_id
+        binding.edtAchievements.setText(profileModel.achievements)
+        binding.edtEvents.setText(profileModel.events)
+        binding.edtLanguages.setText(profileModel.languages)
+        binding.edtGenre.setText(profileModel.genre)
+
+        if (!profileModel.work_links.isNullOrEmpty()) {
+            val innerArrayStr = profileModel.work_links[0].worklink_url
+            val innerArray = JSONArray(innerArrayStr)
+            for (i in 0 until innerArray.length()) {
+                val item = innerArray.getJSONObject(i)
+                val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                workLinkList.add(workLink)
+            }
+            worklinkAdapter(binding.singerworklinkrecyclerview)
+        }
+
+        /*if (!profileModel.video_url.isNullOrEmpty()) {
+            val innerArrayStr = profileModel.video_url[0].worklink_url
+            val innerArray = JSONArray(innerArrayStr)
+            for (i in 0 until innerArray.length()) {
+                val item = innerArray.getJSONObject(i)
+                val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                showreelLinkList.add(workLink)
+            }
+            showreelAdapter()
+        }*/
+
+        if (!profileModel.imagefile.isNullOrEmpty()) {
+            val imageViews = listOf(binding.singerfirstImage, binding.singersecondimage, binding.singerthirdimage)
 
             for (i in 0 until profileModel.imagefile.size) {
                 Glide.with(mContext).load(profileModel.imagefile[i])
@@ -878,14 +929,22 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         }
     }
 
-
-    fun worklinkAdapter(){
-        binding.worklinkrecyclerview.layoutManager =
+    fun worklinkAdapter(view:RecyclerView){
+        view.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.worklinkrecyclerview.setHasFixedSize(true)
+        view.setHasFixedSize(true)
         val adapter =
             WorkAdapter(this, workLinkList, this)
-        binding.worklinkrecyclerview.adapter = adapter
+        view.adapter = adapter
+    }
+
+    fun showreelAdapter(){
+        binding.singerShowreelecyclerview.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.singerShowreelecyclerview.setHasFixedSize(true)
+        val adapter =
+            WorkAdapter(this, showreelLinkList, this)
+        binding.singerShowreelecyclerview.adapter = adapter
     }
 
 
@@ -893,7 +952,6 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         val dialogView = Dialog(this)
         dialogView.setContentView(R.layout.add_work_link)
 
-        // Make the dialog full screen
         dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
@@ -962,7 +1020,128 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                         )
                     )
                 }
-                worklinkAdapter()
+
+                when(categories){
+                    Categorie.SINGER.toString(),Categorie.DJ.toString()->{
+                        worklinkAdapter(binding.singerworklinkrecyclerview)
+                    }
+
+                    Categorie.ACTOR.toString() ->{
+                        worklinkAdapter(binding.worklinkrecyclerview)
+                    }
+
+                    Categorie.DANCER.toString() ->{
+                        worklinkAdapter(binding.singerworklinkrecyclerview)
+                    }
+
+                    Categorie.INFLUENCER.toString() ->{
+                        worklinkAdapter(binding.influencerworklinkrecyclerview)
+                    }
+                }
+                dialogView.dismiss()
+            } else {
+                Toast.makeText(this, "Add at least one work link", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialogView.show()
+    }
+
+
+    private fun addShowreelDialog(isDancer:Boolean){
+        val dialogView = Dialog(this)
+        dialogView.setContentView(R.layout.add_work_link)
+
+        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val workLinkName1 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName1)
+        val workLinkName2 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName2)
+        val workLinkName3 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName3)
+        val linkName1 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink1)
+        val linkName2 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink2)
+        val linkName3 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
+        val addbutton = dialogView.findViewById<TextView>(R.id.tvAddLinks)
+        val hint = dialogView.findViewById<TextView>(R.id.tv_hint)
+        val closebutton = dialogView.findViewById<ImageView>(R.id.close)
+
+        if (isDancer){
+            hint.text = "Update Dance Video"
+            workLinkName1.setHint("Dance Video Link Name")
+            workLinkName2.setHint("Dance Video Link Name")
+            workLinkName3.setHint("Dance Video Link Name")
+            linkName1.setHint("Add Dance Video Link Url")
+            linkName2.setHint("Add Dance Video Link Url")
+            linkName3.setHint("Add Dance Video Link Url")
+        }else {
+            hint.text = "Update Showreel"
+            workLinkName1.setHint("Showreel Link Name")
+            workLinkName2.setHint("Showreel Link Name")
+            workLinkName3.setHint("Showreel Link Name")
+            linkName1.setHint("Add Showreel Link Url")
+            linkName2.setHint("Add Showreel Link Url")
+            linkName3.setHint("Add Showreel Link Url")
+        }
+
+
+        if (showreelLinkList.size > 0)
+        {
+            for (index in 0 until showreelLinkList.size) {
+                val worklink = showreelLinkList[index]
+                when(index){
+                    0 ->{
+                        workLinkName1.setText(worklink.worklink_name)
+                        linkName1.setText(worklink.worklink_url)
+                    }
+
+                    1->{
+                        workLinkName2.setText(worklink.worklink_name)
+                        linkName2.setText(worklink.worklink_url)
+                    }
+
+                    2->{
+                        workLinkName3.setText(worklink.worklink_name)
+                        linkName3.setText(worklink.worklink_url)
+                    }
+                }
+            }
+        }
+
+        closebutton.setOnClickListener {
+            dialogView.dismiss()
+        }
+
+        addbutton.setOnClickListener {
+            showreelLinkList.clear()
+            if (!workLinkName1.text.isNullOrEmpty() || !workLinkName2.text.isNullOrEmpty() || !workLinkName3.text.isNullOrEmpty()) {
+                if (!workLinkName1.text.isNullOrEmpty() && !linkName1.text.isNullOrEmpty()) {
+                    showreelLinkList.add(
+                        WorkLinkProfileData(
+                            workLinkName1.text.toString(),
+                            linkName1.text.toString()
+                        )
+                    )
+                }
+
+                if (!workLinkName2.text.isNullOrEmpty() && !linkName2.text.isNullOrEmpty()) {
+                    showreelLinkList.add(
+                        WorkLinkProfileData(
+                            workLinkName2.text.toString(),
+                            linkName2.text.toString()
+                        )
+                    )
+                }
+
+                if (!workLinkName3.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
+                    showreelLinkList.add(
+                        WorkLinkProfileData(
+                            workLinkName3.text.toString(),
+                            linkName3.text.toString()
+                        )
+                    )
+                }
+
+                showreelAdapter()
                 dialogView.dismiss()
             } else {
                 Toast.makeText(this, "Add at least one work link", Toast.LENGTH_SHORT).show()
@@ -1001,7 +1180,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
     private fun setSpannableString() {
         val spanTxt = SpannableStringBuilder(
-            "By creating an account, you agree to our"
+            "By Updating an account, you agree to our"
         )
 
         spanTxt.setSpan(
@@ -1116,16 +1295,509 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         }
     }
 
-    private fun setImage(imageNumber: Int, uri: Uri?) {
-        when (imageNumber) {
-            1 -> binding.firstImage.setImageURI(uri)
-            2 -> binding.secondImage.setImageURI(uri)
-            3 -> binding.thirdImage.setImageURI(uri)
-            4 -> binding.fourthImage.setImageURI(uri)
-            5 -> binding.fifthimage.setImageURI(uri)
-            6 -> binding.siximage.setImageURI(uri)
-            else -> throw IllegalArgumentException("Invalid image number")
+    private fun updateActorProfile()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidMobileNumber(
+                    mContext, binding.edtMobileNumber.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
+
+                val name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val mobileNumber: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtMobileNumber.text.toString().trim()
+                )
+
+
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+                val cat_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), "1"
+                )
+
+
+                val desc: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val categoryId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), category_Id
+                )
+
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLocation.text.toString().trim()
+                )
+
+                val height: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acheight.text.toString().trim()
+                )
+
+                val passport: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acPassPort.text.toString().trim()
+                )
+
+                val body_type: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acBodyType.text.toString().trim()
+                )
+
+                val age: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acage.text.toString().trim()
+                )
+
+                val skin_color: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acSkinColor.text.toString().trim()
+                )
+
+
+                var profileBody: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    // create RequestBody instance from file
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    profileBody = MultipartBody.Part.createFormData(
+                        "image", file.name, requestFile
+                    )
+                }
+
+                var imageBody: MultipartBody.Part?=null
+                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                for (image in imagesurl){
+                    if (image.isNotEmpty()) {
+                        val file = File(image)
+                        if (file != null) {
+                            val requestFile =
+                                RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    file
+                                )
+
+                            imageBody = MultipartBody.Part.createFormData(
+                                "imagefile[]", file.name, requestFile
+                            )
+                            imagefile.add(imageBody)
+                        }
+                    }
+                }
+
+                val jsonArray = JSONArray()
+
+                for (i in 0 until workLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
+                    jsonArray.put(jsonObject)
+                }
+
+
+                val workLink: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                )
+
+                viewModel.updateProfile(
+                    name,
+                    email,
+                    user_Id,
+                    cat_Id,
+                    mobileNumber,
+                    desc,
+                    height,
+                    passport,
+                    body_type,
+                    skin_color,
+                    age,
+                    location,
+                    workLink,
+                    categoryId,
+                    profileBody,
+                    imagefile
+                )
+
+
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
+
+
+    private fun updateSingerProfile()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidMobileNumber(
+                    mContext, binding.edtMobileNumber.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
+
+                val name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val mobileNumber: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtMobileNumber.text.toString().trim()
+                )
+
+
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+                val cat_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), "1"
+                )
+
+
+                val desc: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val achievements: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtAchievements.text.toString().trim()
+                )
+
+                val languages: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLanguages.text.toString().trim()
+                )
+
+                val events: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEvents.text.toString().trim()
+                )
+
+                val genre: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtGenre.text.toString().trim()
+                )
+
+                val categoryId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), category_Id
+                )
+
+
+                var profileBody: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    profileBody = MultipartBody.Part.createFormData(
+                        "image", file.name, requestFile
+                    )
+                }
+
+                var imageBody: MultipartBody.Part?=null
+                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                for (image in imagesurl){
+                    if (image.isNotEmpty()) {
+                        val file = File(image)
+                        if (file != null) {
+                            val requestFile =
+                                RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    file
+                                )
+
+                            imageBody = MultipartBody.Part.createFormData(
+                                "imagefile[]", file.name, requestFile
+                            )
+                            imagefile.add(imageBody)
+                        }
+                    }
+                }
+
+                val jsonArray = JSONArray()
+                for (i in 0 until workLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
+                    jsonArray.put(jsonObject)
+                }
+
+
+                val workLink: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                )
+
+                val jsonSingerArray = JSONArray()
+                for (i in 0 until showreelLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", showreelLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", showreelLinkList[i].worklink_url)
+                    jsonSingerArray.put(jsonObject)
+                }
+
+
+                val showreel: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonSingerArray.toString()
+                )
+
+                viewModel.updateSingerProfile(
+                    name,
+                    email,
+                    user_Id,
+                    cat_Id,
+                    mobileNumber,
+                    desc,
+                    achievements,
+                    languages,
+                    events,
+                    genre,
+                    showreel,
+                    workLink,
+                    categoryId,
+                    profileBody,
+                    imagefile
+                )
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+
+
+
+    private fun setImage(imageNumber: Int, uri: Uri?) {
+        when(categories){
+            Categorie.SINGER.toString(),Categorie.DJ.toString(),Categorie.DANCER.toString()->{
+                when (imageNumber) {
+                    1 -> binding.singerfirstImage.setImageURI(uri)
+                    2 -> binding.singersecondimage.setImageURI(uri)
+                    3 -> binding.singerthirdimage.setImageURI(uri)
+                    else -> throw IllegalArgumentException("Invalid image number")
+                }
+            }
+
+            Categorie.INFLUENCER.toString()->{
+                when (imageNumber) {
+                    1 -> binding.influencerFirstImage.setImageURI(uri)
+                    2 -> binding.influencerSecondImage.setImageURI(uri)
+                    3 -> binding.influencerThirdImage.setImageURI(uri)
+                    4 -> binding.influencerFourthImage.setImageURI(uri)
+                    5 -> binding.influencerFifthimage.setImageURI(uri)
+                    6 -> binding.influencerSiximage.setImageURI(uri)
+                    else -> throw IllegalArgumentException("Invalid image number")
+                }
+            }
+
+            Categorie.ACTOR.toString() ->{
+                when (imageNumber) {
+                    1 -> binding.firstImage.setImageURI(uri)
+                    2 -> binding.secondImage.setImageURI(uri)
+                    3 -> binding.thirdImage.setImageURI(uri)
+                    4 -> binding.fourthImage.setImageURI(uri)
+                    5 -> binding.fifthimage.setImageURI(uri)
+                    6 -> binding.siximage.setImageURI(uri)
+                    else -> throw IllegalArgumentException("Invalid image number")
+                }
+            }
+        }
+    }
+
+    private fun updateInfluencerProfile()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidMobileNumber(
+                    mContext, binding.edtMobileNumber.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
+
+                val name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val mobileNumber: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtMobileNumber.text.toString().trim()
+                )
+
+
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+                val cat_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), "1"
+                )
+
+
+                val desc: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val collaborate: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtcollaboratedWith.text.toString().trim()
+                )
+
+                val promotion: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtpromotionType.text.toString().trim()
+                )
+
+                val average_like: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtaverageLikes.text.toString().trim()
+                )
+
+                val average_reel_like: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtaverageReelViews.text.toString().trim()
+                )
+
+                val instagram_link: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtlinkInstagram.text.toString().trim()
+                )
+
+                val facebook_link: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtlinkFacebook.text.toString().trim()
+                )
+
+                val youtube_link: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtlinkFacebook.text.toString().trim()
+                )
+
+                val categoryId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), category_Id
+                )
+
+
+                var profileBody: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    profileBody = MultipartBody.Part.createFormData(
+                        "image", file.name, requestFile
+                    )
+                }
+
+                var imageBody: MultipartBody.Part?=null
+                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                for (image in imagesurl){
+                    if (image.isNotEmpty()) {
+                        val file = File(image)
+                        if (file != null) {
+                            val requestFile =
+                                RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    file
+                                )
+
+                            imageBody = MultipartBody.Part.createFormData(
+                                "imagefile[]", file.name, requestFile
+                            )
+                            imagefile.add(imageBody)
+                        }
+                    }
+                }
+
+                val jsonArray = JSONArray()
+                for (i in 0 until workLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
+                    jsonArray.put(jsonObject)
+                }
+
+
+                val workLink: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                )
+
+
+                viewModel.updateInfluencerProfile(
+                    name,
+                    email,
+                    user_Id,
+                    cat_Id,
+                    mobileNumber,
+                    desc,
+                    collaborate,
+                    promotion,
+                    average_like,
+                    average_reel_like,
+                    instagram_link,
+                    facebook_link,
+                    youtube_link,
+                    workLink,
+                    categoryId,
+                    profileBody,
+                    imagefile
+                )
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
 
 }

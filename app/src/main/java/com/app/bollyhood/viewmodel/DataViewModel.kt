@@ -367,6 +367,114 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
+    fun updateSingerProfile(
+        name: RequestBody,
+        email: RequestBody,
+        uid: RequestBody,
+        cat_id: RequestBody,
+        mobile: RequestBody,
+        description: RequestBody,
+        achievements: RequestBody,
+        languages: RequestBody,
+        events: RequestBody,
+        genre: RequestBody,
+        showreel: RequestBody,
+        work_Link: RequestBody?,
+        categories: RequestBody?,
+        profile_image: MultipartBody.Part?,
+        imagefile:ArrayList<MultipartBody.Part>
+    ) {
+        try {
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                mainRepository.updateSingerProfile(
+                    name,
+                    email,
+                    uid,
+                    cat_id,
+                    mobile,
+                    description,
+                    achievements,
+                    languages,
+                    events,
+                    genre,
+                    showreel,
+                    work_Link,
+                    categories,
+                    profile_image,
+                    imagefile
+                ).let {
+                    if (it.body() != null) {
+                        Log.d("okhttp",it.body().toString())
+                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
+                        isLoading.postValue(false)
+                    } else {
+                        isLoading.postValue(false)
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+
+    fun updateInfluencerProfile(
+        name: RequestBody,
+        email: RequestBody,
+        uid: RequestBody,
+        cat_id: RequestBody,
+        mobileNumber: RequestBody,
+        description: RequestBody,
+        collaborate: RequestBody,
+        promotion: RequestBody,
+        average_like: RequestBody,
+        average_reel_like: RequestBody,
+        instagram_link: RequestBody,
+        facebook_link: RequestBody?,
+        youtube_link: RequestBody?,
+        workLink: RequestBody?,
+        categories: RequestBody?,
+        profile_image: MultipartBody.Part?,
+        imagefile:ArrayList<MultipartBody.Part>
+    ) {
+        try {
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                mainRepository.updateInfluencerProfile(
+                    name,
+                    email,
+                    uid,
+                    cat_id,
+                    mobileNumber,
+                    description,
+                    collaborate,
+                    promotion,
+                    average_like,
+                    average_reel_like,
+                    instagram_link,
+                    facebook_link,
+                    youtube_link,
+                    workLink,
+                    categories,
+                    profile_image,
+                    imagefile
+                ).let {
+                    if (it.body() != null) {
+                        Log.d("okhttp",it.body().toString())
+                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
+                        isLoading.postValue(false)
+                    } else {
+                        isLoading.postValue(false)
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+
     fun getBanner() {
         viewModelScope.launch {
             isLoading.postValue(true)

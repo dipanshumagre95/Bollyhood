@@ -16,6 +16,7 @@
         android:background="@drawable/rectangle_white_with_blackborder">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update Worklink's"
