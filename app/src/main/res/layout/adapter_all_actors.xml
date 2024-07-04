@@ -6,7 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="@dimen/_87sdp"
         android:layout_height="@dimen/_120sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         >
 
         <androidx.cardview.widget.CardView
@@ -22,12 +23,12 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivImage"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_75sdp"
+                    android:layout_height="@dimen/_85sdp"
                     android:adjustViewBounds="true"
                     app:shapeAppearance="@style/roundedCornersImageView"
-                    android:src="@drawable/anchors"
+                    android:src="@drawable/ic_profile"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                      />
 
                 <LinearLayout
@@ -35,7 +36,7 @@
                     android:layout_below="@+id/ivImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     >
@@ -83,10 +84,7 @@
                     android:textColor="@color/white"
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_3sdp"
                     android:fontFamily="@font/urbanist_bold"
                     android:layout_below="@+id/txrole"
                     android:layout_centerInParent="true"

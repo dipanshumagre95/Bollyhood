@@ -204,23 +204,25 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     override fun onClick(pos: Int, categoryModel: CategoryModel) {
 
         when(categoryModel.type){
-            "0" ->{
-                val bundle = Bundle()
-                bundle.putString(StaticData.previousFragment, "HomeFragment")
-
-                val allActorsFragment = AllActorsFragment()
-                allActorsFragment.arguments = bundle
-                (activity as MainActivity).loadFragment(allActorsFragment)
-            }
 
             "1" ->{
-
                 val bundle = Bundle()
                 bundle.putString(StaticData.previousFragment, "HomeFragment")
 
                 val castingCallFragment = CastingCallFragment()
                 castingCallFragment.arguments = bundle
                 (activity as MainActivity).loadFragment(castingCallFragment)
+            }
+
+            else ->{
+                val bundle = Bundle()
+                bundle.putString(StaticData.previousFragment, "HomeFragment")
+                bundle.putString(StaticData.categorie,categoryModel.id)
+                bundle.putString(StaticData.name,categoryModel.category_name)
+
+                val allActorsFragment = AllActorsFragment()
+                allActorsFragment.arguments = bundle
+                (activity as MainActivity).loadFragment(allActorsFragment)
             }
         }
     }

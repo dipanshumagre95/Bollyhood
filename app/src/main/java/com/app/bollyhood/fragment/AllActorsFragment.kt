@@ -2,6 +2,8 @@ package com.app.bollyhood.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -32,7 +34,12 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
     lateinit var binding:FragmentAllActorsBinding
     private val viewModel: DataViewModel by viewModels()
+    private val profileList: ArrayList<SingleCategoryModel> = arrayListOf()
+    private val profileSubList: ArrayList<SingleCategoryModel> = arrayListOf()
+    private val filteredData: ArrayList<SingleCategoryModel> = arrayListOf()
     private var previousFragment:String=""
+    private var categorie:String=""
+    private var categorie_name:String=""
 
 
     override fun onCreateView(
@@ -43,8 +50,17 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
         initUI()
         addObserver()
+        addListner()
 
         return binding.root
+    }
+
+    private fun addListner() {
+        binding.let {
+            it.ivBack.setOnClickListener(this)
+            it.cvProfile.setOnClickListener(this)
+            it.tvloadMore.setOnClickListener(this)
+        }
     }
 
     private fun addObserver() {
@@ -58,13 +74,27 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
         })
 
         viewModel.actorsList.observe(requireActivity(), Observer {
-            if (it.status == "1") {
-                setCategoryAdapter(it.result)
+            if (it.status == "1"&&it.result.isNotEmpty()) {
+                    binding.tvNodata.visibility=View.GONE
+                    binding.tvloadMore.visibility=View.VISIBLE
+                    binding.rvprofilesList.visibility=View.VISIBLE
+                    profileList.clear()
+                    profileList.addAll(it.result)
+                    if (profileList.size >= 9) {
+                        profileSubList.clear()
+                        profileSubList.addAll(profileList.subList(0, 9))
+                        setCategoryAdapter(profileSubList)
+                        binding.tvloadMore.visibility=View.VISIBLE
+                    } else {
+                        setCategoryAdapter(profileList)
+                        binding.tvloadMore.visibility=View.GONE
+                    }
             }else{
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                binding.tvNodata.visibility=View.VISIBLE
+                binding.tvloadMore.visibility=View.GONE
+                binding.rvprofilesList.visibility=View.GONE
             }
         })
-
     }
 
     private fun initUI() {
@@ -73,7 +103,12 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
         if (bundle!=null) {
             previousFragment = bundle.getString(StaticData.previousFragment).toString()
+            categorie=bundle.getString(StaticData.categorie).toString()
+            categorie_name=bundle.getString(StaticData.name).toString()
         }
+
+        binding.tvHeaderText.setText("Explore 500+ $categorie_name From Mumbai")
+        binding.edsearch.setHint("Search $categorie_name here...")
 
         (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
 
@@ -85,7 +120,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
         }
 
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getAllActors()
+            viewModel.getAllActors(categorie)
         } else {
             Toast.makeText(
                 requireContext(),
@@ -94,8 +129,32 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
             ).show()
         }
 
-        binding.ivBack.setOnClickListener(this)
-        binding.cvProfile.setOnClickListener(this)
+        binding.edsearch.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (text?.length!! > 3) {
+                    setFilteredData(text.toString())
+                }else{
+                    if (profileList.size >= 9) {
+                        profileSubList.clear()
+                        profileSubList.addAll(profileList.subList(0, 9))
+                        setCategoryAdapter(profileSubList)
+                        binding.tvloadMore.visibility=View.VISIBLE
+                    } else {
+                        setCategoryAdapter(profileList)
+                        binding.tvloadMore.visibility=View.GONE
+                    }
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
     }
 
 
@@ -119,6 +178,25 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
             R.id.cvProfile -> {
                  startActivity(Intent(requireContext(),MyProfileActivity::class.java))
             }
+
+            R.id.tvload_more ->{
+                setCategoryAdapter(profileList)
+                binding.tvloadMore.visibility=View.GONE
+            }
+        }
+    }
+
+    private fun setFilteredData(text: String) {
+        filteredData.clear()
+        if (!text.isNullOrEmpty()){
+            for (category in profileList){
+                if (category.name.contains(text,ignoreCase = true))
+                {
+                    filteredData.add(category)
+                }
+            }
+            binding.actorsAdapter?.updateList(filteredData)
+            binding.tvloadMore.visibility=View.GONE
         }
     }
 

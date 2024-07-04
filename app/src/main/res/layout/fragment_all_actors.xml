@@ -89,6 +89,7 @@
                     android:textSize="@dimen/_20sdp" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvHeader_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvusername"
@@ -97,7 +98,7 @@
                     android:fontFamily="@font/urbanist_regular"
                     android:text="Explore 500+ Actors From Mumbai"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_9sdp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/cvProfile"
@@ -124,7 +125,7 @@
             android:drawableStart="@drawable/baseline_search_24"
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/urbanist_medium"
-            android:hint="@string/search_actors"
+            android:hint=""
             android:maxLines="1"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
@@ -184,19 +185,32 @@
             android:id="@+id/rvprofilesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="@dimen/_2sdp"
             android:padding="@dimen/_5sdp"
-            app:layout_constraintBottom_toTopOf="@+id/materialTextView"
+            app:layout_constraintBottom_toTopOf="@+id/tvload_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llFilter" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_nodata"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="No data found"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:fontFamily="@font/urbanist_semibold"
+            app:layout_constraintBottom_toTopOf="@+id/tvload_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llFilter"/>
+
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView"
+            android:id="@+id/tvload_more"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginStart="30dp"

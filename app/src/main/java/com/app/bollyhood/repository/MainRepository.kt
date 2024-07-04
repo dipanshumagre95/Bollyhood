@@ -11,7 +11,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
 
    suspend fun getSignupCategory(category_type:String)=apiService.getSignupCategory(category_type)
 
-    suspend fun getAllActors() = apiService.getAllActors("actor")
+    suspend fun getAllActors(categorie:String) = apiService.getAllActors(categorie)
 
     suspend fun getRecentCategory() = apiService.getRecentCategory()
 

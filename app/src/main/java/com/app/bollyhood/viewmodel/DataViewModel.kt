@@ -98,10 +98,10 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         }
     }
 
-    fun getAllActors(){
+    fun getAllActors(categorie:String){
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getAllActors().let{
+            mainRepository.getAllActors(categorie).let{
                 if (it.body()!=null){
                     actorsList.postValue(it.body())
                     isLoading.postValue(false)

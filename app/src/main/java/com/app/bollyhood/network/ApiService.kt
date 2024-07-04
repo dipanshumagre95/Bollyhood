@@ -37,7 +37,7 @@ interface ApiService {
     suspend fun getSignupCategory(@Query("category_type") category_type: String): Response<CategoryResponse>
 
     @GET("all_category_users.php")
-    suspend fun getAllActors(@Query("category_type") category_type: String) : Response<ActorsresponseModel>
+    suspend fun getAllActors(@Query("category_id") category_id: String) : Response<ActorsresponseModel>
 
     @GET("recent_category.php")
     suspend fun getRecentCategory(): Response<CategoryResponse>

@@ -29,13 +29,18 @@ class AllActorsAdapter(val context: Context, var list: ArrayList<SingleCategoryM
 
     override fun onBindViewHolder(holder: ActoreViewHolder, position: Int) {
         val model=list[position]
-        Glide.with(context).load(model.image).placeholder(R.drawable.ic_profile).centerCrop().into(holder.binding.ivImage)
+        Glide.with(context).load(model.image).placeholder(R.drawable.ic_profile).into(holder.binding.ivImage)
         holder.binding.txActorsName.text=model.name
         holder.binding.txrole.text=model.category_name
 
         holder.binding.mainItem.setOnClickListener(View.OnClickListener{
             onitemclick.onClick(model)
         })
+    }
+
+    fun updateList(newCategoryList: ArrayList<SingleCategoryModel>) {
+        list = newCategoryList
+        notifyDataSetChanged()
     }
 
     interface onItemCLick{

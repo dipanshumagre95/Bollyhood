@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -27,11 +28,12 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
+class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickListener {
 
     lateinit var binding: FragmentAllCategoryBinding
     private val viewModel: DataViewModel by viewModels()
     private val categoryList: ArrayList<CategoryModel> = arrayListOf()
+    private val categorySubList: ArrayList<CategoryModel> = arrayListOf()
     private val filteredData: ArrayList<CategoryModel> = arrayListOf()
 
     override fun onCreateView(
@@ -77,7 +79,15 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
                 if (text?.length!! > 3) {
                     setFilteredData(text.toString())
                 }else{
-                    binding.categoryAdapter?.updateList(categoryList)
+                    if (categoryList.size >= 12) {
+                        categorySubList.clear()
+                        categorySubList.addAll(categoryList.subList(0, 12))
+                        binding.categoryAdapter?.updateList(categorySubList)
+                        binding.tvloadMore.visibility=View.VISIBLE
+                    } else {
+                        binding.categoryAdapter?.updateList(categoryList)
+                        binding.tvloadMore.visibility=View.GONE
+                    }
                 }
             }
 
@@ -90,7 +100,7 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
 
     private fun setFilteredData(text: String) {
         filteredData.clear()
-        if (text.isNullOrEmpty()){
+        if (!text.isNullOrEmpty()){
             for (category in categoryList){
                 if (category.category_name.contains(text,ignoreCase = true))
                 {
@@ -98,17 +108,14 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
                 }
             }
             binding.categoryAdapter?.updateList(filteredData)
+            binding.tvloadMore.visibility=View.GONE
         }
     }
 
     private fun addListner() {
-        binding.ivBack.setOnClickListener {
-            backpress()
-        }
-
-        binding.cvProfile.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(requireContext(), MyProfileActivity::class.java))
-        })
+        binding.ivBack.setOnClickListener(this)
+        binding.cvProfile.setOnClickListener(this)
+        binding.tvloadMore.setOnClickListener(this)
     }
 
     private fun addObserevs() {
@@ -124,7 +131,13 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
             if (it.status == "1") {
                 categoryList.clear()
                 categoryList.addAll(it.result)
-                setCategoryAdapter(categoryList)
+                 if (categoryList.size >= 12) {
+                     categorySubList.clear()
+                     categorySubList.addAll(categoryList.subList(0, 12))
+                     setCategoryAdapter(categorySubList)
+                } else {
+                     setCategoryAdapter(categoryList)
+                }
             } else {
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
             }
@@ -154,15 +167,16 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
                 (activity as MainActivity).loadFragment(castingCallFragment)
             }
 
-            "0" ->{
+            else ->{
                 val bundle = Bundle()
                   bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
+                  bundle.putString(StaticData.categorie,categoryModel.id)
+                  bundle.putString(StaticData.name,categoryModel.category_name)
 
                  val allActorsFragment = AllActorsFragment()
                  allActorsFragment.arguments = bundle
                  (activity as MainActivity).loadFragment(allActorsFragment)
             }
-
         }
     }
 
@@ -180,6 +194,24 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick {
 
     fun backpress(){
         (requireActivity() as MainActivity).setHomeColor()
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+
+            R.id.ivBack ->{
+                backpress()
+            }
+
+            R.id.cvProfile ->{
+                startActivity(Intent(requireContext(), MyProfileActivity::class.java))
+            }
+
+            R.id.tvload_more ->{
+                setCategoryAdapter(categoryList)
+                binding.tvloadMore.visibility=View.GONE
+            }
+        }
     }
 
 
