@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import Categorie
 import ImagePickerUtil
 import android.Manifest
 import android.app.Activity
@@ -49,6 +50,7 @@ import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.model.ProfileModel
+import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.InbuildLIsts
 import com.app.bollyhood.util.PathUtils
@@ -71,19 +73,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
-enum class Categorie(val categorie: String) {
-    ACTOR("Actor"),
-    SINGER("Singer"),
-    DANCER("Dancer's"),
-    INFLUENCER("Influencer's"),
-    DJ("Dj's");
-
-    override fun toString(): String {
-        return categorie
-    }
-}
-
 @AndroidEntryPoint
 class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemClick,OnClickListener{
 
@@ -96,7 +85,8 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     private var category_Id: String = ""
     private var categories:String=""
     private var workLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
-    private var showreelLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
+    private var showreelLinkList: ArrayList<VideoLink> = arrayListOf()
+    private var showreelLinkListClone: ArrayList<WorkLinkProfileData> = arrayListOf()
     private var imagesurl: ArrayList<String> = arrayListOf()
     private var passPortList: ArrayList<String> = arrayListOf()
     private val imageResultLaunchers = mutableMapOf<Int, ActivityResultLauncher<Intent>>()
@@ -703,7 +693,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
                 workLinkList.add(workLink)
             }
-            worklinkAdapter(binding.worklinkrecyclerview)
+            worklinkAdapter(binding.influencerworklinkrecyclerview)
         }
 
         if (!profileModel.imagefile.isNullOrEmpty()) {
@@ -746,16 +736,16 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
             worklinkAdapter(binding.singerworklinkrecyclerview)
         }
 
-        /*if (!profileModel.video_url.isNullOrEmpty()) {
-            val innerArrayStr = profileModel.video_url[0].worklink_url
+        if (!profileModel.videos_url.isNullOrEmpty()) {
+            val innerArrayStr = profileModel.videos_url[0].video_url
             val innerArray = JSONArray(innerArrayStr)
             for (i in 0 until innerArray.length()) {
                 val item = innerArray.getJSONObject(i)
-                val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
-                showreelLinkList.add(workLink)
+                val workLink = WorkLinkProfileData(item.getString("video_name"), item.getString("video_url"))
+                showreelLinkListClone.add(workLink)
             }
             showreelAdapter()
-        }*/
+        }
 
         if (!profileModel.imagefile.isNullOrEmpty()) {
             val imageViews = listOf(binding.singerfirstImage, binding.singersecondimage, binding.singerthirdimage)
@@ -943,7 +933,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.singerShowreelecyclerview.setHasFixedSize(true)
         val adapter =
-            WorkAdapter(this, showreelLinkList, this)
+            WorkAdapter(this, showreelLinkListClone, this)
         binding.singerShowreelecyclerview.adapter = adapter
     }
 
@@ -1084,10 +1074,10 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         }
 
 
-        if (showreelLinkList.size > 0)
+        if (showreelLinkListClone.size > 0)
         {
-            for (index in 0 until showreelLinkList.size) {
-                val worklink = showreelLinkList[index]
+            for (index in 0 until showreelLinkListClone.size) {
+                val worklink = showreelLinkListClone[index]
                 when(index){
                     0 ->{
                         workLinkName1.setText(worklink.worklink_name)
@@ -1113,34 +1103,54 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
         addbutton.setOnClickListener {
             showreelLinkList.clear()
+            showreelLinkListClone.clear()
             if (!workLinkName1.text.isNullOrEmpty() || !workLinkName2.text.isNullOrEmpty() || !workLinkName3.text.isNullOrEmpty()) {
                 if (!workLinkName1.text.isNullOrEmpty() && !linkName1.text.isNullOrEmpty()) {
-                    showreelLinkList.add(
-                        WorkLinkProfileData(
-                            workLinkName1.text.toString(),
-                            linkName1.text.toString()
+                    if (isValidYouTubeUrl(linkName1.text.toString())) {
+                        showreelLinkList.add(
+                            VideoLink(
+                                workLinkName1.text.toString(),
+                                linkName1.text.toString()
+                            )
                         )
-                    )
+                    }else{
+                        Toast.makeText(this, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
                 }
 
                 if (!workLinkName2.text.isNullOrEmpty() && !linkName2.text.isNullOrEmpty()) {
-                    showreelLinkList.add(
-                        WorkLinkProfileData(
-                            workLinkName2.text.toString(),
-                            linkName2.text.toString()
+                    if (isValidYouTubeUrl(linkName2.text.toString())) {
+                        showreelLinkList.add(
+                            VideoLink(
+                                workLinkName2.text.toString(),
+                                linkName2.text.toString()
+                            )
                         )
-                    )
+                    }else{
+                        Toast.makeText(this, "Invalid ${workLinkName2.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
                 }
 
                 if (!workLinkName3.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
-                    showreelLinkList.add(
-                        WorkLinkProfileData(
-                            workLinkName3.text.toString(),
-                            linkName3.text.toString()
+                    if (isValidYouTubeUrl(linkName3.text.toString())) {
+                        showreelLinkList.add(
+                            VideoLink(
+                                workLinkName3.text.toString(),
+                                linkName3.text.toString()
+                            )
                         )
-                    )
+                    }else{
+                        Toast.makeText(this, "Invalid ${workLinkName3.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
                 }
 
+                for (i in showreelLinkList){
+                    val videolink=WorkLinkProfileData(i.video_name,i.video_url)
+                    showreelLinkListClone.add(videolink)
+                }
                 showreelAdapter()
                 dialogView.dismiss()
             } else {
@@ -1293,6 +1303,11 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun isValidYouTubeUrl(url: String): Boolean {
+        val youtubeRegex = "^(https?://)?(www\\.)?(youtube\\.com|youtu\\.?be)/.+\$".toRegex()
+        return youtubeRegex.matches(url)
     }
 
     private fun updateActorProfile()
@@ -1565,8 +1580,8 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 val jsonSingerArray = JSONArray()
                 for (i in 0 until showreelLinkList.size) {
                     val jsonObject = JSONObject()
-                    jsonObject.put("worklink_name", showreelLinkList[i].worklink_name)
-                    jsonObject.put("worklink_url", showreelLinkList[i].worklink_url)
+                    jsonObject.put("video_name", showreelLinkList[i].video_name)
+                    jsonObject.put("video_url", showreelLinkList[i].video_url)
                     jsonSingerArray.put(jsonObject)
                 }
 

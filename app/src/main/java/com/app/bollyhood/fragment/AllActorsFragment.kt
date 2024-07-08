@@ -102,9 +102,14 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
         val bundle = arguments
 
         if (bundle!=null) {
-            previousFragment = bundle.getString(StaticData.previousFragment).toString()
+            PrefManager(requireContext()).setvalue(StaticData.previousFragment,bundle.getString(StaticData.previousFragment).toString())
             categorie=bundle.getString(StaticData.categorie).toString()
             categorie_name=bundle.getString(StaticData.name).toString()
+            PrefManager(requireContext()).setvalue(StaticData.cate_id,categorie)
+            PrefManager(requireContext()).setvalue(StaticData.cate_name,categorie_name)
+        }else{
+            categorie=PrefManager(requireContext()).getvalue(StaticData.cate_id).toString()
+            categorie_name=PrefManager(requireContext()).getvalue(StaticData.cate_name).toString()
         }
 
         binding.tvHeaderText.setText("Explore 500+ $categorie_name From Mumbai")
@@ -168,7 +173,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
     override fun onClick(item: View?) {
         when(item?.id) {
             R.id.ivBack -> {
-                if (previousFragment.equals("AllCategoryFragment")) {
+                if (PrefManager(requireContext()).getvalue(StaticData.previousFragment).equals("AllCategoryFragment")) {
                     backpress(AllCategoryFragment())
                 }else{
                     (requireActivity() as MainActivity).setHomeColor()
@@ -215,6 +220,10 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
         parentFragmentManager.commit {
             replace(R.id.fragment_container,fragment)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     override fun onClick(singleCategoryModel: SingleCategoryModel) {

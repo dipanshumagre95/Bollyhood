@@ -157,7 +157,7 @@ interface ApiService {
         @Part("instagram_link") instagram_link: RequestBody,
         @Part("facebook_link") facebook_link: RequestBody?,
         @Part("youtube_link") youtube_link: RequestBody?,
-        @Part("workLink") workLink: RequestBody?,
+        @Part("worklinks") workLink: RequestBody?,
         @Part("categories") category_id: RequestBody?,
         @Part image: MultipartBody.Part?,
         @Part imagefile : ArrayList<MultipartBody.Part>

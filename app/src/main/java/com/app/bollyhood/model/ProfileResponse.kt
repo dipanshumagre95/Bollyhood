@@ -36,7 +36,7 @@ data class ProfileModel(
     val passport:String,
     val imagefile:ArrayList<String>,
     val work_links: ArrayList<WorkLinkProfileData>,
-   // val video_url: ArrayList<WorkLinkProfileData>,
+    val videos_url: ArrayList<VideoLink>,
     val categories: ArrayList<ProfileCategoryModel>
 )
 
@@ -49,5 +49,5 @@ data class ProfileCategoryModel(
 
 data class WorkLinkProfileData(
     val worklink_name: String,
-    val worklink_url: String
+    val worklink_url: String,
 )

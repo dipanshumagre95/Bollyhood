@@ -133,87 +133,499 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/firstConstraintLayout">
 
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_3sdp"
-                        android:layout_marginTop="8dp"
-                        android:background="#505050"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/urbanist_bold"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16sdp"
-                        android:text="Dipanshu Magre"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                    <ImageView
-                        android:id="@+id/ivVerified"
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
-                        android:layout_marginTop="17dp"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:visibility="visible"
-                        android:src="@drawable/right_icon"
-                        app:layout_constraintStart_toEndOf="@+id/tvName"
-                        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvCategory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_11sdp"
-                        app:fontFamily="@font/urbanist_regular"
-                        android:textColor="@color/black"
-                        android:text="Actors"
-                        app:layout_constraintTop_toBottomOf="@+id/tvName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDescription"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/prfile_actors"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="26dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="26dp"
-                        android:fontFamily="@font/urbanist_regular"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/_2sdp"
-                        android:text="My Name is akshay sharma. I work as an actor here in mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work Read More."
-                        android:textColor="#757575"
-                        android:textSize="@dimen/_13sdp"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <RelativeLayout
-                        android:id="@+id/relativelayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center_horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_3sdp"
+                            android:layout_marginTop="8dp"
+                            android:background="#505050"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/urbanist_bold"
+                            android:text="Dipanshu Magre"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                        <ImageView
+                            android:id="@+id/ivVerified"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="17dp"
+                            android:src="@drawable/right_icon"
+                            android:visibility="visible"
+                            app:layout_constraintStart_toEndOf="@+id/tvName"
+                            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Actors"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/urbanist_regular"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="26dp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/_2sdp"
+                            android:text="My Name is akshay sharma. I work as an actor here in mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work Read More."
+                            android:textColor="#757575"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+                        <RelativeLayout
+                            android:id="@+id/relativelayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+
+
+                            <LinearLayout
+                                android:id="@+id/lllocation"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="@drawable/rectangle_sky"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Location"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvlocation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llage"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:layout_toRightOf="@+id/lllocation"
+                                android:background="@drawable/rectangle_pink"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Age"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout4"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/llage"
+                                android:background="@drawable/ractangle_cream"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Height"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvheight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/relativesecond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/relativelayout">
+
+                            <LinearLayout
+                                android:id="@+id/llskincolor"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="@drawable/rectangle_skincolor"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Skin Color"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/skinColor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llpassport"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:layout_toRightOf="@+id/llskincolor"
+                                android:background="@drawable/ractangle_passport"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Passport"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvpassport"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearLayou"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/llpassport"
+                                android:background="@drawable/ractangle_bodytype"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Body Type"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvbodytype"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
                         <LinearLayout
-                            android:id="@+id/lllocation"
-                            android:layout_width="@dimen/_70sdp"
-                            android:layout_height="@dimen/_30sdp"
+                            android:id="@+id/llmediaNphoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/relativesecond">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="MEDIA &amp; PHOTOS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_photos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llmediaNphoto" />
+
+                        <LinearLayout
+                            android:id="@+id/llworkLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/recyclerview_photos">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="WORK LINKS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvWorkLinks"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llworkLink" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/prfile_Singer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <View
+                            android:id="@+id/Singerview"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_3sdp"
+                            android:layout_marginTop="8dp"
+                            android:background="#505050"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvsinger_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/urbanist_bold"
+                            android:text="Dipanshu Magre"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/Singerview" />
+
+                        <ImageView
+                            android:id="@+id/ivsinger_verified"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="17dp"
+                            android:src="@drawable/right_icon"
+                            android:visibility="visible"
+                            app:layout_constraintStart_toEndOf="@+id/tvsinger_name"
+                            app:layout_constraintTop_toBottomOf="@+id/Singerview" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvsinger_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Actors"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/urbanist_regular"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvsinger_name" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvsinger_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="26dp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/_2sdp"
+                            android:text="My Name is akshay sharma. I work as an actor here in mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work Read More."
+                            android:textColor="#757575"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvsinger_category" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_achievements"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
                             android:background="@drawable/rectangle_sky"
                             android:orientation="vertical"
-                            >
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_40sdp"
+                            android:layout_marginEnd="@dimen/_40sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvsinger_description">
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
@@ -221,12 +633,12 @@
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="@font/urbanist_regular"
                                 android:paddingTop="@dimen/_2sdp"
-                                android:text="Location"
+                                android:text="Achievements"
                                 android:textColor="@color/black"
-                                android:textSize="10dp" />
+                                android:textSize="12dp" />
 
                             <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvlocation"
+                                android:id="@+id/tv_achievements"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -235,306 +647,727 @@
                                 android:paddingLeft="@dimen/_2sdp"
                                 android:paddingRight="@dimen/_2sdp"
                                 android:singleLine="true"
-                                android:text=""
+                                android:text="Saregamapa Little Champs 2010"
                                 android:textColor="@color/black"
-                                android:textSize="11dp"
+                                android:textSize="14dp"
                                 app:fontFamily="@font/urbanist_semibold" />
 
                         </LinearLayout>
-
 
                         <LinearLayout
-                            android:id="@+id/llage"
-                            android:layout_width="@dimen/_70sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:layout_toRightOf="@+id/lllocation"
-                            android:background="@drawable/rectangle_pink"
-                            >
+                            android:id="@+id/llthree"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_achievements">
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:text="Age"
-                                android:textColor="@color/black"
-                                android:textSize="10dp" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:gravity="center_horizontal"
-                                android:paddingLeft="@dimen/_2sdp"
-                                android:paddingRight="@dimen/_2sdp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                app:fontFamily="@font/urbanist_semibold" />
+                            <LinearLayout
+                                android:id="@+id/llLanguages"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:background="@drawable/rectangle_sky"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Languages"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvLanguages"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Hindi, Gujrati"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llGenre"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_toRightOf="@+id/llLanguages"
+                                android:background="@drawable/rectangle_pink"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Genre"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvGenre"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Bollywood, Soofi"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llEvents"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_toRightOf="@+id/llGenre"
+                                android:background="@drawable/ractangle_cream"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Events"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvEvents"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Wedding, Corporate"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
 
 
                         </LinearLayout>
-
 
                         <LinearLayout
-                            android:id="@+id/linearLayout4"
-                            android:layout_width="@dimen/_70sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/ractangle_cream"
-                            android:orientation="vertical"
-                            android:layout_toRightOf="@+id/llage"
-                            >
+                            android:id="@+id/llShowreel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/llthree">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:text="Height"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="SHOWREEL"
                                 android:textColor="@color/black"
-                                android:textSize="10dp" />
+                                android:textSize="@dimen/_12sdp" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvheight"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:gravity="center_horizontal"
-                                android:paddingLeft="@dimen/_2sdp"
-                                android:paddingRight="@dimen/_2sdp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                app:fontFamily="@font/urbanist_semibold" />
-
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
 
                         </LinearLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/llVideoView"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_130sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_30sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:background="@drawable/rectangle_app_background"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llShowreel">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="@dimen/_10sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                >
+
+                                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                    android:id="@+id/youtube_player_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    />
+
+                            </androidx.cardview.widget.CardView>
 
 
+                        </RelativeLayout>
 
-                    </RelativeLayout>
+                        <LinearLayout
+                            android:id="@+id/llsinger_mediaNphoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/llVideoView">
 
-                    <RelativeLayout
-                        android:id="@+id/relativesecond"
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="MEDIA &amp; PHOTOS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/Singerrecyclerview_photos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llsinger_mediaNphoto" />
+
+                        <LinearLayout
+                            android:id="@+id/llSinger_workLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/Singerrecyclerview_photos">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="WORK LINKS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvSinger_WorkLinks"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llSinger_workLink" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/prfile_Dance"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center_horizontal"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/relativelayout">
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
-                            android:id="@+id/llskincolor"
-                            android:layout_width="@dimen/_70sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/rectangle_skincolor"
-                            android:orientation="vertical"
-                            >
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:text="Skin Color"
-                                android:textColor="@color/black"
-                                android:textSize="10dp" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/skinColor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:gravity="center_horizontal"
-                                android:paddingLeft="@dimen/_2sdp"
-                                android:paddingRight="@dimen/_2sdp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                app:fontFamily="@font/urbanist_semibold" />
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/llpassport"
-                            android:layout_width="@dimen/_70sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_20sdp"
-                            android:layout_toRightOf="@+id/llskincolor"
-                            android:background="@drawable/ractangle_passport"
-                            >
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:text="Passport"
-                                android:textColor="@color/black"
-                                android:textSize="10dp" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvpassport"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:gravity="center_horizontal"
-                                android:paddingLeft="@dimen/_2sdp"
-                                android:paddingRight="@dimen/_2sdp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                app:fontFamily="@font/urbanist_semibold" />
-
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/linearLayou"
-                            android:layout_width="@dimen/_70sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/ractangle_bodytype"
-                            android:orientation="vertical"
-                            android:layout_toRightOf="@+id/llpassport"
-                            >
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:text="Body Type"
-                                android:textColor="@color/black"
-                                android:textSize="10dp" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvbodytype"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/urbanist_regular"
-                                android:gravity="center_horizontal"
-                                android:paddingLeft="@dimen/_2sdp"
-                                android:paddingRight="@dimen/_2sdp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                app:fontFamily="@font/urbanist_semibold" />
-
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llmediaNphoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center_horizontal"
-                        app:layout_constraintTop_toBottomOf="@+id/relativesecond"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="60sp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="@dimen/_1sdp"
-                            android:src="@drawable/right_line"/>
-
+                        <View
+                            android:id="@+id/Danceview"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_3sdp"
+                            android:layout_marginTop="8dp"
+                            android:background="#505050"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvDance_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="MEDIA &amp; PHOTOS"
-                            android:textSize="@dimen/_12sdp"
-                            android:textColor="@color/black"
-                            android:layout_gravity="center_vertical"
-                            android:padding="@dimen/_5sdp"
+                            android:layout_marginTop="8dp"
                             android:fontFamily="@font/urbanist_bold"
-                            />
+                            android:text="Dipanshu Magre"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/Danceview" />
 
                         <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="@dimen/_1sdp"
-                            android:src="@drawable/left_line"/>
-
-                    </LinearLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_photos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/llmediaNphoto" />
-
-                    <LinearLayout
-                        android:id="@+id/llworkLink"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center_horizontal"
-                        app:layout_constraintTop_toBottomOf="@+id/recyclerview_photos"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="60sp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="@dimen/_1sdp"
-                            android:src="@drawable/right_line"/>
-
+                            android:id="@+id/ivDance_verified"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="17dp"
+                            android:src="@drawable/right_icon"
+                            android:visibility="visible"
+                            app:layout_constraintStart_toEndOf="@+id/tvDance_name"
+                            app:layout_constraintTop_toBottomOf="@+id/Danceview" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvDance_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="WORK LINKS"
-                            android:textSize="@dimen/_12sdp"
+                            android:text="Actors"
                             android:textColor="@color/black"
-                            android:layout_gravity="center_vertical"
-                            android:padding="@dimen/_5sdp"
-                            android:fontFamily="@font/urbanist_bold"
-                            />
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/urbanist_regular"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDance_name" />
 
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="@dimen/_1sdp"
-                            android:src="@drawable/left_line"/>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvDance_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="26dp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/_2sdp"
+                            android:text="My Name is akshay sharma. I work as an actor here in mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work Read More."
+                            android:textColor="#757575"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDance_category" />
 
-                    </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/llDance_achievements"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:background="@drawable/rectangle_sky"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_40sdp"
+                            android:layout_marginEnd="@dimen/_40sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDance_description">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvWorkLinks"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/llworkLink" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Achievements"
+                                android:textColor="@color/black"
+                                android:textSize="12dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvDance_achievements"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="Saregamapa Little Champs 2010"
+                                android:textColor="@color/black"
+                                android:textSize="14dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDancethree"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llDance_achievements">
+
+
+                            <LinearLayout
+                                android:id="@+id/llDanceLanguages"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:background="@drawable/rectangle_sky"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Languages"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvDanceLanguages"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Hindi, Gujrati"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llDanceGenre"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_toRightOf="@+id/llLanguages"
+                                android:background="@drawable/rectangle_pink"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Genre"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvDanceGenre"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Bollywood, Soofi"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llDanceEvents"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_toRightOf="@+id/llGenre"
+                                android:background="@drawable/ractangle_cream"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Events"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvDanceEvents"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Wedding, Corporate"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDanceShowreel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/llDancethree">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="DANCE VIDEOS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDanceVideoView"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_170sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llDanceShowreel">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:background="@drawable/rectangle_app_background">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="@dimen/_10sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    >
+
+                                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                        android:id="@+id/Danceyoutube_player_view1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        />
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:background="@drawable/rectangle_app_background">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="@dimen/_10sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    >
+
+                                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                        android:id="@+id/Danceyoutube_player_view2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        />
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDance_mediaNphoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/llDanceVideoView">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="PHOTOS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/Dancerecyclerview_photos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llDance_mediaNphoto" />
+
+                        <LinearLayout
+                            android:id="@+id/llDance_workLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/Dancerecyclerview_photos">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="WORK LINKS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvDance_WorkLinks"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llDance_workLink" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

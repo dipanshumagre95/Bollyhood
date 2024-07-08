@@ -129,5 +129,7 @@ dependencies {
     implementation ("com.github.JobGetabu:KaziChatVoicePlayer:1.0.0")
     implementation ("com.google.android.material:material:1.4.0")
 
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:12.1.0")
 
 }

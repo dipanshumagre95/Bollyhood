@@ -1089,7 +1089,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_below="@+id/llphone">
 
@@ -1213,7 +1213,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:background="@android:color/transparent"
-                                android:hint="Achievements"
+                                android:hint="Genre"
                                 android:inputType="text"
                                 android:singleLine="true"
                                 android:maxLength="50"
@@ -1494,7 +1494,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/llphone"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="vertical">
 

@@ -19,6 +19,8 @@ class StaticData {
         const val userModel = "userModel"
         const val previousFragment="previousFragment"
         const val categorie="categorie"
+        const val cate_id="cate_id"
+        const val cate_name="cate_name"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"
