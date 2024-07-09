@@ -676,6 +676,7 @@
                                 android:orientation="vertical">
 
                                 <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvLanguagestitle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
@@ -1078,12 +1079,12 @@
                                     android:layout_gravity="center_horizontal"
                                     android:fontFamily="@font/urbanist_regular"
                                     android:paddingTop="@dimen/_2sdp"
-                                    android:text="Languages"
+                                    android:text="Location"
                                     android:textColor="@color/black"
                                     android:textSize="12dp" />
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvDanceLanguages"
+                                    android:id="@+id/tvDanceLocation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
@@ -1092,7 +1093,7 @@
                                     android:paddingLeft="@dimen/_2sdp"
                                     android:paddingRight="@dimen/_2sdp"
                                     android:singleLine="true"
-                                    android:text="Hindi, Gujrati"
+                                    android:text="Mumbai, Pune"
                                     android:textColor="@color/black"
                                     android:textSize="13dp"
                                     app:fontFamily="@font/urbanist_semibold" />
@@ -1117,12 +1118,12 @@
                                     android:layout_gravity="center_horizontal"
                                     android:fontFamily="@font/urbanist_regular"
                                     android:paddingTop="@dimen/_2sdp"
-                                    android:text="Genre"
+                                    android:text="Dance Forms"
                                     android:textColor="@color/black"
                                     android:textSize="12dp" />
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvDanceGenre"
+                                    android:id="@+id/tvDanceForms"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
@@ -1155,12 +1156,12 @@
                                     android:layout_gravity="center_horizontal"
                                     android:fontFamily="@font/urbanist_regular"
                                     android:paddingTop="@dimen/_2sdp"
-                                    android:text="Events"
+                                    android:text="What i Do ?"
                                     android:textColor="@color/black"
                                     android:textSize="12dp" />
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvDanceEvents"
+                                    android:id="@+id/tvDancewhatI"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
@@ -1197,6 +1198,7 @@
 
 
                             <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvDance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -1231,7 +1233,7 @@
                                 android:layout_weight="1"
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_marginEnd="@dimen/_7sdp"
-                                android:background="@drawable/rectangle_app_background">
+                                android:background="@drawable/casting_call_background">
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
@@ -1256,7 +1258,7 @@
                                 android:layout_marginEnd="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:layout_marginStart="@dimen/_7sdp"
-                                android:background="@drawable/rectangle_app_background">
+                                android:background="@drawable/casting_call_background">
 
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
@@ -1364,6 +1366,532 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/llDance_workLink" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/prfile_Influencer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <View
+                            android:id="@+id/Influencerview"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_3sdp"
+                            android:layout_marginTop="8dp"
+                            android:background="#505050"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvInfluencer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/urbanist_bold"
+                            android:text="Dipanshu Magre"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/Influencerview" />
+
+                        <ImageView
+                            android:id="@+id/ivInfluencer_verified"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="17dp"
+                            android:src="@drawable/right_icon"
+                            android:visibility="visible"
+                            app:layout_constraintStart_toEndOf="@+id/tvInfluencer_name"
+                            app:layout_constraintTop_toBottomOf="@+id/Influencerview" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvInfluencer_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Actors"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/urbanist_regular"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvInfluencer_name" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvInfluencer_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="26dp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/_2sdp"
+                            android:text="My Name is akshay sharma. I work as an actor here in mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work Read More."
+                            android:textColor="#757575"
+                            android:textSize="@dimen/_13sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvInfluencer_category" />
+
+                        <LinearLayout
+                            android:id="@+id/llInfluencer_achievements"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:background="@drawable/rectangle_sky"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_40sdp"
+                            android:layout_marginEnd="@dimen/_40sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvInfluencer_description">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:text="Collaborated With"
+                                android:textColor="@color/black"
+                                android:textSize="12dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvInfluencer_collaborated_with"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_horizontal"
+                                android:paddingLeft="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_2sdp"
+                                android:singleLine="true"
+                                android:text="Sneakerz, Godrej, Pepsi, Zomato"
+                                android:textColor="@color/black"
+                                android:textSize="14dp"
+                                app:fontFamily="@font/urbanist_semibold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llInfluencerthree"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llInfluencer_achievements">
+
+
+                            <LinearLayout
+                                android:id="@+id/llInfluencerLanguages"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:background="@drawable/rectangle_sky"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Average Likes"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvInfluencer_average_likes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="102k"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llInfluencerGenre"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_toRightOf="@+id/llLanguages"
+                                android:background="@drawable/rectangle_pink"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Promotion Type"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvInfluencer_promotion_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="Reel, Story, Post"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llInfluencerEvents"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_toRightOf="@+id/llGenre"
+                                android:background="@drawable/ractangle_cream"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:text="Average Reel Views"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvInfluencer_average_reel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/urbanist_regular"
+                                    android:gravity="center_horizontal"
+                                    android:paddingLeft="@dimen/_2sdp"
+                                    android:paddingRight="@dimen/_2sdp"
+                                    android:singleLine="true"
+                                    android:text="3Million"
+                                    android:textColor="@color/black"
+                                    android:textSize="13dp"
+                                    app:fontFamily="@font/urbanist_semibold" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llInstaNfacebook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginTop="10dp"
+                            android:elevation="@dimen/_5sdp"
+                            android:background="@drawable/border_gray"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llInfluencerthree">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/ivinsta"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:src="@drawable/ig_instagram_icon"/>
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="807k"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:textColor="@color/black"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="@font/urbanist_semibold"
+                                    android:layout_toRightOf="@+id/ivinsta"
+                                    android:textSize="@dimen/_12sdp"/>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/ivfb"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_18sdp"
+                                    android:src="@drawable/fackbook"/>
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="807k"
+                                    android:textColor="@color/black"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="@font/urbanist_semibold"
+                                    android:layout_toRightOf="@+id/ivfb"
+                                    android:textSize="@dimen/_12sdp"/>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/ivtube"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:src="@drawable/video"/>
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="807k"
+                                    android:textColor="@color/black"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="@font/urbanist_semibold"
+                                    android:layout_toRightOf="@+id/ivtube"
+                                    android:textSize="@dimen/_12sdp"/>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llInfluencerShowreel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/llInstaNfacebook">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvInfluencer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="UGC Content For Brands "
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llInfluencerVideoView"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_170sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llInfluencerShowreel">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:background="@drawable/casting_call_background">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="@dimen/_10sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    >
+
+                                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                        android:id="@+id/Influenceryoutube_player_view1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        />
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:background="@drawable/casting_call_background">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="@dimen/_10sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    >
+
+                                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                        android:id="@+id/Influenceryoutube_player_view2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        />
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llInfluencer_mediaNphoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/llInfluencerVideoView">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="PHOTOS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/Influencerrecyclerview_photos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llInfluencer_mediaNphoto" />
+
+                        <LinearLayout
+                            android:id="@+id/llInfluencer_workLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@+id/Influencerrecyclerview_photos">
+
+                            <ImageView
+                                android:layout_width="60sp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/right_line" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/urbanist_bold"
+                                android:padding="@dimen/_5sdp"
+                                android:text="WORK LINKS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:src="@drawable/left_line" />
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvInfluencer_WorkLinks"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/llInfluencer_workLink" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -116,10 +116,22 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 gson.fromJson(PrefManager(mContext).getvalue(StaticData.category), categoryListType)
             categories=categoriesList[0].category_name
             when(categories){
-                Categorie.SINGER.toString(),Categorie.DJ.toString()->{
+                Categorie.SINGER.toString()->{
                     binding.profileActors.visibility=View.GONE
                     binding.profileSinger.visibility=View.VISIBLE
                     binding.profileInfluencer.visibility=View.GONE
+                    binding.edtLanguages.setHint("Languages")
+                    binding.edtEvents.setHint("Events")
+                    binding.edtGenre.setHint("Genre")
+                }
+
+               Categorie.DJ.toString()->{
+                    binding.profileActors.visibility=View.GONE
+                    binding.profileSinger.visibility=View.VISIBLE
+                    binding.profileInfluencer.visibility=View.GONE
+                    binding.edtLanguages.setHint("Location")
+                   binding.edtEvents.setHint("Events")
+                   binding.edtGenre.setHint("Genre")
                 }
 
                 Categorie.ACTOR.toString() ->{
@@ -133,6 +145,9 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.profileSinger.visibility=View.VISIBLE
                     binding.profileInfluencer.visibility=View.GONE
                     binding.tvsingerShowreel.setText("Update Dance Videos")
+                    binding.edtLanguages.setHint("Location")
+                    binding.edtEvents.setHint("Dance Forms")
+                    binding.edtGenre.setHint("What i do ?")
                 }
 
                 Categorie.INFLUENCER.toString() ->{
@@ -376,16 +391,22 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
             R.id.tvUpdateProfile->{
                 when(categories){
-                    Categorie.SINGER.toString(),Categorie.DJ.toString()->{
+                    Categorie.SINGER.toString()->{
                         updateSingerProfile()
                     }
+
+
 
                     Categorie.ACTOR.toString() ->{
                         updateActorProfile()
                     }
 
+                    Categorie.DJ.toString() ->{
+                        updateDjProfile()
+                    }
+
                     Categorie.DANCER.toString() ->{
-                        updateSingerProfile()
+                        updateDancerProfile()
                     }
 
                     Categorie.INFLUENCER.toString() ->{
@@ -722,8 +743,27 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         category_Id = profileModel.categories[0].category_id
         binding.edtAchievements.setText(profileModel.achievements)
         binding.edtEvents.setText(profileModel.events)
-        binding.edtLanguages.setText(profileModel.languages)
         binding.edtGenre.setText(profileModel.genre)
+
+        when(categories){
+            Categorie.SINGER.toString() ->{
+                binding.edtLanguages.setText(profileModel.languages)
+                binding.edtEvents.setText(profileModel.events)
+                binding.edtGenre.setText(profileModel.genre)
+            }
+
+            Categorie.DJ.toString() ->{
+                binding.edtLanguages.setText(profileModel.location)
+                binding.edtEvents.setText(profileModel.events)
+                binding.edtGenre.setText(profileModel.genre)
+            }
+
+            Categorie.DANCER.toString()->{
+                binding.edtLanguages.setText(profileModel.location)
+                binding.edtEvents.setText(profileModel.dancer_form)
+                binding.edtGenre.setText(profileModel.what_i_do)
+            }
+        }
 
         if (!profileModel.work_links.isNullOrEmpty()) {
             val innerArrayStr = profileModel.work_links[0].worklink_url
@@ -1519,6 +1559,21 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.edtLanguages.text.toString().trim()
                 )
 
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val dancer_form: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val what_i_do: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
                 val events: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     binding.edtEvents.text.toString().trim()
@@ -1599,6 +1654,9 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     desc,
                     achievements,
                     languages,
+                    location,
+                    dancer_form,
+                    what_i_do,
                     events,
                     genre,
                     showreel,
@@ -1618,7 +1676,345 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     }
 
 
+    private fun updateDjProfile()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidMobileNumber(
+                    mContext, binding.edtMobileNumber.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
 
+                val name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val mobileNumber: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtMobileNumber.text.toString().trim()
+                )
+
+
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+                val cat_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), "1"
+                )
+
+
+                val desc: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val achievements: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtAchievements.text.toString().trim()
+                )
+
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLanguages.text.toString().trim()
+                )
+
+                val languages: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                   ""
+                )
+
+                val dancer_form: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val what_i_do: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val events: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEvents.text.toString().trim()
+                )
+
+                val genre: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtGenre.text.toString().trim()
+                )
+
+                val categoryId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), category_Id
+                )
+
+
+                var profileBody: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    profileBody = MultipartBody.Part.createFormData(
+                        "image", file.name, requestFile
+                    )
+                }
+
+                var imageBody: MultipartBody.Part?=null
+                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                for (image in imagesurl){
+                    if (image.isNotEmpty()) {
+                        val file = File(image)
+                        if (file != null) {
+                            val requestFile =
+                                RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    file
+                                )
+
+                            imageBody = MultipartBody.Part.createFormData(
+                                "imagefile[]", file.name, requestFile
+                            )
+                            imagefile.add(imageBody)
+                        }
+                    }
+                }
+
+                val jsonArray = JSONArray()
+                for (i in 0 until workLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
+                    jsonArray.put(jsonObject)
+                }
+
+
+                val workLink: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                )
+
+                val jsonSingerArray = JSONArray()
+                for (i in 0 until showreelLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("video_name", showreelLinkList[i].video_name)
+                    jsonObject.put("video_url", showreelLinkList[i].video_url)
+                    jsonSingerArray.put(jsonObject)
+                }
+
+
+                val showreel: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonSingerArray.toString()
+                )
+
+                viewModel.updateSingerProfile(
+                    name,
+                    email,
+                    user_Id,
+                    cat_Id,
+                    mobileNumber,
+                    desc,
+                    achievements,
+                    languages,
+                    location,
+                    dancer_form,
+                    what_i_do,
+                    events,
+                    genre,
+                    showreel,
+                    workLink,
+                    categoryId,
+                    profileBody,
+                    imagefile
+                )
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun updateDancerProfile()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidMobileNumber(
+                    mContext, binding.edtMobileNumber.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
+
+                val name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val mobileNumber: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtMobileNumber.text.toString().trim()
+                )
+
+
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+                val cat_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), "1"
+                )
+
+
+                val desc: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val achievements: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtAchievements.text.toString().trim()
+                )
+
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLanguages.text.toString().trim()
+                )
+
+                val languages: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val dancer_form: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEvents.text.toString().trim()
+                )
+
+                val events: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val what_i_do: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtGenre.text.toString().trim()
+                )
+
+                val genre: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val categoryId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), category_Id
+                )
+
+
+                var profileBody: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    profileBody = MultipartBody.Part.createFormData(
+                        "image", file.name, requestFile
+                    )
+                }
+
+                var imageBody: MultipartBody.Part?=null
+                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                for (image in imagesurl){
+                    if (image.isNotEmpty()) {
+                        val file = File(image)
+                        if (file != null) {
+                            val requestFile =
+                                RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    file
+                                )
+
+                            imageBody = MultipartBody.Part.createFormData(
+                                "imagefile[]", file.name, requestFile
+                            )
+                            imagefile.add(imageBody)
+                        }
+                    }
+                }
+
+                val jsonArray = JSONArray()
+                for (i in 0 until workLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
+                    jsonArray.put(jsonObject)
+                }
+
+
+                val workLink: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                )
+
+                val jsonSingerArray = JSONArray()
+                for (i in 0 until showreelLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("video_name", showreelLinkList[i].video_name)
+                    jsonObject.put("video_url", showreelLinkList[i].video_url)
+                    jsonSingerArray.put(jsonObject)
+                }
+
+
+                val showreel: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonSingerArray.toString()
+                )
+
+                viewModel.updateSingerProfile(
+                    name,
+                    email,
+                    user_Id,
+                    cat_Id,
+                    mobileNumber,
+                    desc,
+                    achievements,
+                    languages,
+                    location,
+                    dancer_form,
+                    what_i_do,
+                    events,
+                    genre,
+                    showreel,
+                    workLink,
+                    categoryId,
+                    profileBody,
+                    imagefile
+                )
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     private fun setImage(imageNumber: Int, uri: Uri?) {
         when(categories){

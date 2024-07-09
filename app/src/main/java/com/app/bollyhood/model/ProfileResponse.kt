@@ -25,6 +25,8 @@ data class ProfileModel(
     val achievements: String,
     val languages: String,
     val genre: String,
+    val dancer_form: String,
+    val what_i_do: String,
     val events: String,
     var is_bookmarked: Int,
     val category_name: String,

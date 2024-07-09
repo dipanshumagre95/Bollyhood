@@ -45,8 +45,8 @@ import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
@@ -100,6 +100,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                     binding.prfileActors.visibility=View.VISIBLE
                     binding.prfileSinger.visibility=View.GONE
                     binding.prfileDance.visibility=View.GONE
+                    binding.prfileInfluencer.visibility=View.GONE
                 }
 
                 Categorie.SINGER.toString(),Categorie.DJ.toString() ->{
@@ -107,6 +108,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                     binding.prfileActors.visibility=View.GONE
                     binding.prfileSinger.visibility=View.VISIBLE
                     binding.prfileDance.visibility=View.GONE
+                    binding.prfileInfluencer.visibility=View.GONE
                 }
 
                 Categorie.DANCER.toString() ->{
@@ -114,8 +116,16 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                     binding.prfileActors.visibility=View.GONE
                     binding.prfileSinger.visibility=View.GONE
                     binding.prfileDance.visibility=View.VISIBLE
+                    binding.prfileInfluencer.visibility=View.GONE
                 }
 
+                Categorie.INFLUENCER.toString()->{
+                    setInfluencerProfile(singleCategoryModel)
+                    binding.prfileActors.visibility=View.GONE
+                    binding.prfileSinger.visibility=View.GONE
+                    binding.prfileDance.visibility=View.GONE
+                    binding.prfileInfluencer.visibility=View.VISIBLE
+                }
             }
         }else {
             if (bundle != null) {
@@ -268,9 +278,20 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
             Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(ivImage)
             tvsingerName.text = singleCategoryModel?.name
             tvAchievements.text=singleCategoryModel?.achievements
-            tvLanguages.text=singleCategoryModel?.languages
             tvGenre.text=singleCategoryModel?.genre
             tvEvents.text=singleCategoryModel?.events
+
+            when(singleCategoryModel?.category_name){
+                Categorie.SINGER.toString() ->{
+                    tvLanguagestitle.text="Languages"
+                    tvLanguages.text=singleCategoryModel?.languages
+                }
+
+                Categorie.DJ.toString() ->{
+                    tvLanguagestitle.text="Location"
+                    tvLanguages.text=singleCategoryModel?.location
+                }
+            }
 
             if (singleCategoryModel?.is_verify == "1") {
                 ivsingerVerified.visibility = View.VISIBLE
@@ -303,7 +324,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 ivBookMark.setImageResource(R.drawable.ic_bookmark)
             }
 
-            if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
+            if (!singleCategoryModel.videos_url[0].video_url.equals("[]")) {
                 val innerArrayStr = singleCategoryModel.videos_url[0].video_url
                 val innerArray = JSONArray(innerArrayStr)
                 for (i in 0 until innerArray.length()) {
@@ -356,9 +377,9 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
             Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(ivImage)
             tvDanceName.text = singleCategoryModel?.name
             tvDanceAchievements.text=singleCategoryModel?.achievements
-            tvDanceLanguages.text=singleCategoryModel?.languages
-            tvDanceGenre.text=singleCategoryModel?.genre
-            tvDanceEvents.text=singleCategoryModel?.events
+            tvDanceLocation.text=singleCategoryModel?.location
+            tvDanceForms.text=singleCategoryModel?.dancer_form
+            tvDancewhatI.text=singleCategoryModel?.what_i_do
 
             if (singleCategoryModel?.is_verify == "1") {
                 ivDanceVerified.visibility = View.VISIBLE
@@ -442,20 +463,117 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
         }
     }
 
+    private fun setInfluencerProfile(singleCategoryModel: SingleCategoryModel?) {
 
-    private fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView)
-    {
-        lifecycle.addObserver(youtubePlayerView)
-        youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                    val url = videoUrl
-                    val videoId = extractVideoId(url) ?: ""
-                    youTubePlayer.loadVideo(videoId, 0f)
+        binding.apply {
+            Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(ivImage)
+            tvInfluencerName.text = singleCategoryModel?.name
+            tvInfluencerAverageLikes.text=singleCategoryModel?.average_like
+            tvInfluencerCollaboratedWith.text=singleCategoryModel?.collaborate
+            tvInfluencerPromotionType.text=singleCategoryModel?.promotion
+            tvInfluencerAverageReel.text=singleCategoryModel?.average_reel_like
+
+            if (singleCategoryModel?.is_verify == "1") {
+                ivInfluencerVerified.visibility = View.VISIBLE
+            } else {
+                ivInfluencerVerified.visibility = View.GONE
             }
 
-            override fun onStateChange(youTubePlayer: YouTubePlayer, state: PlayerConstants.PlayerState) {
+
+            val stringList = arrayListOf<String>()
+
+            for (i in 0 until singleCategoryModel?.categories?.size!!) {
+                stringList.add(singleCategoryModel?.categories?.get(i)?.category_name!!)
             }
-        })
+            tvInfluencerCategory.text = stringList.joinToString(separator = " / ")
+
+            if (singleCategoryModel.description.length > 150){
+                val shorttext=singleCategoryModel.description.substring(0,150)
+                setSpannableString(shorttext,"read more",singleCategoryModel.description,singleCategoryModel.category_name)
+            }else{
+                binding.tvInfluencerDescription.text = singleCategoryModel.description
+            }
+
+
+
+            is_bookmark = singleCategoryModel.is_bookmarked
+
+            if (singleCategoryModel.is_bookmarked == 1) {
+                ivBookMark.setImageResource(R.drawable.ic_addedbookmark)
+            } else {
+                ivBookMark.setImageResource(R.drawable.ic_bookmark)
+            }
+
+            if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
+                val innerArrayStr = singleCategoryModel.videos_url[0].video_url
+                val innerArray = JSONArray(innerArrayStr)
+                for (i in 0 until innerArray.length()) {
+                    val item = innerArray.getJSONObject(i)
+                    if (i==0){
+                        playVideo(item.getString("video_url"), binding.InfluenceryoutubePlayerView1)
+                    }
+
+                    if (i==1){
+                        playVideo(item.getString("video_url"), binding.InfluenceryoutubePlayerView2)
+                    }
+                }
+            }else{
+                binding.llInfluencerVideoView.visibility=View.GONE
+                binding.llInfluencerShowreel.visibility=View.GONE
+            }
+
+            for (i in 0 until singleCategoryModel.imagefile.size){
+                photolist.add(PhotoModel(i, singleCategoryModel.imagefile.get(i)))
+            }
+
+            InfluencerrecyclerviewPhotos.layoutManager = GridLayoutManager(requireContext(),3)
+            InfluencerrecyclerviewPhotos.setHasFixedSize(true)
+            adapter = ImagesAdapter(requireContext(), photolist, this@ProfileDetailFragment)
+            InfluencerrecyclerviewPhotos.adapter = adapter
+            adapter?.notifyDataSetChanged()
+
+
+
+            try {
+                if (!singleCategoryModel.work_links.isNullOrEmpty()) {
+                    val innerArrayStr = singleCategoryModel.work_links[0].worklink_url
+                    val innerArray = JSONArray(innerArrayStr)
+                    for (i in 0 until innerArray.length()) {
+                        val item = innerArray.getJSONObject(i)
+                        val workLink = WorkLinkProfileData(
+                            item.getString("worklink_name"),
+                            item.getString("worklink_url")
+                        )
+                        workLinkList.add(workLink)
+                    }
+                    setWorkLinksAdapter(workLinkList,binding.rvInfluencerWorkLinks)
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
+        }
+    }
+
+    private fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView) {
+        val options = IFramePlayerOptions.Builder()
+            .controls(0)
+            .build()
+
+
+        val listener = object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
+                val videoId = extractVideoId(videoUrl) ?: ""
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+
+            override fun onStateChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer, state: PlayerConstants.PlayerState) {
+            }
+        }
+
+        youtubePlayerView.addYouTubePlayerListener(listener)
+        youtubePlayerView.enableAutomaticInitialization = false
+        youtubePlayerView.initialize(listener, options)
     }
 
     fun extractVideoId(url: String): String? {
@@ -592,6 +710,11 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
             Categorie.DANCER.toString() ->{
                 binding.tvDanceDescription.movementMethod = LinkMovementMethod.getInstance()
                 binding.tvDanceDescription.setText(spanTxt, TextView.BufferType.SPANNABLE)
+            }
+
+            Categorie.INFLUENCER.toString() ->{
+                binding.tvInfluencerDescription.movementMethod = LinkMovementMethod.getInstance()
+                binding.tvInfluencerDescription.setText(spanTxt, TextView.BufferType.SPANNABLE)
             }
 
             else ->{
