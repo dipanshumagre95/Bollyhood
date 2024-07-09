@@ -24,6 +24,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -120,6 +121,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.profileActors.visibility=View.GONE
                     binding.profileSinger.visibility=View.VISIBLE
                     binding.profileInfluencer.visibility=View.GONE
+                    binding.profileCompany.visibility=View.GONE
                     binding.edtLanguages.setHint("Languages")
                     binding.edtEvents.setHint("Events")
                     binding.edtGenre.setHint("Genre")
@@ -129,6 +131,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.profileActors.visibility=View.GONE
                     binding.profileSinger.visibility=View.VISIBLE
                     binding.profileInfluencer.visibility=View.GONE
+                    binding.profileCompany.visibility=View.GONE
                     binding.edtLanguages.setHint("Location")
                    binding.edtEvents.setHint("Events")
                    binding.edtGenre.setHint("Genre")
@@ -138,12 +141,14 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.profileActors.visibility=View.VISIBLE
                     binding.profileSinger.visibility=View.GONE
                     binding.profileInfluencer.visibility=View.GONE
+                    binding.profileCompany.visibility=View.GONE
                 }
 
                 Categorie.DANCER.toString() ->{
                     binding.profileActors.visibility=View.GONE
                     binding.profileSinger.visibility=View.VISIBLE
                     binding.profileInfluencer.visibility=View.GONE
+                    binding.profileCompany.visibility=View.GONE
                     binding.tvsingerShowreel.setText("Update Dance Videos")
                     binding.edtLanguages.setHint("Location")
                     binding.edtEvents.setHint("Dance Forms")
@@ -153,7 +158,18 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 Categorie.INFLUENCER.toString() ->{
                     binding.profileActors.visibility=View.GONE
                     binding.profileSinger.visibility=View.GONE
+                    binding.profileCompany.visibility=View.GONE
                     binding.profileInfluencer.visibility=View.VISIBLE
+                }
+
+                Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
+                    ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
+                                                  Categorie.LOCATIONMANAGER.toString()->{
+                    binding.profileActors.visibility=View.GONE
+                    binding.profileSinger.visibility=View.GONE
+                    binding.profileCompany.visibility=View.VISIBLE
+                    binding.profileInfluencer.visibility=View.GONE
+                    binding.discriptionhint.setText("Company Bio")
                 }
             }
         }
@@ -174,6 +190,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         binding.edtEmailAddress.addTextChangedListener(this)
         binding.edtAchievements.addTextChangedListener(this)
         binding.edtLanguages.addTextChangedListener(this)
+        binding.edtComLocation.addTextChangedListener(this)
         binding.edtEvents.addTextChangedListener(this)
         binding.edtGenre.addTextChangedListener(this)
     }
@@ -181,42 +198,18 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
     private fun addListner() {
 
         binding.apply {
-            acheight.setOnTouchListener { v, event ->
-                setHeightData()
-                acheight.showDropDown()
-                false
-            }
-
-            acSkinColor.setOnTouchListener { v, event ->
-                setSkinColorData()
-                acSkinColor.showDropDown()
-                false
-            }
-
-
-            acBodyType.setOnTouchListener { v, event ->
-                setBodyTypeData()
-                acBodyType.showDropDown()
-                false
-            }
-
-            acPassPort.setOnTouchListener { v, event ->
-                setPassPortData()
-                acPassPort.showDropDown()
-                false
-            }
-
-            acage.setOnTouchListener { v, event ->
-                setAgeData()
-                acage.showDropDown()
-                false
-            }
+            setupAutoCompleteTextView(acheight) { setHeightData() }
+            setupAutoCompleteTextView(acSkinColor) { setSkinColorData() }
+            setupAutoCompleteTextView(acBodyType) { setBodyTypeData() }
+            setupAutoCompleteTextView(acPassPort) { setPassPortData() }
+            setupAutoCompleteTextView(acage) { setAgeData() }
 
             ivBack.setOnClickListener(this@MyProfileActivity)
             tvAddWorkLink.setOnClickListener(this@MyProfileActivity)
             tvAddShowreel.setOnClickListener(this@MyProfileActivity)
             tvAddSingerWorkLink.setOnClickListener(this@MyProfileActivity)
             tvinfluencerAddWorkLink.setOnClickListener(this@MyProfileActivity)
+            tvCompanyAddWorkLink.setOnClickListener(this@MyProfileActivity)
             firstImage.setOnClickListener(this@MyProfileActivity)
             secondImage.setOnClickListener(this@MyProfileActivity)
             thirdImage.setOnClickListener(this@MyProfileActivity)
@@ -262,6 +255,10 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
             }
 
             R.id.tvAddSingerWorkLink->{
+                addWorkLinksDialog()
+            }
+
+            R.id.tvCompanyAddWorkLink ->{
                 addWorkLinksDialog()
             }
 
@@ -412,6 +409,12 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     Categorie.INFLUENCER.toString() ->{
                         updateInfluencerProfile()
                     }
+
+                    Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
+                        ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
+                                                      Categorie.LOCATIONMANAGER.toString()->{
+                        updateCompanyProfile()
+                    }
                 }
             }
 
@@ -462,6 +465,10 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.llLanguages.setHintEnabled(true)
                 }
 
+                binding.edtComLocation.text.hashCode() ->{
+                    binding.llLocation.setHintEnabled(true)
+                }
+
                 binding.edtEvents.getText().hashCode() ->{
                     binding.llEvents.setHintEnabled(true)
                 }
@@ -498,6 +505,10 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
                 binding.edtLanguages.getText().hashCode() ->{
                     binding.llLanguages.setHintEnabled(false)
+                }
+
+                binding.edtComLocation.text.hashCode() ->{
+                    binding.llLocation.setHintEnabled(false)
                 }
 
                 binding.edtEvents.getText().hashCode() ->{
@@ -613,6 +624,12 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     Categorie.INFLUENCER.toString() ->{
                         setInfluencerProfileData(profileModel)
                     }
+
+                    Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
+                        ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
+                                                        Categorie.LOCATIONMANAGER.toString()->{
+                                                                setCompanyProfileData(profileModel)
+                                                        }
                 }
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
@@ -726,6 +743,33 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     .centerCrop()
                     .into(imageViews[i])
             }
+        }
+    }
+
+    private fun setCompanyProfileData(profileModel: ProfileModel) {
+        if (!profileModel.image.isNullOrEmpty()) {
+            Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile).into(binding.cvProfile)
+        }
+
+        binding.edtName.setText(profileModel.name)
+        binding.edtEmailAddress.setText(profileModel.email)
+        binding.edtMobileNumber.setText(profileModel.mobile)
+        binding.edtDescriptions.setText(profileModel.description)
+        binding.edtCategory.setText(profileModel.categories[0].category_name)
+        category_Id = profileModel.categories[0].category_id
+        binding.edtComLocation.setText(profileModel.location)
+
+
+        if (!profileModel.work_links.isNullOrEmpty()) {
+            val innerArrayStr = profileModel.work_links[0].worklink_url
+            val innerArray = JSONArray(innerArrayStr)
+            for (i in 0 until innerArray.length()) {
+                val item = innerArray.getJSONObject(i)
+                val workLink = WorkLinkProfileData(item.getString("worklink_name"), item.getString("worklink_url"))
+                workLinkList.add(workLink)
+            }
+            worklinkAdapter(binding.Companyworklinkrecyclerview)
         }
     }
 
@@ -1067,6 +1111,12 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     Categorie.INFLUENCER.toString() ->{
                         worklinkAdapter(binding.influencerworklinkrecyclerview)
                     }
+
+                    Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
+                        ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
+                                                       Categorie.LOCATIONMANAGER.toString()-> {
+                                                           worklinkAdapter(binding.Companyworklinkrecyclerview)
+                                                       }
                 }
                 dialogView.dismiss()
             } else {
@@ -2207,6 +2257,105 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                 getString(R.string.str_error_internet_connections),
                 Toast.LENGTH_SHORT
             ).show()
+        }
+    }
+
+
+    private fun updateCompanyProfile()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidMobileNumber(
+                    mContext, binding.edtMobileNumber.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
+
+                val name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val mobileNumber: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtMobileNumber.text.toString().trim()
+                )
+
+
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+
+                val description: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val categoryId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), category_Id
+                )
+
+
+                var profileBody: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    profileBody = MultipartBody.Part.createFormData(
+                        "image", file.name, requestFile
+                    )
+                }
+
+                val jsonArray = JSONArray()
+                for (i in 0 until workLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
+                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
+                    jsonArray.put(jsonObject)
+                }
+
+
+                val workLink: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
+                )
+
+
+                viewModel.updateCompanyProfile(
+                    name,
+                    email,
+                    user_Id,
+                    mobileNumber,
+                    description,
+                    workLink,
+                    categoryId,
+                    profileBody,
+                )
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+
+    fun setupAutoCompleteTextView(autoCompleteTextView: AutoCompleteTextView, setData: () -> Unit) {
+        autoCompleteTextView.setOnTouchListener { v, event ->
+            setData()
+            autoCompleteTextView.showDropDown()
+            false
         }
     }
 

@@ -166,6 +166,19 @@ interface ApiService {
         @Part imagefile : ArrayList<MultipartBody.Part>
     ): Response<ProfileResponse>
 
+    @Multipart
+    @POST("update_profile.php")
+    suspend fun updateCompanyProfile(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("uid") uid: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("worklinks") workLink: RequestBody?,
+        @Part("categories") category_id: RequestBody?,
+        @Part image: MultipartBody.Part?,
+    ): Response<ProfileResponse>
+
 
     @Multipart
     @POST("create_casting.php")

@@ -481,6 +481,44 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
+    fun updateCompanyProfile(
+        name: RequestBody,
+        email: RequestBody,
+        uid: RequestBody,
+        mobileNumber: RequestBody,
+        description: RequestBody,
+        workLink: RequestBody?,
+        categories: RequestBody?,
+        profile_image: MultipartBody.Part?,
+    ) {
+        try {
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                mainRepository.updateCompanyProfile(
+                    name,
+                    email,
+                    uid,
+                    mobileNumber,
+                    description,
+                    workLink,
+                    categories,
+                    profile_image,
+                ).let {
+                    if (it.body() != null) {
+                        Log.d("okhttp",it.body().toString())
+                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
+                        isLoading.postValue(false)
+                    } else {
+                        isLoading.postValue(false)
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+
     fun getBanner() {
         viewModelScope.launch {
             isLoading.postValue(true)

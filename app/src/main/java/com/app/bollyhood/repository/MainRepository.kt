@@ -198,6 +198,30 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
             imagefile
         )
 
+
+
+    suspend fun updateCompanyProfile(
+        name: RequestBody,
+        email: RequestBody,
+        uid: RequestBody,
+        mobileNumber: RequestBody,
+        description: RequestBody,
+        workLink: RequestBody?,
+        categories: RequestBody?,
+        profile_image: MultipartBody.Part?,
+    ) =
+        apiService.updateCompanyProfile(
+            name,
+            email,
+            uid,
+            mobileNumber,
+            description,
+            workLink,
+            categories,
+            profile_image,
+        )
+
+
     suspend fun getBanner() = apiService.getBanner()
 
     suspend fun getRecentExpertise(uid: String?) = apiService.getRecentExpertise(uid.toString())
