@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:backgroundTint="#FDE2E2"
         android:background="@drawable/actors_background_gradient"
         >
 
@@ -60,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:gravity="center_vertical">
 
                     <ImageView

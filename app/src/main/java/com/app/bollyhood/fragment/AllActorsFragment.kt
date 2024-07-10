@@ -1,5 +1,6 @@
 package com.app.bollyhood.fragment
 
+import Categorie
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -228,13 +229,28 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
 
     override fun onClick(singleCategoryModel: SingleCategoryModel) {
         if (singleCategoryModel!=null){
-            val bundle = Bundle()
-            bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
-            bundle.putString(StaticData.previousFragment,"AllActosFragment")
+            when(singleCategoryModel.category_name){
+                Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString(),Categorie.MUSICLABEL.toString(),
+                Categorie.LOCATIONMANAGER.toString()->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
 
-           val profileDetailFragment = ProfileDetailFragment()
-           profileDetailFragment.arguments = bundle
-           (requireActivity() as MainActivity).loadFragment(profileDetailFragment)
+                    val companyProfileFragment = CompanyProfileFragment()
+                    companyProfileFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(companyProfileFragment)
+                }
+
+                else->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
+
+                    val profileDetailFragment = ProfileDetailFragment()
+                    profileDetailFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(profileDetailFragment)
+                }
+            }
         }
     }
 

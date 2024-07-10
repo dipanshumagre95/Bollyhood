@@ -176,6 +176,7 @@ interface ApiService {
         @Part("description") description: RequestBody,
         @Part("worklinks") workLink: RequestBody?,
         @Part("categories") category_id: RequestBody?,
+        @Part("location") location: RequestBody?,
         @Part image: MultipartBody.Part?,
     ): Response<ProfileResponse>
 

@@ -2295,6 +2295,11 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     PrefManager(mContext).getvalue(StaticData.id).toString()
                 )
 
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtComLocation.text.toString().trim()
+                )
+
 
                 val description: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
@@ -2338,6 +2343,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     description,
                     workLink,
                     categoryId,
+                    location,
                     profileBody,
                 )
             }
