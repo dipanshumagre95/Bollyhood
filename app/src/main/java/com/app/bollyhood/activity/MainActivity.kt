@@ -63,14 +63,18 @@ class MainActivity : AppCompatActivity() {
             val categoryListType = object : TypeToken<List<CategoryModel>>() {}.type
             val categories: List<CategoryModel> = gson.fromJson(PrefManager(mContext).getvalue(StaticData.category), categoryListType)
 
-            when(categories[0].category_name){
-                "Casting Calls" ->{
-                    fragment=AllCastingCallFragment()
-                }
+            try {
+                when (categories[0].category_name) {
+                    "Casting Calls" -> {
+                        fragment = AllCastingCallFragment()
+                    }
 
-                else ->{
-                    fragment=HomeFragment()
+                    else -> {
+                        fragment = HomeFragment()
+                    }
                 }
+            }catch (e:Exception){
+                e.printStackTrace()
             }
         }
     }

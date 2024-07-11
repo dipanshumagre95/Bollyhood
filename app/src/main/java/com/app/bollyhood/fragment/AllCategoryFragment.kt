@@ -1,5 +1,6 @@
 package com.app.bollyhood.fragment
 
+import Categorie
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -157,14 +158,23 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
 
     override fun onItemClick(pos: Int, categoryModel: CategoryModel) {
 
-        when(categoryModel.type){
-            "1" ->{
+        when(categoryModel.category_name){
+            Categorie.CASTINGCALLS.toString() ->{
                 val bundle = Bundle()
                 bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
 
                 val castingCallFragment = CastingCallFragment()
                 castingCallFragment.arguments = bundle
                 (activity as MainActivity).loadFragment(castingCallFragment)
+            }
+
+            Categorie.PRODUCTIONHOUSE.toString() ->{
+                val bundle = Bundle()
+                bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
+
+                val productionHouseFragment = ProductionHouseFragment()
+                productionHouseFragment.arguments = bundle
+                (activity as MainActivity).loadFragment(productionHouseFragment)
             }
 
             else ->{

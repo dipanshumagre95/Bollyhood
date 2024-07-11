@@ -68,7 +68,7 @@ class CompanyProfileFragment : Fragment(),OnClickListener {
         }
 
         val bundle = arguments
-        if (bundle!=null&&bundle?.getString(StaticData.previousFragment)=="AllActosFragment") {
+        if (bundle!=null&&(bundle?.getString(StaticData.previousFragment)=="AllActosFragment")||(bundle?.getString(StaticData.previousFragment)=="ProductionHouseFragment")) {
             singleCategoryModel = Gson().fromJson(
                 bundle.getString(StaticData.userModel),
                 SingleCategoryModel::class.java
@@ -80,39 +80,41 @@ class CompanyProfileFragment : Fragment(),OnClickListener {
 
     private fun setData()
     {
-        if (singleCategoryModel!=null)
-        binding.let {
-            Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(it.ivImage)
-            it.tvCompanyName.setText(singleCategoryModel?.name)
-            it.tvLocation.setText(singleCategoryModel?.location)
-            it.tvDescription.setText(singleCategoryModel?.description)
+        if (singleCategoryModel!=null) {
+            binding.let {
+                Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop()
+                    .placeholder(R.drawable.ic_profile).into(it.ivImage)
+                it.tvCompanyName.setText(singleCategoryModel?.name)
+                it.tvLocation.setText(singleCategoryModel?.location)
+                it.tvDescription.setText(singleCategoryModel?.description)
 
-            if (singleCategoryModel?.is_verify == "1") {
-                it.ivCompanyVerified.visibility = View.VISIBLE
-            } else {
-                it.ivCompanyVerified.visibility = View.GONE
-            }
-
-            try {
-                if (!singleCategoryModel?.work_links.isNullOrEmpty()) {
-                    val innerArrayStr = singleCategoryModel?.work_links?.get(0)?.worklink_url
-                    val innerArray = JSONArray(innerArrayStr)
-                    for (i in 0 until innerArray.length()) {
-                        val item = innerArray.getJSONObject(i)
-                        if (i==0){
-                            playVideo(item.getString("worklink_url"), binding.playerView1)
-                        }
-
-                        if (i==1){
-                            playVideo(item.getString("worklink_url"), binding.playerView2)
-                        }
-                    }
-                }else{
-                    binding.llVideoView.visibility=View.GONE
-                    binding.llrecentWork.visibility=View.GONE
+                if (singleCategoryModel?.is_verify == "1") {
+                    it.ivCompanyVerified.visibility = View.VISIBLE
+                } else {
+                    it.ivCompanyVerified.visibility = View.GONE
                 }
-            }catch (e:Exception){
-                e.printStackTrace()
+
+                try {
+                    if (!singleCategoryModel?.work_links.isNullOrEmpty()) {
+                        val innerArrayStr = singleCategoryModel?.work_links?.get(0)?.worklink_url
+                        val innerArray = JSONArray(innerArrayStr)
+                        for (i in 0 until innerArray.length()) {
+                            val item = innerArray.getJSONObject(i)
+                            if (i == 0) {
+                                playVideo(item.getString("worklink_url"), binding.playerView1)
+                            }
+
+                            if (i == 1) {
+                                playVideo(item.getString("worklink_url"), binding.playerView2)
+                            }
+                        }
+                    } else {
+                        binding.llVideoView.visibility = View.GONE
+                        binding.llrecentWork.visibility = View.GONE
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }
@@ -151,6 +153,8 @@ class CompanyProfileFragment : Fragment(),OnClickListener {
             R.id.ivBack ->{
                 if (previousFragment.equals("AllActosFragment")){
                     (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
+                }else if(previousFragment.equals("ProductionHouseFragment")){
+                    (requireActivity() as MainActivity).loadFragment(ProductionHouseFragment())
                 }else {
                     (requireActivity() as MainActivity).setHomeColor()
                 }

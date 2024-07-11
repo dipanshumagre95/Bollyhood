@@ -209,6 +209,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         workLink: RequestBody?,
         categories: RequestBody?,
         location: RequestBody?,
+        tag: RequestBody?,
         profile_image: MultipartBody.Part?,
     ) =
         apiService.updateCompanyProfile(
@@ -220,6 +221,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
             workLink,
             categories,
             location,
+            tag,
             profile_image,
         )
 

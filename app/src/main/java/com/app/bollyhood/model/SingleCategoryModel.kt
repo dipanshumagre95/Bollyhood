@@ -22,6 +22,7 @@ data class SingleCategoryModel(
     val events: String,
     val dancer_form: String,
     val what_i_do: String,
+    val tag: String,
     var is_bookmarked: Int,
     val category_name: String,
     val skin_color:String,

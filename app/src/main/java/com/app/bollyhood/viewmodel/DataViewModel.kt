@@ -490,6 +490,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         workLink: RequestBody?,
         categories: RequestBody?,
         location: RequestBody?,
+        tag: RequestBody?,
         profile_image: MultipartBody.Part?,
     ) {
         try {
@@ -504,6 +505,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     workLink,
                     categories,
                     location,
+                    tag,
                     profile_image,
                 ).let {
                     if (it.body() != null) {

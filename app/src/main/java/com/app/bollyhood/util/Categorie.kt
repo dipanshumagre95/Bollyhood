@@ -8,6 +8,7 @@ enum class Categorie(val categorie: String) {
     CAMERALIGHT("Camera & Light"),
     LOCATIONMANAGER("Location Manager"),
     EVENTPLANNER("Event Planner"),
+    PRODUCTIONHOUSE("Production Houses"),
     DJ("Dj's");
 
     override fun toString(): String {

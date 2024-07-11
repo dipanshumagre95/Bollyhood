@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:elevation="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/rectangle_white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/llImage"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/llImage"
+            android:layout_toLeftOf="@+id/tvVerified"
+            android:text=""
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_11sdp"
+            android:textColor="@color/black"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="textShortMessage"
+            android:fontFamily="@font/urbanist_bold"
+            android:textSize="@dimen/_13sdp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvVerified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verified"
+            android:textColor="@color/white"
+            android:fontFamily="@font/urbanist_semibold"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="@dimen/_5sdp"
+            android:textSize="@dimen/_10sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:drawablePadding="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:drawableStart="@drawable/verified_castingcall"
+            android:drawableTint="@color/white"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#07864B"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_toRightOf="@+id/llImage"
+            android:text=""
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/urbanist_regular"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="textShortMessage"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvtag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llImage"
+            android:text=""
+            android:background="@drawable/rectangle_grey"
+            android:textSize="@dimen/_10sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:fontFamily="@font/urbanist_regular"
+            android:paddingBottom="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"/>
+
+    </RelativeLayout>
+
+</layout>

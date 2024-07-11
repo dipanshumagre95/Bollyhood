@@ -24,6 +24,11 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_profile"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/profile_gradient"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -38,7 +38,6 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
     private val profileList: ArrayList<SingleCategoryModel> = arrayListOf()
     private val profileSubList: ArrayList<SingleCategoryModel> = arrayListOf()
     private val filteredData: ArrayList<SingleCategoryModel> = arrayListOf()
-    private var previousFragment:String=""
     private var categorie:String=""
     private var categorie_name:String=""
 
@@ -50,6 +49,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
         binding= DataBindingUtil.inflate(layoutInflater,R.layout.fragment_all_actors, container, false)
 
         initUI()
+        setSearchView()
         addObserver()
         addListner()
 
@@ -101,7 +101,6 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
     private fun initUI() {
 
         val bundle = arguments
-
         if (bundle!=null) {
             PrefManager(requireContext()).setvalue(StaticData.previousFragment,bundle.getString(StaticData.previousFragment).toString())
             categorie=bundle.getString(StaticData.categorie).toString()
@@ -134,7 +133,11 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
 
+
+    fun setSearchView()
+    {
         binding.edsearch.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 

@@ -1,5 +1,6 @@
 package com.app.bollyhood.fragment
 
+import Categorie
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -203,15 +204,24 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
 
     override fun onClick(pos: Int, categoryModel: CategoryModel) {
 
-        when(categoryModel.type){
+        when(categoryModel.category_name){
 
-            "1" ->{
+            Categorie.CASTINGCALLS.toString() ->{
                 val bundle = Bundle()
                 bundle.putString(StaticData.previousFragment, "HomeFragment")
 
                 val castingCallFragment = CastingCallFragment()
                 castingCallFragment.arguments = bundle
                 (activity as MainActivity).loadFragment(castingCallFragment)
+            }
+
+            Categorie.PRODUCTIONHOUSE.toString() ->{
+                val bundle = Bundle()
+                bundle.putString(StaticData.previousFragment, "HomeFragment")
+
+                val productionHouseFragment = ProductionHouseFragment()
+                productionHouseFragment.arguments = bundle
+                (activity as MainActivity).loadFragment(productionHouseFragment)
             }
 
             else ->{

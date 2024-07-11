@@ -2242,10 +2242,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/llphone"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="vertical">
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/lltag"
+                        android:layout_width="@dimen/_170sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_below="@+id/llDescriptions"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/rectangle_gray_with_black_border"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="false"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                        <EditText
+                            android:id="@+id/edt_tag"
+                            style="@style/style_sec_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Add Tags"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:maxLength="50"
+                            android:paddingStart="@dimen/_10sdp"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/llLocation"
@@ -2256,6 +2284,7 @@
                         android:background="@drawable/rectangle_gray_with_black_border"
                         android:gravity="center"
                         android:padding="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         app:hintAnimationEnabled="true"
                         app:hintEnabled="false"
                         app:hintTextAppearance="@style/TextInputLayoutHintText">

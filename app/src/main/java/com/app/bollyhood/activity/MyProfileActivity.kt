@@ -164,12 +164,22 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
                 Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
                     ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
-                                                  Categorie.LOCATIONMANAGER.toString()->{
+                    Categorie.LOCATIONMANAGER.toString()->{
+                    binding.profileActors.visibility=View.GONE
+                    binding.profileSinger.visibility=View.GONE
+                    binding.profileCompany.visibility=View.VISIBLE
+                    binding.profileInfluencer.visibility=View.GONE
+                    binding.lltag.visibility=View.GONE
+                    binding.discriptionhint.setText("Company Bio")
+                }
+
+                Categorie.PRODUCTIONHOUSE.toString()->{
                     binding.profileActors.visibility=View.GONE
                     binding.profileSinger.visibility=View.GONE
                     binding.profileCompany.visibility=View.VISIBLE
                     binding.profileInfluencer.visibility=View.GONE
                     binding.discriptionhint.setText("Company Bio")
+                    binding.lltag.visibility=View.VISIBLE
                 }
             }
         }
@@ -191,6 +201,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         binding.edtAchievements.addTextChangedListener(this)
         binding.edtLanguages.addTextChangedListener(this)
         binding.edtComLocation.addTextChangedListener(this)
+        binding.edtTag.addTextChangedListener(this)
         binding.edtEvents.addTextChangedListener(this)
         binding.edtGenre.addTextChangedListener(this)
     }
@@ -412,7 +423,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
                     Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
                         ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
-                                                      Categorie.LOCATIONMANAGER.toString()->{
+                         Categorie.LOCATIONMANAGER.toString(),Categorie.PRODUCTIONHOUSE.toString()->{
                         updateCompanyProfile()
                     }
                 }
@@ -469,6 +480,10 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.llLocation.setHintEnabled(true)
                 }
 
+                binding.edtTag.text.hashCode() ->{
+                    binding.lltag.setHintEnabled(true)
+                }
+
                 binding.edtEvents.getText().hashCode() ->{
                     binding.llEvents.setHintEnabled(true)
                 }
@@ -509,6 +524,10 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
                 binding.edtComLocation.text.hashCode() ->{
                     binding.llLocation.setHintEnabled(false)
+                }
+
+                binding.edtTag.text.hashCode() ->{
+                    binding.lltag.setHintEnabled(false)
                 }
 
                 binding.edtEvents.getText().hashCode() ->{
@@ -627,7 +646,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
                     Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
                         ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
-                                                        Categorie.LOCATIONMANAGER.toString()->{
+                         Categorie.LOCATIONMANAGER.toString(),Categorie.PRODUCTIONHOUSE.toString()->{
                                                                 setCompanyProfileData(profileModel)
                                                         }
                 }
@@ -759,6 +778,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         binding.edtCategory.setText(profileModel.categories[0].category_name)
         category_Id = profileModel.categories[0].category_id
         binding.edtComLocation.setText(profileModel.location)
+        binding.edtTag.setText(profileModel.tag)
 
 
         if (!profileModel.work_links.isNullOrEmpty()) {
@@ -1069,30 +1089,45 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
             workLinkList.clear()
             if (!workLinkName1.text.isNullOrEmpty() || !workLinkName2.text.isNullOrEmpty() || !workLinkName3.text.isNullOrEmpty()) {
                 if (!workLinkName1.text.isNullOrEmpty() && !linkName1.text.isNullOrEmpty()) {
-                    workLinkList.add(
-                        WorkLinkProfileData(
-                            workLinkName1.text.toString(),
-                            linkName1.text.toString()
+                    if (isValidYouTubeUrl(linkName1.text.toString())) {
+                        workLinkList.add(
+                            WorkLinkProfileData(
+                                workLinkName1.text.toString(),
+                                linkName1.text.toString()
+                            )
                         )
-                    )
+                    }else{
+                        Toast.makeText(this, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
                 }
 
                 if (!workLinkName2.text.isNullOrEmpty() && !linkName2.text.isNullOrEmpty()) {
-                    workLinkList.add(
-                        WorkLinkProfileData(
-                            workLinkName2.text.toString(),
-                            linkName2.text.toString()
+                    if (isValidYouTubeUrl(linkName1.text.toString())) {
+                        workLinkList.add(
+                            WorkLinkProfileData(
+                                workLinkName2.text.toString(),
+                                linkName2.text.toString()
+                            )
                         )
-                    )
+                    }else{
+                        Toast.makeText(this, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
                 }
 
                 if (!workLinkName3.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
-                    workLinkList.add(
-                        WorkLinkProfileData(
-                            workLinkName3.text.toString(),
-                            linkName3.text.toString()
+                    if (isValidYouTubeUrl(linkName1.text.toString())) {
+                        workLinkList.add(
+                            WorkLinkProfileData(
+                                workLinkName3.text.toString(),
+                                linkName3.text.toString()
+                            )
                         )
-                    )
+                    }else{
+                        Toast.makeText(this, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
                 }
 
                 when(categories){
@@ -1114,7 +1149,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
 
                     Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
                         ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
-                                                       Categorie.LOCATIONMANAGER.toString()-> {
+                         Categorie.LOCATIONMANAGER.toString(),Categorie.PRODUCTIONHOUSE.toString()-> {
                                                            worklinkAdapter(binding.Companyworklinkrecyclerview)
                                                        }
                 }
@@ -2300,6 +2335,11 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     binding.edtComLocation.text.toString().trim()
                 )
 
+                val tag: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtTag.text.toString().trim()
+                )
+
 
                 val description: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
@@ -2344,6 +2384,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
                     workLink,
                     categoryId,
                     location,
+                    tag,
                     profileBody,
                 )
             }
