@@ -33,7 +33,7 @@ data class ProfileModel(
     val skin_color:String,
     val body_type:String,
     val location:String,
-    val tag:String,
+    val tag_name:String,
     val age:String,
     val height:String,
     val passport:String,

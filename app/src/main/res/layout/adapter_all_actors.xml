@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_width="101dp"
+        android:layout_height="153dp"
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginBottom="@dimen/_6sdp"
         android:background="@drawable/rectangle_app_background"
@@ -27,6 +27,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="-5dp"
                 android:background="@drawable/profile_gradient"/>
 
             <RelativeLayout

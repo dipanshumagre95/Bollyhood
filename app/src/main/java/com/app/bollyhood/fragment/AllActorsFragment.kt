@@ -81,6 +81,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
                     binding.rvprofilesList.visibility=View.VISIBLE
                     profileList.clear()
                     profileList.addAll(it.result)
+                    binding.tvListsize.setText("${profileList.size} recent profiles found")
                     if (profileList.size >= 9) {
                         profileSubList.clear()
                         profileSubList.addAll(profileList.subList(0, 9))

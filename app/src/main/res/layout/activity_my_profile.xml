@@ -44,7 +44,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="130dp"
                 android:text="Edit profile"
                 android:textColor="@color/white"
                 android:textSize="25dp"

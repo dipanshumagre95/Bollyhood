@@ -412,9 +412,16 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 ivBookMark.setImageResource(R.drawable.ic_bookmark)
             }
 
-            if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
+            if (!singleCategoryModel.videos_url[0].video_url.equals("[]")) {
                 val innerArrayStr = singleCategoryModel.videos_url[0].video_url
                 val innerArray = JSONArray(innerArrayStr)
+                if (innerArray.length()>1){
+                    binding.llDanceyoutubePlayerView1.visibility=View.VISIBLE
+                    binding.llDanceyoutubePlayerView2.visibility=View.VISIBLE
+                }else{
+                    binding.llDanceyoutubePlayerView1.visibility=View.VISIBLE
+                    binding.llDanceyoutubePlayerView2.visibility=View.GONE
+                }
                 for (i in 0 until innerArray.length()) {
                     val item = innerArray.getJSONObject(i)
                     if (i==0){
@@ -504,9 +511,16 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 ivBookMark.setImageResource(R.drawable.ic_bookmark)
             }
 
-            if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
+            if (!singleCategoryModel.videos_url[0].video_url.equals("[]")) {
                 val innerArrayStr = singleCategoryModel.videos_url[0].video_url
                 val innerArray = JSONArray(innerArrayStr)
+                if (innerArray.length()>1){
+                    binding.llInfluenceryoutubePlayerView1.visibility=View.VISIBLE
+                    binding.llInfluenceryoutubePlayerView2.visibility=View.VISIBLE
+                }else{
+                    binding.llInfluenceryoutubePlayerView1.visibility=View.VISIBLE
+                    binding.llInfluenceryoutubePlayerView2.visibility=View.GONE
+                }
                 for (i in 0 until innerArray.length()) {
                     val item = innerArray.getJSONObject(i)
                     if (i==0){

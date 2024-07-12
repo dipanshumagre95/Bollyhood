@@ -778,7 +778,7 @@ class MyProfileActivity : AppCompatActivity(), TextWatcher,WorkAdapter.onItemCli
         binding.edtCategory.setText(profileModel.categories[0].category_name)
         category_Id = profileModel.categories[0].category_id
         binding.edtComLocation.setText(profileModel.location)
-        binding.edtTag.setText(profileModel.tag)
+        binding.edtTag.setText(profileModel.tag_name)
 
 
         if (!profileModel.work_links.isNullOrEmpty()) {

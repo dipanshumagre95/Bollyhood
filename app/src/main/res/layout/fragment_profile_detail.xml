@@ -1228,6 +1228,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/llDanceShowreel">
 
                             <LinearLayout
+                                android:id="@+id/llDanceyoutube_player_view1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1253,6 +1254,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/llDanceyoutube_player_view2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginEnd="@dimen/_15sdp"
@@ -1754,6 +1756,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/llInfluencerShowreel">
 
                             <LinearLayout
+                                android:id="@+id/llInfluenceryoutube_player_view1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1779,6 +1782,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/llInfluenceryoutube_player_view2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginEnd="@dimen/_15sdp"

@@ -160,6 +160,7 @@
 
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvListsize"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="123 recent profiles found"
