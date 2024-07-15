@@ -13,8 +13,16 @@ class PermissionUtils {
         return ContextCompat.checkSelfPermission(context, android.Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED
     }
 
+        fun isCamera(context: Context):Boolean{
+            return ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED
+        }
+
     fun requestRecordingPermission(activity: Activity) {
         ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.RECORD_AUDIO), 100)
     }
+
+        fun requestCameraPermission(activity: Activity) {
+            ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.CAMERA), 100)
+        }
     }
 }

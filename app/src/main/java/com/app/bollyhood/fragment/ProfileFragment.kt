@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.ChangePasswordActivity
+import com.app.bollyhood.activity.KycActivity
 import com.app.bollyhood.activity.LoginActivity
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.MyBookMarkActivity
@@ -70,6 +71,10 @@ class ProfileFragment : Fragment() {
 
             rrBookMark.setOnClickListener {
                 startActivity(Intent(requireContext(), MyBookMarkActivity::class.java))
+            }
+
+            rrKyc.setOnClickListener {
+                startActivity(Intent(requireContext(), KycActivity::class.java))
             }
 
             rrAboutUs.setOnClickListener {

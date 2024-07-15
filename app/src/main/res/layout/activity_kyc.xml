@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.KycActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/photo_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:src="@drawable/baseline_keyboard_backspace_24"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KYC"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/urbanist_semibold"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complete KYC"
+            android:textSize="@dimen/_25sdp"
+            android:textColor="#EF4F6A"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:fontFamily="@font/urbanist_semibold"
+            android:layout_below="@+id/ivBack"/>
+
+        <RelativeLayout
+            android:id="@+id/llLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/ractangle_passport"
+            android:layout_below="@+id/tvStatus">
+
+            <View
+                android:id="@+id/percentage_adhaar"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/rectangle_app_background"/>
+
+            <View
+                android:id="@+id/percentage_photo"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/rectangle_app_background"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llLine">
+
+        <RelativeLayout
+            android:id="@+id/llfrontNback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/rectangle_chatwhite"
+            android:elevation="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_15sdp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvtextAdhaar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easy Adhaar Card Verification"
+                android:textSize="22dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist_semibold"
+                android:layout_centerHorizontal="true"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvpleaseUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please upload your Aadhar card below \nfor completing your KYC."
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tvtextAdhaar"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/urbanist_regular"/>
+
+            <RelativeLayout
+                android:id="@+id/rrfrontPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:background="@drawable/rectangle_chatwhite"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_below="@+id/tvpleaseUpload">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvfrontUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload aadhaar card back photo"
+                    android:textSize="15dp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/btnfrontUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:background="@drawable/rectangle_black_button"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:layout_below="@+id/tvfrontUpload"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:fontFamily="@font/urbanist_bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rrBackPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/rectangle_chatwhite"
+                android:elevation="@dimen/_5sdp"
+                android:layout_below="@+id/rrfrontPhoto">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvbackUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload aadhaar card front photo"
+                    android:textSize="15dp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/btnbackUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:background="@drawable/rectangle_black_button"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:layout_below="@+id/tvbackUpload"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:fontFamily="@font/urbanist_bold"/>
+
+            </RelativeLayout>
+            
+            
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/btn_adharSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_33sdp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_below="@+id/rrBackPhoto"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_25sdp"
+                android:background="@drawable/rectangle_app_background"
+                android:text="Submit"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:fontFamily="@font/urbanist_semibold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lluploadphoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/rectangle_chatwhite"
+            android:elevation="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_15sdp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvtextphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please Upload Your Selfie. "
+                android:textSize="22dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/urbanist_semibold"
+                android:layout_centerHorizontal="true"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvpleaseUploadPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Its Only For The Verification Purpose. Its Not Going To Be \nVisible AnyWhere."
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tvtextphoto"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/urbanist_regular"/>
+
+            <RelativeLayout
+                android:id="@+id/rrPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:background="@drawable/rectangle_chatwhite"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_below="@+id/tvpleaseUploadPhoto">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvphotoUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload your Photo"
+                    android:textSize="15dp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/btnphotoUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:background="@drawable/rectangle_black_button"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:layout_below="@+id/tvphotoUpload"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:fontFamily="@font/urbanist_bold"/>
+
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/btn_photosubmit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_33sdp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_below="@+id/rrPhoto"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_25sdp"
+                android:background="@drawable/rectangle_app_background"
+                android:text="Submit"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:fontFamily="@font/urbanist_semibold"/>
+
+        </RelativeLayout>
+
+      </RelativeLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvWhatsaap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_below="@+id/view"
+            android:text="If you are facing any difficulties, please get in \ntouch with us on Whatsapp"
+            android:gravity="center"
+            android:layout_marginTop="-11dp"
+            android:textColor="@color/gray"
+            android:textSize="14dp"
+            android:fontFamily="@font/urbanist_semibold"/>
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/succss_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/successIcon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="-15dp"
+                android:src="@drawable/success_casting_call"
+                android:layout_centerVertical="true"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KYC Submitted"
+                android:textSize="22dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/successIcon"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/urbanist_bold"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btn_backtohome"
+                android:fontFamily="@font/urbanist_semibold"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:text="Thanks for submitting your document we’ll verify it \nand complete your KYC as soon as possible"
+                android:textColor="@color/gray"
+                android:textSize="14dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/btn_backtohome"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/rectangle_app_background">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/textback"
+                    android:src="@drawable/icon_back"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back to home"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:textSize="18dp"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+   </RelativeLayout>
+</layout>
