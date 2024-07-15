@@ -1,5 +1,7 @@
 package com.app.bollyhood.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -14,6 +16,7 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -80,6 +83,7 @@ class KycActivity : AppCompatActivity(),OnClickListener {
 
             percentagePhoto.visibility=View.VISIBLE
             lluploadphoto.visibility=View.VISIBLE
+            succssView.visibility=View.GONE
 
             percentageAdhaar.visibility=View.GONE
             llfrontNback.visibility=View.GONE
@@ -93,6 +97,7 @@ class KycActivity : AppCompatActivity(),OnClickListener {
 
             percentagePhoto.visibility=View.GONE
             lluploadphoto.visibility=View.GONE
+            succssView.visibility=View.GONE
 
             percentageAdhaar.visibility=View.VISIBLE
             llfrontNback.visibility=View.VISIBLE
@@ -237,7 +242,19 @@ class KycActivity : AppCompatActivity(),OnClickListener {
 
     fun StartAnimation()
     {
+        val scaleX = ObjectAnimator.ofFloat(binding.successIcon, "scaleX", 0f, 1f)
+        val scaleY = ObjectAnimator.ofFloat(binding.successIcon, "scaleY", 0f, 1f)
+        val fadeIn = ObjectAnimator.ofFloat(binding.tvkycsuccess, "alpha", 0f, 1f)
+        val translateYView1 = ObjectAnimator.ofFloat(binding.tvthanksSuccess, "translationY", -100f, 0f)
+        val fadeInView1 = ObjectAnimator.ofFloat(binding.tvthanksSuccess, "alpha", 0f, 1f)
+        val translateYView2 = ObjectAnimator.ofFloat(binding.btnBacktohome, "translationY", 100f, 0f)
+        val fadeInView2 = ObjectAnimator.ofFloat(binding.btnBacktohome, "alpha", 0f, 1f)
 
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(scaleX, scaleY, fadeIn, translateYView1, fadeInView1, translateYView2, fadeInView2)
+        animatorSet.duration = 1000
+        animatorSet.interpolator = AccelerateDecelerateInterpolator()
+        animatorSet.start()
     }
 
     private fun openWhatsAppChat() {
