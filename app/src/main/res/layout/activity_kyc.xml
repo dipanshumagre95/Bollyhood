@@ -346,7 +346,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginTop="-15dp"
-                android:src="@drawable/success_casting_call"
+                android:src="@drawable/group_1000002023"
                 android:layout_centerVertical="true"/>
 
             <com.google.android.material.textview.MaterialTextView

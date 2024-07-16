@@ -24,11 +24,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityKycBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.util.PermissionUtils
+import com.app.bollyhood.util.PrefManager
+import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -45,6 +56,7 @@ class KycActivity : AppCompatActivity(),OnClickListener {
     private var adharFrontPhoto:String=""
     private var adharBackPhoto:String=""
     private var selfeePhoto:String=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this, R.layout.activity_kyc)
@@ -55,7 +67,23 @@ class KycActivity : AppCompatActivity(),OnClickListener {
     }
 
     private fun addObserevs() {
+        viewModel.isLoading.observe(this, Observer {
+            if (it) {
+                binding.pbLoadData.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadData.visibility = View.GONE
+            }
+        })
 
+        viewModel.kycUploadLiveData.observe(this, Observer {
+            if (it.status == "1") {
+                   binding.photoView.visibility=View.GONE
+                   binding.succssView.visibility=View.VISIBLE
+                   StartAnimation()
+            } else {
+                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun addListner() {
@@ -112,17 +140,19 @@ class KycActivity : AppCompatActivity(),OnClickListener {
             }
 
             R.id.btn_adharSubmit ->{
-                setSelfeView()
+                binding.pbLoadData.visibility=View.VISIBLE
+                GlobalScope.launch(Dispatchers.Main) {
+                    delay(5000)
+                    binding.pbLoadData.visibility=View.GONE
+                    setSelfeView()
+                }
             }
 
             R.id.btn_photosubmit ->{
-                binding.photoView.visibility=View.GONE
-                binding.succssView.visibility=View.VISIBLE
-                StartAnimation()
+                uploadKycApi()
             }
 
             R.id.btnphotoUpload ->{
-
                 if (PermissionUtils.isCamera(this)){
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT)
@@ -161,6 +191,59 @@ class KycActivity : AppCompatActivity(),OnClickListener {
     {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startForProfileImageResult.launch(intent)
+    }
+
+    private fun uploadKycApi()
+    {
+        if (isNetworkAvailable(this)) {
+
+            val user_Id: RequestBody = RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(),
+                PrefManager(this).getvalue(StaticData.id).toString()
+            )
+
+            var frontImageBody: MultipartBody.Part? = null
+            if (adharFrontPhoto.isNotEmpty()) {
+                val file = File(adharFrontPhoto)
+                val requestFile =
+                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                frontImageBody = MultipartBody.Part.createFormData(
+                    "front_image", file.name, requestFile
+                )
+            }
+
+            var backImageBody: MultipartBody.Part? = null
+            if (adharBackPhoto.isNotEmpty()) {
+                val file = File(adharBackPhoto)
+                val requestFile =
+                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                backImageBody = MultipartBody.Part.createFormData(
+                    "back_image", file.name, requestFile
+                )
+            }
+
+            var selfeePhotoBody: MultipartBody.Part? = null
+            if (selfeePhoto.isNotEmpty()) {
+                val file = File(selfeePhoto)
+                val requestFile =
+                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                selfeePhotoBody = MultipartBody.Part.createFormData(
+                    "image", file.name, requestFile
+                )
+            }
+
+            viewModel.uploadKyc(
+                frontImageBody,
+                backImageBody,
+                selfeePhotoBody,
+                user_Id
+            )
+        } else {
+            Toast.makeText(
+                this, getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun setSpannableString() {

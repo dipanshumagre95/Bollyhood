@@ -203,6 +203,15 @@ interface ApiService {
     ): Response<SuccessResponse>
 
 
+    @Multipart
+    @POST("adhar_kyc.php")
+    suspend fun uploadKyc(
+        @Part front_image: MultipartBody.Part?,
+        @Part back_image: MultipartBody.Part?,
+        @Part image: MultipartBody.Part?,
+        @Part("uid") uid: RequestBody,
+    ):Response<SuccessResponse>
+
     @GET("banner.php")
     suspend fun getBanner(): Response<BannerResponse>
 

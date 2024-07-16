@@ -83,6 +83,19 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         role,
         company_logo)
 
+
+    suspend fun uploadKyc(
+        front_image: MultipartBody.Part?,
+        back_image: MultipartBody.Part?,
+        image: MultipartBody.Part?,
+        user_Id: RequestBody
+      )=apiService.uploadKyc(
+        front_image,
+        back_image,
+        image,
+        user_Id
+     )
+
     suspend fun updateProfile(
         name: RequestBody, email: RequestBody,
         uid: RequestBody, cat_id: RequestBody,

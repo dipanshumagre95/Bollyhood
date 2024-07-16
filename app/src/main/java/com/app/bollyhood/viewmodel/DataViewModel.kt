@@ -46,6 +46,7 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     var loginLiveData = MutableLiveData<LoginResponse>()
     var changePasswordLiveData = MutableLiveData<SuccessResponse>()
     var castingUploadedLiveData = MutableLiveData<SuccessResponse>()
+    var kycUploadLiveData = MutableLiveData<SuccessResponse>()
     var profileLiveData = MutableLiveData<ProfileResponse>()
     var updateProfileLiveData = MutableLiveData<ProfileResponse>()
     var bannerLiveData = MutableLiveData<BannerResponse>()
@@ -355,6 +356,34 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     if (it.body() != null) {
                         Log.d("okhttp",it.body().toString())
                         updateProfileLiveData.postValue(it.body() as ProfileResponse)
+                        isLoading.postValue(false)
+                    } else {
+                        isLoading.postValue(false)
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+    fun uploadKyc(
+        front_image: MultipartBody.Part?,
+        back_image: MultipartBody.Part?,
+        image: MultipartBody.Part?,
+        user_Id:RequestBody
+    ){
+        try {
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                mainRepository.uploadKyc(
+                    front_image,
+                    back_image,
+                    image,
+                    user_Id,
+                ).let {
+                    if (it.body() != null) {
+                        kycUploadLiveData.postValue(it.body() as SuccessResponse)
                         isLoading.postValue(false)
                     } else {
                         isLoading.postValue(false)
