@@ -36,6 +36,7 @@ class ExpertiseAdapter(
 
         if (expertiseList[position].image.isNotEmpty()) {
             Glide.with(requireContext).load(expertiseList[position].image)
+                .centerCrop()
                 .into(holder.binding.ivImage)
 
         }

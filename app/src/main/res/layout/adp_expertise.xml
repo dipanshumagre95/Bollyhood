@@ -10,11 +10,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         android:background="@drawable/rectangle_app_background">
 
         <androidx.cardview.widget.CardView
@@ -48,9 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
-                android:layout_marginStart="@dimen/_3ssp"
-                android:layout_marginEnd="@dimen/_3ssp"
-                android:layout_marginBottom="@dimen/_15sdp"
                 android:alpha="0.9"
                 android:background="@drawable/rectangle_black"
                 android:orientation="vertical"
@@ -71,6 +68,7 @@
                         android:gravity="start"
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:layout_centerHorizontal="true"
                         android:text="@{model.name}"
                         android:textColor="#FFFFFF"
                         android:textSize="@dimen/_12sdp" />
@@ -97,7 +95,7 @@
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:fontFamily="@font/urbanist_semibold"
-                    android:gravity="start"
+                    android:gravity="center_horizontal"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/white"
