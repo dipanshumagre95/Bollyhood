@@ -29,7 +29,7 @@ class AllCategoryAdapter(val requireContext: Context, var categoryList: ArrayLis
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val model = categoryList[position]
-        Glide.with(requireContext).load(model.category_image).into(holder.binding.ivCategoryImage)
+        Glide.with(requireContext).load(model.category_image).centerCrop().into(holder.binding.ivCategoryImage)
         holder.binding.tvCategoryName.text = model.category_name
 
         holder.itemView.setOnClickListener {

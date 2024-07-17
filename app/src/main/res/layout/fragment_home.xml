@@ -154,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:gravity="center"
-                            android:layout_marginTop="@dimen/_8sdp"/>
+                            android:layout_marginTop="@dimen/_2sdp"/>
 
 
                         <RelativeLayout
@@ -343,7 +343,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
-                            android:background="@drawable/how"
+                            android:background="@drawable/how_get_job_banner"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="6dp"/>
@@ -356,9 +356,10 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/left_line"/>
+                                android:padding="@dimen/_2sdp"
+                                android:src="@drawable/color_line"/>
 
 
                             <com.google.android.material.textview.MaterialTextView
@@ -373,9 +374,10 @@
                                 android:text="@string/trending_ca"/>
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/right_line"/>
+                                android:padding="@dimen/_2sdp"
+                                android:src="@drawable/color_line"/>
 
 
 
@@ -475,7 +477,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Influencers"
+                                    android:text="Music Producers"
                                     android:fontFamily="@font/urbanist_regular"
                                     android:textSize="11dp"
                                     android:layout_gravity="center_horizontal"
@@ -522,7 +524,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Influencers"
+                                    android:text="Dancers"
                                     android:fontFamily="@font/urbanist_regular"
                                     android:textSize="11dp"
                                     android:layout_gravity="center_horizontal"
@@ -568,7 +570,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Influencers"
+                                    android:text="Musical Band"
                                     android:fontFamily="@font/urbanist_regular"
                                     android:textSize="11dp"
                                     android:layout_gravity="center_horizontal"
@@ -587,9 +589,10 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/left_line"/>
+                                android:padding="@dimen/_2sdp"
+                                android:src="@drawable/color_line"/>
 
 
                             <com.google.android.material.textview.MaterialTextView
@@ -604,9 +607,10 @@
                                 android:text="Our Official Partners"/>
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/right_line"/>
+                                android:padding="@dimen/_2sdp"
+                                android:src="@drawable/color_line"/>
 
 
 
@@ -665,7 +669,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
-                            android:background="@drawable/whatsapp_image_2024_07_16_at_2_26_41_pm"
+                            android:background="@drawable/kyc_banner"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginEnd="6dp"/>
@@ -678,9 +682,10 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/left_line"/>
+                                android:padding="@dimen/_2sdp"
+                                android:src="@drawable/color_line"/>
 
 
                             <com.google.android.material.textview.MaterialTextView
@@ -695,9 +700,10 @@
                                 />
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/right_line"/>
+                                android:padding="@dimen/_2sdp"
+                                android:src="@drawable/color_line"/>
 
 
 
