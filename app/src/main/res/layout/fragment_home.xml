@@ -138,15 +138,24 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <androidx.viewpager2.widget.ViewPager2
                             android:id="@+id/rvBanner"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="@dimen/_7sdp"
                             android:layout_marginRight="10dp"
                             android:adapter="@{adapter}"
                             android:padding="@dimen/_5sdp" />
+
+                        <LinearLayout
+                            android:id="@+id/slide_dortll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp"/>
+
 
                         <RelativeLayout
                             android:id="@+id/rrCategory"

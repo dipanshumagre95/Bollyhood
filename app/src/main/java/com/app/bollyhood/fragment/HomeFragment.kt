@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
 import com.app.bollyhood.activity.MainActivity
@@ -36,14 +39,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.onItemClick {
 
     lateinit var binding: FragmentHomeBinding
-
     var bannerList: ArrayList<BannerModel> = arrayListOf()
-
     var categoryList: ArrayList<CategoryModel> = arrayListOf()
-
     var experiseList: ArrayList<ExpertiseModel> = arrayListOf()
-
     val viewModel: DataViewModel by viewModels()
+    val param=LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.WRAP_CONTENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    ).apply {
+        setMargins(5,0,5,0)
+    }
+
 
 
     override fun onCreateView(
@@ -155,13 +161,37 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
 
     private fun setAdapter(bannerList: ArrayList<BannerModel>) {
         binding.apply {
-            rvBanner.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            rvBanner.setHasFixedSize(true)
             adapter = BannerAdapter(requireContext(), bannerList)
             rvBanner.adapter = adapter
             adapter?.notifyDataSetChanged()
         }
+        setIndicactors(bannerList)
+    }
+
+    private fun setIndicactors(bannerList: ArrayList<BannerModel>) {
+        val dostArray= Array(bannerList.size){
+            ImageView(requireContext())
+        }
+
+        dostArray.forEach {
+            it.setImageResource(R.drawable.not_active_dot)
+            binding.slideDortll.addView(it,param)
+        }
+
+        dostArray[0].setImageResource(R.drawable.active_dot)
+
+        binding.rvBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                dostArray.mapIndexed { index, imageView ->
+                    if (position==index){
+                        imageView.setImageResource(R.drawable.active_dot)
+                    }else{
+                        imageView.setImageResource(R.drawable.not_active_dot)
+                    }
+                }
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+        })
     }
 
     private fun setExpertiseAdapter(experiseList: ArrayList<ExpertiseModel>) {
