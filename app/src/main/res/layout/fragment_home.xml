@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -343,7 +343,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
-                            android:background="@drawable/how_get_job_banner"
+                            android:background="@drawable/how_you_banner"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="6dp"/>
@@ -588,13 +588,6 @@
                             android:gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="match_parent"
-                                android:padding="@dimen/_2sdp"
-                                android:src="@drawable/color_line"/>
-
-
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -606,22 +599,14 @@
                                 android:fontFamily="@font/urbanist_bold"
                                 android:text="Our Official Partners"/>
 
-                            <ImageView
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="match_parent"
-                                android:padding="@dimen/_2sdp"
-                                android:src="@drawable/color_line"/>
-
-
-
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
                             android:gravity="center_horizontal"
                             android:weightSum="4"
                             android:orientation="horizontal"
@@ -629,38 +614,42 @@
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:padding="@dimen/_15sdp"
                                 android:layout_weight="1"
+                                android:background="@drawable/border_gray"
                                 android:scaleType="centerCrop"
                                 android:layout_gravity="center"
                                 android:src="@drawable/iifa"/>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_7sdp"
                                 android:layout_weight="1"
+                                android:background="@drawable/border_gray"
                                 android:padding="@dimen/_5sdp"
                                 android:layout_gravity="center_vertical"
-                                android:src="@drawable/iftda"/>
+                                android:src="@drawable/iftda1"/>
 
                             <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
                                 android:padding="@dimen/_5sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
+                                android:background="@drawable/border_gray"
+                                android:layout_marginStart="@dimen/_7sdp"
                                 android:layout_weight="1"
                                 android:src="@drawable/bollywood_artis"/>
 
                             <ImageView
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_7sdp"
                                 android:padding="@dimen/_5sdp"
+                                android:background="@drawable/border_gray"
                                 android:layout_weight="1"
                                 android:src="@drawable/cintaa"/>
 
@@ -669,112 +658,18 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
-                            android:background="@drawable/kyc_banner"
+                            android:background="@drawable/kyc_banner1"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginEnd="6dp"/>
 
-                        <LinearLayout
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_70sdp"
+                            android:background="@drawable/brands_work_with_us"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="match_parent"
-                                android:padding="@dimen/_2sdp"
-                                android:src="@drawable/color_line"/>
-
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Brands Work With Us"
-                                android:textSize="@dimen/_12sdp"
-                                android:textColor="@color/black"
-                                android:layout_gravity="center_vertical"
-                                android:padding="@dimen/_5sdp"
-                                android:fontFamily="@font/urbanist_bold"
-                                />
-
-                            <ImageView
-                                android:layout_width="@dimen/_50sdp"
-                                android:layout_height="match_parent"
-                                android:padding="@dimen/_2sdp"
-                                android:src="@drawable/color_line"/>
-
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:gravity="center_horizontal"
-                            android:weightSum="6"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:padding="@dimen/_7sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_white_with_blackborder"
-                                android:src="@drawable/brand_arre"/>
-
-                            <ImageView
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:padding="@dimen/_7sdp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/rectangle_white_with_blackborder"
-                                android:src="@drawable/brand_netfilx"/>
-
-                            <ImageView
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:padding="@dimen/_7sdp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/rectangle_white_with_blackborder"
-                                android:src="@drawable/brand_radio_mirchi"
-                                />
-
-                            <ImageView
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:padding="@dimen/_7sdp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/rectangle_white_with_blackborder"
-                                android:src="@drawable/brand_pocket_fm"/>
-
-                            <ImageView
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:padding="@dimen/_7sdp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/rectangle_white_with_blackborder"
-                                android:src="@drawable/brand_amazon_prime"/>
-
-                            <ImageView
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:padding="@dimen/_7sdp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/rectangle_white_with_blackborder"
-                                android:src="@drawable/brand_disney_hostar"/>
-
-
-                        </LinearLayout>
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"/>
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -966,7 +861,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:text="2024 Bollyhood.app"
+                            android:text="\@2024 Bollyhood.app"
                             android:textColor="@color/black"
                             android:fontFamily="@font/urbanist_semibold"
                             android:textSize="@dimen/_7sdp"
@@ -980,24 +875,24 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="@dimen/_15sdp"
                             android:gravity="center_horizontal">
 
                             <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
                                 android:padding="@dimen/_4sdp"
                                 android:layout_gravity="center_vertical"
                                 android:src="@drawable/flag_india"/>
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Proudly Made In India"
-                                android:textSize="@dimen/_10sdp"
-                                android:layout_gravity="center_vertical"
-                                android:padding="@dimen/_1sdp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/urbanist_bold"/>
+                            <View
+                                android:layout_width="@dimen/_90sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:padding="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:background="@drawable/proudly_made_in_india"/>
 
 
 
