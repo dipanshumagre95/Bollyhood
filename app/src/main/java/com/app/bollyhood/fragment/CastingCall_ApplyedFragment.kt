@@ -130,7 +130,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
             }
 
             R.id.ivBack ->{
-                (requireActivity() as MainActivity).setHomeColor()
+                (requireActivity() as MainActivity).setBookingColor()
             }
         }
     }

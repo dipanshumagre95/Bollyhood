@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mContext: MainActivity
     private var isOpenScreen = "Home"
     private val viewModel: DataViewModel by viewModels()
-    private var fragment:Fragment=HomeFragment()
+    private var fragment:Fragment=AllCategoryFragment()
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     else -> {
-                        fragment = HomeFragment()
+                        fragment = AllCategoryFragment()
                     }
                 }
             }catch (e:Exception){
@@ -203,11 +203,11 @@ class MainActivity : AppCompatActivity() {
             vProfile.visibility=View.GONE
         }
 
-        loadFragment(fragment)
+        loadFragment(HomeFragment())
 
     }
 
-    private fun setBookingColor() {
+    fun setBookingColor() {
         isOpenScreen = "Bookings"
         binding.apply {
             ivHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
@@ -232,13 +232,7 @@ class MainActivity : AppCompatActivity() {
             vProfile.visibility=View.GONE
         }
 
-
-        if (PrefManager(mContext).getvalue(StaticData.user_type).equals("2")) {
-            loadFragment(AllCategoryFragment())
-        } else {
-            loadFragment(AllCategoryFragment())
-
-        }
+        loadFragment(fragment)
     }
 
     override fun onBackPressed() {

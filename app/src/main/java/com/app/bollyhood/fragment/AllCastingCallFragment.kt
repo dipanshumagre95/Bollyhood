@@ -121,6 +121,10 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
                 startActivity(Intent(requireContext(),Upload_CastingCall::class.java))
             }
 
+            R.id.ivBack ->{
+                (requireActivity() as MainActivity).setHomeColor()
+            }
+
             R.id.tvActive ->{
                 binding.tvActive.setBackgroundResource(R.drawable.rectangle_black_button)
                 binding.tvClose.setBackgroundResource(R.drawable.border_gray)
