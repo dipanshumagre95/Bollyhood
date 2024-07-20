@@ -245,6 +245,16 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
                     (requireActivity() as MainActivity).loadFragment(companyProfileFragment)
                 }
 
+                Categorie.ACTOR.toString() ->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
+
+                    val actorsProfileDetailsFragment = ActorsProfileDetailsFragment()
+                    actorsProfileDetailsFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(actorsProfileDetailsFragment)
+                }
+
                 else->{
                     val bundle = Bundle()
                     bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
