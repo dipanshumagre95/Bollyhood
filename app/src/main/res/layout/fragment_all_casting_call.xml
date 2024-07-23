@@ -68,7 +68,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="Casting Calls"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_19sdp" />
@@ -117,7 +117,7 @@
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/_12sdp"
-                android:fontFamily="@font/urbanist_semibold"/>
+                android:fontFamily="@font/poppins_medium"/>
 
             <ImageView
                 android:layout_width="@dimen/_10sdp"
@@ -160,7 +160,7 @@
                    android:text="Active"
                    android:textSize="@dimen/_17sdp"
                    android:elevation="@dimen/_5sdp"
-                   android:fontFamily="@font/urbanist_semibold"
+                   android:fontFamily="@font/poppins_medium"
                    android:background="@drawable/rectangle_black_button"
                    android:textColor="@color/white"
                    android:paddingStart="@dimen/_25sdp"
@@ -175,7 +175,7 @@
                    android:layout_height="wrap_content"
                    android:text="Close"
                    android:layout_toRightOf="@+id/tvActive"
-                   android:fontFamily="@font/urbanist_semibold"
+                   android:fontFamily="@font/poppins_medium"
                    android:textSize="@dimen/_17sdp"
                    android:elevation="@dimen/_5sdp"
                    android:layout_marginStart="@dimen/_30sdp"
@@ -214,7 +214,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:fontFamily="@font/neueeinstellung_semibold"
+                android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="No Data Found"
                 android:textColor="@color/black"

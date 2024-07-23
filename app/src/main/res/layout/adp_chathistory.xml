@@ -58,7 +58,7 @@
                     android:id="@+id/tvSender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/neueeinstellung_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:padding="@dimen/_10ssp"
@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_80sdp"
-                android:fontFamily="@font/neueeinstellung_regular"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="end"
                 android:padding="@dimen/_1ssp"
                 android:text=""
@@ -145,7 +145,7 @@
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/black"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/urbanist_semibold"/>
+                    android:fontFamily="@font/poppins_semibold"/>
             </LinearLayout>
 
 
@@ -211,7 +211,7 @@
                         android:id="@+id/tvReceiver"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/neueeinstellung_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
                         android:padding="@dimen/_10ssp"
                         android:text=""
@@ -257,7 +257,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_80sdp"
-                android:fontFamily="@font/neueeinstellung_regular"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="start"
                 android:padding="@dimen/_1ssp"
                 android:text=""

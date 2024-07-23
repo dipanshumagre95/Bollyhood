@@ -45,7 +45,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_toRightOf="@+id/ivBack"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/satoshi_bold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17sdp" />
 
@@ -85,9 +85,8 @@
                 android:id="@+id/castingcall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:fontFamily="@font/urbanist_bold"
+                android:fontFamily="@font/satoshi_bold"
                 android:text="@string/casting_cal"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
@@ -125,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/urbanist_regular"
+                android:fontFamily="@font/satoshi_medium"
                 android:padding="@dimen/_3sdp"
                 android:text="Quick Search By Top Agencies  "
                 android:textColor="@color/white"
@@ -209,7 +208,7 @@
             android:textSize="@dimen/_8sdp"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/_15sdp"
-            android:fontFamily="@font/urbanist_regular"
+            android:fontFamily="@font/inter_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/brands"/>

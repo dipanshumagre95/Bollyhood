@@ -42,7 +42,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="Casting Details"
                 android:layout_toRightOf="@+id/ivBack"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/satoshi_bold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17sdp" />
 
@@ -140,7 +140,7 @@
                                     android:text=""
                                     android:singleLine="true"
                                     android:textColor="@color/white"
-                                    android:fontFamily="@font/urbanist_semibold"
+                                    android:fontFamily="@font/satoshi_medium"
                                     />
 
 
@@ -155,7 +155,7 @@
                                     android:text="Netflix India Private Limited"
                                     android:singleLine="true"
                                     android:textColor="@color/white"
-                                    android:fontFamily="@font/urbanist_regular"
+                                    android:fontFamily="@font/satoshi_regular"
                                    />
                             </LinearLayout>
 
@@ -192,7 +192,7 @@
                                     android:id="@+id/tvLocation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:fontFamily="@font/satoshi_regular"
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:layout_gravity="center_horizontal"
@@ -226,7 +226,7 @@
                                     android:id="@+id/tvVerified"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:fontFamily="@font/satoshi_regular"
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:layout_gravity="center_horizontal"
@@ -259,7 +259,7 @@
                                     android:id="@+id/tvShift"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:fontFamily="@font/satoshi_regular"
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:layout_gravity="center_horizontal"
@@ -314,7 +314,7 @@
                             android:alpha="0.5"
                             android:text="Posted 2 days ago"
                             android:layout_toRightOf="@+id/imageview"
-                            android:fontFamily="@font/urbanist_semibold"
+                            android:fontFamily="@font/satoshi_regular"
                             android:textColor="@color/black"
                             android:paddingStart="@dimen/_5sdp"
                             android:textSize="@dimen/_10sdp" />
@@ -325,7 +325,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:fontFamily="@font/neueeinstellung_bold"
+                            android:fontFamily="@font/satoshi_bold"
                             android:paddingEnd="@dimen/_20sdp"
                             android:textColor="@color/black"
                             android:textSize="18dp" />
@@ -365,7 +365,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/urbanist_semibold"
+                            android:fontFamily="@font/satoshi_bold"
                             android:text="@string/str_your_role"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_15sdp" />
@@ -382,7 +382,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:alpha="0.5"
-                        android:fontFamily="@font/urbanist_regular"
+                        android:fontFamily="@font/satoshi_medium"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp" />
@@ -420,7 +420,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:fontFamily="@font/satoshi_bold"
                             android:text="@string/str_skills"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_15sdp" />
@@ -437,7 +437,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:alpha="0.5"
-                        android:fontFamily="@font/urbanist_regular"
+                        android:fontFamily="@font/satoshi_medium"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp" />
@@ -472,7 +472,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/neueeinstellung_semibold"
+                            android:fontFamily="@font/satoshi_medium"
                             android:text="@string/str_casting_requirements"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_15sdp" />
@@ -489,7 +489,7 @@
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:alpha="0.5"
-                        android:fontFamily="@font/neueeinstellung_regular"
+                        android:fontFamily="@font/satoshi_regular"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_11sdp" />
@@ -524,7 +524,7 @@
                 android:textFontWeight="1"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_save"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/satoshi_medium"
                 android:gravity="center"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp"
@@ -543,7 +543,7 @@
                 android:textFontWeight="1"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_apply"
-                android:fontFamily="@font/neueeinstellung_regular"
+                android:fontFamily="@font/satoshi_medium"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
                 android:text="Applied"
@@ -565,7 +565,7 @@
                     android:id="@+id/tvApplyNow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/neueeinstellung_regular"
+                    android:fontFamily="@font/satoshi_medium"
                     android:layout_centerInParent="true"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/str_apply_now"

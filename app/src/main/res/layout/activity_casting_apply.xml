@@ -48,7 +48,7 @@
                 android:paddingBottom="@dimen/_5sdp"
                 android:background="@drawable/rectangle_apply_button"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/gilroy_semibold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
         </RelativeLayout>
@@ -87,7 +87,7 @@
                     android:layout_marginTop="-20dp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_22sdp"
-                    android:fontFamily="@font/urbanist_semibold"
+                    android:fontFamily="@font/gilroy_semibold"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/backgroundimage"/>
 
@@ -102,7 +102,7 @@
                     android:textColor="#737791"
                     android:textSize="@dimen/_11sdp"
                     android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/urbanist_regular"
+                    android:fontFamily="@font/inter_regular"
                     />
 
                 <LinearLayout
@@ -660,7 +660,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toRightOf="@+id/cbteamNcondition"
-                    android:fontFamily="@font/urbanist_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="i accept the terms and conditions "
                     android:gravity="center_vertical"
                     android:singleLine="true"
@@ -685,7 +685,7 @@
                     android:id="@+id/tvApplyNow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/urbanist_bold"
+                    android:fontFamily="@font/satoshi_bold"
                     android:layout_centerInParent="true"
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingTop="@dimen/_10sdp"

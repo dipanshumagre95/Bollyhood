@@ -40,7 +40,7 @@
             android:text=""
             android:textColor="@color/white"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:fontFamily="@font/urbanist_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:textSize="@dimen/_8sdp"/>
 
 

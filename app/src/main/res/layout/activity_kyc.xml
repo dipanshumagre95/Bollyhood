@@ -32,7 +32,7 @@
             android:textSize="18dp"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/urbanist_semibold"/>
+            android:fontFamily="@font/montserrat_semibold"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvStatus"
@@ -43,7 +43,7 @@
             android:textColor="#EF4F6A"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_30sdp"
-            android:fontFamily="@font/urbanist_semibold"
+            android:fontFamily="@font/montserrat_bold"
             android:layout_below="@+id/ivBack"/>
 
         <RelativeLayout
@@ -98,7 +98,7 @@
                 android:textSize="22dp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_centerHorizontal="true"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -112,7 +112,7 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/urbanist_regular"/>
+                android:fontFamily="@font/poppins_regular"/>
 
             <RelativeLayout
                 android:id="@+id/rrfrontPhoto"
@@ -132,7 +132,7 @@
                     android:text="Upload aadhaar card back photo"
                     android:textSize="15dp"
                     android:textColor="@color/gray"
-                    android:fontFamily="@font/urbanist_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_20sdp"/>
 
@@ -151,7 +151,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:fontFamily="@font/urbanist_bold"/>
+                    android:fontFamily="@font/poppins_semibold"/>
 
             </RelativeLayout>
 
@@ -174,7 +174,7 @@
                     android:text="Upload aadhaar card front photo"
                     android:textSize="15dp"
                     android:textColor="@color/gray"
-                    android:fontFamily="@font/urbanist_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_20sdp"/>
 
@@ -193,7 +193,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:fontFamily="@font/urbanist_bold"/>
+                    android:fontFamily="@font/poppins_semibold"/>
 
             </RelativeLayout>
             
@@ -213,7 +213,7 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist_semibold"/>
+                android:fontFamily="@font/poppins_bold"/>
 
         </RelativeLayout>
 
@@ -237,7 +237,7 @@
                 android:textSize="22dp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/inter_semibold"
                 android:layout_centerHorizontal="true"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -251,7 +251,7 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/urbanist_regular"/>
+                android:fontFamily="@font/inter_regular"/>
 
             <RelativeLayout
                 android:id="@+id/rrPhoto"
@@ -271,7 +271,7 @@
                     android:text="Upload your Photo"
                     android:textSize="15dp"
                     android:textColor="@color/gray"
-                    android:fontFamily="@font/urbanist_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_20sdp"/>
 
@@ -290,7 +290,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:fontFamily="@font/urbanist_bold"/>
+                    android:fontFamily="@font/poppins_bold"/>
 
             </RelativeLayout>
 
@@ -309,7 +309,7 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist_semibold"/>
+                android:fontFamily="@font/poppins_bold"/>
 
         </RelativeLayout>
 
@@ -328,7 +328,7 @@
             android:layout_marginTop="-11dp"
             android:textColor="@color/gray"
             android:textSize="14dp"
-            android:fontFamily="@font/urbanist_semibold"/>
+            android:fontFamily="@font/inter_semibold"/>
 
     </RelativeLayout>
 
@@ -337,7 +337,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/successIcon"
@@ -358,7 +358,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/successIcon"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/urbanist_bold"
+                android:fontFamily="@font/poppins_bold"
                 />
 
             <com.google.android.material.textview.MaterialTextView
@@ -366,7 +366,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/btn_backtohome"
-                android:fontFamily="@font/urbanist_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:text="Thanks for submitting your document we’ll verify it \nand complete your KYC as soon as possible"
@@ -399,7 +399,7 @@
                     android:textColor="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/urbanist_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textSize="18dp"/>
 
             </RelativeLayout>
