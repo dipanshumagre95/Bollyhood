@@ -30,7 +30,11 @@ class ProductionHouseAdapter(val context:Context,var productionList: ArrayList<S
         val productionHouse=productionList[position]
 
         Glide.with(context).load(productionHouse.image).placeholder(R.drawable.ic_profile).centerCrop().into(holder.binding.ivImage)
-        holder.binding.tvName.text=productionHouse.name
+        if (productionHouse.name.length>21){
+            holder.binding.tvName.text=productionHouse.name.substring(0, 21) + "..."
+        }else{
+            holder.binding.tvName.text=productionHouse.name
+        }
         holder.binding.tvLocation.text=productionHouse.location
         holder.binding.tvtag.text=productionHouse.tag_name
 

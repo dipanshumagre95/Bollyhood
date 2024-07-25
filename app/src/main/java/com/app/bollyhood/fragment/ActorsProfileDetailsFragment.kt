@@ -84,9 +84,11 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
 
         viewModel.addRemoveBookMarkLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
-                if (it.msg.equals("Bookmark Successfully")){
+                if (it.msg.equals("Bookmarked Successfully")){
+                    singleCategoryModel?.is_bookmarked=1
                    binding.ivBookMark.setBackgroundResource(R.drawable.ic_addedbookmark)
                 }else{
+                    singleCategoryModel?.is_bookmarked=0
                     binding.ivBookMark.setBackgroundResource(R.drawable.ic_bookmark)
                 }
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()

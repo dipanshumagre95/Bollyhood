@@ -40,8 +40,10 @@
             android:maxLines="1"
             android:singleLine="true"
             android:inputType="textShortMessage"
-            android:fontFamily="@font/urbanist_bold"
-            android:textSize="@dimen/_13sdp"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:ellipsize="end"
+            android:maxEms="19"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvVerified"
@@ -49,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="Verified"
             android:textColor="@color/white"
-            android:fontFamily="@font/urbanist_semibold"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_alignParentEnd="true"
             android:paddingStart="@dimen/_5sdp"
             android:textSize="@dimen/_8sdp"
@@ -72,7 +74,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/black"
-            android:fontFamily="@font/urbanist_regular"
+            android:fontFamily="@font/poppins_regular"
             android:maxLines="1"
             android:singleLine="true"
             android:inputType="textShortMessage"/>
@@ -87,7 +89,7 @@
             android:background="@drawable/rectangle_grey"
             android:textSize="@dimen/_10sdp"
             android:paddingTop="@dimen/_3sdp"
-            android:fontFamily="@font/urbanist_regular"
+            android:fontFamily="@font/poppins_medium"
             android:paddingBottom="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_8sdp"

@@ -132,13 +132,14 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
             if (it.status == "1") {
                 categoryList.clear()
                 categoryList.addAll(it.result)
-                 if (categoryList.size >= 12) {
+                 /*if (categoryList.size >= 12) {
                      categorySubList.clear()
                      categorySubList.addAll(categoryList.subList(0, 12))
                      setCategoryAdapter(categorySubList)
                 } else {
                      setCategoryAdapter(categoryList)
-                }
+                }*/
+                setCategoryAdapter(categoryList)
             } else {
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
             }

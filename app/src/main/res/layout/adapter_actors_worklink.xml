@@ -30,13 +30,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/urbanist_medium"
+                android:fontFamily="@font/inter_semibold"
                 android:maxLines="1"
+                android:maxLength="120"
                 android:id="@+id/tvName"
                 android:singleLine="true"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 android:text="Hello Youtube"
-                android:textColor="@color/white" />
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
