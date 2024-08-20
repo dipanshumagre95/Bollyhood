@@ -415,7 +415,7 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
         binding.tvName.setText(senderDetails.name)
 
         if (senderDetails.is_online == "1") {
-            binding.tvStatus.text = "Online"
+            binding.tvStatus.text = "Active Now"
             binding.ivStatus.setImageResource(R.drawable.circle_green)
         } else {
             binding.tvStatus.text = "Offline"

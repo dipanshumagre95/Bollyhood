@@ -648,7 +648,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
         viewModel.checkSubscriptionLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (it.result.is_subscription == "0") {
-                    startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
+                   // startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
                 }else{
                     if (expertiseModel?.mobile?.isNotEmpty()!!) {
                         val intent =

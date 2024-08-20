@@ -37,11 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/llimageview"
             android:layout_centerHorizontal="true"
+            android:singleLine="true"
+            android:maxLines="1"
             android:text=""
             android:textColor="@color/white"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="@dimen/_8sdp"/>
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="@dimen/_7sdp"/>
 
 
     </RelativeLayout>

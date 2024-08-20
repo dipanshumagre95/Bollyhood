@@ -58,20 +58,20 @@ android {
 }
 
 dependencies {
-    implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.activity:activity:1.9.1")
     val lifecycle_version = "2.6.2"
     val glideVersion = "4.11.0"
 
 
 
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     //glide
     implementation("com.github.bumptech.glide:glide:$glideVersion")
@@ -85,25 +85,25 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
     //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
 
     //di
     implementation("com.github.bumptech.glide:glide:4.15.0")
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
-    kapt("androidx.hilt:hilt-compiler:1.1.0")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
 
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // Retrofit
     implementation("com.squareup.okhttp3:logging-interceptor:4.5.0")
 
 
     //imagepicker
-    implementation("androidx.activity:activity-ktx:1.8.1")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.activity:activity-ktx:1.9.1")
+    implementation("androidx.fragment:fragment-ktx:1.8.2")
 
 
     //Dimen
@@ -114,10 +114,10 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     //youtubeplayerview
-    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.0.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 
     implementation("com.github.colourmoon:readmore-textview:v1.0.2")
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-analytics")
 
     implementation("com.google.firebase:firebase-messaging:24.0.0")
@@ -127,10 +127,11 @@ dependencies {
     implementation ("com.github.3llomi:RecordView:3.1.3")
 
     implementation ("com.github.JobGetabu:KaziChatVoicePlayer:1.0.0")
-    implementation ("com.google.android.material:material:1.4.0")
+    implementation ("com.google.android.material:material:1.12.0")
 
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:12.1.0")
-    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
+    implementation ("com.razorpay:checkout:1.6.39")
 
 }

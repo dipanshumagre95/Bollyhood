@@ -28,7 +28,6 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/app_name"
@@ -42,6 +41,14 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_toRightOf="@+id/ivBack" />
 
+            <ImageView
+                android:id="@+id/ivStatus"
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="@dimen/_8sdp"
+                android:layout_toRightOf="@+id/cvProfile"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginStart="-11dp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,6 +71,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
                         android:text=""
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
 
@@ -85,23 +94,14 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
                     android:layout_toRightOf="@+id/cvProfile">
-
-                    <ImageView
-                        android:id="@+id/ivStatus"
-                        android:layout_width="@dimen/_8sdp"
-                        android:layout_height="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_centerVertical="true"
-                        />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:layout_toRightOf="@+id/ivStatus"
-                        android:layout_marginStart="@dimen/_3sdp"
                         android:text=""
                         android:textColor="#80797C7B"
                         android:textSize="@dimen/_10sdp" />
@@ -171,8 +171,8 @@
 
             <ImageView
                 android:id="@+id/ivattechment"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:padding="@dimen/_8sdp"
                 android:visibility="visible"
@@ -185,7 +185,7 @@
                 android:layout_height="45dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/ivattechment"
-                android:background="@drawable/rectangle_gray_with_black_border"
+                android:background="@drawable/message_view"
                 android:layout_toLeftOf="@+id/ivCamera"
                 android:fontFamily="@font/poppins_medium"
                 android:hint="Write your message"
@@ -199,8 +199,8 @@
 
             <ImageView
                 android:id="@+id/ivCamera"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
@@ -237,8 +237,8 @@
 
                 <com.devlomi.record_view.RecordButton
                     android:id="@+id/iv_microphone"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingStart="@dimen/_3sdp"
                     android:paddingEnd="@dimen/_3sdp"

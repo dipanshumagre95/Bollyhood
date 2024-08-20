@@ -24,7 +24,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.MainActivity
-import com.app.bollyhood.activity.SubscriptionPlanActivity
 import com.app.bollyhood.activity.YoutubeActivity
 import com.app.bollyhood.adapter.ActorsProfileWorkLinkAda
 import com.app.bollyhood.databinding.FragmentActorsProfileDetailsBinding
@@ -100,7 +99,7 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
         viewModel.checkSubscriptionLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (it.result.is_subscription == "0") {
-                    startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
+                 //   startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
                 }else{
                     if (singleCategoryModel?.mobile?.isNotEmpty()!!) {
                         val intent =
@@ -422,120 +421,6 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
                 setImagesInView(photolist,6)
             }
         }
-    }
-
-    private fun setSixImage(photolist: ArrayList<PhotoModel>) {
-        for (i in 0 until photolist.size){
-            when(i){
-                 0 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image1)
-                }
-
-                1 ->{
-                    Glide.with(requireContext()).load(photolist[1]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image2)
-                }
-
-                2 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image3)
-                }
-
-                3 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image4)
-                }
-
-                4 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image5)
-                }
-
-                5 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image6)
-                }
-            }
-        }
-    }
-
-    private fun setFiveImage(photolist: ArrayList<PhotoModel>) {
-        for (i in 0 until photolist.size){
-            when(i){
-                0 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fiveimage1)
-                }
-
-                1 ->{
-                    Glide.with(requireContext()).load(photolist[1]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fiveimage2)
-                }
-
-                2 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fiveimage3)
-                }
-
-                3 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fiveimage4)
-                }
-
-                4 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fiveimage5)
-                }
-            }
-        }
-    }
-
-    private fun setFourImage(photolist: ArrayList<PhotoModel>) {
-        for (i in 0 until photolist.size){
-            when(i){
-                0 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fourthimage1)
-                }
-
-                1 ->{
-                    Glide.with(requireContext()).load(photolist[1]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fourthimage2)
-                }
-
-                2 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fourthimage3)
-                }
-
-                3 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.fourthimage4)
-                }
-            }
-        }
-    }
-
-    private fun setThreeImage(photolist: ArrayList<PhotoModel>) {
-        for (i in 0 until photolist.size){
-            when(i){
-                0 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.threeimage1)
-                }
-
-                1 ->{
-                    Glide.with(requireContext()).load(photolist[1]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.threeimage2)
-                }
-
-                2 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.threeimage3)
-                }
-            }
-        }
-    }
-
-    private fun setTwoImage(photolist: ArrayList<PhotoModel>) {
-        for (i in 0 until photolist.size){
-            when(i){
-                0 ->{
-                    Glide.with(requireContext()).load(photolist[0]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.twoimage1)
-                }
-
-                1 ->{
-                    Glide.with(requireContext()).load(photolist[1]).centerCrop().placeholder(R.drawable.ic_profile).into(binding.twoimage2)
-                }
-            }
-        }
-    }
-
-    private fun setOneImage(photolist: ArrayList<PhotoModel>) {
-        Glide.with(requireContext()).load(photolist[0].url).centerCrop().placeholder(R.drawable.ic_profile).into(binding.image1)
     }
 
     private fun setWorkLinksAdapter(

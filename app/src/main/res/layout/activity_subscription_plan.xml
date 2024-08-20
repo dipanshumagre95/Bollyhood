@@ -13,199 +13,299 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgpink"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-10dp"
+        android:background="@drawable/subscriptions_background"
         tools:context=".activity.SubscriptionPlanActivity">
 
+       <androidx.core.widget.NestedScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/llTop"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@android:color/holo_red_light"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_gravity="center_vertical"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
-                android:paddingStart="@dimen/_5sdp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/baseline_keyboard_backspace_24"
-                app:tint="@color/white" />
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="visible">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="@font/neueeinstellung_semibold"
-                android:gravity="center"
-                android:text="@string/str_subscriptions"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp" />
+                   <ImageView
+                       android:id="@+id/ivBack"
+                       android:layout_width="@dimen/_30sdp"
+                       android:layout_height="@dimen/_30sdp"
+                       android:src="@drawable/icon_back"
+                       android:padding="@dimen/_8sdp"
+                       android:layout_marginStart="@dimen/_10sdp"
+                       android:layout_marginTop="@dimen/_30sdp"
+                       android:background="@drawable/border_gray"/>
 
+                   <View
+                       android:id="@+id/tvBollyhood"
+                       android:layout_width="150dp"
+                       android:layout_height="40dp"
+                       android:layout_below="@+id/ivBack"
+                       android:layout_marginTop="-10dp"
+                       android:layout_centerHorizontal="true"
+                       android:background="@drawable/bollyhoodapp"/>
 
-        </LinearLayout>
+                   <View
+                       android:id="@+id/tvexclusive"
+                       android:layout_width="match_parent"
+                       android:layout_height="40dp"
+                       android:background="@drawable/exclusive"
+                       android:layout_below="@+id/tvBollyhood"
+                       android:layout_marginStart="@dimen/_45sdp"
+                       android:layout_marginEnd="@dimen/_44sdp"
+                       />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvActivate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:background="@drawable/rectangle_orange"
-            android:fontFamily="@font/neueeinstellung_medium"
-            android:gravity="center"
-            android:padding="@dimen/_10sdp"
-            android:paddingStart="@dimen/_50sdp"
-            android:paddingEnd="@dimen/_50sdp"
-            android:text="@string/str_activate_pro"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llTop" />
+                   <com.google.android.material.textview.MaterialTextView
+                       android:id="@+id/your_exclus"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Your Exclusive membership will \nstart on 24th February 2024"
+                       android:textColor="@color/white"
+                       android:gravity="center"
+                       android:layout_marginTop="@dimen/_15sdp"
+                       android:textSize="14dp"
+                       android:fontFamily="@font/urbanist_regular"
+                       android:layout_below="@+id/tvexclusive"
+                       android:layout_centerHorizontal="true"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvPlanDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:fontFamily="@font/neueeinstellung_medium"
-            android:gravity="center"
-            android:text="@string/str_plan_desc"
-            android:textSize="@dimen/_11sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvActivate" />
+                   <View
+                       android:id="@+id/offer_view"
+                       android:layout_width="match_parent"
+                       android:layout_height="85dp"
+                       android:background="@drawable/plan_offer_bg"
+                       android:layout_below="@+id/your_exclus"
+                       android:layout_marginTop="@dimen/_15sdp"
+                       android:layout_marginStart="@dimen/_30sdp"
+                       android:layout_marginEnd="@dimen/_30sdp"/>
 
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/offer_view"
+                       android:orientation="vertical"
+                       android:layout_marginStart="@dimen/_15sdp"
+                       android:layout_marginEnd="@dimen/_15sdp"
+                       android:layout_marginTop="@dimen/_20sdp"
+                       android:layout_marginBottom="@dimen/_30sdp"
+                       android:background="@drawable/subscription_plan_background">
 
-        <LinearLayout
-            android:id="@+id/tvOneTimeOffer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            app:layout_constraintTop_toBottomOf="@id/tvPlanDesc">
+                       <LinearLayout
+                           android:layout_width="wrap_content"
+                           android:layout_height="18dp"
+                           android:layout_gravity="center_horizontal"
+                           android:layout_marginTop="@dimen/_10sdp"
+                           android:orientation="horizontal">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@android:color/holo_red_light">
+                           <View
+                               android:layout_width="70dp"
+                               android:layout_height="2dp"
+                               android:layout_gravity="center_vertical"
+                               android:background="@drawable/white_left_line"/>
 
-            </View>
+                           <View
+                               android:layout_width="100dp"
+                               android:layout_height="14dp"
+                               android:layout_gravity="center_vertical"
+                               android:layout_marginStart="@dimen/_8sdp"
+                               android:layout_marginEnd="@dimen/_8sdp"
+                               android:background="@drawable/your_benefits"/>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_orange"
-                android:fontFamily="@font/neueeinstellung_medium"
-                android:gravity="center"
-                android:padding="@dimen/_8sdp"
-                android:paddingStart="@dimen/_20sdp"
-                android:paddingEnd="@dimen/_20sdp"
-                android:text="@string/str_one_time_offer"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_11sdp" />
+                           <View
+                               android:layout_width="70dp"
+                               android:layout_height="2dp"
+                               android:layout_gravity="center_vertical"
+                               android:background="@drawable/white_right_line"/>
 
+                       </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@android:color/holo_red_light">
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="100dp"
+                           android:layout_marginEnd="@dimen/_12sdp"
+                           android:layout_marginStart="@dimen/_12sdp"
+                           android:layout_marginTop="@dimen/_15sdp"
+                           android:background="@drawable/priority_access_bg"/>
 
-            </View>
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="100dp"
+                           android:layout_marginEnd="@dimen/_12sdp"
+                           android:layout_marginStart="@dimen/_12sdp"
+                           android:layout_marginTop="@dimen/_10sdp"
+                           android:background="@drawable/enhanced_visibility_bg"/>
 
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="100dp"
+                           android:layout_marginEnd="@dimen/_12sdp"
+                           android:layout_marginStart="@dimen/_12sdp"
+                           android:layout_marginTop="@dimen/_10sdp"
+                           android:background="@drawable/advance_features_bg"/>
 
-        </LinearLayout>
+                       <com.google.android.material.textview.MaterialTextView
+                           android:id="@+id/btn_join"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/_35sdp"
+                           android:background="@drawable/btn_backlground"
+                           android:text="Join Exclusive"
+                           android:textColor="@color/white"
+                           android:textSize="18dp"
+                           android:layout_marginTop="@dimen/_15sdp"
+                           android:fontFamily="@font/urbanist_bold"
+                           android:gravity="center"
+                           android:layout_marginStart="@dimen/_25sdp"
+                           android:layout_marginEnd="@dimen/_25sdp"/>
 
+                   </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvOfferDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:fontFamily="@font/neueeinstellung_medium"
-            android:gravity="center"
-            android:text="@string/str_offer_desc"
-            android:textSize="@dimen/_11sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvOneTimeOffer" />
+               </RelativeLayout>
 
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="gone">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/curve_rectangle"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvOfferDesc">
+                   <ImageView
+                       android:id="@+id/spivBack"
+                       android:layout_width="@dimen/_30sdp"
+                       android:layout_height="@dimen/_30sdp"
+                       android:src="@drawable/icon_back"
+                       android:padding="@dimen/_8sdp"
+                       android:layout_marginStart="@dimen/_10sdp"
+                       android:layout_marginTop="@dimen/_30sdp"
+                       android:background="@drawable/border_gray"/>
 
+                   <View
+                       android:id="@+id/sptvBollyhood"
+                       android:layout_width="150dp"
+                       android:layout_height="40dp"
+                       android:layout_below="@+id/spivBack"
+                       android:layout_marginTop="-10dp"
+                       android:layout_centerHorizontal="true"
+                       android:background="@drawable/bollyhoodapp"/>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvChoosePlan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:fontFamily="@font/neueeinstellung_bold"
-                android:text="@string/str_choose_your_plan"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp" />
+                   <View
+                       android:id="@+id/sptvexclusive"
+                       android:layout_width="match_parent"
+                       android:layout_height="48dp"
+                       android:background="@drawable/super_pass_bg"
+                       android:layout_below="@+id/sptvBollyhood"
+                       android:layout_marginStart="@dimen/_35sdp"
+                       android:layout_marginEnd="@dimen/_35sdp"
+                       />
 
+                   <com.google.android.material.textview.MaterialTextView
+                       android:id="@+id/spyour_exclus"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="SuperCharge Your Work With \nBollyhood SuperPass."
+                       android:textColor="@color/white"
+                       android:gravity="center"
+                       android:layout_marginTop="@dimen/_15sdp"
+                       android:textSize="14dp"
+                       android:fontFamily="@font/urbanist_regular"
+                       android:layout_below="@+id/sptvexclusive"
+                       android:layout_centerHorizontal="true"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPlan"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/tvCheckOut"
-                android:layout_below="@id/tvChoosePlan"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:adapter="@{adapter}"
-                android:padding="@dimen/_5sdp" />
+                   <View
+                       android:id="@+id/spoffer_view"
+                       android:layout_width="match_parent"
+                       android:layout_height="85dp"
+                       android:background="@drawable/plan_offer_bg"
+                       android:layout_below="@+id/spyour_exclus"
+                       android:layout_marginTop="@dimen/_15sdp"
+                       android:layout_marginStart="@dimen/_30sdp"
+                       android:layout_marginEnd="@dimen/_30sdp"/>
 
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/spoffer_view"
+                       android:orientation="vertical"
+                       android:layout_marginStart="@dimen/_15sdp"
+                       android:layout_marginEnd="@dimen/_15sdp"
+                       android:layout_marginTop="@dimen/_20sdp"
+                       android:layout_marginBottom="@dimen/_30sdp"
+                       android:background="@drawable/subscription_plan_background">
 
-            <TextView
-                android:id="@+id/tvCheckOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@drawable/rectangle_btn"
-                android:drawableStart="@drawable/baseline_shopping_cart_24"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/neueeinstellung_bold"
-                android:gravity="start|center"
-                android:padding="@dimen/_14sdp"
-                android:paddingStart="@dimen/_40sdp"
-                android:paddingEnd="@dimen/_40sdp"
-                android:text="@string/str_checkout_now"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp" />
+                       <LinearLayout
+                           android:layout_width="wrap_content"
+                           android:layout_height="18dp"
+                           android:layout_gravity="center_horizontal"
+                           android:layout_marginTop="@dimen/_10sdp"
+                           android:orientation="horizontal">
 
+                           <View
+                               android:layout_width="70dp"
+                               android:layout_height="2dp"
+                               android:layout_gravity="center_vertical"
+                               android:background="@drawable/white_left_line"/>
 
-        </RelativeLayout>
+                           <View
+                               android:layout_width="100dp"
+                               android:layout_height="14dp"
+                               android:layout_gravity="center_vertical"
+                               android:layout_marginStart="@dimen/_8sdp"
+                               android:layout_marginEnd="@dimen/_8sdp"
+                               android:background="@drawable/your_benefits"/>
+
+                           <View
+                               android:layout_width="70dp"
+                               android:layout_height="2dp"
+                               android:layout_gravity="center_vertical"
+                               android:background="@drawable/white_right_line"/>
+
+                       </LinearLayout>
+
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="100dp"
+                           android:layout_marginEnd="@dimen/_12sdp"
+                           android:layout_marginStart="@dimen/_12sdp"
+                           android:layout_marginTop="@dimen/_15sdp"
+                           android:background="@drawable/priority_access_bg"/>
+
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="100dp"
+                           android:layout_marginEnd="@dimen/_12sdp"
+                           android:layout_marginStart="@dimen/_12sdp"
+                           android:layout_marginTop="@dimen/_10sdp"
+                           android:background="@drawable/enhanced_visibility_bg"/>
+
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="100dp"
+                           android:layout_marginEnd="@dimen/_12sdp"
+                           android:layout_marginStart="@dimen/_12sdp"
+                           android:layout_marginTop="@dimen/_10sdp"
+                           android:background="@drawable/advance_features_bg"/>
+
+                       <com.google.android.material.textview.MaterialTextView
+                           android:id="@+id/btn_spjoin"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/_35sdp"
+                           android:background="@drawable/btn_backlground"
+                           android:text="Join Exclusive"
+                           android:textColor="@color/white"
+                           android:textSize="18dp"
+                           android:layout_marginTop="@dimen/_15sdp"
+                           android:fontFamily="@font/urbanist_bold"
+                           android:gravity="center"
+                           android:layout_marginStart="@dimen/_25sdp"
+                           android:layout_marginEnd="@dimen/_25sdp"/>
+
+                   </LinearLayout>
+
+               </RelativeLayout>
+           </RelativeLayout>
+
+       </androidx.core.widget.NestedScrollView>
 
 
         <ProgressBar

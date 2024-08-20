@@ -52,10 +52,10 @@ class DateUtils {
                         }
                     }
                 } else {
-                    SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
+                    SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(date)
                 }
             } else {
-                SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
+                SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(date)
             }
         }
 
@@ -98,10 +98,10 @@ class DateUtils {
                         }
                     }
                 } else {
-                    SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
+                    SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(date)
                 }
             } else {
-                SimpleDateFormat("dd MMMM yyyy hh:mm aa", Locale.getDefault()).format(date)
+                SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(date)
             }
         }
 

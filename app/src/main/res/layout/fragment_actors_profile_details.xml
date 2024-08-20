@@ -30,7 +30,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout4"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_170sdp"
+                    android:layout_height="@dimen/_150sdp"
                     android:background="@drawable/actors_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +54,7 @@
                         android:text="Actor’s Details"
                         android:textColor="#0F1325"
                         android:textSize="24dp"
+                        android:visibility="gone"
                         android:singleLine="true"
                         android:maxLines="1"
                         app:fontFamily="@font/inter_bold"
@@ -104,7 +105,7 @@
                             android:layout_marginTop="95dp"
                             android:text="Akshay Kapoor"
                             android:textColor="@color/black"
-                            android:textSize="20dp"
+                            android:textSize="18dp"
                             android:singleLine="true"
                             android:maxLines="1"
                             android:layout_centerHorizontal="true"
@@ -117,7 +118,7 @@
                             android:layout_height="18dp"
                             android:visibility="gone"
                             android:src="@drawable/actors_verified"
-                            android:layout_marginTop="102dp"
+                            android:layout_marginTop="100dp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_toRightOf="@+id/tvName"/>
 
@@ -129,7 +130,6 @@
                             android:layout_below="@+id/tvName"
                             android:textSize="14dp"
                             android:singleLine="true"
-                            android:layout_marginTop="@dimen/_4sdp"
                             android:maxLines="1"
                             android:paddingStart="@dimen/_10sdp"
                             android:fontFamily="@font/inter_regular"
@@ -180,6 +180,7 @@
                                 android:text="My Name is Akshay Kapoor. I work as an actor here in Mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work inquiry.... Read More"
                                 android:textSize="16dp"
                                 android:padding="@dimen/_3sdp"
+                                android:textColor="@color/black"
                                 app:fontFamily="@font/inter_regular"
                                 android:layout_marginStart="@dimen/_7sdp"
                                 android:layout_marginEnd="@dimen/_7sdp"
@@ -195,7 +196,7 @@
                             android:layout_height="@dimen/_40sdp"
                             android:background="@drawable/tvquick_info"
                             android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
                             android:layout_marginEnd="@dimen/_12sdp"
                             android:layout_below="@+id/llabout"
                             />
@@ -840,7 +841,7 @@
                             android:layout_marginStart="@dimen/_12sdp"
                             android:layout_marginEnd="@dimen/_12sdp"
                             android:background="@drawable/work_link_frame"
-                            android:layout_marginTop="@dimen/_15sdp"/>
+                            android:layout_marginTop="@dimen/_20sdp"/>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rrworkLink"
@@ -880,7 +881,7 @@
                                 android:textColor="@color/black"
                                 app:fontFamily="@font/poppins_semibold"
                                 android:layout_toRightOf="@+id/cbteamNcondition"
-                                android:fontFamily="@font/urbanist_medium"
+                                android:fontFamily="@font/urbanist_regular"
                                 android:gravity="center_vertical"
                                 android:textSize="10dp" />
                         </RelativeLayout>
@@ -907,8 +908,8 @@
 
                 <RelativeLayout
                     android:id="@+id/rrProfile"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_gravity="center"
                     android:gravity="right|center"
                     android:background="@drawable/actors_profile_gradient"

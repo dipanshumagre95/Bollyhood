@@ -20,7 +20,7 @@
                 android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:gravity="center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +41,10 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvProfile"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -52,14 +52,14 @@
 
 
             <ImageView
-                android:layout_width="90dp"
+                android:layout_width="70dp"
                 android:layout_height="100dp"
                 android:src="@drawable/ellipse_5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="130dp"
                 android:src="@drawable/ellipse_5"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +80,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivImage"
-                android:layout_width="@dimen/_90sdp"
-                android:layout_height="@dimen/_90sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:src="@drawable/ic_profile"
                 app:civ_border_width="@dimen/_1sdp" />
 
@@ -91,7 +91,6 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toTopOf="@+id/tvInquiry"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,10 +108,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/urbanist_bold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="Disney India Private Limited"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textColor="#454545"
+                    android:textSize="@dimen/_15sdp" />
 
                 <ImageView
                     android:id="@+id/ivCompany_verified"
@@ -130,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvCompany_name"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-8dp"
                     android:fontFamily="@font/urbanist_regular"
                     android:text="Mumbai,India"
                     android:textColor="#8F9298"
@@ -143,9 +143,10 @@
                     android:text="About Us"
                     android:textColor="@color/white"
                     android:layout_below="@+id/tvLocation"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:paddingBottom="@dimen/_3sdp"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingStart="@dimen/_15sdp"
@@ -157,10 +158,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="About Disney India"
-                    android:textSize="@dimen/_17sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:layout_below="@+id/tvAboutus"
                     android:layout_marginStart="@dimen/_10sdp"/>
 
@@ -171,12 +172,13 @@
                     android:layout_below="@+id/tvabout_title"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/urbanist_regular"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_regular"
                     android:inputType="textMultiLine"
                     android:padding="@dimen/_3sdp"
                     android:text="Disney india is a production company creating premium content for television, films and OTT platforms. Our expertise covers all genres including entertainment, factual, scripted and reality not only across all territories in India but also in Asia. Disney is part of Disney Hotstar group, the worlds largest independent content producer, which already has production entities in 16 territories across the globe.The vision to engage in strategic partnerships with the best creative talent around the world resulted in the JV between the Disney group and Asia pacific region."
                     android:textColor="#6E6E6E"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_10sdp"
                     tools:ignore="TextSizeCheck" />
 
 
@@ -200,11 +202,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/urbanist_semibold"
+                        android:fontFamily="@font/poppins_semibold"
                         android:padding="@dimen/_5sdp"
                         android:text="Recent Work"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_17sdp" />
+                        android:textSize="@dimen/_16sdp" />
 
                     <ImageView
                         android:layout_width="60dp"
@@ -218,7 +220,7 @@
                     android:id="@+id/llVideoView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_90sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:orientation="horizontal"
                     android:weightSum="2"
@@ -288,6 +290,7 @@
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/rectangle_app_background"
             android:fontFamily="@font/urbanist_semibold"

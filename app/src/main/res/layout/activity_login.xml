@@ -35,7 +35,7 @@
                     android:visibility="visible"
                     android:text="India's #1 Entertainment \n       Recruitment App"
                     android:textColor="@color/text_color"
-                    android:textSize="28dp"
+                    android:textSize="24dp"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/satoshi_medium"
                     android:text="@string/str_login_msg"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/str_privarcy_policy"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toTopOf="@+id/tvPrivarcyPolicy"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

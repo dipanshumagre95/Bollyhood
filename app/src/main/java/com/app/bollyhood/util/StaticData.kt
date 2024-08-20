@@ -2,6 +2,7 @@ package com.app.bollyhood.util
 
 class StaticData {
     companion object {
+        const val RAZORPAY_API_KEY = "rzp_test_BXsStmq1yc7yro"
         const val BASE_URL = "https://bollyhood.app/admin/API/"
         const val fcmToken = "fcmToken"
         const val SPALSH_TIME_OUT = 3000
@@ -21,6 +22,8 @@ class StaticData {
         const val categorie="categorie"
         const val cate_id="cate_id"
         const val cate_name="cate_name"
+        const val currency="INR"
+        const val amount="49900"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"
