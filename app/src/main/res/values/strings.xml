@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BollyHood</string>
+    <string name="app_name">Spotly</string>
     <string name="str_mobile_verification">Add your phone number. we will send you a verification code so we know you\'re a real.</string>
     <string name="str_send_otp">Send Otp</string>
     <string name="str_mobile_number">Mobile Number</string>
