@@ -57,7 +57,6 @@ class LoginActivity : AppCompatActivity(),OnClickListener {
 
         viewModel.otpLiveData.observe(this, Observer {
             if (it.status == "1") {
-
                 Toast.makeText(mContext, it.result.otp, Toast.LENGTH_SHORT).show()
                 PrefManager(mContext).setvalue(StaticData.image, it.result.image)
 
@@ -66,7 +65,7 @@ class LoginActivity : AppCompatActivity(),OnClickListener {
                         .putExtra(
                             StaticData.mobileNumber,
                             binding.edtMobileNumber.text.toString().trim()
-                        )
+                        ).putExtra("Otp",it.result.otp)
                 )
 
             } else if(it.status=="0" && it.msg.equals("User is not exist")){

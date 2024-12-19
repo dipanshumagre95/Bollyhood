@@ -3,7 +3,6 @@ package com.app.bollyhood.activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
@@ -47,6 +46,24 @@ class SendOtpActivity : AppCompatActivity() {
         if (intent.extras != null) {
             mobileNumber = intent.getStringExtra(StaticData.mobileNumber)
             binding.tvMobileNumber.text = "+91 $mobileNumber"
+            val otp = intent.getStringExtra("Otp")
+            otp?.let {
+                val editTextList = listOf(
+                    binding.edtNumber1,
+                    binding.edtNumber2,
+                    binding.edtNUmber3,
+                    binding.edtNumber4,
+                    binding.edtNumber5,
+                    binding.edtNumber6
+                )
+
+                for (index in it.indices) {
+                    if (index < editTextList.size) {
+                        editTextList[index].setText(it[index].toString())
+                    }
+                }
+            }
+
         }
     }
 

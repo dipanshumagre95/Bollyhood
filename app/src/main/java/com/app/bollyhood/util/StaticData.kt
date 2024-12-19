@@ -3,7 +3,7 @@ package com.app.bollyhood.util
 class StaticData {
     companion object {
         const val RAZORPAY_API_KEY = "rzp_test_BXsStmq1yc7yro"
-        const val BASE_URL = "https://bollyhood.app/admin/API/"
+        const val BASE_URL = "https://spotlyapp.co/"
         const val fcmToken = "fcmToken"
         const val SPALSH_TIME_OUT = 3000
         const val mobileNumber = "mobileNumber"
