@@ -1,6 +1,8 @@
 package com.app.bollyhood.viewmodel
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,6 +27,7 @@ import com.app.bollyhood.model.castinglist.CastingListResponse
 import com.app.bollyhood.repository.MainRepository
 import com.app.bollyhood.util.StaticData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -32,7 +35,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
-class DataViewModel @Inject constructor(val mainRepository: MainRepository) : ViewModel() {
+class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Context,val mainRepository: MainRepository) : ViewModel() {
 
     val isLoading = MutableLiveData(false)
     val splashLiveData = MutableLiveData(false)
@@ -88,44 +91,71 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     fun getCategory() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getCategory().let {
-                if (it.body() != null) {
-                    categoryLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getCategory()
+                if (response.isSuccessful && response.body() != null) {
+                    categoryLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
 
-    fun getAllActors(categorie:String){
+
+    fun getAllActors(categorie: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getAllActors(categorie).let{
-                if (it.body()!=null){
-                    actorsList.postValue(it.body())
-                    isLoading.postValue(false)
-                }else{
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getAllActors(categorie)
+                if (response.isSuccessful && response.body() != null) {
+                    actorsList.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to fetch actors: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
     fun getRecentCategory() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getRecentCategory().let {
-                if (it.body() != null) {
-                    categoryLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getRecentCategory()
+                if (response.isSuccessful && response.body() != null) {
+                    categoryLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch recent categories: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun doSignup(
@@ -134,156 +164,229 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         cat_id: String,
         mobile: String,
         user_type: String,
-        subCategroyId: String
+        subCategoryId: String
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.doSignup(
-                name,
-                password,
-                cat_id,
-                mobile,
-                user_type,
-                subCategroyId
-            )
-                .let {
-                    if (it.body() != null) {
-                        signupLiveData.postValue(it.body())
-                        isLoading.postValue(false)
-                    } else {
-                        isLoading.postValue(false)
-                    }
+            try {
+                val response = mainRepository.doSignup(
+                    name,
+                    password,
+                    cat_id,
+                    mobile,
+                    user_type,
+                    subCategoryId
+                )
+                if (response.isSuccessful && response.body() != null) {
+                    signupLiveData.postValue(response.body())
+                } else {
+                    val errorMessage = "Signup failed: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
+            }
         }
     }
+
 
 
     fun sendOtp(mobile: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.sendOtp(mobile).let {
-                if (it.body() != null) {
-                    otpLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.sendOtp(mobile)
+                if (response.isSuccessful && response.body() != null) {
+                    otpLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to send OTP: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
+
 
     fun doLogout(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.doLogout(uid).let {
-                if (it.body() != null) {
-                    logoutLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.doLogout(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    logoutLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Logout failed: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
 
-    fun doLogin(mobile: String, otp: String, fcmToken: String, is_online: String) {
+
+    fun doLogin(
+        mobile: String,
+        otp: String,
+        fcmToken: String,
+        isOnline: String
+    ) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.doLogin(mobile, otp, fcmToken, is_online).let {
-                if (it.body() != null) {
-                    loginLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.doLogin(mobile, otp, fcmToken, isOnline)
+                if (response.isSuccessful && response.body() != null) {
+                    loginLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Login failed: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
+
 
     fun doForgotPassword(mobile: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.doForgotPassword(mobile).let {
-                if (it.body() != null) {
-                    forgotLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.doForgotPassword(mobile)
+                if (response.isSuccessful && response.body() != null) {
+                    forgotLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Forgot password failed: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
     fun doResetPassword(mobile: String, password: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.doResetPassword(mobile, password).let {
-                if (it.body() != null) {
-                    resetPasswordLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.doResetPassword(mobile, password)
+                if (response.isSuccessful && response.body() != null) {
+                    resetPasswordLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Reset password failed: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
 
-    fun doChangePassword(uid: String, old_password: String, new_password: String) {
+
+    fun doChangePassword( uid: String, oldPassword: String, newPassword: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.doChangePassword(uid, old_password, new_password).let {
-                if (it.body() != null) {
-                    changePasswordLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.doChangePassword(uid, oldPassword, newPassword)
+                if (response.isSuccessful && response.body() != null) {
+                    changePasswordLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Change password failed: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun getProfile(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getProfile(uid).let {
-                if (it.body() != null) {
-                    Log.d("okhttptt",it.body().toString())
-                    profileLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getProfile(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d("Profile", response.body().toString()) // Log for debugging
+                    profileLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch profile: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
 
 
+
     fun uploadCastingCall(
-        uid:RequestBody,
-        company_name:RequestBody,
-        organization:RequestBody,
-        requirement:RequestBody,
-        shifting:RequestBody,
-        gender:RequestBody,
-        location:RequestBody,
-        height:RequestBody,
-        passport:RequestBody,
-        body_type:RequestBody,
-        skin_clor:RequestBody,
-        age:RequestBody,
-        price:RequestBody,
-        role:RequestBody,
-        company_logo:MultipartBody.Part?
-    ){
-        try {
-            viewModelScope.launch {
-                isLoading.postValue(true)
-                mainRepository.uploadCastingCall(
+        uid: RequestBody,
+        company_name: RequestBody,
+        organization: RequestBody,
+        requirement: RequestBody,
+        shifting: RequestBody,
+        gender: RequestBody,
+        location: RequestBody,
+        height: RequestBody,
+        passport: RequestBody,
+        body_type: RequestBody,
+        skin_clor: RequestBody,
+        age: RequestBody,
+        price: RequestBody,
+        role: RequestBody,
+        company_logo: MultipartBody.Part?
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.uploadCastingCall(
                     uid,
                     company_name,
                     organization,
@@ -299,19 +402,25 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     price,
                     role,
                     company_logo
-                ).let {
-                    if (it.body() != null) {
-                        isLoading.postValue(false)
-                        castingUploadedLiveData.postValue(it.body())
-                    } else {
-                        isLoading.postValue(false)
-                    }
+                )
+
+                if (response.isSuccessful && response.body() != null) {
+                    castingUploadedLiveData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to upload casting call: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
-        }catch (e:Exception){
-            e.printStackTrace()
         }
     }
+
 
 
     fun updateProfile(
@@ -330,12 +439,12 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         work_Link: RequestBody?,
         categories: RequestBody?,
         profile_image: MultipartBody.Part?,
-        imagefile:ArrayList<MultipartBody.Part>
+        imagefile: ArrayList<MultipartBody.Part>
     ) {
-        try {
-            viewModelScope.launch {
-                isLoading.postValue(true)
-                mainRepository.updateProfile(
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.updateProfile(
                     name,
                     email,
                     uid,
@@ -352,48 +461,61 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     categories,
                     profile_image,
                     imagefile
-                ).let {
-                    if (it.body() != null) {
-                        Log.d("okhttp",it.body().toString())
-                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
-                        isLoading.postValue(false)
-                    } else {
-                        isLoading.postValue(false)
-                    }
+                )
+
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d("okhttp", response.body().toString())
+                    updateProfileLiveData.postValue(response.body() as ProfileResponse)
+                } else {
+                    val errorMessage = "Failed to update profile: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
-        }catch (e:Exception){
-            e.printStackTrace()
         }
     }
+
 
     fun uploadKyc(
         front_image: MultipartBody.Part?,
         back_image: MultipartBody.Part?,
         image: MultipartBody.Part?,
-        user_Id:RequestBody
-    ){
-        try {
-            viewModelScope.launch {
-                isLoading.postValue(true)
-                mainRepository.uploadKyc(
+        user_Id: RequestBody
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.uploadKyc(
                     front_image,
                     back_image,
                     image,
-                    user_Id,
-                ).let {
-                    if (it.body() != null) {
-                        kycUploadLiveData.postValue(it.body() as SuccessResponse)
-                        isLoading.postValue(false)
-                    } else {
-                        isLoading.postValue(false)
-                    }
+                    user_Id
+                )
+
+                if (response.isSuccessful && response.body() != null) {
+                    // Successful upload
+                    kycUploadLiveData.postValue(response.body() as SuccessResponse)
+                } else {
+                    val errorMessage = "Failed to upload KYC: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
-        }catch (e:Exception){
-            e.printStackTrace()
         }
     }
+
 
 
     fun updateSingerProfile(
@@ -414,12 +536,12 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         work_Link: RequestBody?,
         categories: RequestBody?,
         profile_image: MultipartBody.Part?,
-        imagefile:ArrayList<MultipartBody.Part>
+        imagefile: ArrayList<MultipartBody.Part>
     ) {
-        try {
-            viewModelScope.launch {
-                isLoading.postValue(true)
-                mainRepository.updateSingerProfile(
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.updateSingerProfile(
                     name,
                     email,
                     uid,
@@ -438,20 +560,27 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     categories,
                     profile_image,
                     imagefile
-                ).let {
-                    if (it.body() != null) {
-                        Log.d("okhttp",it.body().toString())
-                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
-                        isLoading.postValue(false)
-                    } else {
-                        isLoading.postValue(false)
-                    }
+                )
+
+                if (response.isSuccessful && response.body() != null) {
+                    // Successful profile update
+                    Log.d("okhttp", response.body().toString())
+                    updateProfileLiveData.postValue(response.body() as ProfileResponse)
+                } else {
+                    val errorMessage = "Failed to update singer profile: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
-        }catch (e:Exception){
-            e.printStackTrace()
         }
     }
+
 
 
     fun updateInfluencerProfile(
@@ -471,12 +600,12 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         workLink: RequestBody?,
         categories: RequestBody?,
         profile_image: MultipartBody.Part?,
-        imagefile:ArrayList<MultipartBody.Part>
+        imagefile: ArrayList<MultipartBody.Part>
     ) {
-        try {
-            viewModelScope.launch {
-                isLoading.postValue(true)
-                mainRepository.updateInfluencerProfile(
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.updateInfluencerProfile(
                     name,
                     email,
                     uid,
@@ -494,18 +623,23 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     categories,
                     profile_image,
                     imagefile
-                ).let {
-                    if (it.body() != null) {
-                        Log.d("okhttp",it.body().toString())
-                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
-                        isLoading.postValue(false)
-                    } else {
-                        isLoading.postValue(false)
-                    }
+                )
+
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d("okhttp", response.body().toString())
+                    updateProfileLiveData.postValue(response.body() as ProfileResponse)
+                } else {
+                    val errorMessage = "Failed to update influencer profile: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
-        }catch (e:Exception){
-            e.printStackTrace()
         }
     }
 
@@ -520,12 +654,12 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         categories: RequestBody?,
         location: RequestBody?,
         tag: RequestBody?,
-        profile_image: MultipartBody.Part?,
+        profile_image: MultipartBody.Part?
     ) {
-        try {
-            viewModelScope.launch {
-                isLoading.postValue(true)
-                mainRepository.updateCompanyProfile(
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.updateCompanyProfile(
                     name,
                     email,
                     uid,
@@ -535,19 +669,23 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                     categories,
                     location,
                     tag,
-                    profile_image,
-                ).let {
-                    if (it.body() != null) {
-                        Log.d("okhttp",it.body().toString())
-                        updateProfileLiveData.postValue(it.body() as ProfileResponse)
-                        isLoading.postValue(false)
-                    } else {
-                        isLoading.postValue(false)
-                    }
+                    profile_image
+                )
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d("okhttp", response.body().toString())
+                    updateProfileLiveData.postValue(response.body() as ProfileResponse)
+                } else {
+                    val errorMessage = "Failed to update company profile: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
-        }catch (e:Exception){
-            e.printStackTrace()
         }
     }
 
@@ -555,104 +693,167 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     fun getBanner() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getBanner().let {
-                if (it.body() != null) {
-                    bannerLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getBanner()
+                if (response.isSuccessful && response.body() != null) {
+                    bannerLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch banner: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun getRecentExpertise(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getRecentExpertise(uid).let {
-                if (it.body() != null) {
-                    expertiseLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getRecentExpertise(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    expertiseLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch expertise: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
 
+
     fun getAllExpertise(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getAllExpertise(uid).let {
-                if (it.body() != null) {
-                    expertiseLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getAllExpertise(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    expertiseLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch expertise: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun getExpertiseProfileDetail(id: String?, uid: String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getExpertiseProfile(id, uid).let {
-                if (it.body() != null) {
-                    expertiseProfileLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getExpertiseProfile(id, uid)
+                if (response.isSuccessful && response.body() != null) {
+                    expertiseProfileLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch profile details: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun addRemoveBookMark(uid: String?, bookmark_uid: String?, bookmark_mode: String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.addRemoveBookMark(uid, bookmark_uid, bookmark_mode).let {
-                if (it.body() != null) {
-                    addRemoveBookMarkLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.addRemoveBookMark(uid, bookmark_uid, bookmark_mode)
+                if (response.isSuccessful && response.body() != null) {
+                    addRemoveBookMarkLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to add/remove bookmark: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
 
+
     fun myBookMark(uid: String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getBookMark(uid).let {
-                if (it.body() != null) {
-                    bookMarkLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getBookMark(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    bookMarkLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch bookmarks: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun castingBookmark(uid: String?, casting_id: String?, bookmark_mode: String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.addCastingBookMark(uid, casting_id, bookmark_mode).let {
-                if (it.body() != null) {
-                    castingBookmark.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.addCastingBookMark(uid, casting_id, bookmark_mode)
+                if (response.isSuccessful && response.body() != null) {
+                    castingBookmark.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to update bookmark: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun addBook(
@@ -662,248 +863,378 @@ class DataViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.addBook(
-                uid,
-                w_mobile,
-                purpose,
-                booking_date,
-                booking_time,
-                category_Id,
-                booking_uid
-            ).let {
-                if (it.body() != null) {
-                    addBookLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.addBook(
+                    uid,
+                    w_mobile,
+                    purpose,
+                    booking_date,
+                    booking_time,
+                    category_Id,
+                    booking_uid
+                )
+                if (response.isSuccessful && response.body() != null) {
+                    addBookLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to add booking: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
 
 
-    fun getBooking(uid: String?) {
+
+    fun getBooking(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getBooking(uid).let {
-                if (it.body() != null) {
-                    myBookLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getBooking(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    myBookLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch booking: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
     fun getPlan() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getPlan().let {
-                if (it.body() != null) {
-                    subscriptionPlanLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getPlan()
+                if (response.isSuccessful && response.body() != null) {
+                    subscriptionPlanLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch subscription plans: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun checkSubscriptions(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.checkSubscriptions(uid).let {
-                if (it.body() != null) {
-                    checkSubscriptionLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.checkSubscriptions(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    checkSubscriptionLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch subscriptions: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
     fun getCMS(type: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getCMS(type).let {
-                if (it.body() != null) {
-                    cmsLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getCMS(type)
+                if (response.isSuccessful && response.body() != null) {
+                    cmsLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch CMS data: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
+
 
 
     fun getSubCategory(category_Id: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getSubCategory(category_Id).let {
-                if (it.body() != null) {
-                    subCategoryLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getSubCategory(category_Id)
+                if (response.isSuccessful && response.body() != null) {
+                    subCategoryLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch subcategory data: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
 
-    fun getAllCastingCalls(uid: String){
+
+    fun getAllCastingCalls(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getAllCastingCalls(uid).let {
-                if (it.body() != null) {
-                    castingCallsLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getAllCastingCalls(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    castingCallsLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch casting calls: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun getCastingCalls(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getCastingCalls(uid).let {
-                if (it.body() != null) {
-                    castingCallsLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getCastingCalls(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    castingCallsLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch casting calls: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
+
 
 
     fun getCastingBookMarkCalls(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getCastingBookMark(uid).let {
-                if (it.body() != null) {
-                    castingBookMarkCallsLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getCastingBookMark(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    castingBookMarkCallsLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch casting bookmarks: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
 
-    fun getAgency(uid:String) {
+
+    fun getAgency(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getAgency(uid).let {
-                if (it.body() != null) {
-                    agencyLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getAgency(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    agencyLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch agency details: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
+
     fun getCastingCallApply(
-        uid: RequestBody, casting_id: RequestBody,
-        images: ArrayList<MultipartBody.Part>?, video: MultipartBody.Part?
+        uid: RequestBody,
+        casting_id: RequestBody,
+        images: ArrayList<MultipartBody.Part>?,
+        video: MultipartBody.Part?
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getCastingApply(uid, casting_id, images, video).let {
-                if (it.body() != null) {
-                    castingCallsApplyLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getCastingApply(uid, casting_id, images, video)
+                if (response.isSuccessful && response.body() != null) {
+                    castingCallsApplyLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to apply for casting call: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
 
     fun sendMessage(
-        uid: RequestBody, other_uid: RequestBody,
+        uid: RequestBody,
+        other_uid: RequestBody,
         text: RequestBody,
         image: MultipartBody.Part?
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.sendMessage(uid, other_uid, text, image).let {
-                if (it.body() != null) {
-                    sendMessageLiveData.postValue(it.body() as SendMessageResponse)
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.sendMessage(uid, other_uid, text, image)
+                if (response.isSuccessful && response.body() != null) {
+                    sendMessageLiveData.postValue(response.body() as SendMessageResponse)
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to send message: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
+
     fun sendPayment(
-        payment_id: String, uid: String,
+        payment_id: String,
+        uid: String,
         plan_id: String
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.sendPayment(payment_id, uid, plan_id).let {
-                if (it.body() != null) {
-                    sendPaymentLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.sendPayment(payment_id, uid, plan_id)
+
+                if (response.isSuccessful && response.body() != null) {
+                    sendPaymentLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to process payment: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
 
-    fun getSignupCategory(category_type:String) {
+
+    fun getSignupCategory(category_type: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getSignupCategory(category_type).let {
-                if (it.body() != null) {
-                    categoryLiveDataforSignup.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getSignupCategory(category_type)
+                if (response.isSuccessful && response.body() != null) {
+                    categoryLiveDataforSignup.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
     }
+
 
 
     fun getChatHistory(uid: String, other_uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mainRepository.getChat(uid, other_uid).let {
-                if (it.body() != null) {
-                    chatHistoryLiveData.postValue(it.body())
-                    isLoading.postValue(false)
+            try {
+                val response = mainRepository.getChat(uid, other_uid)
+                if (response.isSuccessful && response.body() != null) {
+                    chatHistoryLiveData.postValue(response.body())
                 } else {
-                    isLoading.postValue(false)
+                    val errorMessage = "Failed to fetch chat history: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
                 }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
             }
         }
-
     }
+
 
 
 }

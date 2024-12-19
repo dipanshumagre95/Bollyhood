@@ -216,7 +216,7 @@
                        android:id="@+id/spoffer_view"
                        android:layout_width="match_parent"
                        android:layout_height="85dp"
-                       android:background="@drawable/plan_offer_bg"
+                       android:background="@drawable/_999_plan_offer"
                        android:layout_below="@+id/spyour_exclus"
                        android:layout_marginTop="@dimen/_15sdp"
                        android:layout_marginStart="@dimen/_30sdp"
@@ -268,7 +268,7 @@
                            android:layout_marginEnd="@dimen/_12sdp"
                            android:layout_marginStart="@dimen/_12sdp"
                            android:layout_marginTop="@dimen/_15sdp"
-                           android:background="@drawable/priority_access_bg"/>
+                           android:background="@drawable/access_to_all_features"/>
 
                        <View
                            android:layout_width="match_parent"
@@ -284,7 +284,7 @@
                            android:layout_marginEnd="@dimen/_12sdp"
                            android:layout_marginStart="@dimen/_12sdp"
                            android:layout_marginTop="@dimen/_10sdp"
-                           android:background="@drawable/advance_features_bg"/>
+                           android:background="@drawable/premium_suport"/>
 
                        <com.google.android.material.textview.MaterialTextView
                            android:id="@+id/btn_spjoin"
