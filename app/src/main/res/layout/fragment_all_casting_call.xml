@@ -100,11 +100,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_7sdp"
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_2sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/rectangle_black_button"
+            android:background="@drawable/black_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
@@ -114,16 +114,15 @@
                 android:layout_height="wrap_content"
                 android:text="Post Casting Call"
                 android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/poppins_medium"/>
 
             <ImageView
-                android:layout_width="@dimen/_10sdp"
-                android:layout_height="@dimen/_10sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:src="@drawable/plus__1_"
-                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_7sdp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/circle_transparent"
                 android:layout_toRightOf="@+id/tvpostcastingcall"/>
