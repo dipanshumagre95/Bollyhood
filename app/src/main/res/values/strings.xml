@@ -185,5 +185,7 @@
     <string name="body">Upload 3 or 4 images and 1 video for better\n results and visibility.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="purple_star">Purple Start Entertainment</string>
+    <string name="talent_dash">Talent Dashboard</string>
 
 </resources>

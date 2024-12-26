@@ -7,8 +7,7 @@
 
         <variable
             name="adapter"
-            type="com.app.bollyhood.adapter.AllCastingCallListAdapter" />
-
+            type="com.app.bollyhood.adapter.TalentManagmentAdapter" />
 
     </data>
 
@@ -62,16 +61,16 @@
                 android:src="@drawable/icon_back" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvusername"
+                android:id="@+id/page_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Casting Calls"
+                android:text="@string/purple_star"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_19sdp" />
+                android:textSize="17sp" />
 
             <RelativeLayout
                 android:id="@+id/llcvprofile"
@@ -95,12 +94,11 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/llPostCastingCall"
+            android:id="@+id/lltalentDashboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_7sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_2sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,23 +110,12 @@
                 android:id="@+id/tvpostcastingcall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Post Casting Call"
-                android:textColor="@color/white"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/poppins_medium"
-                tools:ignore="TextSizeCheck"/>
-
-            <ImageView
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/plus__1_"
-                android:layout_marginStart="@dimen/_7sdp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/circle_transparent"
-                android:layout_toRightOf="@+id/tvpostcastingcall"/>
-
-
+                android:text="@string/talent_dash"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                tools:ignore="TextSizeCheck" />
         </RelativeLayout>
 
 
@@ -141,59 +128,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llPostCastingCall">
-
-           <RelativeLayout
-               android:id="@+id/llbuttons"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               app:layout_constraintEnd_toEndOf="parent"
-               android:layout_marginTop="@dimen/_15sdp"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               >
-
-               <com.google.android.material.textview.MaterialTextView
-                   android:id="@+id/tvActive"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Active"
-                   android:textSize="@dimen/_17sdp"
-                   android:elevation="@dimen/_5sdp"
-                   android:fontFamily="@font/poppins_medium"
-                   android:background="@drawable/rectangle_black_button"
-                   android:textColor="@color/white"
-                   android:paddingStart="@dimen/_25sdp"
-                   android:paddingEnd="@dimen/_25sdp"
-                   android:paddingTop="@dimen/_8sdp"
-                   android:paddingBottom="@dimen/_8sdp"/>
-
-
-               <com.google.android.material.textview.MaterialTextView
-                   android:id="@+id/tvClose"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Close"
-                   android:layout_toRightOf="@+id/tvActive"
-                   android:fontFamily="@font/poppins_medium"
-                   android:textSize="@dimen/_17sdp"
-                   android:elevation="@dimen/_5sdp"
-                   android:layout_marginStart="@dimen/_30sdp"
-                   android:background="@drawable/border_gray"
-                   android:textColor="@color/black"
-                   android:paddingStart="@dimen/_25sdp"
-                   android:paddingEnd="@dimen/_25sdp"
-                   android:paddingTop="@dimen/_8sdp"
-                   android:paddingBottom="@dimen/_8sdp"/>
-
-
-
-           </RelativeLayout>
+            app:layout_constraintTop_toBottomOf="@+id/lltalentDashboard">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_all_catingcall"
+                android:id="@+id/talent_managment_list"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="7dp"
@@ -203,7 +143,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llbuttons" />
+                app:layout_constraintTop_toBottomOf="parent" />
 
 
             <com.google.android.material.textview.MaterialTextView
