@@ -29,7 +29,7 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/border_gray"
+                android:background="@drawable/back_icon"
                 android:paddingTop="@dimen/_6sdp"
                 android:paddingBottom="@dimen/_6sdp"
                 android:paddingStart="@dimen/_6sdp"
@@ -46,11 +46,10 @@
                 android:paddingEnd="@dimen/_30sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-                android:background="@drawable/rectangle_apply_button"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/gilroy_semibold"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp" />
+                android:textColor="@color/black"
+                android:textSize="24sp" />
         </RelativeLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -70,94 +69,30 @@
                 <ImageView
                     android:id="@+id/backgroundimage"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_170sdp"
-                    android:layout_marginStart="20dp"
+                    android:layout_height="@dimen/_220sdp"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/castingcall_apply"
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/file_export"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/uploadatta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upload_atta"
-                    android:layout_marginTop="-20dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_22sdp"
-                    android:fontFamily="@font/gilroy_semibold"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/backgroundimage"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/uploadphototext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/uploadatta"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:text="@string/body"
-                    android:gravity="center"
-                    android:textColor="#737791"
-                    android:textSize="@dimen/_11sdp"
-                    android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/inter_regular"
-                    />
-
-                <LinearLayout
-                    android:id="@+id/llmediaNphoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:gravity="center_horizontal"
-                    android:layout_below="@+id/uploadphototext"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="60sp"
-                        android:layout_height="match_parent"
-                        android:paddingTop="@dimen/_2sdp"
-                        android:paddingBottom="@dimen/_2sdp"
-                        android:src="@drawable/right_line"/>
-
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Photo &amp; Video"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        android:fontFamily="@font/urbanist_bold"
-                        />
-
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        android:paddingTop="@dimen/_2sdp"
-                        android:paddingBottom="@dimen/_2sdp"
-                        android:src="@drawable/left_line"/>
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/first3"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_90sdp"
-                    android:layout_below="@id/llmediaNphoto"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_height="@dimen/_110sdp"
+                    android:layout_below="@id/backgroundimage"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:weightSum="3">
 
                     <LinearLayout
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rectangle_app_background">
+                        android:layout_weight="1">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -165,7 +100,7 @@
                             android:layout_margin="@dimen/_1sdp"
                             android:elevation="@dimen/_5sdp"
                             app:cardBackgroundColor="@color/grey"
-                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -173,7 +108,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/background_for_castingimage"
+                                android:background="@drawable/upload_image_icon"
                                 >
 
 
@@ -185,30 +120,6 @@
                                     android:contentDescription="@string/app_name"
                                     android:scaleType="centerCrop"
                                     />
-
-                                <LinearLayout
-                                    android:id="@+id/first_background"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_15sdp"
-                                        android:layout_height="@dimen/_15sdp"
-                                        android:src="@drawable/upload_image"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Upload Image"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp"
-                                        android:fontFamily="@font/urbanist_medium"
-                                        />
-
-
-                                </LinearLayout>
 
                                 <ProgressBar
                                     android:id="@+id/progressBar1"
@@ -235,7 +146,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_weight="1"
-                        android:background="@drawable/rectangle_app_background">
+                        >
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -243,7 +154,7 @@
                             android:layout_margin="@dimen/_1sdp"
                             android:elevation="@dimen/_5sdp"
                             app:cardBackgroundColor="@color/grey"
-                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -251,7 +162,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/background_for_castingimage">
+                                android:background="@drawable/upload_image_icon">
 
 
                                 <ImageView
@@ -262,30 +173,6 @@
                                     android:contentDescription="@string/app_name"
                                     android:scaleType="centerCrop"
                                     />
-
-                                <LinearLayout
-                                    android:id="@+id/second_background"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_15sdp"
-                                        android:layout_height="@dimen/_15sdp"
-                                        android:src="@drawable/upload_image"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Upload Image"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp"
-                                        android:fontFamily="@font/urbanist_medium"
-                                        />
-
-
-                                </LinearLayout>
 
                                 <ProgressBar
                                     android:id="@+id/progressBar2"
@@ -311,7 +198,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_weight="1"
-                        android:background="@drawable/rectangle_app_background">
+                        >
 
 
                         <androidx.cardview.widget.CardView
@@ -320,7 +207,7 @@
                             android:layout_margin="@dimen/_1sdp"
                             android:elevation="@dimen/_5sdp"
                             app:cardBackgroundColor="@color/grey"
-                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -328,7 +215,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/background_for_castingimage">
+                                android:background="@drawable/upload_image_icon">
 
 
                                 <ImageView
@@ -339,30 +226,6 @@
                                     android:contentDescription="@string/app_name"
                                     android:scaleType="centerCrop"
                                     />
-
-                                <LinearLayout
-                                    android:id="@+id/third_background"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_15sdp"
-                                        android:layout_height="@dimen/_15sdp"
-                                        android:src="@drawable/upload_image"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Upload Image"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp"
-                                        android:fontFamily="@font/urbanist_medium"
-                                        />
-
-
-                                </LinearLayout>
 
                                 <ProgressBar
                                     android:id="@+id/progressBar3"
@@ -387,11 +250,11 @@
                 <LinearLayout
                     android:id="@+id/second3"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_height="@dimen/_110sdp"
                     android:layout_below="@id/first3"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:weightSum="3">
 
                     <LinearLayout
@@ -399,7 +262,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_weight="1"
-                        android:background="@drawable/rectangle_app_background">
+                        >
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -407,7 +270,7 @@
                             android:layout_margin="@dimen/_1sdp"
                             android:elevation="@dimen/_5sdp"
                             app:cardBackgroundColor="@color/grey"
-                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -415,7 +278,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/background_for_castingimage">
+                                android:background="@drawable/upload_image_icon">
 
 
                                 <ImageView
@@ -427,29 +290,6 @@
                                     android:scaleType="centerCrop"
                                     />
 
-                                <LinearLayout
-                                    android:id="@+id/fourth_background"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_15sdp"
-                                        android:layout_height="@dimen/_15sdp"
-                                        android:src="@drawable/upload_image"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Upload Image"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp"
-                                        android:fontFamily="@font/urbanist_medium"
-                                        />
-
-
-                                </LinearLayout>
 
                                 <ProgressBar
                                     android:id="@+id/progressBar4"
@@ -476,8 +316,7 @@
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rectangle_app_background">
+                        android:layout_weight="1">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -485,7 +324,7 @@
                             android:layout_margin="@dimen/_1sdp"
                             android:elevation="@dimen/_5sdp"
                             app:cardBackgroundColor="@color/grey"
-                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -493,7 +332,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/background_for_castingimage">
+                                android:background="@drawable/upload_image_icon">
 
 
                                 <ImageView
@@ -505,29 +344,6 @@
                                     android:scaleType="centerCrop"
                                     />
 
-                                <LinearLayout
-                                    android:id="@+id/fifth_background"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_15sdp"
-                                        android:layout_height="@dimen/_15sdp"
-                                        android:src="@drawable/upload_image"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Upload Image"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp"
-                                        android:fontFamily="@font/urbanist_medium"
-                                        />
-
-
-                                </LinearLayout>
 
                                 <ProgressBar
                                     android:id="@+id/progressBar5"
@@ -552,8 +368,7 @@
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rectangle_app_background">
+                        android:layout_weight="1">
 
 
                         <androidx.cardview.widget.CardView
@@ -562,7 +377,7 @@
                             android:layout_margin="@dimen/_1sdp"
                             android:elevation="@dimen/_5sdp"
                             app:cardBackgroundColor="@color/grey"
-                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -570,7 +385,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/background_for_castingimage">
+                                android:background="@drawable/upload_image_icon">
 
 
                                 <ImageView
@@ -582,29 +397,6 @@
                                     android:scaleType="centerCrop"
                                     />
 
-                                <LinearLayout
-                                    android:id="@+id/six_background"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:orientation="horizontal">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_15sdp"
-                                        android:layout_height="@dimen/_15sdp"
-                                        android:src="@drawable/upload_image"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Upload Image"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp"
-                                        android:fontFamily="@font/urbanist_medium"
-                                        />
-
-
-                                </LinearLayout>
 
                                 <ProgressBar
                                     android:id="@+id/progressBar6"
@@ -643,7 +435,7 @@
                 android:id="@+id/llteamNcondition"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:orientation="horizontal">
 
@@ -652,7 +444,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentStart="true"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvteam_condition"
@@ -660,51 +453,28 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toRightOf="@+id/cbteamNcondition"
-                    android:fontFamily="@font/inter_semibold"
-                    android:text="i accept the terms and conditions "
+                    android:fontFamily="@font/inter_regular"
+                    android:text="I Accept the Terms &amp; Conditions."
                     android:gravity="center_vertical"
+                    android:textColor="#EA1874"
                     android:singleLine="true"
-                    android:textSize="11dp" />
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <ImageButton
                 android:id="@+id/lltvApplyNow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_gravity="center_vertical"
-                android:paddingStart="@dimen/_20sdp"
-                android:layout_centerHorizontal="true"
-                android:paddingEnd="@dimen/_30sdp"
+                android:layout_width="246dp"
+                android:layout_height="48dp"
                 android:layout_below="@+id/llteamNcondition"
-                android:background="@drawable/rectangle_apply_button"
-                android:layout_weight="1">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvApplyNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/satoshi_bold"
-                    android:layout_centerInParent="true"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_5sdp"
-                    android:text="Submit Audition"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13sdp"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_toRightOf="@+id/tvApplyNow"
-                    android:layout_centerVertical="true"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/baseline_arrow_right_alt_24"/>
-
-            </RelativeLayout>
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/submit_audition"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </RelativeLayout>
         <ProgressBar

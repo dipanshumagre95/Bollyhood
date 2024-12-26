@@ -339,7 +339,7 @@ class CastingApplyActivity : AppCompatActivity() {
         progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
-    private fun hideImageBackground(imageNumber: Int, isVisible: Boolean) {
+   /* private fun hideImageBackground(imageNumber: Int, isVisible: Boolean) {
         val progressBar = when (imageNumber) {
             1 -> binding.firstBackground
             2 -> binding.secondBackground
@@ -350,7 +350,7 @@ class CastingApplyActivity : AppCompatActivity() {
             else -> throw IllegalArgumentException("Invalid image number")
         }
         progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
-    }
+    }*/
 
     private fun initializeImageResultLaunchers() {
         for (i in 1..6) {
@@ -368,7 +368,7 @@ class CastingApplyActivity : AppCompatActivity() {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 showProgressBar(imageNumber, false)
-                hideImageBackground(imageNumber,false)
+              //  hideImageBackground(imageNumber,false)
                 if (isCamera) {
                     val imageBitmap = data?.extras?.get("data") as Bitmap
                     val image = saveImageToStorage(imageBitmap).toString()
