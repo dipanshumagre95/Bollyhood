@@ -187,5 +187,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="purple_star">Purple Start Entertainment</string>
     <string name="talent_dash">Talent Dashboard</string>
+    <string name="check_message">Check Messages</string>
+    <string name="explore_more_opportunities">Explore More Opportunities</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="your_applic">Your application has been \nsuccessfully submitted. You track\nthe progress the applications menu.</string>
 
 </resources>
