@@ -191,5 +191,7 @@
     <string name="explore_more_opportunities">Explore More Opportunities</string>
     <string name="congratulations">Congratulations!</string>
     <string name="your_applic">Your application has been \nsuccessfully submitted. You track\nthe progress the applications menu.</string>
-
+    <string name="search_shoo">Search Shoot Locations here...</string>
+    <string name="featured_lo">Featured Locations</string>
+    <string name="locations_a">Locations Around Mumbai</string>
 </resources>

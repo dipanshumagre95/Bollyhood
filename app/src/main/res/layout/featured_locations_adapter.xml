@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="110sp"
+        android:layout_height="160sp"
+        android:background="@drawable/popup_background">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/_5sdp"
+            android:layout_margin="1sp"
+            app:cardBackgroundColor="@color/grey"
+            app:cardCornerRadius="23dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/singer"
+                    android:scaleType="centerCrop"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/love_icon"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_alignParentEnd="true"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/location_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sets In The City"
+                    android:layout_above="@+id/location_city"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/urbanist_medium"
+                    android:textSize="12sp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/location_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thane , Mumbai"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="-3dp"
+                    android:layout_above="@+id/rating"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:textSize="8sp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐️ 4.8"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:textSize="8sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>
