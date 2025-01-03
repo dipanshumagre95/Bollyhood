@@ -4,12 +4,12 @@
     <string name="str_send_otp">Send Otp</string>
     <string name="str_mobile_number">Mobile Number</string>
     <string name="str_privarcy_policy">By continuing , you agree to our</string>
-    <string name="str_verification">Verification</string>
-    <string name="str_code_whatsapp">We have sent a code to your mobile number</string>
+    <string name="str_verification">OTP Verification</string>
+    <string name="str_code_whatsapp">We Will send you a one time password on</string>
     <string name="str_one_time_password">One Time Password</string>
     <string name="str_code">Code</string>
-    <string name="str_resend"><u>Resend</u></string>
-    <string name="str_verify">Verify</string>
+    <string name="str_resend"><u>Send OTP</u></string>
+    <string name="str_verify">Submit</string>
     <string name="str_dont_have_an_account">Don\'t have an account?</string>
     <string name="str_signup">Signup</string>
     <string name="str_already_have_an_account">Already have an account?</string>

@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
+import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class SendOtpActivity : AppCompatActivity() {
+class SendOtpActivity : AppCompatActivity(),OnClickListener {
 
     lateinit var mContext: SendOtpActivity
     lateinit var binding: ActivitySendOtpBinding
@@ -45,7 +46,7 @@ class SendOtpActivity : AppCompatActivity() {
     private fun initUI() {
         if (intent.extras != null) {
             mobileNumber = intent.getStringExtra(StaticData.mobileNumber)
-            binding.tvMobileNumber.text = "+91 $mobileNumber"
+            binding.tvMobileNumber.text = "+91-$mobileNumber"
             val otp = intent.getStringExtra("Otp")
             otp?.let {
                 val editTextList = listOf(
@@ -194,40 +195,9 @@ class SendOtpActivity : AppCompatActivity() {
             false
         })
 
-        binding.tvVerify.setOnClickListener {
-
-            if (isNetworkAvailable(mContext)) {
-                if (isvalidOtp(
-                        mContext,
-                        binding.edtNumber1.text.toString()
-                            .trim() + "" + binding.edtNumber2.text.toString().trim() + ""
-                                + binding.edtNUmber3.text.toString()
-                            .trim() + "" + binding.edtNumber4.text.toString().trim() + ""
-                                + binding.edtNumber5.text.toString()
-                            .trim() + "" + binding.edtNumber6.text.toString().trim()
-                    )
-                ) {
-                    viewModel.doLogin(
-                        mobileNumber.toString(), binding.edtNumber1.text.toString()
-                            .trim() + "" + binding.edtNumber2.text.toString().trim() + ""
-                                + binding.edtNUmber3.text.toString()
-                            .trim() + "" + binding.edtNumber4.text.toString().trim() + ""
-                                + binding.edtNumber5.text.toString()
-                            .trim() + "" + binding.edtNumber6.text.toString().trim(),
-                        PrefManager(mContext).getvalue(StaticData.fcmToken).toString(), "1"
-                    )
-                }
-
-            } else {
-                Toast.makeText(
-                    mContext, getString(R.string.str_error_internet_connections),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-
-        }
-
+        binding.tvVerify.setOnClickListener(this)
+        binding.ivBack.setOnClickListener(this)
+        binding.tvloginButton.setOnClickListener(this)
 
     }
 
@@ -268,5 +238,48 @@ class SendOtpActivity : AppCompatActivity() {
 
         startActivity(Intent(mContext, MainActivity::class.java))
         finishAffinity()
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.tvVerify ->{
+                if (isNetworkAvailable(mContext)) {
+                    if (isvalidOtp(
+                            mContext,
+                            binding.edtNumber1.text.toString()
+                                .trim() + "" + binding.edtNumber2.text.toString().trim() + ""
+                                    + binding.edtNUmber3.text.toString()
+                                .trim() + "" + binding.edtNumber4.text.toString().trim() + ""
+                                    + binding.edtNumber5.text.toString()
+                                .trim() + "" + binding.edtNumber6.text.toString().trim()
+                        )
+                    ) {
+                        viewModel.doLogin(
+                            mobileNumber.toString(), binding.edtNumber1.text.toString()
+                                .trim() + "" + binding.edtNumber2.text.toString().trim() + ""
+                                    + binding.edtNUmber3.text.toString()
+                                .trim() + "" + binding.edtNumber4.text.toString().trim() + ""
+                                    + binding.edtNumber5.text.toString()
+                                .trim() + "" + binding.edtNumber6.text.toString().trim(),
+                            PrefManager(mContext).getvalue(StaticData.fcmToken).toString(), "1"
+                        )
+                    }
+
+                } else {
+                    Toast.makeText(
+                        mContext, getString(R.string.str_error_internet_connections),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            R.id.ivBack ->{
+                finish()
+            }
+
+            R.id.tvlogin_button ->{
+                startActivity(Intent(this,LoginActivity::class.java))
+            }
+        }
     }
 }

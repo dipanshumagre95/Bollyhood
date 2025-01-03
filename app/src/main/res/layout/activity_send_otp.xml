@@ -6,92 +6,146 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/app_background_gradient"
         tools:context=".activity.OtpActivity">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:background="@drawable/rectangle_curve_lightwhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivLogo"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
-                android:scaleType="fitCenter"
-                android:src="@drawable/applogo"
-                android:visibility="gone"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_190sdp"
+                android:background="@drawable/otp_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_140sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/otp_bg_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/baseline_keyboard_backspace_24"
+                    android:backgroundTint="@color/gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvVerification"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/urbanist_medium"
-                android:gravity="center"
-                android:text="@string/str_verification"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_22sdp"
-                app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvSendCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/urbanist_regular"
-                android:gravity="center"
-                android:text="@string/str_code_whatsapp"
-                android:textColor="@color/colorgrey"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvVerification" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvMobileNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/urbanist_medium"
-                android:gravity="center"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvSendCode" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:fontFamily="@font/urbanist_medium"
-                android:text="@string/str_code"
-                android:textAllCaps="true"
-                android:textSize="@dimen/_11sdp"
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="160sp"
+                android:layout_height="160sp"
+                android:scaleType="fitXY"
+                android:src="@drawable/applogo"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout5"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
+            <LinearLayout
+                android:id="@+id/lltext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/llCode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvverification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="@string/str_verification"
+                    android:textColor="#474646"
+                    android:textSize="22sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/str"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/str_code_whatsapp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/st_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="this"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/str_mobile_number"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMobileNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="+91-7000428209"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="6"
-                app:layout_constraintTop_toBottomOf="@id/tvCode">
+                app:layout_constraintBottom_toTopOf="@+id/lldo_not_send"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
 
                 <EditText
@@ -100,12 +154,12 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center"
                     android:autofillHints="phone"
-                    android:background="@drawable/rectangle_grey"
+                    android:background="@drawable/otp_number_bg"
+                    android:fontFamily="@font/urbanist_regular"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
                     android:text=""
-                    android:fontFamily="@font/urbanist_regular"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -116,8 +170,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:autofillHints="phone"
+                    android:background="@drawable/otp_number_bg"
                     android:fontFamily="@font/urbanist_regular"
-                    android:background="@drawable/rectangle_grey"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
@@ -130,11 +184,11 @@
                     android:id="@+id/edtNUmber3"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:fontFamily="@font/urbanist_regular"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:autofillHints="phone"
-                    android:background="@drawable/rectangle_grey"
+                    android:background="@drawable/otp_number_bg"
+                    android:fontFamily="@font/urbanist_regular"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
@@ -150,8 +204,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:autofillHints="phone"
+                    android:background="@drawable/otp_number_bg"
                     android:fontFamily="@font/urbanist_regular"
-                    android:background="@drawable/rectangle_grey"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
@@ -164,10 +218,10 @@
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/urbanist_regular"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:autofillHints="phone"
-                    android:background="@drawable/rectangle_grey"
+                    android:background="@drawable/otp_number_bg"
+                    android:fontFamily="@font/urbanist_regular"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
@@ -183,27 +237,55 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:autofillHints="phone"
-                    android:background="@drawable/rectangle_grey"
-                    android:gravity="center"
+                    android:background="@drawable/otp_number_bg"
                     android:fontFamily="@font/urbanist_regular"
+                    android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
-
-
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/lldo_not_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/tvVerify"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Do not send OTP ?"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvsend_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/str_resend"
+                    android:textColor="#E9890A"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvVerify"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
                 android:background="@drawable/rectangle_app_background"
                 android:fontFamily="@font/urbanist_bold"
                 android:gravity="center"
@@ -211,10 +293,42 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
-                app:layout_constraintTop_toBottomOf="@id/llCode" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You have an account ?"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_regular"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvlogin_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:fontFamily="@font/poppins_semibold"/>
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/pbLoadData"
