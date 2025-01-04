@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/view"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="Create your account"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/black"
@@ -62,8 +62,8 @@
 
                 <LinearLayout
                     android:id="@+id/lyindividual"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="160dp"
+                    android:layout_height="56dp"
                     android:background="@drawable/rectangle_black_button"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -98,8 +98,8 @@
 
                 <LinearLayout
                     android:id="@+id/lycompany"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="160dp"
+                    android:layout_height="56dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/border_gray"
                     android:gravity="center"
@@ -135,7 +135,7 @@
             <RelativeLayout
                 android:id="@+id/llacSelectcatagory"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/llcategory"
                 android:layout_centerHorizontal="true"
@@ -181,11 +181,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:text="First Name"
                 android:layout_below="@+id/llacSelectcatagory"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="14sp"
                  />
 
             <LinearLayout
@@ -228,7 +228,7 @@
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/colorgrey"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/rrProfile" />
 
             </LinearLayout>
@@ -239,11 +239,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Last Name"
                 android:layout_below="@+id/llfirstname"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="14sp"
                  />
 
             <LinearLayout
@@ -286,7 +286,7 @@
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/colorgrey"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/rrProfile" />
 
             </LinearLayout>
@@ -297,11 +297,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Password"
                 android:layout_below="@+id/lllastname"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="14sp"
                  />
 
             <RelativeLayout
@@ -346,7 +346,7 @@
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/colorgrey"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/passwordshow"
@@ -368,11 +368,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Confirm Password"
                 android:layout_below="@+id/llpassward"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="14sp"
                 />
 
             <RelativeLayout
@@ -417,7 +417,7 @@
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/colorgrey"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/cnfmpassshow"
@@ -456,9 +456,9 @@
                     android:layout_height="30dp"
                     android:singleLine="true"
                     android:layout_toRightOf="@+id/cbteamNcondition"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center_vertical"
-                    android:textSize="11dp" />
+                    android:textSize="9dp" />
             </RelativeLayout>
 
 
@@ -477,15 +477,15 @@
                     android:id="@+id/tvSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
                     android:text="SIGN UP"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="16sp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
