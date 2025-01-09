@@ -57,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textview.MaterialTextView
@@ -75,12 +76,13 @@
 
                     <ImageView
                         android:id="@+id/ivBookMark"
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_2sdp"
-                        android:adjustViewBounds="true"
-                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:visibility="gone"
+                        android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/tvname"
                         android:contentDescription="@string/app_name"
                         android:scaleType="fitCenter"

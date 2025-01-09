@@ -52,9 +52,9 @@
                         android:id="@+id/rrMain"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="15sp"
                         android:layout_marginTop="15dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -69,10 +69,10 @@
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/cvProfile"
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
                                 android:layout_centerVertical="true"
-                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_margin="@dimen/_1sdp"
                                 android:src="@drawable/ic_profile" />
                         </RelativeLayout>
 
@@ -80,30 +80,29 @@
                             android:id="@+id/tvusername"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_2sdp"
                             android:layout_toRightOf="@id/llcvprofile"
-                            android:fontFamily="@font/urbanist_bold"
+                            android:fontFamily="@font/urbanist_semibold"
                             android:text="Hi Akshay,"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_20sdp" />
+                            android:textSize="24sp" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvusername"
-                            android:layout_marginStart="@dimen/_2sdp"
-                            android:layout_marginTop="-5dp"
+                            android:layout_marginTop="-4dp"
                             android:layout_toRightOf="@id/llcvprofile"
                             android:fontFamily="@font/urbanist_regular"
                             android:text="Showing Results From Mumbai"
                             android:textColor="#444A6D"
-                            android:textSize="@dimen/_10sdp" />
+                            android:textSize="12sp" />
 
                         <ImageView
-                            android:layout_width="@dimen/_27sdp"
-                            android:layout_height="@dimen/_27sdp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_centerVertical="true"
                             android:background="@drawable/rectangle_app_background"
                             android:padding="@dimen/_5sdp"
                             android:src="@drawable/notification" />
@@ -123,7 +122,7 @@
                             android:id="@+id/edtSearchView"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="15sp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:background="@drawable/search_view"
@@ -144,7 +143,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="@dimen/_7sdp"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="10sp"
                             android:adapter="@{adapter}"
                             android:padding="@dimen/_5sdp" />
 
@@ -161,9 +160,9 @@
                             android:id="@+id/rrCategory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="15sp"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginEnd="15sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/rvBanner">
 
@@ -172,7 +171,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/gilroy_semibold"
-                                android:layout_marginStart="@dimen/_5sdp"
                                 android:text="@string/str_normal_category"
                                 android:layout_centerVertical="true"
                                 android:textSize="@dimen/_15sdp"
@@ -185,10 +183,10 @@
                                 android:layout_marginTop="@dimen/_2sdp"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentEnd="true"
-                                android:fontFamily="@font/urbanist_medium"
+                                android:fontFamily="@font/urbanist_regular"
                                 android:text="@string/str_view_all"
                                 android:textColor="#1AA7CE"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="14sp" />
 
 
                         </RelativeLayout>
@@ -216,9 +214,9 @@
                             android:id="@+id/rrExpertise"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="15sp"
                             android:layout_marginTop="@dimen/_15sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginEnd="15sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/rvCategory">
 
@@ -226,7 +224,6 @@
                                 android:id="@+id/tvExpertise"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
                                 android:fontFamily="@font/gilroy_semibold"
                                 android:text="@string/str_hand_picked_talent"
                                 android:textSize="@dimen/_15sdp"
@@ -242,7 +239,7 @@
                                 android:text="@string/str_see_more"
                                 android:layout_centerVertical="true"
                                 android:textColor="#1AA7CE"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="14sp" />
 
 
                         </RelativeLayout>
@@ -260,8 +257,8 @@
                             android:layout_height="150dp"
                             android:background="@drawable/how_you_banner"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginEnd="6dp"/>
+                            android:layout_marginStart="15sp"
+                            android:layout_marginEnd="10sp"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -301,8 +298,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginStart="15sp"
+                            android:layout_marginEnd="15sp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_weight="4">
 
@@ -519,9 +516,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="15sp"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_marginEnd="15sp"
                             android:gravity="center_horizontal"
                             android:weightSum="4"
                             android:orientation="horizontal"
@@ -574,23 +571,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:background="@drawable/kyc_banner1"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="15sp"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginEnd="6dp"/>
+                            android:layout_marginEnd="5sp"/>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_70sdp"
                             android:background="@drawable/brands_work_with_us"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginEnd="@dimen/_12sdp"/>
+                            android:layout_marginStart="15sp"
+                            android:layout_marginEnd="15sp"/>
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginStart="15sp"
+                            android:layout_marginEnd="15sp"
                             android:background="@drawable/bollyhood_backgd"
                             android:layout_marginTop="@dimen/_12sdp">
 

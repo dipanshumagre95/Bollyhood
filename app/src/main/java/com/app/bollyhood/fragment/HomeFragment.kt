@@ -68,6 +68,7 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
             Glide.with(requireContext())
                 .load(PrefManager(requireContext()).getvalue(StaticData.image))
                 .placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile)
+                .centerCrop()
                 .into(binding.cvProfile)
         }
 
@@ -76,6 +77,8 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
         if (isNetworkAvailable(requireContext())) {
             viewModel.getBanner()
             viewModel.getRecentCategory()
+            viewModel.getRecentExpertise(
+            PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
             Toast.makeText(
                 requireContext(),
@@ -208,10 +211,6 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
 
     override fun onResume() {
         super.onResume()
-
-        viewModel.getRecentExpertise(
-            PrefManager(requireContext()).getvalue(StaticData.id).toString()
-        )
 
         binding.tvusername.text = "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
 
