@@ -80,15 +80,16 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
                 if (text?.length!! > 3) {
                     setFilteredData(text.toString())
                 }else{
-                    if (categoryList.size >= 12) {
+                    /*if (categoryList.size >= 12) {
                         categorySubList.clear()
                         categorySubList.addAll(categoryList.subList(0, 12))
                         binding.categoryAdapter?.updateList(categorySubList)
-                        binding.tvloadMore.visibility=View.VISIBLE
+                        binding.tvloadMore.visibility=View.GONE
                     } else {
                         binding.categoryAdapter?.updateList(categoryList)
                         binding.tvloadMore.visibility=View.GONE
-                    }
+                    }*/
+                    binding.categoryAdapter?.updateList(categoryList)
                 }
             }
 
