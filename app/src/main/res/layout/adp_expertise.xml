@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginTop="-2dp"
+                    android:layout_marginTop="-5dp"
                     android:fontFamily="@font/urbanist_semibold"
                     android:gravity="center_horizontal"
                     android:maxLines="1"

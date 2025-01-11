@@ -50,6 +50,19 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
         setMargins(5,0,5,0)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getBanner()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
 
 
     override fun onCreateView(
@@ -75,7 +88,6 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
         (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
 
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getBanner()
             viewModel.getRecentCategory()
             viewModel.getRecentExpertise(
             PrefManager(requireContext()).getvalue(StaticData.id).toString())

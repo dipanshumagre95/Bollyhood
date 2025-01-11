@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AdpAllCategoryBinding
 import com.app.bollyhood.model.CategoryModel
 import com.bumptech.glide.Glide
@@ -29,7 +30,11 @@ class AllCategoryAdapter(val requireContext: Context, var categoryList: ArrayLis
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val model = categoryList[position]
-        Glide.with(requireContext).load(model.category_image).centerCrop().into(holder.binding.ivCategoryImage)
+        Glide.with(requireContext)
+            .load(model.category_image)
+            .centerCrop()
+            .error(R.drawable.ic_profile)
+            .into(holder.binding.ivCategoryImage)
         holder.binding.tvCategoryName.text = model.category_name
 
         holder.itemView.setOnClickListener {
