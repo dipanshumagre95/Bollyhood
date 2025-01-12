@@ -254,7 +254,7 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             tvCategroy.text = stringList.joinToString(separator = " / ")
 
 
-            if (singleCategoryModel.description.isNotEmpty()) {
+            if (singleCategoryModel.description.isNullOrEmpty()==false) {
                 if (singleCategoryModel.description.length > 150) {
                     val shorttext = singleCategoryModel.description.substring(0, 150)
                     setSpannableString(shorttext, "read more", singleCategoryModel.description)
