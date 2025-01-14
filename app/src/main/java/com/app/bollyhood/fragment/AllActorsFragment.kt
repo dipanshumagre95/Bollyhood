@@ -22,6 +22,11 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.adapter.AllActorsAdapter
 import com.app.bollyhood.databinding.FragmentAllActorsBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.fragment.profileDetailsFragments.ActorsProfileDetailsFragment
+import com.app.bollyhood.fragment.profileDetailsFragments.DancerProfileDetailFragment
+import com.app.bollyhood.fragment.profileDetailsFragments.DjProfileDetailFragment
+import com.app.bollyhood.fragment.profileDetailsFragments.InfluencerProfileDetailFragment
+import com.app.bollyhood.fragment.profileDetailsFragments.SingerProfileDetailsFragment
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -253,6 +258,46 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
                     val actorsProfileDetailsFragment = ActorsProfileDetailsFragment()
                     actorsProfileDetailsFragment.arguments = bundle
                     (requireActivity() as MainActivity).loadFragment(actorsProfileDetailsFragment)
+                }
+
+                Categorie.SINGER.toString() ->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
+
+                    val singerProfileDetailFragment = SingerProfileDetailsFragment()
+                    singerProfileDetailFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(singerProfileDetailFragment)
+                }
+
+                Categorie.DJ.toString() ->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
+
+                    val djProfileDetailFragment = DjProfileDetailFragment()
+                    djProfileDetailFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(djProfileDetailFragment)
+                }
+
+                Categorie.DANCER.toString() ->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
+
+                    val dancerProfileDetailFragment = DancerProfileDetailFragment()
+                    dancerProfileDetailFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(dancerProfileDetailFragment)
+                }
+
+                Categorie.INFLUENCER.toString() ->{
+                    val bundle = Bundle()
+                    bundle.putString(StaticData.userModel, Gson().toJson(singleCategoryModel))
+                    bundle.putString(StaticData.previousFragment,"AllActosFragment")
+
+                    val influencerProfileDetailFragment = InfluencerProfileDetailFragment()
+                    influencerProfileDetailFragment.arguments = bundle
+                    (requireActivity() as MainActivity).loadFragment(influencerProfileDetailFragment)
                 }
 
                 else->{

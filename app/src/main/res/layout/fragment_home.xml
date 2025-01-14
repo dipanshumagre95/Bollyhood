@@ -141,9 +141,9 @@
                             android:id="@+id/rvBanner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/_7sdp"
-                            android:layout_marginRight="10sp"
                             android:adapter="@{adapter}"
                             android:padding="@dimen/_5sdp" />
 

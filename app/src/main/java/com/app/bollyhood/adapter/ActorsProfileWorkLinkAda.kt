@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.AdapterActorsWorklinkBinding
 import com.app.bollyhood.model.WorkLinkProfileData
 
-class ActorsProfileWorkLinkAda(val mContext: Context, val workLinks: ArrayList<WorkLinkProfileData>,val onclick: ActorsProfileWorkLinkAda.onItemClick) :
+class ActorsProfileWorkLinkAda(val mContext: Context, val workLinks: ArrayList<WorkLinkProfileData>,val onclick: onItemClick) :
     RecyclerView.Adapter<ActorsProfileWorkLinkAda.MyViewHolder>(){
 
 

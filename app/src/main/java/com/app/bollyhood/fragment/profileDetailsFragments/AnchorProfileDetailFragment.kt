@@ -1,4 +1,4 @@
-package com.app.bollyhood.fragment
+package com.app.bollyhood.fragment.profileDetailsFragments
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -26,8 +26,9 @@ import com.app.bollyhood.R
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.YoutubeActivity
 import com.app.bollyhood.adapter.ActorsProfileWorkLinkAda
-import com.app.bollyhood.databinding.FragmentActorsProfileDetailsBinding
+import com.app.bollyhood.databinding.FragmentAnchorProfileDetailBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.fragment.AllActorsFragment
 import com.app.bollyhood.model.PhotoModel
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -36,13 +37,17 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
 
 @AndroidEntryPoint
-class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWorkLinkAda.onItemClick {
+class AnchorProfileDetailFragment : Fragment(),OnClickListener,ActorsProfileWorkLinkAda.onItemClick {
 
-    private lateinit var binding: FragmentActorsProfileDetailsBinding
+    private lateinit var binding: FragmentAnchorProfileDetailBinding
     private var singleCategoryModel: SingleCategoryModel? =null
     private lateinit var previousFragment:String
     private val viewModel: DataViewModel by viewModels()
@@ -50,12 +55,12 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
     private var is_bookmark: Int = 0
     private var photolist:ArrayList<PhotoModel> = arrayListOf()
     private var expanded:Boolean=true
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding= DataBindingUtil.inflate(layoutInflater,R.layout.fragment_actors_profile_details, container, false)
+        binding= DataBindingUtil.inflate(layoutInflater,R.layout.fragment_anchor_profile_detail, container, false)
 
         initUi()
         addListener()
@@ -64,11 +69,9 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
     }
 
     private fun addListener() {
-
         binding.llbookmark.setOnClickListener(this)
         binding.llBack.setOnClickListener(this)
         binding.llCall.setOnClickListener(this)
-
     }
 
     private fun addObserevs() {
@@ -85,7 +88,7 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             if (it.status == "1") {
                 if (it.msg.equals("Bookmarked Successfully")){
                     singleCategoryModel?.is_bookmarked=1
-                   binding.ivBookMark.setBackgroundResource(R.drawable.ic_addedbookmark)
+                    binding.ivBookMark.setBackgroundResource(R.drawable.ic_addedbookmark)
                 }else{
                     singleCategoryModel?.is_bookmarked=0
                     binding.ivBookMark.setBackgroundResource(R.drawable.ic_bookmark)
@@ -99,13 +102,13 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
         viewModel.checkSubscriptionLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (it.result.is_subscription == "0") {
-                 //   startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
+                    //   startActivity(Intent(requireContext(), SubscriptionPlanActivity::class.java))
                 }else{
                     if (singleCategoryModel?.mobile?.isNotEmpty()!!) {
                         val intent =
                             Intent(
                                 Intent.ACTION_DIAL, Uri.fromParts("tel",
-                                singleCategoryModel?.mobile, null))
+                                    singleCategoryModel?.mobile, null))
                         startActivity(intent)
                     }
 
@@ -202,34 +205,22 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(cvProfile)
             tvName.text = singleCategoryModel?.name
 
-            if (singleCategoryModel?.age?.isNotEmpty() == true){
-                tvage.text=singleCategoryModel?.age
+            if (singleCategoryModel?.genre?.isNotEmpty() == true){
+                tvExperience.text=singleCategoryModel?.genre
             }else{
-                llage.visibility=View.GONE
+                llExperience.visibility=View.GONE
             }
 
-            if (singleCategoryModel?.body_type?.isNotEmpty()== true) {
-                tvbodytype.text = singleCategoryModel?.body_type
+            if (singleCategoryModel?.languages?.isNotEmpty()==true){
+                tvLanguages.text=singleCategoryModel?.languages
             }else{
-                llbodyType.visibility=View.GONE
+                llLanguages.visibility=View.GONE
             }
 
-            if (singleCategoryModel?.height?.isNotEmpty()==true){
-                tvheight.text=singleCategoryModel?.height
+            if (singleCategoryModel?.events?.isNotEmpty()==true){
+                EventTypes.text=singleCategoryModel?.events
             }else{
-                llheight.visibility=View.GONE
-            }
-
-            if (singleCategoryModel?.skin_color?.isNotEmpty()==true){
-                skinColor.text=singleCategoryModel?.skin_color
-            }else{
-                skinColor.visibility=View.GONE
-            }
-
-            if (singleCategoryModel?.passport?.isNotEmpty() == true) {
-                tvpassport.text = singleCategoryModel?.passport
-            }else{
-                tvpassport.visibility=View.GONE
+                llEventTypes.visibility=View.GONE
             }
 
             if (singleCategoryModel?.location?.isNotEmpty()==true) {
@@ -265,6 +256,20 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
                 llabout.visibility=View.GONE
             }
 
+            if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
+                val innerArrayStr = singleCategoryModel.videos_url[0].video_url
+                val innerArray = JSONArray(innerArrayStr)
+                for (i in 0 until innerArray.length()) {
+                    val item = innerArray.getJSONObject(i)
+                    if (i==0){
+                        playVideo(item.getString("video_url"),binding.youtubePlayerView)
+                    }
+                }
+            }else{
+                binding.llVideoView.visibility=View.GONE
+                binding.showreelFrame.visibility=View.GONE
+            }
+
             is_bookmark = singleCategoryModel.is_bookmarked
 
             if (singleCategoryModel.is_bookmarked == 1) {
@@ -274,7 +279,7 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             }
 
 
-            if (!(singleCategoryModel?.imagefile?.isNullOrEmpty() == true)) {
+            if (singleCategoryModel?.imagefile?.isNullOrEmpty() == false) {
                 for (i in 0 until singleCategoryModel.imagefile.size) {
                     photolist.add(PhotoModel(i, singleCategoryModel.imagefile.get(i)))
                 }
@@ -430,7 +435,7 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rrworkLink.setHasFixedSize(true)
         binding.adapter =
-            ActorsProfileWorkLinkAda(requireContext(), worklinklist, this@ActorsProfileDetailsFragment)
+            ActorsProfileWorkLinkAda(requireContext(), worklinklist, this@AnchorProfileDetailFragment)
         binding.rrworkLink.adapter = binding.adapter
     }
 
@@ -439,4 +444,33 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             Intent(requireContext(), YoutubeActivity::class.java).putExtra("videoId", work.worklink_url)
         )
     }
+
+    private fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView) {
+        val options = IFramePlayerOptions.Builder()
+            .controls(0)
+            .build()
+
+
+        val listener = object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
+                val videoId = extractVideoId(videoUrl) ?: ""
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+
+            override fun onStateChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer, state: PlayerConstants.PlayerState) {
+            }
+        }
+
+        youtubePlayerView.addYouTubePlayerListener(listener)
+        youtubePlayerView.enableAutomaticInitialization = false
+        youtubePlayerView.initialize(listener, options)
+    }
+
+    fun extractVideoId(url: String): String? {
+        val pattern = "(?<=youtu\\.be/|watch\\?v=|/videos/|embed\\/|youtu\\.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%2F|shorts/)[^#\\&\\?\\n]*"
+        val regex = Regex(pattern)
+        val matchResult = regex.find(url)
+        return matchResult?.value
+    }
+
 }

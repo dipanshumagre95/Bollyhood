@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="adapter"
+            type="com.app.bollyhood.adapter.ActorsProfileWorkLinkAda" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/actors_profile_background"
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="-20dp"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/llscroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:background="@drawable/actors_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <View
+                        android:id="@+id/llBack"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/back_icon"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_40sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_45sdp"
+                        android:text="Actor’s Details"
+                        android:textColor="#0F1325"
+                        android:textSize="24dp"
+                        android:visibility="gone"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        app:fontFamily="@font/inter_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RelativeLayout
+                        android:id="@+id/llbookmark"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/_40sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/bollyhood_backgd"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <View
+                            android:id="@+id/ivBookMark"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="#FA469E"
+                            android:background="@drawable/ic_bookmark"/>
+
+                    </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/llmain"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="-30dp"
+                    android:background="@drawable/actors_profile_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="95dp"
+                            android:text="Sushant Pujaari"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/gilroy_semibold"
+                            />
+
+                        <ImageView
+                            android:id="@+id/ivVerified"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:visibility="gone"
+                            android:src="@drawable/actors_verified"
+                            android:layout_marginTop="100dp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/tvName"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_officalid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="\@sushantpujarionline"
+                            android:layout_below="@+id/tvName"
+                            android:textSize="14dp"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:fontFamily="@font/inter_regular"
+                            android:textColor="#FA469E"
+                            android:layout_centerHorizontal="true"
+                            tools:ignore="TextSizeCheck"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_Categroy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dancer &amp; Actor "
+                            android:textSize="14sp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:layout_below="@+id/tv_officalid"
+                            android:textColor="#475569"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/inter_semibold"/>
+
+                        <LinearLayout
+                            android:id="@+id/llabout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_Categroy"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:background="@drawable/about_background"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:orientation="vertical">
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvabout_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="About Sushant"
+                                android:textSize="18dp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:fontFamily="@font/inter_semibold"
+                                android:layout_gravity="center"
+                                android:textColor="#F94260"/>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_Description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="My Name is Akshay Kapoor. I work as an actor here in Mumbai. I have done 100+ roles till now. I have done my acting course from NDA. Feel free to contact with me for any work inquiry.... Read More"
+                                android:textSize="16dp"
+                                android:padding="@dimen/_3sdp"
+                                android:textColor="@color/black"
+                                app:fontFamily="@font/inter_regular"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/quickview"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@drawable/tvquick_info"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:layout_below="@+id/llabout"
+                            />
+
+                        <LinearLayout
+                            android:id="@+id/locationNage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_below="@+id/quickview">
+
+                            <LinearLayout
+                                android:id="@+id/lllocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_weight="1">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Location"
+                                    android:textSize="14sp"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_semibold"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/location_background"
+                                    android:layout_marginTop="@dimen/_8sdp">
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/location_icon"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tvlocation"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Mumbai, Delhi"
+                                        android:singleLine="true"
+                                        android:maxLines="1"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="12dp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_semibold"
+                                        tools:ignore="TextSizeCheck"
+                                        />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llGenre"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_weight="1">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Genre"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:textSize="14sp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_semibold"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/age_background"
+                                    android:layout_marginTop="@dimen/_8sdp">
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/ic_mic_icon"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tvGenre"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Pop, Indie, Rap"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:singleLine="true"
+                                        android:maxLines="1"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="12dp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_semibold"
+                                        tools:ignore="TextSizeCheck"
+                                        />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/skinNheight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_below="@+id/locationNage">
+
+                            <LinearLayout
+                                android:id="@+id/llEvent_types"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:orientation="vertical"
+                                android:layout_weight="1">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Event Types"
+                                    android:textSize="14sp"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_semibold"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/height_background"
+                                    android:layout_marginTop="@dimen/_8sdp">
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/ic_share_icon"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/Event_types"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Wedding, Corporate"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:singleLine="true"
+                                        android:maxLines="1"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="12sp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_semibold"
+                                        />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llLanguages"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_weight="1">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Height"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:textSize="14sp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_semibold"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="56dp"
+                                    android:background="@drawable/language_bg"
+                                    android:layout_marginTop="@dimen/_8sdp">
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/heart"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tvLanguages"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Hindi, Marathi"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="12sp"
+                                        android:singleLine="true"
+                                        android:maxLines="1"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_semibold"
+                                        />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/dancer_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/skinNheight"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:background="@drawable/ic_dancer_frame"
+                            android:layout_marginTop="@dimen/_15sdp"/>
+
+                        <LinearLayout
+                            android:id="@+id/llVideoView"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_170sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_below="@+id/dancer_frame">
+
+                            <LinearLayout
+                                android:id="@+id/llyoutube_player_view1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
+                                android:background="@drawable/casting_call_background">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="@dimen/_10sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    >
+
+                                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                        android:id="@+id/youtube_player_view1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        />
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llyoutube_player_view2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:background="@drawable/casting_call_background">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="@dimen/_10sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    >
+
+                                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                        android:id="@+id/youtube_player_view2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        />
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/media_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/llVideoView"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:background="@drawable/media_photo_frame"
+                            android:layout_marginTop="@dimen/_15sdp"/>
+
+
+                        <RelativeLayout
+                            android:id="@+id/llimage"
+                            android:layout_width="match_parent"
+                            android:layout_below="@+id/media_frame"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:layout_height="wrap_content">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="@dimen/_30sdp">
+
+                                <RelativeLayout
+                                    android:id="@+id/llsiximage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/image1"
+                                        android:layout_width="200dp"
+                                        android:layout_height="200dp"
+                                        android:scaleType="centerCrop"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/image2"
+                                        android:layout_width="165dp"
+                                        android:layout_height="98dp"
+                                        android:scaleType="centerCrop"
+                                        android:layout_toRightOf="@+id/image1"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/image3"
+                                        android:layout_width="165dp"
+                                        android:layout_height="95dp"
+                                        android:scaleType="centerCrop"
+                                        android:layout_below="@+id/image2"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/image1"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:src="@drawable/singer"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:layout_below="@+id/image1"
+                                        android:weightSum="3"
+                                        android:layout_marginTop="@dimen/_5sdp">
+
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/image4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="167dp"
+                                            android:layout_weight="1"
+                                            app:shapeAppearance="@style/roundedCornersProfile"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/singer"/>
+
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/image5"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="167dp"
+                                            android:layout_weight="1"
+                                            android:layout_marginStart="@dimen/_5sdp"
+                                            android:layout_marginEnd="@dimen/_5sdp"
+                                            app:shapeAppearance="@style/roundedCornersProfile"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/singer"/>
+
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/image6"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="167dp"
+                                            android:layout_weight="1"
+                                            app:shapeAppearance="@style/roundedCornersProfile"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/singer"/>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/llfiveimage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fiveimage1"
+                                        android:layout_width="200dp"
+                                        android:layout_height="200dp"
+                                        android:scaleType="centerCrop"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fiveimage2"
+                                        android:layout_width="165dp"
+                                        android:layout_height="200dp"
+                                        android:scaleType="centerCrop"
+                                        android:layout_toRightOf="@+id/fiveimage1"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:src="@drawable/singer"/>
+
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fiveimage3"
+                                        android:layout_width="126dp"
+                                        android:layout_height="167dp"
+                                        android:layout_below="@+id/fiveimage1"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fiveimage4"
+                                        android:layout_width="126dp"
+                                        android:layout_height="167dp"
+                                        android:layout_below="@+id/fiveimage1"
+                                        android:layout_toRightOf="@+id/fiveimage3"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fiveimage5"
+                                        android:layout_width="126dp"
+                                        android:layout_height="167dp"
+                                        android:layout_below="@+id/fiveimage1"
+                                        android:layout_toRightOf="@+id/fiveimage4"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/llfourthimage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fourthimage1"
+                                        android:layout_width="190dp"
+                                        android:layout_height="180dp"
+                                        android:scaleType="centerCrop"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fourthimage2"
+                                        android:layout_width="190dp"
+                                        android:layout_height="180dp"
+                                        android:scaleType="centerCrop"
+                                        android:layout_toRightOf="@+id/fourthimage1"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:src="@drawable/singer"/>
+
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fourthimage3"
+                                        android:layout_width="190dp"
+                                        android:layout_height="180dp"
+                                        android:layout_below="@+id/fourthimage1"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/fourthimage4"
+                                        android:layout_width="190dp"
+                                        android:layout_height="180dp"
+                                        android:layout_below="@+id/fourthimage1"
+                                        android:layout_toRightOf="@+id/fourthimage3"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/llthreeimage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/threeimage1"
+                                        android:layout_width="380dp"
+                                        android:layout_height="180dp"
+                                        android:scaleType="centerCrop"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:src="@drawable/singer"/>
+
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/threeimage2"
+                                        android:layout_width="190dp"
+                                        android:layout_height="180dp"
+                                        android:layout_below="@+id/threeimage1"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/threeimage3"
+                                        android:layout_width="190dp"
+                                        android:layout_height="180dp"
+                                        android:layout_below="@+id/threeimage1"
+                                        android:layout_toRightOf="@+id/threeimage2"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/lltwoimage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/twoimage1"
+                                        android:layout_width="190dp"
+                                        android:layout_height="250dp"
+                                        android:scaleType="centerCrop"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:src="@drawable/singer"/>
+
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/twoimage2"
+                                        android:layout_width="190dp"
+                                        android:layout_height="250dp"
+                                        android:layout_toRightOf="@+id/twoimage1"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/singer"/>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/lloneimage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/oneimage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="250dp"
+                                        android:scaleType="centerCrop"
+                                        app:shapeAppearance="@style/roundedCornersProfile"
+                                        android:src="@drawable/singer"/>
+
+
+                                </RelativeLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </RelativeLayout>
+
+
+                        <View
+                            android:id="@+id/work_link_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/llimage"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            android:background="@drawable/work_link_frame"
+                            android:layout_marginTop="@dimen/_20sdp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rrworkLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adapter="@{adapter}"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_below="@+id/work_link_frame"
+                            android:layout_marginStart="@dimen/_10sdp"/>
+
+                        <RelativeLayout
+                            android:id="@+id/llExclusively"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_below="@+id/rrworkLink"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/cbteamNcondition"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/verified_account"
+                                android:layout_alignParentStart="true"
+                                android:layout_gravity="center" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvteam_condition"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_centerVertical="true"
+                                android:text="Exclusively Managed By PurpleStar Entertainment. "
+                                android:textColor="@color/black"
+                                app:fontFamily="@font/poppins_semibold"
+                                android:layout_toRightOf="@+id/cbteamNcondition"
+                                android:fontFamily="@font/urbanist_regular"
+                                android:gravity="center_vertical"
+                                android:textSize="10dp" />
+                        </RelativeLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/llCall"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:textColor="@color/white"
+                            android:text="Hire Me / Message Me"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/urbanist_semibold"
+                            android:gravity="center"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_below="@+id/llExclusively"
+                            android:layout_marginBottom="@dimen/_25sdp"
+                            android:background="@drawable/rectangle_app_background" />
+
+                    </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rrProfile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:gravity="right|center"
+                    android:background="@drawable/actors_profile_gradient"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cvProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_profile"
+                        android:layout_margin="@dimen/_2sdp" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RelativeLayout>
+</layout>

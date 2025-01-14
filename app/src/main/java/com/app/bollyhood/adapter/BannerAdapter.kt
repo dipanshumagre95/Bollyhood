@@ -25,7 +25,10 @@ class BannerAdapter(val requireContext: Context, val bannerList: ArrayList<Banne
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val model = bannerList[position]
-        Glide.with(requireContext).load(model.banner_image).into(holder.binding.ivImage)
+        Glide.with(requireContext)
+            .load(model.banner_image)
+            .centerCrop()
+            .into(holder.binding.ivImage)
     }
 
     class MyViewHolder(val binding: AdpBannerlistBinding) : RecyclerView.ViewHolder(binding.root) {
