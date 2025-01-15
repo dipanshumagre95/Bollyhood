@@ -786,6 +786,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_20sdp"
                             android:layout_below="@+id/rrworkLink"
+                            android:visibility="gone"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_12sdp"
                             android:orientation="horizontal">

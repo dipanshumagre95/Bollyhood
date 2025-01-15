@@ -806,7 +806,7 @@
                                 android:maxLines="1"
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:layout_centerVertical="true"
-                                android:text="Exclusively Managed By PurpleStar Entertainment. "
+                                android:text="Exclusively Managed By PurpleStar Entertainment."
                                 android:textColor="@color/black"
                                 app:fontFamily="@font/poppins_semibold"
                                 android:layout_toRightOf="@+id/cbteamNcondition"
