@@ -326,7 +326,7 @@
                             android:layout_below="@+id/locationNage">
 
                             <LinearLayout
-                                android:id="@+id/llEvent_types"
+                                android:id="@+id/llAvailable_for"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/_5sdp"
@@ -336,7 +336,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Event Types"
+                                    android:text="Available For"
                                     android:textSize="14sp"
                                     android:layout_marginStart="@dimen/_5sdp"
                                     android:textColor="#2F2F2F"
@@ -356,10 +356,10 @@
                                         android:layout_marginStart="@dimen/_8sdp"/>
 
                                     <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/Event_types"
+                                        android:id="@+id/tvAvailable_for"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Wedding, Corporate"
+                                        android:text="Wedding Gigs &amp; Choreography"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:singleLine="true"
                                         android:maxLines="1"

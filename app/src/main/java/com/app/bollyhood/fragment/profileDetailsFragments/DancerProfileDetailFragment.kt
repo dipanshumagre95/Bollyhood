@@ -11,6 +11,7 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -218,9 +219,9 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
             }
 
             if (singleCategoryModel?.events?.isNotEmpty()==true){
-                EventTypes.text=singleCategoryModel?.events
+                tvAvailableFor.text=singleCategoryModel?.events
             }else{
-                llEventTypes.visibility=View.GONE
+                llAvailableFor.visibility=View.GONE
             }
 
             if (singleCategoryModel?.location?.isNotEmpty()==true) {
@@ -355,22 +356,47 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
 
 
     private fun setImagesInView(photolist: ArrayList<PhotoModel>, imageCount: Int) {
-        val imageViews = when (imageCount) {
-            1 -> listOf(binding.image1)
-            2 -> listOf(binding.twoimage1, binding.twoimage2)
-            3 -> listOf(binding.threeimage1, binding.threeimage2, binding.threeimage3)
-            4 -> listOf(binding.fourthimage1, binding.fourthimage2, binding.fourthimage3, binding.fourthimage4)
-            5 -> listOf(binding.fiveimage1, binding.fiveimage2, binding.fiveimage3, binding.fiveimage4, binding.fiveimage5)
-            6 -> listOf(binding.image1, binding.image2, binding.image3, binding.image4, binding.image5, binding.image6)
-            else -> emptyList()
-        }
+        try {
+            val imageViews = when (imageCount) {
+                1 -> listOf(binding.image1)
+                2 -> listOf(binding.twoimage1, binding.twoimage2)
+                3 -> listOf(binding.threeimage1, binding.threeimage2, binding.threeimage3)
+                4 -> listOf(
+                    binding.fourthimage1,
+                    binding.fourthimage2,
+                    binding.fourthimage3,
+                    binding.fourthimage4
+                )
 
-        for (i in 0 until photolist.size) {
-            Glide.with(requireContext())
-                .load(photolist[i].url)
-                .centerCrop()
-                .placeholder(R.drawable.ic_profile)
-                .into(imageViews[i])
+                5 -> listOf(
+                    binding.fiveimage1,
+                    binding.fiveimage2,
+                    binding.fiveimage3,
+                    binding.fiveimage4,
+                    binding.fiveimage5
+                )
+
+                6 -> listOf(
+                    binding.image1,
+                    binding.image2,
+                    binding.image3,
+                    binding.image4,
+                    binding.image5,
+                    binding.image6
+                )
+
+                else -> emptyList()
+            }
+
+            for (i in 0 until photolist.size) {
+                Glide.with(requireContext())
+                    .load(photolist[i].url)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_profile)
+                    .into(imageViews[i])
+            }
+        }catch (e:Exception){
+            Log.d("error",e.message.toString())
         }
     }
 
