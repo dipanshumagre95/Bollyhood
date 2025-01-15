@@ -20,7 +20,6 @@
             android:id="@+id/llscroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/llExclusively"
             android:layout_alignParentTop="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,11 +104,11 @@
                             android:layout_marginTop="95dp"
                             android:text="Akshay Kapoor"
                             android:textColor="@color/black"
-                            android:textSize="18dp"
+                            android:textSize="20sp"
                             android:singleLine="true"
                             android:maxLines="1"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/inter_semibold"
+                            android:fontFamily="@font/gilroy_semibold"
                             />
 
                         <ImageView
@@ -148,7 +147,7 @@
                             android:layout_below="@+id/tv_officalid"
                             android:textColor="#475569"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/inter_semibold"/>
+                            android:fontFamily="@font/inter_medium"/>
 
                         <LinearLayout
                             android:id="@+id/llabout"
@@ -169,7 +168,7 @@
                                 android:text="About Akshay"
                                 android:textSize="18dp"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:fontFamily="@font/inter_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:layout_gravity="center"
                                 android:textColor="#F94260"/>
 
@@ -224,10 +223,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Location"
-                                    android:textSize="16dp"
+                                    android:textSize="14sp"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:textColor="#1D2028"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -236,8 +235,8 @@
                                     android:layout_marginTop="@dimen/_8sdp">
 
                                     <ImageView
-                                        android:layout_width="32dp"
-                                        android:layout_height="32dp"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
                                         android:src="@drawable/location_icon"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="@dimen/_8sdp"/>
@@ -251,9 +250,9 @@
                                         android:maxLines="1"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:layout_gravity="center_vertical"
-                                        android:textSize="16dp"
-                                        android:textColor="@color/black"
-                                        android:fontFamily="@font/inter_semibold"
+                                        android:textSize="12sp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_medium"
                                         />
 
 
@@ -274,9 +273,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="Age"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:textSize="16dp"
-                                    android:textColor="#1D2028"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:textSize="14sp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -285,8 +284,8 @@
                                     android:layout_marginTop="@dimen/_8sdp">
 
                                     <ImageView
-                                        android:layout_width="32dp"
-                                        android:layout_height="32dp"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
                                         android:src="@drawable/age_icon"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="@dimen/_8sdp"/>
@@ -300,9 +299,9 @@
                                         android:singleLine="true"
                                         android:maxLines="1"
                                         android:layout_gravity="center_vertical"
-                                        android:textSize="16dp"
-                                        android:textColor="@color/black"
-                                        android:fontFamily="@font/inter_semibold"
+                                        android:textSize="12sp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_medium"
                                         />
 
 
@@ -335,10 +334,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Skin Color"
-                                    android:textSize="16dp"
+                                    android:textSize="14sp"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:textColor="#1D2028"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -347,8 +346,8 @@
                                     android:layout_marginTop="@dimen/_8sdp">
 
                                     <ImageView
-                                        android:layout_width="32dp"
-                                        android:layout_height="32dp"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
                                         android:src="@drawable/skin_color_icon"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="@dimen/_8sdp"/>
@@ -362,9 +361,9 @@
                                         android:singleLine="true"
                                         android:maxLines="1"
                                         android:layout_gravity="center_vertical"
-                                        android:textSize="16dp"
-                                        android:textColor="@color/black"
-                                        android:fontFamily="@font/inter_semibold"
+                                        android:textSize="12sp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_medium"
                                         />
 
 
@@ -385,9 +384,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="Height"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:textSize="16dp"
-                                    android:textColor="#1D2028"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:textSize="14sp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -396,8 +395,8 @@
                                     android:layout_marginTop="@dimen/_8sdp">
 
                                     <ImageView
-                                        android:layout_width="32dp"
-                                        android:layout_height="32dp"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
                                         android:src="@drawable/height_icon"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="@dimen/_8sdp"/>
@@ -409,11 +408,11 @@
                                         android:text="5’.7”"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:layout_gravity="center_vertical"
-                                        android:textSize="16dp"
+                                        android:textSize="12sp"
                                         android:singleLine="true"
                                         android:maxLines="1"
-                                        android:textColor="@color/black"
-                                        android:fontFamily="@font/inter_semibold"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_medium"
                                         />
 
 
@@ -446,10 +445,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Body Type"
-                                    android:textSize="16dp"
+                                    android:textSize="14sp"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:textColor="#1D2028"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -458,8 +457,8 @@
                                     android:layout_marginTop="@dimen/_8sdp">
 
                                     <ImageView
-                                        android:layout_width="32dp"
-                                        android:layout_height="32dp"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
                                         android:src="@drawable/body_icon"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="@dimen/_8sdp"/>
@@ -471,11 +470,11 @@
                                         android:text="Average"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:layout_gravity="center_vertical"
-                                        android:textSize="16dp"
+                                        android:textSize="12sp"
                                         android:singleLine="true"
                                         android:maxLines="1"
-                                        android:textColor="@color/black"
-                                        android:fontFamily="@font/inter_semibold"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_medium"
                                         />
 
 
@@ -496,9 +495,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="Passport"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:textSize="16dp"
-                                    android:textColor="#1D2028"
-                                    android:fontFamily="@font/inter_semibold"/>
+                                    android:textSize="14sp"
+                                    android:textColor="#2F2F2F"
+                                    android:fontFamily="@font/inter_medium"/>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -507,8 +506,8 @@
                                     android:layout_marginTop="@dimen/_8sdp">
 
                                     <ImageView
-                                        android:layout_width="32dp"
-                                        android:layout_height="32dp"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
                                         android:src="@drawable/passport_icon"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="@dimen/_8sdp"/>
@@ -522,9 +521,9 @@
                                         android:layout_gravity="center_vertical"
                                         android:singleLine="true"
                                         android:maxLines="1"
-                                        android:textSize="16dp"
-                                        android:textColor="@color/black"
-                                        android:fontFamily="@font/inter_semibold"
+                                        android:textSize="12sp"
+                                        android:textColor="#2F2F2F"
+                                        android:fontFamily="@font/inter_medium"
                                         />
 
                                 </LinearLayout>

@@ -352,20 +352,12 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:adjustViewBounds="true"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/rectangle_6441" />
-
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/satoshi_bold"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:fontFamily="@font/satoshi_medium"
                             android:text="@string/str_your_role"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_15sdp" />
@@ -380,9 +372,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:alpha="0.5"
-                        android:fontFamily="@font/satoshi_medium"
+                        android:fontFamily="@font/satoshi_regular"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp" />
@@ -407,20 +399,12 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:adjustViewBounds="true"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/skill_requiment" />
-
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/satoshi_bold"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:fontFamily="@font/satoshi_medium"
                             android:text="@string/str_skills"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_15sdp" />
@@ -435,9 +419,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:alpha="0.5"
-                        android:fontFamily="@font/satoshi_medium"
+                        android:fontFamily="@font/satoshi_regular"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp" />
@@ -496,6 +480,14 @@
 
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/casting_fee_frame"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_22sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"/>
 
 
             </LinearLayout>

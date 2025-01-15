@@ -54,11 +54,13 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
     lateinit var binding:ActivityUploadCastingCallBinding
     private val viewModel: DataViewModel by viewModels()
     private var heightList: ArrayList<String> = arrayListOf()
+    private var daysList: ArrayList<String> = arrayListOf()
     private var shiftTimeList: ArrayList<String> = arrayListOf()
     private var genderList: ArrayList<String> = arrayListOf()
     private var skinColorList: ArrayList<String> = arrayListOf()
     private var bodyTypeList: ArrayList<String> = arrayListOf()
     private var passPortList: ArrayList<String> = arrayListOf()
+    private var castingFeeList: ArrayList<String> = arrayListOf()
     private var ageList: ArrayList<String> = arrayListOf()
     private var height: String = ""
     private var gender: String = ""
@@ -108,12 +110,19 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
         setAgeData()
         setShiftTimeData()
         setGenderData()
+        setamoutData()
+        setCastingFeeData()
     }
 
     private fun addLisnter()
     {
         binding.acheight.setOnTouchListener { v, event ->
             binding.acheight.showDropDown()
+            false
+        }
+
+        binding.acChooseType.setOnTouchListener { v, event ->
+            binding.acChooseType.showDropDown()
             false
         }
 
@@ -129,6 +138,11 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
         binding.acPassPort.setOnTouchListener { v, event ->
             binding.acPassPort.showDropDown()
+            false
+        }
+
+        binding.acCastingFeesPplicable.setOnTouchListener { v, event ->
+            binding.acCastingFeesPplicable.showDropDown()
             false
         }
 
@@ -276,6 +290,24 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             }
     }
 
+    private fun setamoutData() {
+        daysList.clear()
+        daysList.add("Project Basis")
+        daysList.add("Day Basis")
+
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, R.layout.dropdown, daysList)
+        binding.acChooseType.threshold = 0
+        binding.acChooseType.dropDownVerticalOffset = 0
+        binding.acChooseType.setAdapter(arrayAdapter)
+
+        binding.acChooseType.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                height = daysList[position]
+            }
+    }
+
     private fun setSkinColorData() {
         skinColorList.clear()
         skinColorList.add("Light Brown")
@@ -337,6 +369,24 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
         binding.acPassPort.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 passport = passPortList[position]
+            }
+    }
+
+    private fun setCastingFeeData() {
+        castingFeeList.clear()
+        castingFeeList.add("Yes")
+        castingFeeList.add("No")
+
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, R.layout.dropdown, castingFeeList)
+        binding.acCastingFeesPplicable.threshold = 0
+        binding.acCastingFeesPplicable.dropDownVerticalOffset = 0
+        binding.acCastingFeesPplicable.setAdapter(arrayAdapter)
+
+        binding.acCastingFeesPplicable.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                passport = castingFeeList[position]
             }
     }
 

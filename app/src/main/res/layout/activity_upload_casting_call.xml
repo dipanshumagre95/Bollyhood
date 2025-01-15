@@ -10,11 +10,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_marginStart="-50dp"
-            android:layout_marginTop="-100dp"
-            android:layout_marginEnd="-50dp"
-            android:background="@drawable/circle_gradient_background_profile"
+            android:layout_height="@dimen/_120sdp"
+            android:background="@drawable/pagebackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -22,9 +19,9 @@
             <RelativeLayout
                 android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -44,7 +41,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="20dp"
                 android:text="Post Casting Call"
                 android:textColor="@color/white"
                 android:textSize="25dp"
@@ -55,20 +52,18 @@
 
 
             <ImageView
-                android:layout_width="90dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="65dp"
-                android:layout_marginEnd="40dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:src="@drawable/ellipse_5"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="130dp"
-                android:layout_marginTop="65dp"
-                android:layout_marginEnd="40dp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:src="@drawable/ellipse_5"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -746,6 +741,105 @@
 
                     </LinearLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/rrChoose_type"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txChoose_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_20sdp"
+                            android:text="Choose Type"
+                            android:textColorHint="#757575"
+                            android:textSize="10sp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/acChoose_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txChoose_type"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:dropDownAnchor="@id/acshift"
+                            android:focusable="false"
+                            android:fontFamily="@font/neueeinstellung_regular"
+                            android:hint="Select type"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_20sdp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rrCasting_fees_pplicable"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txCasting_fees_pplicable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_20sdp"
+                            android:text="Casting Fees Applicable ?"
+                            android:textColorHint="#757575"
+                            android:textSize="10sp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/acCasting_fees_pplicable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txCasting_fees_pplicable"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:dropDownAnchor="@id/acshift"
+                            android:focusable="false"
+                            android:fontFamily="@font/neueeinstellung_regular"
+                            android:hint="Yes"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_20sdp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/rrperday"

@@ -124,8 +124,8 @@
     <string name="str_casting_calls">Casting Calls</string>
     <string name="str_casting_details">Casting Details</string>
     <string name="str_casting_requirements">Casting Requirement</string>
-    <string name="str_skills">Skills &amp; Requirement</string>
-    <string name="str_your_role">What’s The Role ?</string>
+    <string name="str_skills">Role Requirement.</string>
+    <string name="str_your_role">About The Role ?</string>
     <string name="str_save_later">Save</string>
     <string name="str_apply_now">Apply Now</string>
 
