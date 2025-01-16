@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllExpertiseProfileActivity
@@ -210,14 +209,75 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     }
 
     private fun setExpertiseAdapter(experiseList: ArrayList<ExpertiseModel>) {
-        binding.apply {
-            rvExpertise.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            rvExpertise.setHasFixedSize(true)
-            expertiseAdapter = ExpertiseAdapter(requireActivity(), experiseList, this@HomeFragment)
-            rvExpertise.adapter = expertiseAdapter
-            expertiseAdapter?.notifyDataSetChanged()
+        val size=experiseList.size
+        if (size!=null||size!=0){
+            when(size){
+                1 ->{
+                    binding.llfirstimageTalent.visibility=View.VISIBLE
+                    binding.llsecondimageTalent.visibility=View.GONE
+                    Glide.with(requireContext()).load(experiseList[0].image)
+                        .centerCrop()
+                        .error(R.drawable.ic_profile)
+                        .into(binding.firsttalentivImage)
 
+                    binding.tvfirsttalentname.text=experiseList[0].name
+                    if (experiseList[0].is_verify == "1") {
+                        binding.ivfirsttalentBookMark.visibility = View.VISIBLE
+                    } else {
+                        binding.ivfirsttalentBookMark.visibility = View.GONE
+                    }
+                    val stringList = arrayListOf<String>()
+                    for (i in 0 until experiseList[0].categories.size) {
+                        stringList.add(experiseList[0].categories[i].category_name)
+                    }
+
+                    binding.tvfirsttalentCategory.text = stringList.joinToString(separator = "/")
+                }
+
+                else ->{
+                    binding.llfirstimageTalent.visibility=View.VISIBLE
+                    binding.llsecondimageTalent.visibility=View.VISIBLE
+                    Glide.with(requireContext()).load(experiseList[0].image)
+                        .centerCrop()
+                        .error(R.drawable.ic_profile)
+                        .into(binding.firsttalentivImage)
+
+                    binding.tvfirsttalentname.text=experiseList[0].name
+                    if (experiseList[0].is_verify == "1") {
+                        binding.ivfirsttalentBookMark.visibility = View.VISIBLE
+                    } else {
+                        binding.ivfirsttalentBookMark.visibility = View.GONE
+                    }
+                    val stringList = arrayListOf<String>()
+                    for (i in 0 until experiseList[0].categories.size) {
+                        stringList.add(experiseList[0].categories[i].category_name)
+                    }
+
+                    binding.tvfirsttalentCategory.text = stringList.joinToString(separator = "/")
+
+                    Glide.with(requireContext()).load(experiseList[1].image)
+                        .centerCrop()
+                        .error(R.drawable.ic_profile)
+                        .into(binding.ivsecondtalentImage)
+
+                    binding.tvsecondtalentname.text=experiseList[1].name
+                    if (experiseList[1].is_verify == "1") {
+                        binding.ivsecondtalentBookMark.visibility = View.VISIBLE
+                    } else {
+                        binding.ivsecondtalentBookMark.visibility = View.GONE
+                    }
+                    val stringList2 = arrayListOf<String>()
+                    for (i in 0 until experiseList[1].categories.size) {
+                        stringList2.add(experiseList[1].categories[i].category_name)
+                    }
+
+                    binding.tvsecondtalentCategory.text = stringList2.joinToString(separator = "/")
+                }
+            }
+        }else{
+            binding.llfirstimageTalent.visibility=View.GONE
+            binding.llsecondimageTalent.visibility=View.GONE
+            binding.rrExpertise.visibility=View.GONE
         }
     }
 
