@@ -246,12 +246,10 @@ class FilmCrewProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileW
             }
 
             if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
-                val innerArrayStr = singleCategoryModel.videos_url[0].video_url
-                val innerArray = JSONArray(innerArrayStr)
-                for (i in 0 until innerArray.length()) {
-                    val item = innerArray.getJSONObject(i)
+                for (i in 0 until singleCategoryModel.videos_url.size) {
+                    val item = singleCategoryModel.videos_url[i].video_url
                     if (i==0){
-                        playVideo(item.getString("video_url"),binding.youtubePlayerView)
+                        playVideo(item,binding.youtubePlayerView)
                     }
                 }
             }else{

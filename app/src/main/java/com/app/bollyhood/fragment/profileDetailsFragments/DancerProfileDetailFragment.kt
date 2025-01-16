@@ -266,23 +266,21 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
             }
 
             if (!singleCategoryModel.videos_url.isNullOrEmpty()) {
-                val innerArrayStr = singleCategoryModel.videos_url[0].video_url
-                val innerArray = JSONArray(innerArrayStr)
-                if (innerArray.length()>1){
+                if (singleCategoryModel.videos_url.size >1){
                     binding.llyoutubePlayerView1.visibility=View.VISIBLE
                     binding.llyoutubePlayerView2.visibility=View.VISIBLE
                 }else{
                     binding.llyoutubePlayerView1.visibility=View.VISIBLE
                     binding.llyoutubePlayerView2.visibility=View.GONE
                 }
-                for (i in 0 until innerArray.length()) {
-                    val item = innerArray.getJSONObject(i)
+                for (i in 0 until singleCategoryModel.videos_url.size) {
+                    val item = singleCategoryModel.videos_url[i].video_url
                     if (i==0){
-                        playVideo(item.getString("video_url"), binding.youtubePlayerView1)
+                        playVideo(item, binding.youtubePlayerView1)
                     }
 
                     if (i==1){
-                        playVideo(item.getString("video_url"), binding.youtubePlayerView2)
+                        playVideo(item, binding.youtubePlayerView2)
                     }
                 }
             }else{
