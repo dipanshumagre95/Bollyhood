@@ -14,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
-import com.app.bollyhood.activity.ChangePasswordActivity
 import com.app.bollyhood.activity.KycActivity
 import com.app.bollyhood.activity.LoginActivity
 import com.app.bollyhood.activity.MainActivity
@@ -63,7 +62,7 @@ class ProfileFragment : Fragment() {
     private fun addListner() {
         binding.apply {
             rrprivacy.setOnClickListener {
-                startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
+              //  startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
             }
             rrProfile.setOnClickListener {
                 startActivityForResult(Intent(requireContext(), MyProfileActivity::class.java), 201)
