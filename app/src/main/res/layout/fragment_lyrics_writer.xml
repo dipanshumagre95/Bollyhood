@@ -68,7 +68,7 @@
                         android:layout_marginTop="@dimen/_40sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:background="@drawable/bollyhood_backgd"
+                        android:background="@drawable/background_for_castingimage"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <View
