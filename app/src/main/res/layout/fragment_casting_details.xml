@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="@dimen/_15sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +28,10 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/white_border"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_6sdp"
-                android:paddingStart="@dimen/_6sdp"
-                android:paddingEnd="@dimen/_6sdp"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_7sdp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_7sdp"
                 android:src="@drawable/icon_back" />
 
             <TextView
@@ -42,14 +42,14 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="Casting Details"
                 android:layout_toRightOf="@+id/ivBack"
-                android:fontFamily="@font/satoshi_bold"
+                android:fontFamily="@font/satoshi_medium"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_17sdp" />
+                android:textSize="18sp" />
 
             <RelativeLayout
                 android:id="@+id/llcvprofile"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="40dp"
+                android:layout_height="40sp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_8sdp"
@@ -124,7 +124,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_toEndOf="@id/cdlogo"
@@ -135,9 +134,9 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@+id/ivLogo"
-                                    android:textSize="12sp"
+                                    android:textSize="18sp"
                                     android:maxLines="1"
-                                    android:text=""
+                                    android:text="Female Lead Actor OTT"
                                     android:singleLine="true"
                                     android:textColor="@color/white"
                                     android:fontFamily="@font/satoshi_medium"
@@ -149,9 +148,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@+id/ivLogo"
-                                    android:textSize="10sp"
+                                    android:textSize="12sp"
                                     android:layout_below="@+id/tvName"
                                     android:maxLines="1"
+                                    android:layout_marginTop="@dimen/_2sdp"
                                     android:text="Netflix India Private Limited"
                                     android:singleLine="true"
                                     android:textColor="@color/white"
@@ -199,7 +199,8 @@
                                     android:layout_marginStart="@dimen/_2sdp"
                                     android:text="Mumbai"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="@dimen/_10sdp"
+                                    tools:ignore="TextSizeCheck"/>
 
                             </LinearLayout>
                             <LinearLayout
@@ -233,7 +234,8 @@
                                     android:layout_marginStart="@dimen/_2sdp"
                                     android:text="Verified Listing"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="@dimen/_10sdp"
+                                    tools:ignore="TextSizeCheck"/>
 
                             </LinearLayout>
 
@@ -266,7 +268,8 @@
                                     android:layout_marginStart="@dimen/_2sdp"
                                     android:text="12hr Shift"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="@dimen/_10sdp"
+                                    tools:ignore="TextSizeCheck"/>
 
                             </LinearLayout>
 
@@ -317,7 +320,7 @@
                             android:fontFamily="@font/satoshi_regular"
                             android:textColor="@color/black"
                             android:paddingStart="@dimen/_5sdp"
-                            android:textSize="@dimen/_10sdp" />
+                            android:textSize="12sp" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tvprice"
@@ -325,10 +328,21 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:fontFamily="@font/satoshi_bold"
+                            android:fontFamily="@font/satoshi_medium"
                             android:paddingEnd="@dimen/_20sdp"
+                            android:text="Project Basis"
                             android:textColor="@color/black"
-                            android:textSize="18dp" />
+                            android:textSize="15sp" />
+
+                        <View
+                            android:id="@+id/ic_rupes"
+                            android:layout_width="18sp"
+                            android:layout_height="18sp"
+                            android:layout_centerVertical="true"
+                            android:visibility="visible"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_toStartOf="@+id/tvprice"
+                            android:background="@drawable/ic_rupes_forcasting"/>
 
 
                     </RelativeLayout>
@@ -377,7 +391,7 @@
                         android:fontFamily="@font/satoshi_regular"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp" />
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
@@ -424,7 +438,7 @@
                         android:fontFamily="@font/satoshi_regular"
                         android:text="@string/str_dummy_text"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp" />
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
@@ -567,7 +581,7 @@
 
                   <TextView
                       android:layout_width="@dimen/_15sdp"
-                      android:layout_height="@dimen/_15sdp"
+                      android:layout_height="@dimen/_20sdp"
                       android:layout_toRightOf="@+id/tvApplyNow"
                       android:layout_centerVertical="true"
                       android:backgroundTint="@color/white"

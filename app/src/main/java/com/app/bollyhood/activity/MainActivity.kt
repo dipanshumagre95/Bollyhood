@@ -278,7 +278,7 @@ class MainActivity : AppCompatActivity() {
 
             ivProfile.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.darkgrey))
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
-            vBooking.visibility=View.GONE
+            vProfile.visibility=View.GONE
         }
         loadFragment(ChatFragment())
     }

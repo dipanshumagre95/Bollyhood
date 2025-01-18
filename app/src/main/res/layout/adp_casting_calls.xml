@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -23,7 +24,7 @@
             <RelativeLayout
                 android:id="@+id/tvView"
                 android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_34sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:background="@drawable/castingcall_viewbutton"
                 android:layout_alignParentEnd="true"
@@ -38,6 +39,7 @@
                     android:layout_centerInParent="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp"
+                    tools:ignore="TextSizeCheck"
                     />
 
                 <ImageView
@@ -61,19 +63,19 @@
 
                 <RelativeLayout
                     android:id="@+id/lllogo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="48dp"
                     android:background="@drawable/rectangle_white"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="48dp">
 
-                    <com.google.android.material.imageview.ShapeableImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivLogo"
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:src="@drawable/singer"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_3sdp"
                         app:shapeAppearance="@style/roundedCornersImageView"
-                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
                         android:scaleType="centerCrop" />
 
                 </RelativeLayout>
@@ -83,12 +85,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/lllogo"
-                    android:textSize="12sp"
+                    android:textSize="18sp"
                     android:maxLines="1"
+                    android:text="Male Actor Music Video "
                     android:singleLine="true"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/satoshi_bold"
+                    android:fontFamily="@font/satoshi_medium"
                     android:layout_marginStart="@dimen/_5sdp"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -96,10 +99,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/lllogo"
-                    android:textSize="10sp"
+                    android:textSize="12sp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:text="Jio Studios Private Limited"
                     android:layout_below="@+id/tvName"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/_2sdp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/satoshi_regular"
                     android:layout_marginStart="@dimen/_5sdp"/>
@@ -189,7 +193,8 @@
                         android:layout_marginStart="@dimen/_2sdp"
                         android:text="Verified Listing"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        tools:ignore="TextSizeCheck"/>
 
                 </LinearLayout>
 
@@ -222,7 +227,8 @@
                         android:layout_marginStart="@dimen/_2sdp"
                         android:text="12hr Shift"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        tools:ignore="TextSizeCheck"/>
 
                 </LinearLayout>
 
@@ -237,10 +243,12 @@
                 android:inputType="textMultiLine"
                 android:layout_below="@+id/lllocationNverified"
                 android:paddingEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:text="We Urgently Need Male Actor. Preferred Age is 25 to 38 Years, Shooting Will Happen In Madh Marve,3 Years Of ...Read More"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/satoshi_regular"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="12sp"
+                tools:ignore="TouchTargetSizeCheck"/>
 
 
         </RelativeLayout>
@@ -271,7 +279,8 @@
                 android:fontFamily="@font/satoshi_medium"
                 android:textColor="@color/black"
                 android:paddingStart="@dimen/_5sdp"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="@dimen/_10sdp"
+                tools:ignore="TextSizeCheck"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvSalary"
@@ -279,10 +288,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/satoshi_bold"
-                android:paddingEnd="@dimen/_20sdp"
+                android:text="Project Basis "
+                android:fontFamily="@font/satoshi_medium"
+                android:paddingEnd="@dimen/_15sdp"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/ic_rupes"
+                android:layout_width="18sp"
+                android:layout_height="18sp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@+id/tvSalary"
+                android:background="@drawable/ic_rupes_forcasting"/>
 
 
         </RelativeLayout>
