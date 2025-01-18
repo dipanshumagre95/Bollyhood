@@ -170,7 +170,7 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
                 (activity as MainActivity).loadFragment(castingCallFragment)
             }
 
-            Categorie.PRODUCTIONHOUSE.toString() ->{
+            Categorie.PRODUCTIONHOUSE.toString(),Categorie.CAMERANLIGHTS.toString() ->{
                 val bundle = Bundle()
                 bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
 
