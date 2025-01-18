@@ -39,7 +39,6 @@ import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONArray
 
 @AndroidEntryPoint
 class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWorkLinkAda.onItemClick {
@@ -286,13 +285,11 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
 
             try {
                 if (!singleCategoryModel.work_links.isNullOrEmpty()) {
-                    val innerArrayStr = singleCategoryModel.work_links[0].worklink_url
-                    val innerArray = JSONArray(innerArrayStr)
-                    for (i in 0 until innerArray.length()) {
-                        val item = innerArray.getJSONObject(i)
+                    for (i in 0 until singleCategoryModel.work_links.size) {
+                        val item = singleCategoryModel.work_links[i]
                         val workLink = WorkLinkProfileData(
-                            item.getString("worklink_name"),
-                            item.getString("worklink_url")
+                            item.worklink_name,
+                            item.worklink_url
                         )
                         workLinkList.add(workLink)
                     }

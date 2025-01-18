@@ -3,8 +3,8 @@
 
     <RelativeLayout
         android:id="@+id/rrMain"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
+        android:layout_width="175sp"
+        android:layout_height="52sp"
         android:layout_margin="@dimen/_5sdp"
         android:background="@drawable/age_background">
 
@@ -30,12 +30,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/inter_medium"
                 android:maxLines="1"
                 android:maxLength="120"
                 android:id="@+id/tvName"
                 android:singleLine="true"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="12sp"
                 android:text="Hello Youtube"
                 android:textColor="@color/black" />
 
