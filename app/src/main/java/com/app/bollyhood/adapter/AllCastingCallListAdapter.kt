@@ -4,11 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
+import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AllcastingcalllAdapterBinding
 import com.app.bollyhood.model.CastingCallModel
-import com.app.bollyhood.util.DateUtils
 import com.bumptech.glide.Glide
+
 
 class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingCallListAdapter.OnClickInterface,val castingModels: ArrayList<CastingCallModel>): RecyclerView.Adapter<AllCastingCallListAdapter.MyViewHolder>() {
 
@@ -41,10 +45,6 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
             holder.binding.tvcastingName.text=castingModel.role
         }
 
-        if (!castingModels[position].modify_date.isNullOrEmpty()) {
-            holder.binding.tvtime.text = DateUtils.getConvertDateTiemFormat(castingModels[position].modify_date)
-        }
-
         if (!castingModel.apply_casting_count.isNullOrEmpty()&&castingModel.apply_casting_count!="0"){
             holder.binding.tvapplyCount.visibility=View.VISIBLE
             holder.binding.tvapplyCount.text=castingModel.apply_casting_count
@@ -55,7 +55,55 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         holder.binding.llmain.setOnClickListener(View.OnClickListener {
             onitemclick.onItemClick(castingModel)
         })
+
+        holder.binding.threeDots.setOnClickListener(View.OnClickListener {
+            showCustomMenu(holder.binding.threeDots, position)
+        })
     }
+
+    private fun showCustomMenu(anchor: View, position: Int) {
+
+        val inflater = LayoutInflater.from(context)
+        val menuView = inflater.inflate(R.layout.menu_options_layout, null)
+
+        // Create the PopupWindow
+        val popupWindow = PopupWindow(
+            menuView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        val pinOption = menuView.findViewById<RelativeLayout>(R.id.menu_pin)
+        val editOption = menuView.findViewById<RelativeLayout>(R.id.menu_edit)
+        val hideAlertsOption = menuView.findViewById<RelativeLayout>(R.id.menu_hide_alerts)
+        val deleteOption = menuView.findViewById<RelativeLayout>(R.id.menu_delete)
+
+
+        pinOption.setOnClickListener {
+            Toast.makeText(context, "Pin clicked for item $position", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+
+        editOption.setOnClickListener {
+            Toast.makeText(context, "Edit clicked for item $position", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+
+        hideAlertsOption.setOnClickListener {
+            Toast.makeText(context, "Hide Alerts clicked for item $position", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+
+        deleteOption.setOnClickListener {
+            Toast.makeText(context, "Delete clicked for item $position", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+
+        popupWindow.isOutsideTouchable = true
+        popupWindow.showAsDropDown(anchor)
+    }
+
 
     interface OnClickInterface
     {

@@ -70,6 +70,7 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
         binding.llPostCastingCall.setOnClickListener(this)
         binding.tvActive.setOnClickListener(this)
         binding.tvClose.setOnClickListener(this)
+        binding.llbookmark.setOnClickListener(this)
     }
 
     private fun initUi()

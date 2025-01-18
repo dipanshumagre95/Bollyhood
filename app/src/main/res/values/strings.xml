@@ -194,4 +194,8 @@
     <string name="search_shoo">Search Shoot Locations here...</string>
     <string name="featured_lo">Featured Locations</string>
     <string name="locations_a">Locations Around Mumbai</string>
+    <string name="pin">Pin</string>
+    <string name="edit">Edit</string>
+    <string name="hide_alerts">Hide Alerts</string>
+    <string name="delete_post">Delete Post</string>
 </resources>
