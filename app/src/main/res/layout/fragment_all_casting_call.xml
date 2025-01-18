@@ -97,10 +97,10 @@
 
             <RelativeLayout
                 android:id="@+id/llbookmark"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/bollyhood_backgd"
+                android:background="@drawable/background_for_castingimage"
                 android:layout_alignParentEnd="true">
 
                 <View
