@@ -355,7 +355,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:background="@drawable/rectangle_white_with_blackborder"
+                    android:background="@drawable/gradient_castingcall_bg"
                     android:orientation="vertical"
                     android:padding="@dimen/_10sdp">
 
@@ -402,7 +402,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:background="@drawable/rectangle_white_with_blackborder"
+                    android:background="@drawable/gradient_castingcall_bg"
                     android:orientation="vertical"
                     android:padding="@dimen/_10sdp">
 
