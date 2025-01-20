@@ -43,12 +43,6 @@ import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentInfluencerEditProfileBinding
-import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.extensions.isvalidDescriptions
-import com.app.bollyhood.extensions.isvalidEmailAddress
-import com.app.bollyhood.extensions.isvalidMobileNumber
-import com.app.bollyhood.extensions.isvalidName
-import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
@@ -57,11 +51,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -107,6 +96,10 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
         binding.edtMobileNumber.addTextChangedListener(this)
         binding.edtDescriptions.addTextChangedListener(this)
         binding.edtEmailAddress.addTextChangedListener(this)
+        binding.edtAvaregeViews.addTextChangedListener(this)
+        binding.edtPromotionType.addTextChangedListener(this)
+        binding.edtLanguages.addTextChangedListener(this)
+        binding.edtPlatforms.addTextChangedListener(this)
     }
 
     private fun addListner() {
@@ -179,7 +172,7 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
             }
 
             R.id.tvUpdateProfile->{
-                updateInfluencerProfile()
+              //  updateInfluencerProfile()
             }
         }
     }
@@ -212,6 +205,22 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
                 binding.edtEmailAddress.getText().hashCode() ->{
                     binding.llEmail.setHintEnabled(true)
                 }
+
+                binding.edtAvaregeViews.getText().hashCode() ->{
+                    binding.llAvaregeViews.setHintEnabled(true)
+                }
+
+                binding.edtLanguages.getText().hashCode() ->{
+                    binding.llLanguages.setHintEnabled(true)
+                }
+
+                binding.edtPlatforms.getText().hashCode() ->{
+                    binding.llPlatforms.setHintEnabled(true)
+                }
+
+                binding.edtPromotionType.getText().hashCode() ->{
+                    binding.llPromotionType.setHintEnabled(true)
+                }
             }
         }else if (charSequence?.length!! <= 0){
             when(charSequence.hashCode()){
@@ -233,6 +242,22 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
 
                 binding.edtEmailAddress.getText().hashCode() ->{
                     binding.llEmail.setHintEnabled(false)
+                }
+
+                binding.edtAvaregeViews.getText().hashCode() ->{
+                    binding.llAvaregeViews.setHintEnabled(false)
+                }
+
+                binding.edtLanguages.getText().hashCode() ->{
+                    binding.llLanguages.setHintEnabled(false)
+                }
+
+                binding.edtPromotionType.getText().hashCode() ->{
+                    binding.llPromotionType.setHintEnabled(false)
+                }
+
+                binding.edtPlatforms.getText().hashCode() ->{
+                    binding.llPlatforms.setHintEnabled(false)
                 }
             }
         }
@@ -280,8 +305,6 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
         PrefManager(mContext).setvalue(StaticData.image, result.image)
     }
 
-
-
     private fun setInfluencerProfileData(profileModel: ProfileModel) {
         if (!profileModel.image.isNullOrEmpty()) {
             Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
@@ -294,13 +317,13 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
         binding.edtDescriptions.setText(profileModel.description)
         binding.edtCategory.setText(profileModel.categories[0].category_name)
         category_Id = profileModel.categories[0].category_id
-        binding.edtcollaboratedWith.setText(profileModel.collaborate)
-        binding.edtpromotionType.setText(profileModel.promotion)
-        binding.edtaverageLikes.setText(profileModel.average_like)
-        binding.edtaverageReelViews.setText(profileModel.average_reel_like)
         binding.edtlinkInstagram.setText(profileModel.instagram_link)
         binding.edtlinkFacebook.setText(profileModel.facebook_link)
         binding.edtlinkYoutube.setText(profileModel.youtube_link)
+        binding.edtAvaregeViews.setText(profileModel.averageviews)
+        binding.edtPromotionType.setText(profileModel.promotion)
+        binding.edtPlatforms.setText(profileModel.platforms)
+        binding.edtLanguages.setText(profileModel.languages)
 
 
         if (!profileModel.work_links.isNullOrEmpty()) {
@@ -597,7 +620,7 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
         }
     }
 
-    private fun updateInfluencerProfile()
+    /*private fun updateInfluencerProfile()
     {
         if (isNetworkAvailable(mContext)) {
             if (isvalidName(
@@ -752,6 +775,6 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
+    }*/
 
 }
