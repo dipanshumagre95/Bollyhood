@@ -43,12 +43,6 @@ import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentDancerEditProfileBinding
-import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.extensions.isvalidDescriptions
-import com.app.bollyhood.extensions.isvalidEmailAddress
-import com.app.bollyhood.extensions.isvalidMobileNumber
-import com.app.bollyhood.extensions.isvalidName
-import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -58,11 +52,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -109,10 +98,10 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
         binding.edtMobileNumber.addTextChangedListener(this)
         binding.edtDescriptions.addTextChangedListener(this)
         binding.edtEmailAddress.addTextChangedListener(this)
-        binding.edtAchievements.addTextChangedListener(this)
+        binding.edtLocation.addTextChangedListener(this)
+        binding.edtDanceForms.addTextChangedListener(this)
+        binding.edtAvailableFor.addTextChangedListener(this)
         binding.edtLanguages.addTextChangedListener(this)
-        binding.edtEvents.addTextChangedListener(this)
-        binding.edtGenre.addTextChangedListener(this)
     }
 
     private fun addListner() {
@@ -121,9 +110,12 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
             tvAddShowreel.setOnClickListener(this@DancerEditProfileFragment)
             tvAddSingerWorkLink.setOnClickListener(this@DancerEditProfileFragment)
             tvUpdateProfile.setOnClickListener(this@DancerEditProfileFragment)
-            singerfirstImage.setOnClickListener(this@DancerEditProfileFragment)
-            singersecondimage.setOnClickListener(this@DancerEditProfileFragment)
-            singerthirdimage.setOnClickListener(this@DancerEditProfileFragment)
+            firstImage.setOnClickListener(this@DancerEditProfileFragment)
+            secondImage.setOnClickListener(this@DancerEditProfileFragment)
+            thirdImage.setOnClickListener(this@DancerEditProfileFragment)
+            fourthImage.setOnClickListener(this@DancerEditProfileFragment)
+            fifthimage.setOnClickListener(this@DancerEditProfileFragment)
+            siximage.setOnClickListener(this@DancerEditProfileFragment)
         }
     }
 
@@ -138,7 +130,11 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                 addWorkLinksDialog()
             }
 
-            R.id.singerfirstImage->{
+            R.id.tvUpdateProfile->{
+        //        updateDancerProfile()
+            }
+
+            R.id.firstImage->{
                 if (checkPermission()){
                     dialogForImage(1)
                 }else{
@@ -146,7 +142,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                 }
             }
 
-            R.id.singersecondimage->{
+            R.id.secondImage ->{
                 if (checkPermission()){
                     dialogForImage(2)
                 }else{
@@ -154,7 +150,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                 }
             }
 
-            R.id.singerthirdimage->{
+            R.id.thirdImage ->{
                 if (checkPermission()){
                     dialogForImage(3)
                 }else{
@@ -162,8 +158,28 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                 }
             }
 
-            R.id.tvUpdateProfile->{
-                updateDancerProfile()
+            R.id.fourthImage->{
+                if (checkPermission()){
+                    dialogForImage(4)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.fifthimage ->{
+                if (checkPermission()){
+                    dialogForImage(5)
+                }else{
+                    checkPermission()
+                }
+            }
+
+            R.id.siximage ->{
+                if (checkPermission()){
+                    dialogForImage(6)
+                }else{
+                    checkPermission()
+                }
             }
         }
     }
@@ -197,20 +213,20 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                     binding.llEmail.setHintEnabled(true)
                 }
 
-                binding.edtAchievements.getText().hashCode() ->{
-                    binding.llAchievements.setHintEnabled(true)
+                binding.edtLocation.getText().hashCode() ->{
+                    binding.llLocation.setHintEnabled(true)
+                }
+
+                binding.edtDanceForms.getText().hashCode() ->{
+                    binding.llDanceForms.setHintEnabled(true)
+                }
+
+                binding.edtAvailableFor.getText().hashCode() ->{
+                    binding.llAvailableFor.setHintEnabled(true)
                 }
 
                 binding.edtLanguages.getText().hashCode() ->{
                     binding.llLanguages.setHintEnabled(true)
-                }
-
-                binding.edtEvents.getText().hashCode() ->{
-                    binding.llEvents.setHintEnabled(true)
-                }
-
-                binding.edtGenre.getText().hashCode() ->{
-                    binding.llGenre.setHintEnabled(true)
                 }
             }
         }else if (charSequence?.length!! <= 0){
@@ -235,20 +251,20 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                     binding.llEmail.setHintEnabled(false)
                 }
 
-                binding.edtAchievements.getText().hashCode() ->{
-                    binding.llAchievements.setHintEnabled(false)
+                binding.edtLocation.getText().hashCode() ->{
+                    binding.llLocation.setHintEnabled(false)
+                }
+
+                binding.edtDanceForms.getText().hashCode() ->{
+                    binding.llDanceForms.setHintEnabled(false)
+                }
+
+                binding.edtAvailableFor.getText().hashCode() ->{
+                    binding.llAvailableFor.setHintEnabled(false)
                 }
 
                 binding.edtLanguages.getText().hashCode() ->{
                     binding.llLanguages.setHintEnabled(false)
-                }
-
-                binding.edtEvents.getText().hashCode() ->{
-                    binding.llEvents.setHintEnabled(false)
-                }
-
-                binding.edtGenre.getText().hashCode() ->{
-                    binding.llGenre.setHintEnabled(false)
                 }
             }
         }
@@ -310,12 +326,10 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
         binding.edtDescriptions.setText(profileModel.description)
         binding.edtCategory.setText(profileModel.categories[0].category_name)
         category_Id = profileModel.categories[0].category_id
-        binding.edtAchievements.setText(profileModel.achievements)
-        binding.edtEvents.setText(profileModel.events)
-        binding.edtGenre.setText(profileModel.genre)
-        binding.edtLanguages.setText(profileModel.location)
-        binding.edtEvents.setText(profileModel.dancer_form)
-        binding.edtGenre.setText(profileModel.what_i_do)
+        binding.edtLocation.setText(profileModel.location)
+        binding.edtAvailableFor.setText(profileModel.available)
+        binding.edtLanguages.setText(profileModel.languages)
+        binding.edtDanceForms.setText(profileModel.dancer_form)
 
         if (!profileModel.work_links.isNullOrEmpty()) {
             for (i in 0 until profileModel.work_links.size) {
@@ -336,9 +350,9 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
         }
 
         if (!profileModel.imagefile.isNullOrEmpty()) {
-            val imageViews = listOf(binding.singerfirstImage, binding.singersecondimage, binding.singerthirdimage)
+            val imageViews = listOf(binding.firstImage, binding.secondImage, binding.thirdImage, binding.fourthImage, binding.fifthimage, binding.siximage)
 
-            for (i in 0 until minOf(profileModel.imagefile.size, 3)) {
+            for (i in 0 until minOf(profileModel.imagefile.size, 6)) {
                 Glide.with(mContext).load(profileModel.imagefile[i])
                     .error(R.drawable.upload_to_the_cloud_svg)
                     .centerCrop()
@@ -371,24 +385,6 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
             false
         } else {
             true
-        }
-    }
-
-
-    private fun saveImageToStorage(bitmap: Bitmap): String? {
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val imageFileName = "JPEG_$timeStamp.jpg"
-        val storageDir: File? = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
-        return try {
-            val imageFile = File(storageDir, imageFileName)
-            val fos = FileOutputStream(imageFile)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
-            fos.close()
-            imageFile.absolutePath
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
         }
     }
 
@@ -672,76 +668,12 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
 
     }
 
-    private fun dialogForImage(imageNumber: Int) {
-        val dialogView = Dialog(mContext)
-        dialogView.setContentView(R.layout.image_picker)
-        dialogView.setCancelable(false)
-
-        val txtCamera = dialogView.findViewById<TextView>(R.id.txtcamera)
-        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
-        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
-
-        txtCamera.setOnClickListener { v: View? ->
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            imageResultLaunchers[imageNumber]?.launch(intent)
-
-            isCamera = true
-            isGallery = false
-            dialogView.dismiss()
-        }
-
-        txtGallery.setOnClickListener { v: View? ->
-            ImagePickerUtil.pickImageFromGallery(mContext,imageResultLaunchers[imageNumber] ?: return@setOnClickListener)
-
-            isCamera = false
-            isGallery = true
-            dialogView.dismiss()
-        }
-
-        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
-        dialogView.show()
-    }
-
-
-    private fun initializeImageResultLaunchers() {
-        for (i in 1..6) {
-            val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-                handleImageResult(result, i)
-            }
-            imageResultLaunchers[i] = launcher
-        }
-    }
-
-    private fun handleImageResult(result: ActivityResult, imageNumber: Int) {
-        val resultCode = result.resultCode
-        val data = result.data
-
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                if (isCamera) {
-                    val imageBitmap = data?.extras?.get("data") as Bitmap
-                    val image = saveImageToStorage(imageBitmap).toString()
-                    imagesurl.add(image)
-                    setImage(imageNumber, Uri.parse(image))
-                } else if (isGallery) {
-                    val uri = data?.data
-                    imagesurl.add(PathUtils.getRealPath(mContext, uri!!).toString())
-                    setImage(imageNumber, uri)
-                }
-            }
-
-            else -> {
-                Toast.makeText(mContext, "Task Cancelled", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun isValidYouTubeUrl(url: String): Boolean {
         val youtubeRegex = "^(https?://)?(www\\.)?(youtube\\.com|youtu\\.?be)/.+\$".toRegex()
         return youtubeRegex.matches(url)
     }
 
-    private fun updateDancerProfile()
+    /*private fun updateDancerProfile()
     {
         if (isNetworkAvailable(mContext)) {
             if (isvalidName(
@@ -787,12 +719,12 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
 
                 val achievements: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtAchievements.text.toString().trim()
+                    binding.edtLocation.text.toString().trim()
                 )
 
                 val location: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtLanguages.text.toString().trim()
+                    binding.edtDanceForms.text.toString().trim()
                 )
 
                 val languages: RequestBody = RequestBody.create(
@@ -909,16 +841,114 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }*/
+
+    private fun saveImageToStorage(bitmap: Bitmap): String? {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageFileName = "JPEG_$timeStamp.jpg"
+        val storageDir: File? = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        return try {
+            val imageFile = File(storageDir, imageFileName)
+            val fos = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+            fos.close()
+            imageFile.absolutePath
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun dialogForImage(imageNumber: Int) {
+        val dialogView = Dialog(mContext)
+        dialogView.setContentView(R.layout.image_picker)
+        dialogView.setCancelable(false)
+
+        val txtCamera = dialogView.findViewById<TextView>(R.id.txtcamera)
+        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
+        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
+
+        txtCamera.setOnClickListener { v: View? ->
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            imageResultLaunchers[imageNumber]?.launch(intent)
+
+            showProgressBar(imageNumber, true)
+            isCamera = true
+            isGallery = false
+            dialogView.dismiss()
+        }
+
+        txtGallery.setOnClickListener { v: View? ->
+            ImagePickerUtil.pickImageFromGallery(requireActivity(),imageResultLaunchers[imageNumber] ?: return@setOnClickListener)
+
+            showProgressBar(imageNumber, true)
+            isCamera = false
+            isGallery = true
+            dialogView.dismiss()
+        }
+
+        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
+        dialogView.show()
+    }
+
+    private fun showProgressBar(imageNumber: Int, isVisible: Boolean) {
+        val progressBar = when (imageNumber) {
+            1 -> binding.progressBar1
+            2 -> binding.progressBar2
+            3 -> binding.progressBar3
+            4 -> binding.progressBar4
+            5 -> binding.progressBar5
+            6 -> binding.progressBar6
+            else -> throw IllegalArgumentException("Invalid image number")
+        }
+        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    private fun initializeImageResultLaunchers() {
+        for (i in 1..6) {
+            val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                handleImageResult(result, i)
+            }
+            imageResultLaunchers[i] = launcher
+        }
+    }
+
+    private fun handleImageResult(result: ActivityResult, imageNumber: Int) {
+        val resultCode = result.resultCode
+        val data = result.data
+
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                showProgressBar(imageNumber, false)
+                if (isCamera) {
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    val image = saveImageToStorage(imageBitmap).toString()
+                    imagesurl.add(image)
+                    setImage(imageNumber, Uri.parse(image))
+                } else if (isGallery) {
+                    val uri = data?.data
+                    imagesurl.add(PathUtils.getRealPath(mContext, uri!!).toString())
+                    setImage(imageNumber, uri)
+                }
+            }
+
+            else -> {
+                Toast.makeText(mContext, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setImage(imageNumber: Int, uri: Uri?) {
         when (imageNumber) {
-            1 -> binding.singerfirstImage.setImageURI(uri)
-            2 -> binding.singersecondimage.setImageURI(uri)
-            3 -> binding.singerthirdimage.setImageURI(uri)
+            1 -> binding.firstImage.setImageURI(uri)
+            2 -> binding.secondImage.setImageURI(uri)
+            3 -> binding.thirdImage.setImageURI(uri)
+            4 -> binding.fourthImage.setImageURI(uri)
+            5 -> binding.fifthimage.setImageURI(uri)
+            6 -> binding.siximage.setImageURI(uri)
             else -> throw IllegalArgumentException("Invalid image number")
         }
-
     }
 
 }

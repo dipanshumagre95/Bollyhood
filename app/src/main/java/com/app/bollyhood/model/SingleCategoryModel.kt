@@ -36,6 +36,7 @@ data class SingleCategoryModel(
     val platforms:String,
     val skills:String,
     val softwares:String,
+    val available:String,
     val imagefile:ArrayList<String>,
     val work_links: ArrayList<WorkLinkProfileData>,
     val videos_url: ArrayList<VideoLink>,

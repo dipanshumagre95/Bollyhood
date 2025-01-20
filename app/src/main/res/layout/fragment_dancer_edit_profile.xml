@@ -221,43 +221,112 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/llAchievements"
-                        android:layout_width="@dimen/_120sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_below="@+id/llDescriptions"
-                        android:layout_gravity="center_horizontal"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/rectangle_gray_with_black_border"
-                        android:gravity="center"
-                        android:padding="@dimen/_5sdp"
-                        app:hintAnimationEnabled="true"
-                        app:hintEnabled="false"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-                        <EditText
-                            android:id="@+id/edtAchievements"
-                            style="@style/style_sec_sec"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:hint="Achievements"
-                            android:inputType="textMultiLine"
-                            android:maxLength="50"
-                            android:paddingStart="@dimen/_10sdp" />
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/llLocation"
+                            android:layout_width="@dimen/_150sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/llDescriptions"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="false"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <EditText
+                                android:id="@+id/edtLocation"
+                                style="@style/style_sec_sec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:hint="Location"
+                                android:inputType="textMultiLine"
+                                android:maxLength="50"
+                                android:paddingStart="@dimen/_10sdp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/llDance_forms"
+                            android:layout_width="@dimen/_150sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/llDescriptions"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="false"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                            <EditText
+                                android:id="@+id/edtDance_forms"
+                                style="@style/style_sec_sec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:hint="Dance Forms"
+                                android:inputType="text"
+                                android:maxLength="50"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/llAvailable_for"
+                            android:layout_width="@dimen/_150sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/llDescriptions"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="false"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                            <EditText
+                                android:id="@+id/edtAvailable_for"
+                                style="@style/style_sec_sec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:hint="Available For"
+                                android:inputType="text"
+                                android:maxLength="50"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/llLanguages"
@@ -266,6 +335,7 @@
                             android:layout_below="@+id/llDescriptions"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:background="@drawable/rectangle_gray_with_black_border"
                             android:gravity="center"
                             android:padding="@dimen/_5sdp"
@@ -280,67 +350,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:background="@android:color/transparent"
-                                android:hint="Location"
-                                android:inputType="text"
-                                android:maxLength="50"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/llEvents"
-                            android:layout_width="@dimen/_130sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_below="@+id/llDescriptions"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            app:hintAnimationEnabled="true"
-                            app:hintEnabled="false"
-                            app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                            <EditText
-                                android:id="@+id/edtEvents"
-                                style="@style/style_sec_sec"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@android:color/transparent"
-                                android:hint="Dance Forms"
-                                android:inputType="text"
-                                android:maxLength="50"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/llGenre"
-                            android:layout_width="@dimen/_160sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_below="@+id/llDescriptions"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            app:hintAnimationEnabled="true"
-                            app:hintEnabled="false"
-                            app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                            <EditText
-                                android:id="@+id/edtGenre"
-                                style="@style/style_sec_sec"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@android:color/transparent"
-                                android:hint="What i do ?"
+                                android:hint="Languages"
                                 android:inputType="text"
                                 android:maxLength="50"
                                 android:paddingStart="@dimen/_10sdp"
@@ -485,7 +495,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/singerphoto"
+                        android:id="@+id/first3"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_below="@id/llworkLink"
@@ -497,7 +507,6 @@
                         <LinearLayout
                             android:layout_width="@dimen/_65sdp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_8sdp"
                             android:layout_weight="1"
                             android:background="@drawable/rectangle_app_background">
 
@@ -519,12 +528,26 @@
 
 
                                     <ImageView
-                                        android:id="@+id/singerfirstImage"
+                                        android:id="@+id/firstImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center" />
+                                        android:scaleType="centerCrop" />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar1"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -536,6 +559,7 @@
                             android:layout_width="@dimen/_65sdp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
                             android:layout_weight="1"
                             android:background="@drawable/rectangle_app_background">
 
@@ -557,12 +581,26 @@
 
 
                                     <ImageView
-                                        android:id="@+id/singersecondimage"
+                                        android:id="@+id/secondImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center" />
+                                        android:scaleType="centerCrop" />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar2"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
 
@@ -572,7 +610,6 @@
                         <LinearLayout
                             android:layout_width="@dimen/_65sdp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_8sdp"
                             android:layout_weight="1"
                             android:background="@drawable/rectangle_app_background">
 
@@ -595,16 +632,195 @@
 
 
                                     <ImageView
-                                        android:id="@+id/singerthirdimage"
+                                        android:id="@+id/thirdImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:adjustViewBounds="true"
                                         android:contentDescription="@string/app_name"
-                                        android:scaleType="center"
+                                        android:scaleType="centerCrop" />
 
-                                        />
+                                    <ProgressBar
+                                        android:id="@+id/progressBar3"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </RelativeLayout>
+
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/second3"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_below="@id/first3"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_65sdp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/rectangle_app_background">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_1sdp"
+                                android:elevation="@dimen/_5sdp"
+                                app:cardBackgroundColor="@color/grey"
+                                app:cardCornerRadius="@dimen/_10sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
+
+
+                                    <ImageView
+                                        android:id="@+id/fourthImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:scaleType="centerCrop" />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar4"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_65sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rectangle_app_background">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_1sdp"
+                                android:elevation="@dimen/_5sdp"
+                                app:cardBackgroundColor="@color/grey"
+                                app:cardCornerRadius="@dimen/_10sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
+
+
+                                    <ImageView
+                                        android:id="@+id/fifthimage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:scaleType="centerCrop" />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar5"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </RelativeLayout>
+
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_65sdp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/rectangle_app_background">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_1sdp"
+                                android:elevation="@dimen/_5sdp"
+                                app:cardBackgroundColor="@color/grey"
+                                app:cardCornerRadius="@dimen/_10sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/upload_to_the_cloud_svg">
+
+
+                                    <ImageView
+                                        android:id="@+id/siximage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:scaleType="centerCrop" />
+
+                                    <ProgressBar
+                                        android:id="@+id/progressBar6"
+                                        style="?android:attr/progressBarStyleLarge"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:theme="@style/CircularProgress"
+                                        android:visibility="gone"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintRight_toRightOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </RelativeLayout>
+
 
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
