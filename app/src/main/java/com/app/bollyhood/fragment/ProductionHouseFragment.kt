@@ -127,7 +127,7 @@ class ProductionHouseFragment : Fragment(),OnClickListener,ProductionHouseAdapte
     private fun initUi() {
 
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getAllActors("26")
+            viewModel.getAllActors("26",PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
             Toast.makeText(
                 requireContext(),

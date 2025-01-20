@@ -131,7 +131,7 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
         }
 
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getAllActors(categorie)
+            viewModel.getAllActors(categorie,PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
             Toast.makeText(
                 requireContext(),

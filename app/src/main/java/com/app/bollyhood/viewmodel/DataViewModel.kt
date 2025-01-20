@@ -111,11 +111,11 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     }
 
 
-    fun getAllActors(categorie: String) {
+    fun getAllActors(categorie: String,uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val response = mainRepository.getAllActors(categorie)
+                val response = mainRepository.getAllActors(categorie,uid)
                 if (response.isSuccessful && response.body() != null) {
                     actorsList.postValue(response.body())
                 } else {
