@@ -44,6 +44,12 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentDancerEditProfileBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isvalidDescriptions
+import com.app.bollyhood.extensions.isvalidEmailAddress
+import com.app.bollyhood.extensions.isvalidMobileNumber
+import com.app.bollyhood.extensions.isvalidName
+import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -53,6 +59,11 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -134,7 +145,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
             }
 
             R.id.tvUpdateProfile->{
-        //        updateDancerProfile()
+               updateDancerProfile()
             }
 
             R.id.firstImage->{
@@ -688,7 +699,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
         return youtubeRegex.matches(url)
     }
 
-    /*private fun updateDancerProfile()
+    private fun updateDancerProfile()
     {
         if (isNetworkAvailable(mContext)) {
             if (isvalidName(
@@ -732,24 +743,29 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                     binding.edtDescriptions.text.toString().trim()
                 )
 
-                val achievements: RequestBody = RequestBody.create(
+                val available: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtLocation.text.toString().trim()
+                    binding.edtAvailableFor.text.toString().trim()
                 )
 
                 val location: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtDanceForms.text.toString().trim()
+                    binding.edtLocation.text.toString().trim()
                 )
 
-                val languages: RequestBody = RequestBody.create(
+                val achievements: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     ""
                 )
 
+                val languages: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLanguages.text.toString().trim()
+                )
+
                 val dancer_form: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtEvents.text.toString().trim()
+                    binding.edtDanceForms.text.toString().trim()
                 )
 
                 val events: RequestBody = RequestBody.create(
@@ -759,7 +775,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
 
                 val what_i_do: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtGenre.text.toString().trim()
+                    ""
                 )
 
                 val genre: RequestBody = RequestBody.create(
@@ -842,6 +858,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                     what_i_do,
                     events,
                     genre,
+                    available,
                     showreel,
                     workLink,
                     categoryId,
@@ -856,7 +873,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }*/
+    }
 
     private fun saveImageToStorage(bitmap: Bitmap): String? {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())

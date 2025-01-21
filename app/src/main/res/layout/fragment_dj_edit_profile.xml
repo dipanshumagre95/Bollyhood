@@ -107,7 +107,6 @@
                         android:padding="@dimen/_7sdp"
                         android:layout_alignBottom="@id/cvProfile"
                         android:background="@drawable/image_pen"
-                        android:src="@drawable/edit"
                         />
                 </RelativeLayout>
 

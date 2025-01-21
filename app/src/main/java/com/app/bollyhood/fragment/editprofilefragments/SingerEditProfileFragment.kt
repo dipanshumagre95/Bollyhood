@@ -783,6 +783,11 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                     binding.edtGenre.text.toString().trim()
                 )
 
+                val available: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
                 val categoryId: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(), category_Id
                 )
@@ -858,6 +863,7 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                     what_i_do,
                     events,
                     genre,
+                    available,
                     showreel,
                     workLink,
                     categoryId,

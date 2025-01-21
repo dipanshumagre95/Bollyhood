@@ -44,12 +44,6 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentMusicialBandEditProfileBinding
-import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.extensions.isvalidDescriptions
-import com.app.bollyhood.extensions.isvalidEmailAddress
-import com.app.bollyhood.extensions.isvalidMobileNumber
-import com.app.bollyhood.extensions.isvalidName
-import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -59,11 +53,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -146,7 +135,7 @@ class MusicialBandEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onI
             }
 
             R.id.tvUpdateProfile->{
-                updateSingerProfile()
+              //  updateSingerProfile()
             }
 
             R.id.firstImage->{
@@ -701,7 +690,7 @@ class MusicialBandEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onI
         return youtubeRegex.matches(url)
     }
 
-    private fun updateSingerProfile()
+   /* private fun updateSingerProfile()
     {
         if (isNetworkAvailable(mContext)) {
             if (isvalidName(
@@ -869,7 +858,7 @@ class MusicialBandEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onI
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
+    }*/
 
     private fun dialogForImage(imageNumber: Int) {
         val dialogView = Dialog(mContext)
