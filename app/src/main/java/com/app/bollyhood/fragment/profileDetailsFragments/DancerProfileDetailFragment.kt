@@ -217,7 +217,7 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
                 llLanguages.visibility=View.GONE
             }
 
-            if (singleCategoryModel?.events?.isNotEmpty()==true){
+            if (singleCategoryModel?.available?.isNotEmpty()==true){
                 tvAvailableFor.text=singleCategoryModel?.available
             }else{
                 llAvailableFor.visibility=View.GONE
