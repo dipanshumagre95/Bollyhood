@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/llmain"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_marginStart="-10dp"
+                    android:layout_marginEnd="-10dp"
+                    android:background="@drawable/pagebackground">
+
+                    <RelativeLayout
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/white_border"
+                            android:paddingStart="@dimen/_7sdp"
+                            android:paddingTop="@dimen/_4sdp"
+                            android:paddingEnd="@dimen/_7sdp"
+                            android:paddingBottom="@dimen/_7sdp"
+                            android:src="@drawable/icon_back" />
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:text="Edit profile"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:layout_centerHorizontal="true"
+                        app:fontFamily="@font/urbanist_semibold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/ellipse_5"
+                        android:layout_marginEnd="-30dp"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/ellipse_5"
+                        android:layout_marginEnd="-30dp"
+                        android:layout_marginTop="-10dp"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rrProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right|center"
+                    android:layout_marginTop="-63dp"
+                    android:layout_below="@+id/llmain"
+                    android:layout_centerHorizontal="true">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cvProfile"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:src="@drawable/ic_profile"
+                        app:civ_border_width="@dimen/_2sdp"
+                        app:civ_border_color="#FE885B"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCamera"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignEnd="@id/cvProfile"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_alignBottom="@id/cvProfile"
+                        android:background="@drawable/image_pen"
+                        android:src="@drawable/edit"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/rrProfile"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/lledtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="false"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                        <EditText
+                            android:id="@+id/edtName"
+                            style="@style/style_sec_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Full Name"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:singleLine="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/llCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_below="@+id/lledtName"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="false"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                        <EditText
+                            android:id="@+id/edtCategory"
+                            style="@style/style_sec_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Bio Category"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:singleLine="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/llDescriptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llCategory"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border">
+
+                        <TextView
+                            android:id="@+id/discriptionhint"
+                            style="@style/TextInputLayoutHintText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="About You" />
+
+
+                        <EditText
+                            android:id="@+id/edtDescriptions"
+                            style="@style/style_sec_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/discriptionhint"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="@android:color/transparent"
+                            android:inputType="textMultiLine"
+                            android:maxLength="250"
+                            android:padding="@dimen/_5sdp"
+                            android:scrollbars="vertical"
+                            android:singleLine="true" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/textcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llDescriptions"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:textColor="#757575"
+                        android:textSize="@dimen/_7sdp"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/llEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_below="@+id/textcount"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="false"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                        <EditText
+                            android:id="@+id/edtEmailAddress"
+                            style="@style/style_sec_sec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Email"
+                            android:inputType="textEmailAddress"
+                            android:maxLength="50"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:singleLine="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/llphone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llEmail"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_gray_with_black_border">
+
+
+                        <ImageView
+                            android:id="@+id/flag"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:padding="@dimen/_4sdp"
+                            android:src="@drawable/flag_india" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/llphonenumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_toRightOf="@+id/flag"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="false"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                            <EditText
+                                android:id="@+id/edtMobileNumber"
+                                style="@style/style_sec_sec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:hint="Phone number"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/profile_influencer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llphone"
+                        android:visibility="visible"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/llLocation"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_below="@+id/llDescriptions"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:padding="@dimen/_5sdp"
+                                app:hintAnimationEnabled="true"
+                                app:hintEnabled="false"
+                                app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                                <EditText
+                                    android:id="@+id/edtLocation"
+                                    style="@style/style_sec_sec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Location"
+                                    android:inputType="textMultiLine"
+                                    android:maxLength="50"
+                                    android:paddingStart="@dimen/_10sdp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/llExperience"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_below="@+id/llDescriptions"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                app:hintAnimationEnabled="true"
+                                app:hintEnabled="false"
+                                app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                                <EditText
+                                    android:id="@+id/edtExperience"
+                                    style="@style/style_sec_sec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Experience"
+                                    android:inputType="text"
+                                    android:maxLength="50"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/llSongs_type"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_below="@+id/llDescriptions"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                app:hintAnimationEnabled="true"
+                                app:hintEnabled="false"
+                                app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                                <EditText
+                                    android:id="@+id/edtSongs_types"
+                                    style="@style/style_sec_sec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Songs Type"
+                                    android:inputType="text"
+                                    android:maxLength="50"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/llLanguages"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_below="@+id/llDescriptions"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                app:hintAnimationEnabled="true"
+                                app:hintEnabled="false"
+                                app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                                <EditText
+                                    android:id="@+id/edtLanguages"
+                                    style="@style/style_sec_sec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Languages"
+                                    android:inputType="text"
+                                    android:maxLength="50"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/tvAddShowreel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_below="@+id/ageNpasspod"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/rectangle_pink">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/_8sdp"
+                                android:paddingEnd="@dimen/_8sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_18sdp"
+                                    android:layout_height="@dimen/_18sdp"
+                                    android:adjustViewBounds="true"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/video" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvsinger_showreel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:fontFamily="@font/urbanist_bold"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="Update Showreel"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_10sdp" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/singerShowreelecyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_10sdp" />
+
+                        <RelativeLayout
+                            android:id="@+id/tvAddSingerWorkLink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_below="@+id/ageNpasspod"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/rectangle_pink">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/_8sdp"
+                                android:paddingEnd="@dimen/_8sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_18sdp"
+                                    android:layout_height="@dimen/_18sdp"
+                                    android:adjustViewBounds="true"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/video" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:fontFamily="@font/urbanist_bold"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="Update Work Links"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_10sdp" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/singerworklinkrecyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_10sdp" />
+
+                        <RelativeLayout
+                            android:id="@+id/llteamNcondition"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginStart="30sp"
+                            android:layout_marginEnd="24sp"
+                            android:layout_marginBottom="@dimen/_5sdp">
+
+                            <CheckBox
+                                android:id="@+id/cbteamNcondition"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_gravity="center" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvteam_condition"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_toRightOf="@+id/cbteamNcondition"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center_vertical"
+                                android:singleLine="true"
+                                android:textSize="9dp" />
+                        </RelativeLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvUpdateProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/rectangle_app_background"
+                            android:fontFamily="@font/urbanist_semibold"
+                            android:gravity="center"
+                            android:text="@string/str_update_profile"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
