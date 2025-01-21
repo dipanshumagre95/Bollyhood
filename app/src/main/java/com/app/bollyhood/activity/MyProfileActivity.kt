@@ -17,6 +17,7 @@ import com.app.bollyhood.fragment.editprofilefragments.DjEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.DopNDirectorEditFragment
 import com.app.bollyhood.fragment.editprofilefragments.InfluencerEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.LyricsWriterEditProfileFragment
+import com.app.bollyhood.fragment.editprofilefragments.MusicialBandEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.SingerEditProfileFragment
 import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.util.PrefManager
@@ -82,6 +83,10 @@ class MyProfileActivity : AppCompatActivity(){
 
                 Categorie.LYRICSWRITER.toString() ->{
                     loadFragment(LyricsWriterEditProfileFragment())
+                }
+
+                Categorie.MUSICBAND.toString() ->{
+                    loadFragment(MusicialBandEditProfileFragment())
                 }
 
                 Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
