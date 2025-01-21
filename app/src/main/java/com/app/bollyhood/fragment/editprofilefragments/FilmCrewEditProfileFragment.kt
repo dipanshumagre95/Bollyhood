@@ -43,7 +43,7 @@ import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
-import com.app.bollyhood.databinding.FragmentDopNDirectorBinding
+import com.app.bollyhood.databinding.FragmentFilmCrewEditProfileBinding
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -61,9 +61,10 @@ import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
-class DopNDirectorEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, OnClickListener {
+class FilmCrewEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick,
+    OnClickListener {
 
-    lateinit var binding: FragmentDopNDirectorBinding
+    lateinit var binding: FragmentFilmCrewEditProfileBinding
     private val viewModel: DataViewModel by viewModels()
     lateinit var mContext: Context
     private var isCamera = false
@@ -82,8 +83,7 @@ class DopNDirectorEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemClic
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dop_n_director, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_film_crew_edit_profile, container, false)
         mContext=requireContext()
 
         initUI()
@@ -102,25 +102,23 @@ class DopNDirectorEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemClic
         binding.edtDescriptions.addTextChangedListener(this)
         binding.edtEmailAddress.addTextChangedListener(this)
         binding.edtLocation.addTextChangedListener(this)
-        binding.edtLanguages.addTextChangedListener(this)
-        binding.edtDopCategories.addTextChangedListener(this)
         binding.edtSkills.addTextChangedListener(this)
     }
 
     private fun addListner() {
 
         binding.apply {
-            tvAddShowreel.setOnClickListener(this@DopNDirectorEditFragment)
-            tvAddSingerWorkLink.setOnClickListener(this@DopNDirectorEditFragment)
-            tvUpdateProfile.setOnClickListener(this@DopNDirectorEditFragment)
-            firstImage.setOnClickListener(this@DopNDirectorEditFragment)
-            secondImage.setOnClickListener(this@DopNDirectorEditFragment)
-            thirdImage.setOnClickListener(this@DopNDirectorEditFragment)
-            fourthImage.setOnClickListener(this@DopNDirectorEditFragment)
-            fifthimage.setOnClickListener(this@DopNDirectorEditFragment)
-            siximage.setOnClickListener(this@DopNDirectorEditFragment)
-            ivBack.setOnClickListener(this@DopNDirectorEditFragment)
-            rrProfile.setOnClickListener(this@DopNDirectorEditFragment)
+            tvAddShowreel.setOnClickListener(this@FilmCrewEditProfileFragment)
+            tvAddSingerWorkLink.setOnClickListener(this@FilmCrewEditProfileFragment)
+            tvUpdateProfile.setOnClickListener(this@FilmCrewEditProfileFragment)
+            firstImage.setOnClickListener(this@FilmCrewEditProfileFragment)
+            secondImage.setOnClickListener(this@FilmCrewEditProfileFragment)
+            thirdImage.setOnClickListener(this@FilmCrewEditProfileFragment)
+            fourthImage.setOnClickListener(this@FilmCrewEditProfileFragment)
+            fifthimage.setOnClickListener(this@FilmCrewEditProfileFragment)
+            siximage.setOnClickListener(this@FilmCrewEditProfileFragment)
+            ivBack.setOnClickListener(this@FilmCrewEditProfileFragment)
+            rrProfile.setOnClickListener(this@FilmCrewEditProfileFragment)
 
         }
     }
@@ -235,16 +233,8 @@ class DopNDirectorEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemClic
                     binding.llLocation.setHintEnabled(true)
                 }
 
-                binding.edtLanguages.getText().hashCode() ->{
-                    binding.llLanguages.setHintEnabled(true)
-                }
-
                 binding.edtSkills.getText().hashCode() ->{
                     binding.llSkills.setHintEnabled(true)
-                }
-
-                binding.edtDopCategories.getText().hashCode() ->{
-                    binding.llDopCategories.setHintEnabled(true)
                 }
             }
         }else if (charSequence?.length!! <= 0){
@@ -273,16 +263,8 @@ class DopNDirectorEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemClic
                     binding.llLocation.setHintEnabled(false)
                 }
 
-                binding.edtLanguages.getText().hashCode() ->{
-                    binding.llLanguages.setHintEnabled(false)
-                }
-
                 binding.edtSkills.getText().hashCode() ->{
                     binding.llSkills.setHintEnabled(false)
-                }
-
-                binding.edtDopCategories.getText().hashCode() ->{
-                    binding.llDopCategories.setHintEnabled(false)
                 }
             }
         }
@@ -343,9 +325,7 @@ class DopNDirectorEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemClic
         binding.edtCategory.setText(profileModel.categories[0].category_name)
         category_Id = profileModel.categories[0].category_id
         binding.edtLocation.setText(profileModel.location)
-        binding.edtDopCategories.setText(profileModel.softwares)
         binding.edtSkills.setText(profileModel.genre)
-        binding.edtLanguages.setText(profileModel.languages)
 
         if (!profileModel.work_links.isNullOrEmpty()) {
             for (i in 0 until profileModel.work_links.size) {
