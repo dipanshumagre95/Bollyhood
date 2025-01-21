@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityMyProfileBinding
 import com.app.bollyhood.fragment.editprofilefragments.ActorsEditProfileFragment
+import com.app.bollyhood.fragment.editprofilefragments.AnchorEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.CompanyEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.DancerEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.DjEditProfileFragment
@@ -72,6 +73,10 @@ class MyProfileActivity : AppCompatActivity(){
 
                 Categorie.DOP.toString() ->{
                     loadFragment(DopNDirectorEditFragment())
+                }
+
+                Categorie.ANCHORS.toString() ->{
+                    loadFragment(AnchorEditProfileFragment())
                 }
 
                 Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
