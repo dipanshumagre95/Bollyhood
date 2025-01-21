@@ -13,6 +13,7 @@ import com.app.bollyhood.fragment.editprofilefragments.ActorsEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.CompanyEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.DancerEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.DjEditProfileFragment
+import com.app.bollyhood.fragment.editprofilefragments.DopNDirectorEditFragment
 import com.app.bollyhood.fragment.editprofilefragments.InfluencerEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.SingerEditProfileFragment
 import com.app.bollyhood.model.CategoryModel
@@ -67,6 +68,10 @@ class MyProfileActivity : AppCompatActivity(){
 
                 Categorie.INFLUENCER.toString() ->{
                     loadFragment(InfluencerEditProfileFragment())
+                }
+
+                Categorie.DOP.toString() ->{
+                    loadFragment(DopNDirectorEditFragment())
                 }
 
                 Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
