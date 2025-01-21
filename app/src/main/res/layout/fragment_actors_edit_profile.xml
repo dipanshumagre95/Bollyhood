@@ -319,60 +319,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
                             android:orientation="horizontal"
                             android:visibility="visible">
 
-
-                            <RelativeLayout
-                                android:id="@+id/rrheight"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:orientation="horizontal">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/txheight"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:text="Height"
-                                    android:textColorHint="#757575"
-                                    android:textSize="10sp" />
-
-                                <AutoCompleteTextView
-                                    android:id="@+id/acheight"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txheight"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:background="@android:color/transparent"
-                                    android:clickable="false"
-                                    android:dropDownAnchor="@id/acheight"
-                                    android:focusable="false"
-                                    android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Select Height"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/black"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:visibility="visible" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginEnd="@dimen/_5sdp"
-                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                            </RelativeLayout>
 
                             <RelativeLayout
                                 android:id="@+id/rrlocation"
@@ -415,6 +365,56 @@
 
                             </RelativeLayout>
 
+                            <RelativeLayout
+                                android:id="@+id/rrage"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Age"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/acage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txage"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="false"
+                                    android:dropDownAnchor="@id/acSkinColor"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Select Age"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                            </RelativeLayout>
+
 
                         </LinearLayout>
 
@@ -425,10 +425,9 @@
                             android:layout_below="@+id/heightNlocation"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
                             android:orientation="horizontal"
                             android:visibility="visible">
-
 
                             <RelativeLayout
                                 android:id="@+id/rrSkinColor"
@@ -481,6 +480,69 @@
                             </RelativeLayout>
 
                             <RelativeLayout
+                                android:id="@+id/rrheight"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txheight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Height"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/acheight"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txheight"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="false"
+                                    android:dropDownAnchor="@id/acheight"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Select Height"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ageNpasspod"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/skinNbodytype"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <RelativeLayout
                                 android:id="@+id/rrBodyType"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
@@ -529,77 +591,12 @@
                                     android:layout_marginEnd="@dimen/_5sdp"
                                     android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
                             </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ageNpasspod"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/skinNbodytype"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:orientation="horizontal"
-                            android:visibility="visible">
-
-
-                            <RelativeLayout
-                                android:id="@+id/rrage"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:orientation="horizontal">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/txage"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:text="Age"
-                                    android:textColorHint="#757575"
-                                    android:textSize="10sp" />
-
-                                <AutoCompleteTextView
-                                    android:id="@+id/acage"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txage"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:background="@android:color/transparent"
-                                    android:clickable="false"
-                                    android:dropDownAnchor="@id/acSkinColor"
-                                    android:focusable="false"
-                                    android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Select Age"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/black"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:visibility="visible" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginEnd="@dimen/_5sdp"
-                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                            </RelativeLayout>
-
                             <RelativeLayout
                                 android:id="@+id/rrpassport"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_weight="1"
                                 android:background="@drawable/rectangle_gray_with_black_border"
                                 android:orientation="horizontal">
