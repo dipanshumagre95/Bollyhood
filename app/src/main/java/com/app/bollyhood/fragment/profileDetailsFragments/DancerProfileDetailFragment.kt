@@ -205,10 +205,10 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
             Glide.with(requireContext()).load(singleCategoryModel?.image).centerCrop().placeholder(R.drawable.ic_profile).into(cvProfile)
             tvName.text = singleCategoryModel?.name
 
-            if (singleCategoryModel?.genre?.isNotEmpty() == true){
-                tvGenre.text=singleCategoryModel?.genre
+            if (singleCategoryModel?.dancer_form?.isNotEmpty() == true){
+                tvDanceForms.text=singleCategoryModel?.dancer_form
             }else{
-                llGenre.visibility=View.GONE
+                llDanceForms.visibility=View.GONE
             }
 
             if (singleCategoryModel?.languages?.isNotEmpty()==true){
@@ -218,7 +218,7 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
             }
 
             if (singleCategoryModel?.events?.isNotEmpty()==true){
-                tvAvailableFor.text=singleCategoryModel?.events
+                tvAvailableFor.text=singleCategoryModel?.available
             }else{
                 llAvailableFor.visibility=View.GONE
             }
