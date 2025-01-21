@@ -750,7 +750,7 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
 
                 val achievements: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtLocation.text.toString().trim()
+                    ""
                 )
 
                 val languages: RequestBody = RequestBody.create(
@@ -760,7 +760,7 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
 
                 val location: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    ""
+                    binding.edtLocation.text.toString().trim()
                 )
 
                 val dancer_form: RequestBody = RequestBody.create(
