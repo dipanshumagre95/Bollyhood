@@ -351,33 +351,37 @@
                                     android:paddingStart="@dimen/_10sdp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llLanguages"
+                                android:id="@+id/llGenre"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_below="@+id/llDescriptions"
+                                android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:background="@drawable/rectangle_gray_with_black_border"
                                 android:gravity="center"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:padding="@dimen/_5sdp"
                                 app:hintAnimationEnabled="true"
                                 app:hintEnabled="false"
                                 app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                                 <EditText
-                                    android:id="@+id/edtLanguages"
+                                    android:id="@+id/edtGenre"
                                     style="@style/style_sec_sec"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@android:color/transparent"
-                                    android:hint="Languages"
+                                    android:hint="Genre"
                                     android:inputType="text"
                                     android:maxLength="50"
                                     android:paddingStart="@dimen/_10sdp"
                                     android:singleLine="true" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
 
                         </LinearLayout>
 
@@ -412,7 +416,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@android:color/transparent"
-                                    android:hint="Events"
+                                    android:hint="Event Types"
                                     android:inputType="text"
                                     android:maxLength="50"
                                     android:paddingStart="@dimen/_10sdp"
@@ -421,27 +425,27 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llGenre"
+                                android:id="@+id/llLanguages"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_below="@+id/llDescriptions"
-                                android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:background="@drawable/rectangle_gray_with_black_border"
                                 android:gravity="center"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:padding="@dimen/_5sdp"
                                 app:hintAnimationEnabled="true"
                                 app:hintEnabled="false"
                                 app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                                 <EditText
-                                    android:id="@+id/edtGenre"
+                                    android:id="@+id/edtLanguages"
                                     style="@style/style_sec_sec"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@android:color/transparent"
-                                    android:hint="Genre"
+                                    android:hint="Languages"
                                     android:inputType="text"
                                     android:maxLength="50"
                                     android:paddingStart="@dimen/_10sdp"
