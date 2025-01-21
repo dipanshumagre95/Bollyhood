@@ -7,111 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"
-            android:background="@drawable/pagebackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RelativeLayout
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:gravity="center_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/white_border"
-                    android:paddingStart="@dimen/_7sdp"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_7sdp"
-                    android:src="@drawable/icon_back" />
-
-            </RelativeLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:text="Edit profile"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                app:fontFamily="@font/urbanist_semibold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ellipse_5"
-                android:layout_marginEnd="-30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="110dp"
-                android:src="@drawable/ellipse_5"
-                android:layout_marginEnd="-30dp"
-                android:layout_marginTop="-10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <RelativeLayout
-            android:id="@+id/rrProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="right|center"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cvProfile"
-                android:layout_width="@dimen/_90sdp"
-                android:layout_height="@dimen/_90sdp"
-                android:src="@drawable/ic_profile"
-                app:civ_border_width="@dimen/_2sdp"
-                app:civ_border_color="#FE885B"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivCamera"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_alignEnd="@id/cvProfile"
-                android:padding="@dimen/_7sdp"
-                android:layout_alignBottom="@id/cvProfile"
-                android:background="@drawable/image_pen"
-                android:src="@drawable/edit"
-                 />
-
-
-        </RelativeLayout>
 
         <FrameLayout
             android:id="@+id/fragment_containers"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rrProfile" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

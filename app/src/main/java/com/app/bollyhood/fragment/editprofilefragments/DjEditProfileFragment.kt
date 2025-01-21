@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
+import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentDjEditProfileBinding
@@ -119,6 +120,9 @@ class DjEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, 
             fourthImage.setOnClickListener(this@DjEditProfileFragment)
             fifthimage.setOnClickListener(this@DjEditProfileFragment)
             siximage.setOnClickListener(this@DjEditProfileFragment)
+            ivBack.setOnClickListener(this@DjEditProfileFragment)
+            rrProfile.setOnClickListener(this@DjEditProfileFragment)
+
         }
     }
 
@@ -183,6 +187,18 @@ class DjEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, 
 
             R.id.tvUpdateProfile->{
                // updateDjProfile()
+            }
+
+            R.id.ivBack ->{
+                (requireActivity() as? MyProfileActivity)?.closeActivity()
+            }
+
+            R.id.rrProfile->{
+                if (checkPermission()) {
+                    alertDialogForImagePicker()
+                } else {
+                    checkPermission()
+                }
             }
         }
     }
@@ -952,4 +968,52 @@ class DjEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, 
             else -> throw IllegalArgumentException("Invalid image number")
         }
     }
+
+    private fun alertDialogForImagePicker() {
+        val dialogView = Dialog(requireContext())
+        dialogView.setContentView(R.layout.image_picker)
+        dialogView.setCancelable(false)
+        val txtcamera = dialogView.findViewById<TextView>(R.id.txtcamera)
+        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
+        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
+        txtcamera.setOnClickListener { v: View? ->
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startForProfileImageResult.launch(intent)
+
+            isCamera = true
+            isGallery = false
+            dialogView.dismiss()
+        }
+        txtGallery.setOnClickListener { v: View? ->
+            ImagePickerUtil.pickImageFromGallery(requireActivity(),startForProfileImageResult)
+            isCamera = false
+            isGallery = true
+            dialogView.dismiss()
+        }
+        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
+        dialogView.show()
+    }
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    if (isCamera) {
+                        val imageBitmap = result.data?.extras?.get("data") as Bitmap
+                        profilePath = saveImageToStorage(imageBitmap).toString()
+                        binding.cvProfile.setImageURI(Uri.parse(profilePath))
+                    } else if (isGallery) {
+                        val uri = data!!.data
+                        profilePath =PathUtils.getRealPath(requireContext(), uri!!).toString()
+                        binding.cvProfile.setImageURI(uri)
+                    }
+                }
+                else -> {
+                    Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 }

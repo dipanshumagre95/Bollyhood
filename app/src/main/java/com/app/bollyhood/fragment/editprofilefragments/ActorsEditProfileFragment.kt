@@ -43,6 +43,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
+import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentActorsEditProfileBinding
@@ -144,6 +145,8 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
             fifthimage.setOnClickListener(this@ActorsEditProfileFragment)
             siximage.setOnClickListener(this@ActorsEditProfileFragment)
             tvUpdateProfile.setOnClickListener(this@ActorsEditProfileFragment)
+            ivBack.setOnClickListener(this@ActorsEditProfileFragment)
+            rrProfile.setOnClickListener(this@ActorsEditProfileFragment)
         }
     }
 
@@ -203,6 +206,18 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
 
             R.id.tvUpdateProfile->{
               updateActorProfile()
+            }
+
+            R.id.ivBack ->{
+                (requireActivity() as? MyProfileActivity)?.closeActivity()
+            }
+
+            R.id.rrProfile->{
+                if (checkPermission()) {
+                    alertDialogForImagePicker()
+                } else {
+                    checkPermission()
+                }
             }
         }
     }
@@ -374,7 +389,10 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
     }
 
     private fun setProfileData(profileModel: ProfileModel) {
-
+        if (!profileModel.image.isNullOrEmpty()) {
+            Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile).into(requireActivity().findViewById(R.id.cvProfile))
+        }
         binding.edtName.setText(profileModel.name)
         binding.edtEmailAddress.setText(profileModel.email)
         binding.edtMobileNumber.setText(profileModel.mobile)
@@ -858,4 +876,53 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
             false
         }
     }
+
+    private fun alertDialogForImagePicker() {
+        val dialogView = Dialog(requireContext())
+        dialogView.setContentView(R.layout.image_picker)
+        dialogView.setCancelable(false)
+        val txtcamera = dialogView.findViewById<TextView>(R.id.txtcamera)
+        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
+        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
+        txtcamera.setOnClickListener { v: View? ->
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startForProfileImageResult.launch(intent)
+
+            isCamera = true
+            isGallery = false
+            dialogView.dismiss()
+        }
+        txtGallery.setOnClickListener { v: View? ->
+            ImagePickerUtil.pickImageFromGallery(requireActivity(),startForProfileImageResult)
+            isCamera = false
+            isGallery = true
+            dialogView.dismiss()
+        }
+        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
+        dialogView.show()
+    }
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    if (isCamera) {
+                        val imageBitmap = result.data?.extras?.get("data") as Bitmap
+                        profilePath = saveImageToStorage(imageBitmap).toString()
+                        binding.cvProfile.setImageURI(Uri.parse(profilePath))
+                    } else if (isGallery) {
+                        val uri = data!!.data
+                        profilePath =PathUtils.getRealPath(requireContext(), uri!!).toString()
+                        binding.cvProfile.setImageURI(uri)
+                    }
+                }
+                else -> {
+                    Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
 }

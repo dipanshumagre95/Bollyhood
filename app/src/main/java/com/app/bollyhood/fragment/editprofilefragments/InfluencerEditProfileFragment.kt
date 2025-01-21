@@ -40,10 +40,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
+import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentInfluencerEditProfileBinding
 import com.app.bollyhood.model.ProfileModel
+import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
@@ -71,6 +73,8 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
     private var category_Id: String = ""
     private var workLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
     private var imagesurl: ArrayList<String> = arrayListOf()
+    private var showreelLinkListClone: ArrayList<WorkLinkProfileData> = arrayListOf()
+    private var showreelLinkList: ArrayList<VideoLink> = arrayListOf()
     private val imageResultLaunchers = mutableMapOf<Int, ActivityResultLauncher<Intent>>()
 
     override fun onCreateView(
@@ -106,6 +110,7 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
 
         binding.apply {
             tvinfluencerAddWorkLink.setOnClickListener(this@InfluencerEditProfileFragment)
+            tvAddShowreel.setOnClickListener(this@InfluencerEditProfileFragment)
             tvUpdateProfile.setOnClickListener(this@InfluencerEditProfileFragment)
             influencerFirstImage.setOnClickListener(this@InfluencerEditProfileFragment)
             influencerSecondImage.setOnClickListener(this@InfluencerEditProfileFragment)
@@ -113,6 +118,8 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
             influencerFourthImage.setOnClickListener(this@InfluencerEditProfileFragment)
             influencerFifthimage.setOnClickListener(this@InfluencerEditProfileFragment)
             influencerSiximage.setOnClickListener(this@InfluencerEditProfileFragment)
+            ivBack.setOnClickListener(this@InfluencerEditProfileFragment)
+            rrProfile.setOnClickListener(this@InfluencerEditProfileFragment)
 
         }
     }
@@ -121,6 +128,10 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
         when(view?.id){
             R.id.tvinfluencerAddWorkLink ->{
                 addWorkLinksDialog()
+            }
+
+            R.id.tvAddShowreel->{
+                addShowreelDialog(false)
             }
 
             R.id.influencer_firstImage->{
@@ -173,6 +184,18 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
 
             R.id.tvUpdateProfile->{
               //  updateInfluencerProfile()
+            }
+
+            R.id.ivBack ->{
+                (requireActivity() as? MyProfileActivity)?.closeActivity()
+            }
+
+            R.id.rrProfile->{
+                if (checkPermission()) {
+                    alertDialogForImagePicker()
+                } else {
+                    checkPermission()
+                }
             }
         }
     }
@@ -264,7 +287,6 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
     }
 
     override fun afterTextChanged(p0: Editable?) {
-
     }
 
     private fun addObserevs() {
@@ -293,7 +315,6 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun setPrefData(result: ProfileModel) {
@@ -344,6 +365,15 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
                     .centerCrop()
                     .into(imageViews[i])
             }
+        }
+
+        if (!profileModel.videos_url.isNullOrEmpty()) {
+            for (i in 0 until profileModel.videos_url.size) {
+                val item = profileModel.videos_url[i]
+                val workLink = WorkLinkProfileData("", item.video_url)
+                showreelLinkListClone.add(workLink)
+            }
+            showreelAdapter()
         }
     }
 
@@ -747,6 +777,18 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
                     "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
                 )
 
+                val jsonSingerArray = JSONArray()
+                for (i in 0 until showreelLinkList.size) {
+                    val jsonObject = JSONObject()
+                    jsonObject.put("video_name", showreelLinkList[i].video_name)
+                    jsonObject.put("video_url", showreelLinkList[i].video_url)
+                    jsonSingerArray.put(jsonObject)
+                }
+
+                val showreel: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), jsonSingerArray.toString()
+                )
+
 
                 viewModel.updateInfluencerProfile(
                     name,
@@ -776,5 +818,185 @@ class InfluencerEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onIte
             ).show()
         }
     }*/
+
+    private fun alertDialogForImagePicker() {
+        val dialogView = Dialog(requireContext())
+        dialogView.setContentView(R.layout.image_picker)
+        dialogView.setCancelable(false)
+        val txtcamera = dialogView.findViewById<TextView>(R.id.txtcamera)
+        val txtGallery = dialogView.findViewById<TextView>(R.id.txtGallery)
+        val txtCancel = dialogView.findViewById<TextView>(R.id.txtCancel)
+        txtcamera.setOnClickListener { v: View? ->
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startForProfileImageResult.launch(intent)
+
+            isCamera = true
+            isGallery = false
+            dialogView.dismiss()
+        }
+        txtGallery.setOnClickListener { v: View? ->
+            ImagePickerUtil.pickImageFromGallery(requireActivity(),startForProfileImageResult)
+            isCamera = false
+            isGallery = true
+            dialogView.dismiss()
+        }
+        txtCancel.setOnClickListener { v: View? -> dialogView.dismiss() }
+        dialogView.show()
+    }
+
+    private fun addShowreelDialog(isDancer:Boolean){
+        val dialogView = Dialog(mContext)
+        dialogView.setContentView(R.layout.add_work_link)
+
+        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val workLinkName1 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName1)
+        val workLinkName2 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName2)
+        val workLinkName3 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName3)
+        val linkName1 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink1)
+        val linkName2 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink2)
+        val linkName3 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
+        val addbutton = dialogView.findViewById<TextView>(R.id.tvAddLinks)
+        val hint = dialogView.findViewById<TextView>(R.id.tv_hint)
+        val closebutton = dialogView.findViewById<ImageView>(R.id.close)
+
+        if (isDancer){
+            hint.text = "Update Dance Video"
+            workLinkName1.setHint("Dance Video Link Name")
+            workLinkName2.setHint("Dance Video Link Name")
+            workLinkName3.setHint("Dance Video Link Name")
+            linkName1.setHint("Add Dance Video Link Url")
+            linkName2.setHint("Add Dance Video Link Url")
+            linkName3.setHint("Add Dance Video Link Url")
+        }else {
+            hint.text = "Update Showreel"
+            workLinkName1.setHint("Showreel Link Name")
+            workLinkName2.setHint("Showreel Link Name")
+            workLinkName3.setHint("Showreel Link Name")
+            linkName1.setHint("Add Showreel Link Url")
+            linkName2.setHint("Add Showreel Link Url")
+            linkName3.setHint("Add Showreel Link Url")
+        }
+
+
+        if (showreelLinkListClone.size > 0)
+        {
+            for (index in 0 until showreelLinkListClone.size) {
+                val worklink = showreelLinkListClone[index]
+                when(index){
+                    0 ->{
+                        workLinkName1.setText(worklink.worklink_name)
+                        linkName1.setText(worklink.worklink_url)
+                    }
+
+                    1->{
+                        workLinkName2.setText(worklink.worklink_name)
+                        linkName2.setText(worklink.worklink_url)
+                    }
+
+                    2->{
+                        workLinkName3.setText(worklink.worklink_name)
+                        linkName3.setText(worklink.worklink_url)
+                    }
+                }
+            }
+        }
+
+        closebutton.setOnClickListener {
+            dialogView.dismiss()
+        }
+
+        addbutton.setOnClickListener {
+            showreelLinkList.clear()
+            showreelLinkListClone.clear()
+            if (!workLinkName1.text.isNullOrEmpty() || !workLinkName2.text.isNullOrEmpty() || !workLinkName3.text.isNullOrEmpty()) {
+                if (!workLinkName1.text.isNullOrEmpty() && !linkName1.text.isNullOrEmpty()) {
+                    if (isValidYouTubeUrl(linkName1.text.toString())) {
+                        showreelLinkList.add(
+                            VideoLink(
+                                workLinkName1.text.toString(),
+                                linkName1.text.toString()
+                            )
+                        )
+                    }else{
+                        Toast.makeText(mContext, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                }
+
+                if (!workLinkName2.text.isNullOrEmpty() && !linkName2.text.isNullOrEmpty()) {
+                    if (isValidYouTubeUrl(linkName2.text.toString())) {
+                        showreelLinkList.add(
+                            VideoLink(
+                                workLinkName2.text.toString(),
+                                linkName2.text.toString()
+                            )
+                        )
+                    }else{
+                        Toast.makeText(mContext, "Invalid ${workLinkName2.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                }
+
+                if (!workLinkName3.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
+                    if (isValidYouTubeUrl(linkName3.text.toString())) {
+                        showreelLinkList.add(
+                            VideoLink(
+                                workLinkName3.text.toString(),
+                                linkName3.text.toString()
+                            )
+                        )
+                    }else{
+                        Toast.makeText(mContext, "Invalid ${workLinkName3.text} YouTube URL", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                }
+
+                for (i in showreelLinkList){
+                    val videolink=WorkLinkProfileData(i.video_name,i.video_url)
+                    showreelLinkListClone.add(videolink)
+                }
+                showreelAdapter()
+                dialogView.dismiss()
+            } else {
+                Toast.makeText(mContext, "Add at least one work link", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialogView.show()
+    }
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    if (isCamera) {
+                        val imageBitmap = result.data?.extras?.get("data") as Bitmap
+                        profilePath = saveImageToStorage(imageBitmap).toString()
+                        binding.cvProfile.setImageURI(Uri.parse(profilePath))
+                    } else if (isGallery) {
+                        val uri = data!!.data
+                        profilePath =PathUtils.getRealPath(requireContext(), uri!!).toString()
+                        binding.cvProfile.setImageURI(uri)
+                    }
+                }
+                else -> {
+                    Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    fun showreelAdapter(){
+        binding.Showreelecyclerview.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.Showreelecyclerview.setHasFixedSize(true)
+        val adapter =
+            WorkAdapter(mContext, showreelLinkListClone, this)
+        binding.Showreelecyclerview.adapter = adapter
+    }
 
 }
