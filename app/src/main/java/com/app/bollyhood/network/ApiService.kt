@@ -138,6 +138,7 @@ interface ApiService {
         @Part("events") events: RequestBody,
         @Part("genre") genre: RequestBody,
         @Part("available") available: RequestBody,
+        @Part("softwares") softwares: RequestBody,
         @Part("video_url") showreel: RequestBody,
         @Part("worklinks") worklinks: RequestBody?,
         @Part("categories") category_id: RequestBody?,

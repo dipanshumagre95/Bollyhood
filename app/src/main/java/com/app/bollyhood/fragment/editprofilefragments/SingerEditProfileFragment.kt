@@ -792,6 +792,11 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                     "multipart/form-data".toMediaTypeOrNull(), category_Id
                 )
 
+                val softwares: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
 
                 var profileBody: MultipartBody.Part? = null
                 if (profilePath.isNotEmpty()) {
@@ -864,6 +869,7 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                     events,
                     genre,
                     available,
+                    softwares,
                     showreel,
                     workLink,
                     categoryId,

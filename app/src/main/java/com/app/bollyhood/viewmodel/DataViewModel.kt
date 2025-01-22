@@ -270,77 +270,6 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-
-    fun doForgotPassword(mobile: String) {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            try {
-                val response = mainRepository.doForgotPassword(mobile)
-                if (response.isSuccessful && response.body() != null) {
-                    forgotLiveData.postValue(response.body())
-                } else {
-                    val errorMessage = "Forgot password failed: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
-                }
-            } catch (e: Exception) {
-                val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
-                isLoading.postValue(false)
-            }
-        }
-    }
-
-
-    fun doResetPassword(mobile: String, password: String) {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            try {
-                val response = mainRepository.doResetPassword(mobile, password)
-                if (response.isSuccessful && response.body() != null) {
-                    resetPasswordLiveData.postValue(response.body())
-                } else {
-                    val errorMessage = "Reset password failed: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
-                }
-            } catch (e: Exception) {
-                val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
-                isLoading.postValue(false)
-            }
-        }
-    }
-
-
-    fun doChangePassword( uid: String, oldPassword: String, newPassword: String) {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            try {
-                val response = mainRepository.doChangePassword(uid, oldPassword, newPassword)
-                if (response.isSuccessful && response.body() != null) {
-                    changePasswordLiveData.postValue(response.body())
-                } else {
-                    val errorMessage = "Change password failed: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
-                }
-            } catch (e: Exception) {
-                val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
-                isLoading.postValue(false)
-            }
-        }
-    }
-
-
-
     fun getProfile(uid: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -533,6 +462,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         events: RequestBody,
         genre: RequestBody,
         available: RequestBody,
+        softwares: RequestBody,
         showreel: RequestBody,
         work_Link: RequestBody?,
         categories: RequestBody?,
@@ -557,6 +487,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     events,
                     genre,
                     available,
+                    softwares,
                     showreel,
                     work_Link,
                     categories,
@@ -761,32 +692,6 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-
-
-    fun getExpertiseProfileDetail(id: String?, uid: String?) {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            try {
-                val response = mainRepository.getExpertiseProfile(id, uid)
-                if (response.isSuccessful && response.body() != null) {
-                    expertiseProfileLiveData.postValue(response.body())
-                } else {
-                    val errorMessage = "Failed to fetch profile details: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
-                }
-            } catch (e: Exception) {
-                val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
-                isLoading.postValue(false)
-            }
-        }
-    }
-
-
-
     fun addRemoveBookMark(uid: String?, bookmark_uid: String?, bookmark_mode: String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -879,30 +784,6 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     addBookLiveData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to add booking: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
-                }
-            } catch (e: Exception) {
-                val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
-                isLoading.postValue(false)
-            }
-        }
-    }
-
-
-
-    fun getBooking(uid: String) {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            try {
-                val response = mainRepository.getBooking(uid)
-                if (response.isSuccessful && response.body() != null) {
-                    myBookLiveData.postValue(response.body())
-                } else {
-                    val errorMessage = "Failed to fetch booking: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
                     Log.e("API_ERROR", errorMessage)
                 }
@@ -1236,9 +1117,6 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             }
         }
     }
-
-
-
 }
 
 

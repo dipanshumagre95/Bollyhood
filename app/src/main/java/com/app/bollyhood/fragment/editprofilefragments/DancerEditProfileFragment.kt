@@ -783,6 +783,11 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                     ""
                 )
 
+                val softwares: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
                 val categoryId: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(), category_Id
                 )
@@ -859,6 +864,7 @@ class DancerEditProfileFragment : Fragment(),TextWatcher, WorkAdapter.onItemClic
                     events,
                     genre,
                     available,
+                    softwares,
                     showreel,
                     workLink,
                     categoryId,
