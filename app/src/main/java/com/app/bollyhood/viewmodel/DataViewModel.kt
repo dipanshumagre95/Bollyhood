@@ -310,6 +310,8 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         age: RequestBody,
         price: RequestBody,
         role: RequestBody,
+        priceType:RequestBody,
+        castingFeeType:RequestBody,
         company_logo: MultipartBody.Part?
     ) {
         viewModelScope.launch {
@@ -330,6 +332,8 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     age,
                     price,
                     role,
+                    priceType,
+                    castingFeeType,
                     company_logo
                 )
 

@@ -5,980 +5,979 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"
-            android:background="@drawable/pagebackground"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <RelativeLayout
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/white_border"
-                    android:paddingStart="@dimen/_7sdp"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_7sdp"
-                    android:src="@drawable/icon_back" />
-
-            </RelativeLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Post Casting Call"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                app:fontFamily="@font/urbanist_semibold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:src="@drawable/ellipse_5"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:src="@drawable/ellipse_5"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <RelativeLayout
-            android:id="@+id/rrProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="right|center"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cvProfile"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:src="@drawable/ic_profile"
-                app:civ_border_width="@dimen/_1sdp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivCamera"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignEnd="@id/cvProfile"
-                android:padding="@dimen/_7sdp"
-                android:layout_alignBottom="@id/cvProfile"
-                android:layout_marginEnd="@dimen/_7sdp"
-                android:layout_marginBottom="@dimen/_3ssp"
-                android:background="@drawable/circle_gradient_background_profile"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/edit"
-                />
-
-
-        </RelativeLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvUpdateProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rrProfile">
-
-            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/lltitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rectangle_gray_with_black_border"
-                    android:gravity="center"
-                    android:padding="@dimen/_5sdp"
-                    app:hintAnimationEnabled="true"
-                    app:hintEnabled="false"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                    <EditText
-                        android:id="@+id/edttitle"
-                        style="@style/style_sec_sec"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:hint="Title"
-                        android:inputType="textPersonName"
-                        android:maxLength="50"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:singleLine="true" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/lledtProductionHouse"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rectangle_gray_with_black_border"
-                    android:gravity="center"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_below="@+id/lltitle"
-                    app:hintAnimationEnabled="true"
-                    app:hintEnabled="false"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                    <EditText
-                        android:id="@+id/edtproduction_house"
-                        style="@style/style_sec_sec"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:hint="Production House Name"
-                        android:inputType="textPersonName"
-                        android:maxLength="50"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:singleLine="true" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:id="@+id/llDescriptions"
+                    android:id="@+id/llmain"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rectangle_gray_with_black_border"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_below="@+id/lledtProductionHouse">
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_marginStart="-10dp"
+                    android:layout_marginEnd="-10dp"
+                    android:background="@drawable/pagebackground">
 
-                    <TextView
-                        android:id="@+id/discriptionhint"
+                    <RelativeLayout
+                        android:id="@+id/ivBack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:textSize="12sp"
-                        android:textColorHint="#757575"
-                        android:fontFamily="@font/urbanist_regular"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:text="What’s The Role?"/>
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
+                        <ImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/white_border"
+                            android:paddingStart="@dimen/_7sdp"
+                            android:paddingTop="@dimen/_4sdp"
+                            android:paddingEnd="@dimen/_7sdp"
+                            android:paddingBottom="@dimen/_7sdp"
+                            android:src="@drawable/icon_back" />
 
-                    <EditText
-                        android:id="@+id/edt_what_you_role"
-                        style="@style/style_sec_sec"
-                        android:layout_width="match_parent"
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_below="@+id/discriptionhint"
-                        android:background="@android:color/transparent"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/_5sdp"
-                        android:scrollbars="vertical"
-                        android:maxLength="500"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:singleLine="true" />
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:text="Post Casting Call"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:layout_centerHorizontal="true"
+                        app:fontFamily="@font/urbanist_semibold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/ellipse_5"
+                        android:layout_marginEnd="-30dp"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="180dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/ellipse_5"
+                        android:layout_marginEnd="-30dp"
+                        android:layout_marginTop="-10dp"
+                        android:layout_alignParentEnd="true" />
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/textcount"
+                <RelativeLayout
+                    android:id="@+id/rrProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/llDescriptions"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:visibility="gone"
-                    android:textColor="#757575"
-                    android:textSize="@dimen/_7sdp"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_gravity="center"
+                    android:gravity="right|center"
+                    android:layout_marginTop="-63dp"
+                    android:layout_below="@+id/llmain"
+                    android:layout_centerHorizontal="true">
 
-                <RelativeLayout
-                    android:id="@+id/llskillNrequiment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rectangle_gray_with_black_border"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_below="@+id/textcount">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cvProfile"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:src="@drawable/ic_profile"
+                        app:civ_border_width="@dimen/_2sdp"
+                        app:civ_border_color="#FE885B"/>
 
-                    <TextView
-                        android:id="@+id/skilNreqhint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:textSize="12sp"
-                        android:textColorHint="#757575"
-                        android:fontFamily="@font/urbanist_regular"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:text="Skills &amp; Requirements"/>
-
-
-                    <EditText
-                        android:id="@+id/edt_skill_N_requiment"
-                        style="@style/style_sec_sec"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_below="@+id/skilNreqhint"
-                        android:background="@android:color/transparent"
-                        android:inputType="textMultiLine"
-                        android:padding="@dimen/_5sdp"
-                        android:scrollbars="vertical"
-                        android:maxLength="500"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:singleLine="true" />
-
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCamera"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignEnd="@id/cvProfile"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_alignBottom="@id/cvProfile"
+                        android:background="@drawable/image_pen"
+                        />
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/textcountforskillNrequiment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/llskillNrequiment"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:visibility="gone"
-                    android:textColor="#757575"
-                    android:textSize="@dimen/_7sdp"
-                    android:layout_alignParentEnd="true"/>
-
-                <LinearLayout
-                    android:id="@+id/profileactors"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textcountforskillNrequiment"
-                    android:visibility="visible"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/rrProfile"
+                    android:layout_marginTop="@dimen/_10sdp">
 
-                    <LinearLayout
-                        android:id="@+id/shiftNgender"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:layout_height="match_parent"
+                        >
 
-
-                        <RelativeLayout
-                            android:id="@+id/rrshift"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/lltitle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txshift"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Shift"
-                                android:textColorHint="#757575"
-                                android:textSize="10sp" />
-
-                            <AutoCompleteTextView
-                                android:id="@+id/acshift"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txshift"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acshift"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="Select Shift"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/rrgender"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txgender"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Gender"
-                                android:textColorHint="#757575"
-                                android:textSize="10sp" />
-
-                            <AutoCompleteTextView
-                                android:id="@+id/acgender"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txgender"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acgender"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="Select Gender"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/heightNlocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
-
-
-                        <RelativeLayout
-                            android:id="@+id/rrheight"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txheight"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Height"
-                                android:textColorHint="#757575"
-                                android:textSize="10sp" />
-
-                            <AutoCompleteTextView
-                                android:id="@+id/acheight"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txheight"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acheight"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="Select Height"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/rrlocation"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txlocation"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Location"
-                                android:textColorHint="#757575"
-                                android:textSize="10sp" />
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="false"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                             <EditText
-                                android:id="@+id/edtLocation"
+                                android:id="@+id/edttitle"
+                                style="@style/style_sec_sec"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/txlocation"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_gravity="center"
                                 android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="Enter Location"
+                                android:hint="Title"
+                                android:inputType="textPersonName"
+                                android:maxLength="50"
+                                android:maxLines="1"
                                 android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
+                                android:singleLine="true" />
 
-                        </RelativeLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/lledtProductionHouse"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp"
+                            android:layout_below="@+id/lltitle"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="false"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText">
 
-                    </LinearLayout>
+                            <EditText
+                                android:id="@+id/edtproduction_house"
+                                style="@style/style_sec_sec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:hint="Production House Name"
+                                android:inputType="textPersonName"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:singleLine="true" />
 
-                    <LinearLayout
-                        android:id="@+id/skinNbodytype"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/heightNlocation"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
                         <RelativeLayout
-                            android:id="@+id/rrSkinColor"
+                            android:id="@+id/llDescriptions"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_below="@+id/lledtProductionHouse">
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txSkinColor"
+                            <TextView
+                                android:id="@+id/discriptionhint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Skin Color"
+                                android:textSize="12sp"
                                 android:textColorHint="#757575"
-                                android:textSize="10sp" />
+                                android:fontFamily="@font/urbanist_regular"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:text="What’s The Role?"/>
 
-                            <AutoCompleteTextView
-                                android:id="@+id/acSkinColor"
+
+                            <EditText
+                                android:id="@+id/edt_what_you_role"
+                                style="@style/style_sec_sec"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/txSkinColor"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_below="@+id/discriptionhint"
                                 android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acSkinColor"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="@string/str_skin_color"
+                                android:inputType="textMultiLine"
+                                android:padding="@dimen/_5sdp"
+                                android:scrollbars="vertical"
+                                android:maxLength="500"
                                 android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
+                                android:singleLine="true" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
                         </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/textcount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/llDescriptions"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:visibility="gone"
+                            android:textColor="#757575"
+                            android:textSize="@dimen/_7sdp"
+                            android:layout_alignParentEnd="true"/>
 
                         <RelativeLayout
-                            android:id="@+id/rrBodyType"
+                            android:id="@+id/llskillNrequiment"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_below="@+id/textcount">
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txBodyType"
+                            <TextView
+                                android:id="@+id/skilNreqhint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Body Type"
+                                android:textSize="12sp"
                                 android:textColorHint="#757575"
-                                android:textSize="10sp" />
+                                android:fontFamily="@font/urbanist_regular"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:text="Skills &amp; Requirements"/>
 
-                            <AutoCompleteTextView
-                                android:id="@+id/acBodyType"
+
+                            <EditText
+                                android:id="@+id/edt_skill_N_requiment"
+                                style="@style/style_sec_sec"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/txBodyType"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_below="@+id/skilNreqhint"
                                 android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acBodyType"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="@string/str_body_type"
+                                android:inputType="textMultiLine"
+                                android:padding="@dimen/_5sdp"
+                                android:scrollbars="vertical"
+                                android:maxLength="500"
                                 android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
+                                android:singleLine="true" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
                         </RelativeLayout>
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ageNpasspod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/skinNbodytype"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
-
-
-                        <RelativeLayout
-                            android:id="@+id/rrage"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Age"
-                                android:textColorHint="#757575"
-                                android:textSize="10sp" />
-
-                            <AutoCompleteTextView
-                                android:id="@+id/acage"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txage"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acSkinColor"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="Select Age"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/rrpassport"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rectangle_gray_with_black_border"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/txpassport"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:text="Passport"
-                                android:textColorHint="#757575"
-                                android:textSize="10sp" />
-
-                            <AutoCompleteTextView
-                                android:id="@+id/acPassPort"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txpassport"
-                                android:layout_centerVertical="true"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:background="@android:color/transparent"
-                                android:clickable="false"
-                                android:dropDownAnchor="@id/acPassPort"
-                                android:focusable="false"
-                                android:fontFamily="@font/neueeinstellung_regular"
-                                android:hint="Select"
-                                android:paddingStart="@dimen/_10sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="visible" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rrChoose_type"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/rectangle_gray_with_black_border"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/txChoose_type"
+                        <TextView
+                            android:id="@+id/textcountforskillNrequiment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:text="Choose Type"
-                            android:textColorHint="#757575"
-                            android:textSize="10sp" />
-
-                        <AutoCompleteTextView
-                            android:id="@+id/acChoose_type"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/txChoose_type"
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:dropDownAnchor="@id/acChoose_type"
-                            android:focusable="false"
-                            android:fontFamily="@font/neueeinstellung_regular"
-                            android:hint="Select type"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            android:visibility="visible" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rrCasting_fees_pplicable"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/rectangle_gray_with_black_border"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/txCasting_fees_pplicable"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:text="Casting Fees Applicable ?"
-                            android:textColorHint="#757575"
-                            android:textSize="10sp" />
-
-                        <AutoCompleteTextView
-                            android:id="@+id/acCasting_fees_pplicable"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/txCasting_fees_pplicable"
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:dropDownAnchor="@id/acCasting_fees_pplicable"
-                            android:focusable="false"
-                            android:fontFamily="@font/neueeinstellung_regular"
-                            android:hint="Yes"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            android:visibility="visible" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rrperday"
-                        android:layout_width="@dimen/_150sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rectangle_gray_with_black_border"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/txperday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:text="Per Day"
-                            android:textColorHint="#757575"
-                            android:textSize="10sp" />
-
-                        <EditText
-                            android:id="@+id/edtperday"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/txperday"
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:background="@android:color/transparent"
-                            android:clickable="false"
-                            android:fontFamily="@font/neueeinstellung_regular"
-                            android:hint="Enter Amount"
-                            android:inputType="number"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_20sdp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            android:visibility="visible" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_gravity="center_horizontal">
-
+                            android:layout_below="@+id/llskillNrequiment"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:visibility="gone"
+                            android:textColor="#757575"
+                            android:textSize="@dimen/_7sdp"
+                            android:layout_alignParentEnd="true"/>
 
                         <LinearLayout
-                            android:id="@+id/llverified_profile"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/profileactors"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/rectangle_black_button"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_10sdp"
-                            android:elevation="@dimen/_4sdp"
-                            android:paddingTop="@dimen/_3sdp"
-                            android:paddingBottom="@dimen/_3sdp"
-                            android:orientation="horizontal">
+                            android:layout_below="@+id/textcountforskillNrequiment"
+                            android:visibility="visible"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/_10sdp"
-                                android:layout_height="@dimen/_10sdp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/ic_success"/>
+                            <LinearLayout
+                                android:id="@+id/shiftNgender"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tv_verified_profile"
+
+                                <RelativeLayout
+                                    android:id="@+id/rrshift"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txshift"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Shift"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acshift"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txshift"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acshift"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="Select Shift"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+
+                                <RelativeLayout
+                                    android:id="@+id/rrgender"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txgender"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Gender"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acgender"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txgender"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acgender"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="Select Gender"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/heightNlocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+
+                                <RelativeLayout
+                                    android:id="@+id/rrheight"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txheight"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Height"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acheight"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txheight"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acheight"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="Select Height"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/rrlocation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txlocation"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Location"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <EditText
+                                        android:id="@+id/edtLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txlocation"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="Enter Location"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/skinNbodytype"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/heightNlocation"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+
+                                <RelativeLayout
+                                    android:id="@+id/rrSkinColor"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txSkinColor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Skin Color"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acSkinColor"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txSkinColor"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acSkinColor"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="@string/str_skin_color"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/rrBodyType"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txBodyType"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Body Type"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acBodyType"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txBodyType"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acBodyType"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="@string/str_body_type"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ageNpasspod"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/skinNbodytype"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+
+                                <RelativeLayout
+                                    android:id="@+id/rrage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Age"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txage"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acSkinColor"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="Select Age"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/rrpassport"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangle_gray_with_black_border"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txpassport"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:text="Passport"
+                                        android:textColorHint="#757575"
+                                        android:textSize="10sp" />
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/acPassPort"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txpassport"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:background="@android:color/transparent"
+                                        android:clickable="false"
+                                        android:dropDownAnchor="@id/acPassPort"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/neueeinstellung_regular"
+                                        android:hint="Select"
+                                        android:paddingStart="@dimen/_10sdp"
+                                        android:paddingEnd="@dimen/_20sdp"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/rrChoose_type"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txChoose_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Choose Type"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/acChoose_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txChoose_type"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="false"
+                                    android:dropDownAnchor="@id/acChoose_type"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Select type"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/rrCasting_fees_pplicable"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txCasting_fees_pplicable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Casting Fees Applicable ?"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/acCasting_fees_pplicable"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txCasting_fees_pplicable"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="false"
+                                    android:dropDownAnchor="@id/acCasting_fees_pplicable"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Yes"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/rrperday"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txperday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Per Day"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <EditText
+                                    android:id="@+id/edtperday"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txperday"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Enter Amount"
+                                    android:inputType="number"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Verified Profile’s Only"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:layout_gravity="center_horizontal">
+
+
+                                <LinearLayout
+                                    android:id="@+id/llverified_profile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rectangle_black_button"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_10sdp"
+                                    android:elevation="@dimen/_4sdp"
+                                    android:paddingTop="@dimen/_3sdp"
+                                    android:paddingBottom="@dimen/_3sdp"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_10sdp"
+                                        android:layout_height="@dimen/_10sdp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_success"/>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tv_verified_profile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Verified Profile’s Only"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_8sdp"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:fontFamily="@font/urbanist_semibold"/>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/llanyone_apply"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_gray"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:elevation="@dimen/_4sdp"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_toRightOf="@+id/llverified_profile"
+                                    android:paddingEnd="@dimen/_10sdp"
+                                    android:paddingTop="@dimen/_3sdp"
+                                    android:paddingBottom="@dimen/_3sdp"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_10sdp"
+                                        android:layout_height="@dimen/_10sdp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/red_dot"/>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tv_anyone_can_apply"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Anyone Can Apply"
+                                        android:textColor="@color/black"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:textSize="@dimen/_8sdp"
+                                        android:fontFamily="@font/urbanist_semibold"/>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvUpdateProfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginStart="30dp"
+                                android:layout_marginEnd="30dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/rectangle_app_background"
+                                android:fontFamily="@font/urbanist_semibold"
+                                android:gravity="center"
+                                android:text="@string/str_update_profile"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_8sdp"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/urbanist_semibold"/>
-
+                                android:textSize="@dimen/_15sdp" />
 
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/llanyone_apply"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/border_gray"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:elevation="@dimen/_4sdp"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_toRightOf="@+id/llverified_profile"
-                            android:paddingEnd="@dimen/_10sdp"
-                            android:paddingTop="@dimen/_3sdp"
-                            android:paddingBottom="@dimen/_3sdp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_10sdp"
-                                android:layout_height="@dimen/_10sdp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/red_dot"/>
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tv_anyone_can_apply"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Anyone Can Apply"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:textSize="@dimen/_8sdp"
-                                android:fontFamily="@font/urbanist_semibold"/>
-
-                        </LinearLayout>
-
-
-
                     </RelativeLayout>
-                </LinearLayout>
+
+                </RelativeLayout>
+
             </RelativeLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvUpdateProfile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/rectangle_app_background"
-            android:fontFamily="@font/urbanist_semibold"
-            android:gravity="center"
-            android:text="@string/str_update_profile"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
             android:id="@+id/pbLoadData"
@@ -994,7 +993,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
 
+</layout>

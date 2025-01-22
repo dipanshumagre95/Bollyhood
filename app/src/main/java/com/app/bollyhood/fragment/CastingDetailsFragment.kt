@@ -114,8 +114,16 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                 it.tvRole.text = castingCallModel.organization
             }
 
-            if (castingCallModel.price_discussed == "1") {
-                it.tvprice.text = "T B D"
+            if (castingCallModel.casting_fee_type.equals("Yes")) {
+                it.icRupes.visibility=View.VISIBLE
+                it.icRupes1.visibility=View.VISIBLE
+            }else{
+                it.icRupes.visibility=View.GONE
+                it.icRupes1.visibility=View.GONE
+            }
+
+            if (castingCallModel.price_type.equals("Project Basis")) {
+                it.tvprice.text="Project Basis"
             } else {
                 it.tvprice.text = "₹" + castingCallModel.price+"/pd"
             }

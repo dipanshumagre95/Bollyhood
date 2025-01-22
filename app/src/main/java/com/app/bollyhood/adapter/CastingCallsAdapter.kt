@@ -149,12 +149,17 @@ class CastingCallsAdapter(
             holder.binding.tvDate.text = DateUtils.getConvertDateTiemFormat(castingModels[position].modify_date)
         }
 
-        if (!castingModels[position].price_discussed.isNullOrEmpty()) {
-            if (castingModels[position].price_discussed.equals("1")) {
-                holder.binding.tvSalary.text = "T B D"
-            } else {
-                holder.binding.tvSalary.text = "₹" + castingModels[position].price + "/pd"
-            }
+        if (castingModels[position].casting_fee_type.equals("Yes"))
+        {
+            holder.binding.icRupes.visibility=View.VISIBLE
+        }else{
+            holder.binding.icRupes.visibility=View.GONE
+        }
+
+        if (castingModels[position].price_type.equals("Project Basis")){
+            holder.binding.tvSalary.text = "Project Basis"
+        }else{
+            holder.binding.tvSalary.text = "₹" + castingModels[position].price + "/pd"
         }
 
         if (!castingModels[position].type.isNullOrEmpty()) {

@@ -191,7 +191,7 @@ interface ApiService {
         @Part("company_name") company_name: RequestBody,
         @Part("organization") organization: RequestBody,
         @Part("requirement") requirement: RequestBody,
-        @Part("shifting") shifting: RequestBody,
+        @Part("shift_time") shifting: RequestBody,
         @Part("gender") gender: RequestBody,
         @Part("location") location: RequestBody,
         @Part("height") height: RequestBody,
@@ -201,6 +201,8 @@ interface ApiService {
         @Part("age") age: RequestBody,
         @Part("price") price: RequestBody?,
         @Part("role") role: RequestBody?,
+        @Part("price_type") priceType: RequestBody?,
+        @Part("casting_fee_type") castingFeeType: RequestBody?,
         @Part company_logo: MultipartBody.Part?,
     ): Response<SuccessResponse>
 

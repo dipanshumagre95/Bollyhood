@@ -304,7 +304,12 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
         binding.acChooseType.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                height = daysList[position]
+                if (daysList[position].equals("Project Basis"))
+                {
+                    binding.rrperday.visibility=View.GONE
+                }else{
+                    binding.rrperday.visibility=View.VISIBLE
+                }
             }
     }
 
@@ -645,6 +650,17 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     binding.edtperday.text.toString().trim()
                 )
 
+                val priceType: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acChooseType.text.toString().trim()
+                )
+
+
+                val castingFeeType: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acCastingFeesPplicable.text.toString().trim()
+                )
+
 
                 var company_logo: MultipartBody.Part? = null
                 if (profilePath.isNotEmpty()) {
@@ -672,6 +688,8 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     age,
                     price,
                     role,
+                    priceType,
+                    castingFeeType,
                     company_logo
                 )
             }

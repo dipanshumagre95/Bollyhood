@@ -335,7 +335,7 @@
                             android:textSize="15sp" />
 
                         <View
-                            android:id="@+id/ic_rupes"
+                            android:id="@+id/ic_rupes1"
                             android:layout_width="18sp"
                             android:layout_height="18sp"
                             android:layout_centerVertical="true"
@@ -496,6 +496,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/ic_rupes"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:background="@drawable/casting_fee_frame"
