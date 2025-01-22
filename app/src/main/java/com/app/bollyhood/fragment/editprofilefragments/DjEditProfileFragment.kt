@@ -197,7 +197,7 @@ class DjEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, 
             }
 
             R.id.tvUpdateProfile->{
-               // updateDjProfile()
+                updateDjProfile()
             }
 
             R.id.ivBack ->{
