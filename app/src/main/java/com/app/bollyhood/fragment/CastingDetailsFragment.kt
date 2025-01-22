@@ -239,9 +239,13 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
         viewModel.castingBookmark.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (is_Bookmark){
+                    castingCallModel.is_casting_bookmark=0
                     binding.tvSave.text="Save"
+                    is_Bookmark=false
                 }else{
+                    castingCallModel.is_casting_bookmark=1
                     binding.tvSave.text="Saved"
+                    is_Bookmark=true
                 }
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                // finish()

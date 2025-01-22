@@ -30,5 +30,5 @@ data class CastingCallModel(
     val casting_fee_type: String,
     val is_apply:Int,
     val is_casting_apply: Int,
-    val is_casting_bookmark: Int
+    var is_casting_bookmark: Int
     )
