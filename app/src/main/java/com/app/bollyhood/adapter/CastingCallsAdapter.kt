@@ -145,8 +145,8 @@ class CastingCallsAdapter(
             }
         }
 
-        if (!castingModels[position].modify_date.isNullOrEmpty()) {
-            holder.binding.tvDate.text = DateUtils.getConvertDateTiemFormat(castingModels[position].modify_date)
+        if (!castingModels[position].create_date.isNullOrEmpty()) {
+            holder.binding.tvDate.text = DateUtils.getConvertDateTiemFormat(castingModels[position].create_date)
         }
 
         if (castingModels[position].casting_fee_type.equals("Yes"))

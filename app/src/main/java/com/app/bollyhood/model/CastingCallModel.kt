@@ -28,6 +28,7 @@ data class CastingCallModel(
     val price: String,
     val price_type: String,
     val casting_fee_type: String,
+    val create_date: String,
     val is_apply:Int,
     val is_casting_apply: Int,
     var is_casting_bookmark: Int
