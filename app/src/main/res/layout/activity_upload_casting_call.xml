@@ -825,7 +825,7 @@
                                     android:dropDownAnchor="@id/acCasting_fees_pplicable"
                                     android:focusable="false"
                                     android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Yes"
+                                    android:hint="Select here"
                                     android:paddingStart="@dimen/_10sdp"
                                     android:paddingEnd="@dimen/_20sdp"
                                     android:textColor="@color/black"

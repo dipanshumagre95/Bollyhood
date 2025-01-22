@@ -37,6 +37,7 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
     lateinit var binding: FragmentCastingDetailsBinding
     private val viewModel: DataViewModel by viewModels()
     private var type: String? = ""
+    var is_Bookmark=false
     lateinit var castingCallModel: CastingCallModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,6 +121,14 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
             }else{
                 it.icRupes.visibility=View.GONE
                 it.icRupes1.visibility=View.GONE
+            }
+
+            if (castingCallModel.is_casting_bookmark.equals("0")||castingCallModel.is_casting_bookmark==0){
+                binding.tvSave.text="Save"
+                is_Bookmark=false
+            }else{
+                binding.tvSave.text="Saved"
+                is_Bookmark=true
             }
 
             if (castingCallModel.price_type.equals("Project Basis")) {
@@ -229,6 +238,11 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
 
         viewModel.castingBookmark.observe(requireActivity(), Observer {
             if (it.status == "1") {
+                if (is_Bookmark){
+                    binding.tvSave.text="Save"
+                }else{
+                    binding.tvSave.text="Saved"
+                }
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                // finish()
             } else {
@@ -249,7 +263,6 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
             }
 
             R.id.tvSave ->{
-                if (!binding.tvSave.text.toString().trim().equals("Saved")) {
                     if (isNetworkAvailable(requireContext())) {
                         if (castingCallModel.is_casting_bookmark == 0) {
                             viewModel.castingBookmark(
@@ -270,9 +283,6 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } else {
-                    removeBookMarkDialog()
-                }
             }
 
             R.id.llApplyNowButton ->{

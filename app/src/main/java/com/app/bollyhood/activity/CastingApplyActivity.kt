@@ -81,6 +81,10 @@ class CastingApplyActivity : AppCompatActivity() {
                 Gson().fromJson(intent.getStringExtra("model"), CastingCallModel::class.java)
         }
 
+        binding.ivBack.setOnClickListener(View.OnClickListener {
+            finish()
+        })
+
     }
 
     private fun addListner() {
