@@ -68,6 +68,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         role:RequestBody,
         priceType:RequestBody,
         castingFeeType:RequestBody,
+        is_verify_casting:RequestBody,
         company_logo:MultipartBody.Part?
     )=apiService.uploadCasting(uid,
         company_name,
@@ -85,6 +86,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         role,
         priceType,
         castingFeeType,
+        is_verify_casting,
         company_logo)
 
 

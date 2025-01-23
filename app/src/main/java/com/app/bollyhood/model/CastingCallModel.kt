@@ -31,5 +31,7 @@ data class CastingCallModel(
     val create_date: String,
     val is_apply:Int,
     val is_casting_apply: Int,
+    val is_verify_casting:String,
+    val is_aadhar_verified:String,
     var is_casting_bookmark: Int
     )

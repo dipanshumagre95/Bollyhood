@@ -312,6 +312,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         role: RequestBody,
         priceType:RequestBody,
         castingFeeType:RequestBody,
+        is_verify_casting:RequestBody,
         company_logo: MultipartBody.Part?
     ) {
         viewModelScope.launch {
@@ -334,6 +335,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     role,
                     priceType,
                     castingFeeType,
+                    is_verify_casting,
                     company_logo
                 )
 

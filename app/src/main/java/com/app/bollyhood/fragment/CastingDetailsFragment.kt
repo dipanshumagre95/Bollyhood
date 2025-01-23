@@ -107,6 +107,14 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                 it.tvCastingRequirement.text = castingCallModel.requirement
             }
 
+            binding.llApplyNowButton.isClickable = when {
+                castingCallModel.is_verify_casting == "1" && castingCallModel.is_aadhar_verified == "1" -> true
+                castingCallModel.is_verify_casting == "1" && castingCallModel.is_aadhar_verified == "2" -> false
+                castingCallModel.is_verify_casting == "2" -> true
+                else -> false
+            }
+
+
             if (!castingCallModel.requirement.isNullOrEmpty()) {
                 it.tvSkillRequirement.text = castingCallModel.requirement
             }

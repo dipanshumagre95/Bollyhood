@@ -203,6 +203,7 @@ interface ApiService {
         @Part("role") role: RequestBody?,
         @Part("price_type") priceType: RequestBody?,
         @Part("casting_fee_type") castingFeeType: RequestBody?,
+        @Part("is_verify_casting") is_verify_casting: RequestBody?,
         @Part company_logo: MultipartBody.Part?,
     ): Response<SuccessResponse>
 

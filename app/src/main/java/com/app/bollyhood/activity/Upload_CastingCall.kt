@@ -68,6 +68,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
     private var skinColor: String = ""
     private var bodyType: String = ""
     private var passport: String = ""
+    private var is_verify_profile="1"
     private var age: String = ""
     private var isCamera = false
     private var isGallery = false
@@ -479,6 +480,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                 binding.llanyoneApply.setBackgroundResource(R.drawable.border_gray)
                 binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.black))
+                is_verify_profile="1"
             }
 
             R.id.llanyone_apply ->{
@@ -486,6 +488,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                 binding.llverifiedProfile.setBackgroundResource(R.drawable.border_gray)
                 binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.black))
                 binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.white))
+                is_verify_profile="2"
             }
 
             R.id.ivBack ->{
@@ -661,6 +664,11 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     binding.acCastingFeesPplicable.text.toString().trim()
                 )
 
+                val is_verify_casting: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    is_verify_profile
+                )
+
 
                 var company_logo: MultipartBody.Part? = null
                 if (profilePath.isNotEmpty()) {
@@ -690,6 +698,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     role,
                     priceType,
                     castingFeeType,
+                    is_verify_casting,
                     company_logo
                 )
             }
