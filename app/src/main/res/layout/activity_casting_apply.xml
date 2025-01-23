@@ -384,7 +384,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/upload_image_icon">
+                                android:background="@drawable/upload_video_icon">
 
 
                                 <ImageView
@@ -395,6 +395,14 @@
                                     android:contentDescription="@string/app_name"
                                     android:scaleType="centerCrop"
                                     />
+
+                                <View
+                                    android:id="@+id/playicon"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_centerInParent="true"
+                                    android:visibility="gone"
+                                    android:background="@drawable/circled_play_icon"/>
 
 
                                 <ProgressBar

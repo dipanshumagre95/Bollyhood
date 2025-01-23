@@ -19,6 +19,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -35,7 +36,11 @@ import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
+import com.app.bollyhood.util.ThumbnailUtils
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -53,13 +58,17 @@ class CastingApplyActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityCastingApplyBinding
     lateinit var mContext: CastingApplyActivity
+    lateinit var videoUri: Uri
     private val viewModel: DataViewModel by viewModels()
     private var isCamera = false
     private var isGallery = false
     private var photoList: ArrayList<String> = arrayListOf()
     private val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
-    var currentPhotoPath: String? = null
+    private var is_videoUploaded=false
+    private var videoPath=""
     lateinit var castingCallModel: CastingCallModel
+    private lateinit var player: SimpleExoPlayer
+    private lateinit var pickVideoLauncher: ActivityResultLauncher<Intent>
     private val imageResultLaunchers = mutableMapOf<Int, ActivityResultLauncher<Intent>>()
 
 
@@ -85,6 +94,22 @@ class CastingApplyActivity : AppCompatActivity() {
             finish()
         })
 
+        pickVideoLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ActivityResultCallback { result ->
+                if (result.resultCode == RESULT_OK && result.data != null) {
+                    videoUri = result.data?.data!!
+                    videoPath=PathUtils.getRealPath(this, videoUri!!).toString()
+                    is_videoUploaded=true
+                    if (videoUri != null) {
+                        val videoThumbnail = ThumbnailUtils.getVideoThumbnail(videoUri, this)
+                        if (videoThumbnail != null) {
+                            binding.siximage.setImageBitmap(videoThumbnail)
+                            binding.playicon.visibility=View.VISIBLE
+                        }
+                    }
+                }
+            })
     }
 
     private fun addListner() {
@@ -130,10 +155,14 @@ class CastingApplyActivity : AppCompatActivity() {
         })
 
         binding.siximage.setOnClickListener(View.OnClickListener {
-            if (checkPermission()){
-                dialogForImage(6)
-            }else{
-                checkPermission()
+            if(is_videoUploaded){
+                videoDialog()
+            }else {
+                if (checkPermission()) {
+                    openGalleryForVideo()
+                } else {
+                    checkPermission()
+                }
             }
         })
 
@@ -216,6 +245,12 @@ class CastingApplyActivity : AppCompatActivity() {
 
 
                 var videoBody: MultipartBody.Part? = null
+                val file = File(videoPath)
+                if (file.exists()) {
+                    val imageBody = RequestBody.create("video/*".toMediaTypeOrNull(), file)
+                    videoBody= MultipartBody.Part.createFormData("video", file.name, imageBody)
+                }
+
                 viewModel.getCastingCallApply(uid, casting_id, parts, videoBody)
             }
         } else {
@@ -229,56 +264,30 @@ class CastingApplyActivity : AppCompatActivity() {
 
 
     private fun checkPermission(): Boolean {
-        val writePermission: Int
-        val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        val permissionsNeeded = mutableListOf<String>()
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissionsNeeded.add(Manifest.permission.CAMERA)
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            writePermission =
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
-
-
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES)
+            }
         } else {
-            writePermission =
-                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
         }
 
-
-        val listPermissionsNeeded = ArrayList<String>()
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (writePermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES)
-            }
-            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.CAMERA)
-            }
-
-
+        return if (permissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS)
+            false
         } else {
-            if (writePermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-
-            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(Manifest.permission.CAMERA)
-            }
-
-
+            true
         }
-
-
-
-
-        if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS
-            )
-            return false
-        }
-        return true
     }
+
 
     private fun saveImageToStorage(bitmap: Bitmap): String? {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
@@ -343,19 +352,6 @@ class CastingApplyActivity : AppCompatActivity() {
         progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
-   /* private fun hideImageBackground(imageNumber: Int, isVisible: Boolean) {
-        val progressBar = when (imageNumber) {
-            1 -> binding.firstBackground
-            2 -> binding.secondBackground
-            3 -> binding.thirdBackground
-            4 -> binding.fourthBackground
-            5 -> binding.fifthBackground
-            6 -> binding.sixBackground
-            else -> throw IllegalArgumentException("Invalid image number")
-        }
-        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
-    }*/
-
     private fun initializeImageResultLaunchers() {
         for (i in 1..6) {
             val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -419,10 +415,38 @@ class CastingApplyActivity : AppCompatActivity() {
             3 -> binding.thirdImage.setImageURI(uri)
             4 -> binding.fourthImage.setImageURI(uri)
             5 -> binding.fifthimage.setImageURI(uri)
-            6 -> binding.siximage.setImageURI(uri)
             else -> throw IllegalArgumentException("Invalid image number")
         }
     }
 
+    private fun openGalleryForVideo() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "video/*"
+        pickVideoLauncher.launch(intent)
+    }
+
+    private fun videoDialog(){
+        val dialogView = Dialog(this)
+        dialogView.setContentView(R.layout.videoplayer_layout)
+
+        val video_view = dialogView.findViewById<PlayerView>(R.id.video_player)
+        val close = dialogView.findViewById<View>(R.id.close)
+
+        player = SimpleExoPlayer.Builder(this).build()
+        video_view.player = player
+
+        val mediaItem = MediaItem.fromUri(videoUri)
+        player.setMediaItem(mediaItem)
+        player.prepare()
+        player.playWhenReady = true
+
+        close.setOnClickListener(View.OnClickListener {
+            dialogView.dismiss()
+        })
+
+        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialogView.show()
+    }
 
 }

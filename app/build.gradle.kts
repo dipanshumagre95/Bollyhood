@@ -134,4 +134,6 @@ dependencies {
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
     implementation ("com.razorpay:checkout:1.6.39")
 
+    implementation ("com.google.android.exoplayer:exoplayer:2.18.2")
+
 }
