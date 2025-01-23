@@ -1,11 +1,9 @@
 package com.app.bollyhood.activity
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
-import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
@@ -21,11 +19,8 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivitySignupBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.extensions.isvalidBothPassword
 import com.app.bollyhood.extensions.isvalidCategory
-import com.app.bollyhood.extensions.isvalidConfirmPassword
 import com.app.bollyhood.extensions.isvalidName
-import com.app.bollyhood.extensions.isvalidPassword
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.util.StaticData
@@ -67,11 +62,9 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
             false
         }
 
-        binding.lycompany.setOnClickListener(this)
-        binding.lyindividual.setOnClickListener(this)
+        binding.companyView.setOnClickListener(this)
+        binding.viewIndividual.setOnClickListener(this)
         binding.tvSignUp.setOnClickListener(this)
-        binding.passwordshow.setOnClickListener(this)
-        binding.cnfmpassshow.setOnClickListener(this)
     }
 
     private fun addObserevs() {
@@ -182,26 +175,22 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
 
         when(item?.id){
 
-            R.id.lycompany  -> {
-                binding.lyindividual.background=getDrawable(R.drawable.border_gray)
-                binding.lycompany.background=getDrawable(R.drawable.rectangle_black_button)
-                binding.redbtnCompany.visibility=View.VISIBLE
-                binding.redbtnIndividual.visibility=View.GONE
-                binding.tvindividual.setTextColor(Color.BLACK)
-                binding.tvcompany.setTextColor(Color.WHITE)
+            R.id.company_view  -> {
+                binding.companyView.background=getDrawable(R.drawable.rectangle_app_background)
+                binding.companyBg.background=getDrawable(R.drawable.round_pink_color)
+                binding.individualBg.background=getDrawable(R.drawable.company_bg)
+                binding.viewIndividual.background=getDrawable(R.drawable.gray_bg_10dp)
                 user_type = "2"
                 binding.acSelectToday.setText("Select Category")
                 categoryId=""
                 setCategoryAdapter(companyList!!)
             }
 
-            R.id.lyindividual -> {
-                binding.lycompany.background=getDrawable(R.drawable.border_gray)
-                binding.lyindividual.background=getDrawable(R.drawable.rectangle_black_button)
-                binding.redbtnIndividual.visibility=View.VISIBLE
-                binding.redbtnCompany.visibility=View.GONE
-                binding.tvcompany.setTextColor(Color.BLACK)
-                binding.tvindividual.setTextColor(Color.WHITE)
+            R.id.view_individual -> {
+                binding.companyView.background=getDrawable(R.drawable.gray_bg_10dp)
+                binding.companyBg.background=getDrawable(R.drawable.company_bg)
+                binding.individualBg.background=getDrawable(R.drawable.round_pink_color)
+                binding.viewIndividual.background=getDrawable(R.drawable.rectangle_app_background)
                 binding.acSelectToday.setText("Select Category")
                 categoryId=""
                 user_type = "1"
@@ -210,22 +199,6 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
 
             R.id.tvSignUp  ->{
                 sendSignUpData()
-            }
-
-            R.id.passwordshow  ->{
-                if (binding.edtPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
-                    binding.edtPassword.transformationMethod = null
-                } else {
-                    binding.edtPassword.transformationMethod = PasswordTransformationMethod.getInstance()
-                }
-            }
-
-            R.id.cnfmpassshow  ->{
-                if (binding.edtConfirmPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
-                    binding.edtConfirmPassword.transformationMethod = null
-                } else {
-                    binding.edtConfirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
-                }
             }
         }
 
@@ -240,20 +213,12 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                 )&& isvalidCategory(
                     mContext,
                     binding.acSelectToday.text.toString().trim()
-                ) && isvalidPassword(
-                    mContext,
-                    binding.edtPassword.text.toString().trim()
-                ) && isvalidConfirmPassword(
-                    mContext, binding.edtConfirmPassword.text.toString().trim()
-                ) && isvalidBothPassword(
-                    mContext, binding.edtPassword.text.toString().trim(),
-                    binding.edtConfirmPassword.text.toString().trim()
-                )&& isvalidTeamNCondition(
+                ) && isvalidTeamNCondition(
                     mContext,binding.cbteamNcondition.isChecked)
 
             ) {
                 val name = binding.edtName.text.toString().trim()+" "+binding.edtLastName.text.toString().trim()
-                val password = binding.edtPassword.text.toString().trim()
+                val password = ""
                 val cat_id = categoryId
                 val subCatId= subCategoryId
                 val mobileNumber= mobileNumber!!
