@@ -26,8 +26,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -55,6 +53,7 @@ import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.DialogsUtils
 import com.app.bollyhood.util.InbuildLIsts
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
@@ -153,7 +152,15 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.tvAddWorkLink->{
-                addWorkLinksDialog()
+                DialogsUtils.showWorkLinksDialog(
+                    mContext,
+                    workLinkList,
+                    { updatedLinks ->
+                        workLinkList.clear()
+                        workLinkList.addAll(updatedLinks)
+                        worklinkAdapter(binding.worklinkrecyclerview)
+                    }
+                )
             }
 
             R.id.firstImage->{
@@ -479,105 +486,6 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
         val adapter =
             WorkAdapter(mContext, workLinkList, this)
         view.adapter = adapter
-    }
-
-    private fun addWorkLinksDialog(){
-        val dialogView = Dialog(mContext)
-        dialogView.setContentView(R.layout.add_work_link)
-
-        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-        val workLinkName1 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName1)
-        val workLinkName2 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName2)
-        val workLinkName3 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName3)
-        val linkName1 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink1)
-        val linkName2 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink2)
-        val linkName3 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
-        val addbutton = dialogView.findViewById<TextView>(R.id.tvAddLinks)
-        val closebutton = dialogView.findViewById<ImageView>(R.id.close)
-
-        if (workLinkList.size > 0)
-        {
-            for (index in 0 until workLinkList.size) {
-                val worklink = workLinkList[index]
-                when(index){
-                    0 ->{
-                        workLinkName1.setText(worklink.worklink_name)
-                        linkName1.setText(worklink.worklink_url)
-                    }
-
-                    1->{
-                        workLinkName2.setText(worklink.worklink_name)
-                        linkName2.setText(worklink.worklink_url)
-                    }
-
-                    2->{
-                        workLinkName3.setText(worklink.worklink_name)
-                        linkName3.setText(worklink.worklink_url)
-                    }
-                }
-            }
-        }
-
-        closebutton.setOnClickListener {
-            dialogView.dismiss()
-        }
-
-        addbutton.setOnClickListener {
-            workLinkList.clear()
-            if (!workLinkName1.text.isNullOrEmpty() || !workLinkName2.text.isNullOrEmpty() || !workLinkName3.text.isNullOrEmpty()) {
-                if (!workLinkName1.text.isNullOrEmpty() && !linkName1.text.isNullOrEmpty()) {
-                    if (isValidYouTubeUrl(linkName1.text.toString())) {
-                        workLinkList.add(
-                            WorkLinkProfileData(
-                                workLinkName1.text.toString(),
-                                linkName1.text.toString()
-                            )
-                        )
-                    }else{
-                        Toast.makeText(mContext, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                }
-
-                if (!workLinkName2.text.isNullOrEmpty() && !linkName2.text.isNullOrEmpty()) {
-                    if (isValidYouTubeUrl(linkName1.text.toString())) {
-                        workLinkList.add(
-                            WorkLinkProfileData(
-                                workLinkName2.text.toString(),
-                                linkName2.text.toString()
-                            )
-                        )
-                    }else{
-                        Toast.makeText(mContext, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                }
-
-                if (!workLinkName3.text.isNullOrEmpty() && !linkName3.text.isNullOrEmpty()) {
-                    if (isValidYouTubeUrl(linkName1.text.toString())) {
-                        workLinkList.add(
-                            WorkLinkProfileData(
-                                workLinkName3.text.toString(),
-                                linkName3.text.toString()
-                            )
-                        )
-                    }else{
-                        Toast.makeText(mContext, "Invalid ${workLinkName1.text} YouTube URL", Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                }
-
-
-                worklinkAdapter(binding.worklinkrecyclerview)
-                dialogView.dismiss()
-            } else {
-                Toast.makeText(mContext, "Add at least one work link", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        dialogView.show()
     }
 
 
