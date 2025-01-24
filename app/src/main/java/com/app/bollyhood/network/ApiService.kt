@@ -321,7 +321,7 @@ interface ApiService {
         @Part("uid") uid: RequestBody,
         @Part("casting_id") casting_id: RequestBody,
         @Part image: ArrayList<MultipartBody.Part>?,
-        @Part video: RequestBody
+        @Part ("video") video: RequestBody
     ): Response<SuccessResponse>
 
     @FormUrlEncoded

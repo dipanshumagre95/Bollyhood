@@ -36,6 +36,7 @@ import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
+import com.app.bollyhood.util.ThumbnailUtils.getYouTubeVideoThumbnail
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -215,8 +216,6 @@ class CastingApplyActivity : AppCompatActivity() {
 
                     Log.e("photoList", "=" + photoList[i])
                 }
-
-
                 viewModel.getCastingCallApply(uid, casting_id, parts, video)
             }
         } else {
@@ -398,6 +397,12 @@ class CastingApplyActivity : AppCompatActivity() {
             if (!editText.text.isNullOrEmpty()){
                 if (isValidYouTubeUrl(editText.text.toString().trim())){
                     videoPath=editText.text.toString().trim()
+                    getYouTubeVideoThumbnail(videoPath, this) { bitmap ->
+                        if (bitmap != null) {
+                            binding.siximage.setImageBitmap(bitmap)
+                            dialog.dismiss()
+                        }
+                    }
                 }else{
                     alertTitle.visibility=View.VISIBLE
                 }
