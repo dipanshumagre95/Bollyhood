@@ -96,8 +96,8 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                 .into(binding.ivImage)
         }
 
-        if (castingCallModel.users.get(0).apply_images.isNotEmpty()){
-            setAdapter(castingCallModel.users)
+        if (!castingCallModel.applyed_users.isNullOrEmpty()){
+            setAdapter(castingCallModel.applyed_users)
         }else{
             binding.tvnoData.visibility=View.VISIBLE
             binding.rvcatingcallListed.visibility=View.GONE

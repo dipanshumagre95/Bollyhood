@@ -8,8 +8,6 @@
         <variable
             name="adapter"
             type="com.app.bollyhood.adapter.AllCastingCallListAdapter" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -177,7 +175,7 @@
                <com.google.android.material.textview.MaterialTextView
                    android:id="@+id/tvActive"
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
+                   android:layout_height="47dp"
                    android:text="Active"
                    android:textSize="20sp"
                    android:elevation="@dimen/_5sdp"
@@ -193,7 +191,7 @@
                <com.google.android.material.textview.MaterialTextView
                    android:id="@+id/tvClose"
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
+                   android:layout_height="47dp"
                    android:text="Close"
                    android:layout_toRightOf="@+id/tvActive"
                    android:fontFamily="@font/poppins_medium"
@@ -213,9 +211,7 @@
                 android:id="@+id/rv_all_catingcall"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="7dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="7dp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:adapter="@{adapter}"
                 android:padding="@dimen/_5sdp"

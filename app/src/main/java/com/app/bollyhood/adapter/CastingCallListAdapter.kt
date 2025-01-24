@@ -31,16 +31,16 @@ class CastingCallListAdapter(val context: Context,val applyedUserList:ArrayList<
     override fun onBindViewHolder(holder: CastingCallListAdapter.MyViewHolder, position: Int) {
         val userModel=applyedUserList[position]
 
-        if (userModel.name.isNotEmpty() == true){
+        if (!userModel.name.isNullOrBlank()){
             holder.bindfing.tvName.text=userModel.name
         }
 
-        if (userModel.image.isNotEmpty() == true){
+        if (!userModel.image.isNullOrBlank()){
             Glide.with(context).load(userModel.image)
                 .into(holder.bindfing.ivImage)
         }
 
-        if (userModel.apply_create_date.isNotEmpty()){
+        if (!userModel.apply_create_date.isNullOrBlank()){
             holder.bindfing.tvtime.text=DateUtils.getConvertDateTiemFormat(userModel.apply_create_date)
         }
 
