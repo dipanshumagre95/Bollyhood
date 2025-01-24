@@ -3,7 +3,6 @@ package com.app.bollyhood.util
 import android.app.Dialog
 import android.content.Context
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.app.bollyhood.R
@@ -18,7 +17,6 @@ object DialogsUtils {
     ) {
         val dialogView = Dialog(context)
         dialogView.setContentView(R.layout.add_work_link)
-       // dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val workLinkName1 = dialogView.findViewById<EditText>(R.id.edtWorkLinkName1)
@@ -28,7 +26,6 @@ object DialogsUtils {
         val linkName2 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink2)
         val linkName3 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
         val addButton = dialogView.findViewById<TextView>(R.id.tvAddLinks)
-        val closeButton = dialogView.findViewById<ImageView>(R.id.close)
 
         // Pre-fill values if available
         if (workLinkList.isNotEmpty()) {
@@ -48,10 +45,6 @@ object DialogsUtils {
                     }
                 }
             }
-        }
-
-        closeButton.setOnClickListener {
-            dialogView.dismiss()
         }
 
         addButton.setOnClickListener {

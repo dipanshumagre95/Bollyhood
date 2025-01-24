@@ -2,17 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#80000000"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:background="@drawable/rectangle_app_background"
     >
 
     <RelativeLayout
         android:id="@+id/llMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_10sdp"
         android:layout_centerInParent="true"
+        android:layout_margin="@dimen/_2sdp"
         android:background="@drawable/rectangle_white_with_blackborder">
 
         <com.google.android.material.textview.MaterialTextView
@@ -20,39 +21,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update Worklink's"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="15sp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_12sdp"
-            android:fontFamily="@font/urbanist_bold"
+            android:fontFamily="@font/roboto_medium"
             android:padding="@dimen/_7sdp"/>
-
-    <ImageView
-        android:id="@+id/close"
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:padding="@dimen/_7sdp"
-        android:layout_marginTop="@dimen/_17sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:src="@drawable/img_arrowdown_gray_900_7x8"
-        android:layout_alignParentEnd="true"/>
 
     <LinearLayout
         android:id="@+id/link1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/close"
+        android:layout_below="@+id/tv_hint"
         android:orientation="horizontal">
 
         <EditText
             android:layout_weight="1"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/edtWorkLinkName1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/neueeinstellung_regular"
+            android:background="@drawable/field_bg"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_work_link_name"
             android:inputType="text"
             android:maxLength="20"
@@ -62,7 +52,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             />
 
 
@@ -72,8 +62,8 @@
             android:id="@+id/edtAddWorkLink1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/neueeinstellung_regular"
+            android:background="@drawable/field_bg"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_add_work_link_url"
             android:inputType="textPersonName"
             android:maxLength="50"
@@ -83,9 +73,11 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             />
     </LinearLayout>
+
+
     <LinearLayout
         android:id="@+id/link2"
         android:layout_width="match_parent"
@@ -97,10 +89,10 @@
             android:layout_weight="1"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/edtWorkLinkName2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/neueeinstellung_regular"
+            android:background="@drawable/field_bg"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_work_link_name"
             android:inputType="text"
             android:maxLength="20"
@@ -110,7 +102,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             />
 
 
@@ -120,8 +112,8 @@
             android:id="@+id/edtAddWorkLink2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/neueeinstellung_regular"
+            android:background="@drawable/field_bg"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_add_work_link_url"
             android:inputType="textPersonName"
             android:maxLength="50"
@@ -131,7 +123,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             />
     </LinearLayout>
     <LinearLayout
@@ -147,8 +139,8 @@
             android:id="@+id/edtWorkLinkName3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/neueeinstellung_regular"
+            android:background="@drawable/field_bg"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_work_link_name"
             android:inputType="text"
             android:maxLength="20"
@@ -158,7 +150,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             />
 
 
@@ -168,8 +160,8 @@
             android:id="@+id/edtAddWorkLink3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/rectangle_grey"
-            android:fontFamily="@font/neueeinstellung_regular"
+            android:background="@drawable/field_bg"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/str_add_work_link_url"
             android:inputType="textPersonName"
             android:maxLength="50"
@@ -179,7 +171,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/colorgrey"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             />
     </LinearLayout>
 
