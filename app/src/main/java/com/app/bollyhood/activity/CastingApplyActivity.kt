@@ -15,11 +15,11 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -36,11 +36,7 @@ import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
-import com.app.bollyhood.util.ThumbnailUtils
 import com.app.bollyhood.viewmodel.DataViewModel
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.ui.PlayerView
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -58,17 +54,13 @@ class CastingApplyActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityCastingApplyBinding
     lateinit var mContext: CastingApplyActivity
-    lateinit var videoUri: Uri
     private val viewModel: DataViewModel by viewModels()
     private var isCamera = false
     private var isGallery = false
     private var photoList: ArrayList<String> = arrayListOf()
     private val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
-    private var is_videoUploaded=false
     private var videoPath=""
     lateinit var castingCallModel: CastingCallModel
-    private lateinit var player: SimpleExoPlayer
-    private lateinit var pickVideoLauncher: ActivityResultLauncher<Intent>
     private val imageResultLaunchers = mutableMapOf<Int, ActivityResultLauncher<Intent>>()
 
 
@@ -94,22 +86,6 @@ class CastingApplyActivity : AppCompatActivity() {
             finish()
         })
 
-        pickVideoLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback { result ->
-                if (result.resultCode == RESULT_OK && result.data != null) {
-                    videoUri = result.data?.data!!
-                    videoPath=PathUtils.getRealPath(this, videoUri!!).toString()
-                    is_videoUploaded=true
-                    if (videoUri != null) {
-                        val videoThumbnail = ThumbnailUtils.getVideoThumbnail(videoUri, this)
-                        if (videoThumbnail != null) {
-                            binding.siximage.setImageBitmap(videoThumbnail)
-                            binding.playicon.visibility=View.VISIBLE
-                        }
-                    }
-                }
-            })
     }
 
     private fun addListner() {
@@ -155,15 +131,7 @@ class CastingApplyActivity : AppCompatActivity() {
         })
 
         binding.siximage.setOnClickListener(View.OnClickListener {
-            if(is_videoUploaded){
                 videoDialog()
-            }else {
-                if (checkPermission()) {
-                    openGalleryForVideo()
-                } else {
-                    checkPermission()
-                }
-            }
         })
 
 
@@ -213,6 +181,11 @@ class CastingApplyActivity : AppCompatActivity() {
                     castingCallModel.id
                 )
 
+                val video: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    videoPath
+                )
+
                 val parts: ArrayList<MultipartBody.Part> = arrayListOf()
 
                 for (i in photoList.indices) {
@@ -244,14 +217,7 @@ class CastingApplyActivity : AppCompatActivity() {
                 }
 
 
-                var videoBody: MultipartBody.Part? = null
-                val file = File(videoPath)
-                if (file.exists()) {
-                    val imageBody = RequestBody.create("video/*".toMediaTypeOrNull(), file)
-                    videoBody= MultipartBody.Part.createFormData("video", file.name, imageBody)
-                }
-
-                viewModel.getCastingCallApply(uid, casting_id, parts, videoBody)
+                viewModel.getCastingCallApply(uid, casting_id, parts, video)
             }
         } else {
             Toast.makeText(
@@ -419,34 +385,33 @@ class CastingApplyActivity : AppCompatActivity() {
         }
     }
 
-    private fun openGalleryForVideo() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "video/*"
-        pickVideoLauncher.launch(intent)
-    }
-
     private fun videoDialog(){
-        val dialogView = Dialog(this)
-        dialogView.setContentView(R.layout.videoplayer_layout)
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.videoplayer_layout)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        val video_view = dialogView.findViewById<PlayerView>(R.id.video_player)
-        val close = dialogView.findViewById<View>(R.id.close)
+        val editText = dialog.findViewById<EditText>(R.id.edtName)
+        val button = dialog.findViewById<RelativeLayout>(R.id.button)
+        val alertTitle = dialog.findViewById<TextView>(R.id.alertTitle)
 
-        player = SimpleExoPlayer.Builder(this).build()
-        video_view.player = player
-
-        val mediaItem = MediaItem.fromUri(videoUri)
-        player.setMediaItem(mediaItem)
-        player.prepare()
-        player.playWhenReady = true
-
-        close.setOnClickListener(View.OnClickListener {
-            dialogView.dismiss()
+        button.setOnClickListener(View.OnClickListener {
+            if (!editText.text.isNullOrEmpty()){
+                if (isValidYouTubeUrl(editText.text.toString().trim())){
+                    videoPath=editText.text.toString().trim()
+                }else{
+                    alertTitle.visibility=View.VISIBLE
+                }
+            }else{
+                Toast.makeText(this,"Please paste audition video link.",Toast.LENGTH_SHORT).show()
+            }
         })
 
-        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialogView.show()
+        dialog.show()
+    }
+
+    private fun isValidYouTubeUrl(url: String): Boolean {
+        val youtubeRegex = "^(https?://)?(www\\.)?(youtube\\.com|youtu\\.?be)/.+\$".toRegex()
+        return youtubeRegex.matches(url)
     }
 
 }

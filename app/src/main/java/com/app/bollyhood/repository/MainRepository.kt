@@ -308,7 +308,7 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     suspend fun getCastingApply(
         uid: RequestBody, casting_id: RequestBody,
         images: ArrayList<MultipartBody.Part>?,
-        video: MultipartBody.Part?
+        video: RequestBody
     ) = apiService.getCastingApply(
         uid, casting_id, images, video
     )

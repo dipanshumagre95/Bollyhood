@@ -998,7 +998,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         uid: RequestBody,
         casting_id: RequestBody,
         images: ArrayList<MultipartBody.Part>?,
-        video: MultipartBody.Part?
+        video: RequestBody
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
