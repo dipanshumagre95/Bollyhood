@@ -14,7 +14,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -28,6 +27,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.airbnb.lottie.LottieAnimationView
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityCastingApplyBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -353,24 +353,22 @@ class CastingApplyActivity : AppCompatActivity() {
     }
 
     private fun castingCallSuccessDialog(){
-        val dialogView = Dialog(this)
-        dialogView.setContentView(R.layout.castingcall_apply_dialog)
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.castingcall_apply_dialog)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        val goToMyApplication=dialogView.findViewById<TextView>(R.id.Go_to_My_Applications)
-        val exploreMore=dialogView.findViewById<RelativeLayout>(R.id.tvexlpore_more)
+        val goToMyApplication=dialog.findViewById<TextView>(R.id.Go_to_My_Applications)
+        val exploreMore=dialog.findViewById<RelativeLayout>(R.id.tvexlpore_more)
+        val lottieAnimationView=dialog.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
+
+        lottieAnimationView.playAnimation()
 
         goToMyApplication.setOnClickListener(View.OnClickListener {
-            dialogView.dismiss()
+            dialog.dismiss()
             setResult(Activity.RESULT_OK)
             finish()
         })
-
-
-        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-
-        dialogView.show()
+        dialog.show()
     }
 
     private fun setImage(imageNumber: Int, uri: Uri?) {

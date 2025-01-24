@@ -135,5 +135,6 @@ dependencies {
     implementation ("com.razorpay:checkout:1.6.39")
 
     implementation ("com.google.android.exoplayer:exoplayer:2.18.2")
+    implementation ("com.airbnb.android:lottie:6.1.0")
 
 }
