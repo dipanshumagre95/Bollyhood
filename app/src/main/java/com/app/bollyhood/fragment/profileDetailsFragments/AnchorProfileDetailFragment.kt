@@ -1,6 +1,7 @@
 package com.app.bollyhood.fragment.profileDetailsFragments
 
 import ImagePickerUtil.playVideo
+import ImagePickerUtil.stopVideo
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
@@ -455,6 +456,11 @@ class AnchorProfileDetailFragment : Fragment(),OnClickListener,ActorsProfileWork
         binding.adapter =
             ActorsProfileWorkLinkAda(requireContext(), worklinklist, this@AnchorProfileDetailFragment)
         binding.rrworkLink.adapter = binding.adapter
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopVideo()
     }
 
     override fun onitemClick(pos: Int, work: WorkLinkProfileData) {

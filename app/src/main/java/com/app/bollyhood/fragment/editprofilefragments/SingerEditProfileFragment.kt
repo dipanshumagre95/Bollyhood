@@ -1,6 +1,7 @@
 package com.app.bollyhood.fragment.editprofilefragments
 
 import ImagePickerUtil
+import ImagePickerUtil.stopVideo
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
@@ -901,6 +902,11 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
             6 -> binding.siximage.setImageURI(uri)
             else -> throw IllegalArgumentException("Invalid image number")
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopVideo()
     }
 
     private fun alertDialogForImagePicker() {

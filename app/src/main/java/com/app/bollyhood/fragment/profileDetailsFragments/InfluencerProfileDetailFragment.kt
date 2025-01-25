@@ -1,5 +1,7 @@
 package com.app.bollyhood.fragment.profileDetailsFragments
 
+import ImagePickerUtil.playVideo
+import ImagePickerUtil.stopVideo
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
@@ -38,10 +40,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -477,32 +475,9 @@ class InfluencerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfil
         )
     }
 
-    private fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView) {
-        val options = IFramePlayerOptions.Builder()
-            .controls(0)
-            .build()
-
-
-        val listener = object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
-                val videoId = extractVideoId(videoUrl) ?: ""
-                youTubePlayer.loadVideo(videoId, 0f)
-            }
-
-            override fun onStateChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer, state: PlayerConstants.PlayerState) {
-            }
-        }
-
-        youtubePlayerView.addYouTubePlayerListener(listener)
-        youtubePlayerView.enableAutomaticInitialization = false
-        youtubePlayerView.initialize(listener, options)
-    }
-
-    fun extractVideoId(url: String): String? {
-        val pattern = "(?<=youtu\\.be/|watch\\?v=|/videos/|embed\\/|youtu\\.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%2F|shorts/)[^#\\&\\?\\n]*"
-        val regex = Regex(pattern)
-        val matchResult = regex.find(url)
-        return matchResult?.value
+    override fun onStop() {
+        super.onStop()
+        stopVideo()
     }
 
 }

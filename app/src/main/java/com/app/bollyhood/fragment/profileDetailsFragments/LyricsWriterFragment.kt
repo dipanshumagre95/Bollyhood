@@ -1,6 +1,7 @@
 package com.app.bollyhood.fragment.profileDetailsFragments
 
 import ImagePickerUtil.playVideo
+import ImagePickerUtil.stopVideo
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
@@ -289,6 +290,11 @@ class LyricsWriterFragment : Fragment(), OnClickListener, ActorsProfileWorkLinkA
                 e.printStackTrace()
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopVideo()
     }
 
     private fun setSpannableString(text: String, button: String, fulltext: String) {

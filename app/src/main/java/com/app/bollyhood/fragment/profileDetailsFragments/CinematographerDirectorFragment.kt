@@ -1,6 +1,7 @@
 package com.app.bollyhood.fragment.profileDetailsFragments
 
 import ImagePickerUtil.playVideo
+import ImagePickerUtil.stopVideo
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
@@ -443,6 +444,11 @@ class CinematographerDirectorFragment : Fragment(), View.OnClickListener, Actors
                 setImagesInView(photolist,6)
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopVideo()
     }
 
     private fun setWorkLinksAdapter(
