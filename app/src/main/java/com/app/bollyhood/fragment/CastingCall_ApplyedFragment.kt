@@ -1,5 +1,6 @@
 package com.app.bollyhood.fragment
 
+import ImagePickerUtil.playVideo
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -30,11 +31,7 @@ import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import java.util.regex.Pattern
 
 class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAdapter.onClickItems,
     ImagesAdapter.onItemClick {
@@ -164,10 +161,9 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         val tvRequestText=dialogView.findViewById<TextView>(R.id.tvtext)
         val videoView=dialogView.findViewById<RelativeLayout>(R.id.llVideoView)
         val youtubePlayerView=dialogView.findViewById<YouTubePlayerView>(R.id.youtube_player_view)
-        val playButton=dialogView.findViewById<View>(R.id.playButton)
 
         if (!userModel.videoUrl.isNullOrBlank()){
-            playVideo(userModel.videoUrl,youtubePlayerView,playButton)
+            playVideo(userModel.videoUrl,youtubePlayerView)
         }else{
             videoView.visibility=View.GONE
         }
@@ -211,44 +207,5 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
     }
 
     override fun onRemoveImage(pos: Int, photoModel: PhotoModel) {
-    }
-
-    private fun extractVideoIdFromUrl(url: String): String? {
-        val pattern = "^(?:https?://)?(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)([a-zA-Z0-9_-]{11}).*"
-        val compiledPattern = Pattern.compile(pattern)
-        val matcher = compiledPattern.matcher(url)
-
-        return if (matcher.matches()) {
-            matcher.group(1) // Extract the video ID
-        } else {
-            null
-        }
-    }
-
-    private fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView,playButton: View) {
-        val options = IFramePlayerOptions.Builder()
-            .controls(0)
-            .build()
-
-
-        val listener = object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
-                playButton.setOnClickListener {
-                    val videoId = extractVideoIdFromUrl(videoUrl) ?: ""
-                    if (videoId.isNotEmpty()) {
-                        youTubePlayer.loadVideo(videoId, 0f)
-                    } else {
-                        playButton.isEnabled = false
-                    }
-                }
-            }
-
-            override fun onStateChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer, state: PlayerConstants.PlayerState) {
-            }
-        }
-
-        youtubePlayerView.addYouTubePlayerListener(listener)
-        youtubePlayerView.enableAutomaticInitialization = false
-        youtubePlayerView.initialize(listener, options)
     }
 }

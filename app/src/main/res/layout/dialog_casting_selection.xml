@@ -67,13 +67,6 @@
                         android:layout_height="match_parent"
                         />
 
-                    <View
-                        android:id="@+id/playButton"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/circled_play_icon"/>
-
                 </androidx.cardview.widget.CardView>
 
 
