@@ -15,65 +15,74 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_height="99dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="91dp"
-            android:layout_height="match_parent"
-            android:elevation="@dimen/_5sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_20sdp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@drawable/allcategory_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="@dimen/_5sdp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:layout_width="91dp"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/white"
+                android:layout_margin="2dp"
+                app:cardCornerRadius="@dimen/_20sdp">
 
-
-                <ImageView
-                    android:id="@+id/ivCategoryImage"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent">
 
-                    />
 
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/ivCategoryImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerCrop"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_3ssp"
-                android:layout_marginEnd="@dimen/_3ssp"
-                android:alpha="0.9"
-                android:background="@drawable/rectangle_black"
-                android:orientation="vertical"
-                android:padding="@dimen/_2sdp">
+                        />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvCategoryName"
+                </RelativeLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/urbanist_semibold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Production Houses"
-                    android:singleLine="true"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
+                    android:layout_marginStart="@dimen/_3ssp"
+                    android:layout_marginEnd="@dimen/_3ssp"
+                    android:alpha="0.9"
+                    android:background="@drawable/rectangle_black"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_2sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvCategoryName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:elevation="@dimen/_7sdp"
+                        android:text="Production Houses"
+                        android:singleLine="true"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

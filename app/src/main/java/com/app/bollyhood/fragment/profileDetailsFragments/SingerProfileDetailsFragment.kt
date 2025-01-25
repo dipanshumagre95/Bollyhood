@@ -369,7 +369,7 @@ class SingerProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
                 else -> emptyList()
             }
 
-            for (i in 0 until photolist.size) {
+            for (i in 0 until minOf(photolist.size, 6)) {
                 Glide.with(requireContext())
                     .load(photolist[i].url)
                     .centerCrop()
