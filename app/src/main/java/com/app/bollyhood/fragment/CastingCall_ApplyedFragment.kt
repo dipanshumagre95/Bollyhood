@@ -1,6 +1,7 @@
 package com.app.bollyhood.fragment
 
 import ImagePickerUtil.playVideo
+import ImagePickerUtil.stopVideo
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -8,13 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.ChatActivity
 import com.app.bollyhood.activity.MainActivity
@@ -153,7 +153,11 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         dialogView.setContentView(R.layout.dialog_casting_selection)
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        val recyclerphoto=dialogView.findViewById<RecyclerView>(R.id.rv_photo)
+        val firstImage=dialogView.findViewById<ImageView>(R.id.firstImage)
+        val secondImage=dialogView.findViewById<ImageView>(R.id.secondImage)
+        val thirdImage=dialogView.findViewById<ImageView>(R.id.thirdImage)
+        val fourthImage=dialogView.findViewById<ImageView>(R.id.fourthImage)
+        val fifthImage=dialogView.findViewById<ImageView>(R.id.fifthImage)
         val btn_fit=dialogView.findViewById<TextView>(R.id.tvfit)
         val btn_notFit=dialogView.findViewById<TextView>(R.id.tvNotfit)
         val btn_maybe=dialogView.findViewById<TextView>(R.id.tvMaybe)
@@ -171,6 +175,11 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         tvName.setText(userModel.name+" Applied For Role")
         tvRequestText.setText("Accept Casting Request From ${userModel.name} ?")
 
+        dialogView.setCanceledOnTouchOutside(true)
+        dialogView.setOnDismissListener {
+            stopVideo()
+        }
+
         btn_fit.setOnClickListener(OnClickListener {
             startActivity(
                 Intent(requireContext(), ChatActivity::class.java)
@@ -178,6 +187,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                     .putExtra("msg", "Congratulations you are shortlisted for this position we contact with you soon")
             )
             dialogView.dismiss()
+            stopVideo()
         })
 
         btn_notFit.setOnClickListener(OnClickListener {
@@ -187,18 +197,23 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                     .putExtra("msg", "You are not fit for this position Best of Luck for future")
             )
             dialogView.dismiss()
+            stopVideo()
         })
 
         btn_maybe.setOnClickListener(OnClickListener {
             dialogView.dismiss()
+            stopVideo()
         })
 
-        recyclerphoto.layoutManager = GridLayoutManager(requireContext(),3)
-        recyclerphoto.setHasFixedSize(true)
-        val adapter = ImagesAdapter(requireContext(), photoList,this )
-        recyclerphoto.adapter = adapter
-        adapter?.notifyDataSetChanged()
-
+        if (!userModel.apply_images.isNullOrEmpty()) {
+            val imageViews = listOf(firstImage,secondImage,thirdImage,fourthImage,fifthImage)
+            for (i in 0 until minOf(userModel.apply_images.size, 5)) {
+                Glide.with(requireContext()).load(userModel.apply_images[i])
+                    .error(R.drawable.upload_to_the_cloud_svg)
+                    .centerCrop()
+                    .into(imageViews[i])
+            }
+        }
         dialogView.show()
     }
 

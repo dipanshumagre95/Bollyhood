@@ -11,6 +11,8 @@ import java.util.regex.Pattern
 
 object ImagePickerUtil {
 
+    var youtubePlayers: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer? = null
+
     fun pickImageFromGallery(activity: Context, startForProfileImageResult: ActivityResultLauncher<Intent>) {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
             putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
@@ -40,6 +42,7 @@ object ImagePickerUtil {
             override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
                 val videoId = extractVideoIdFromUrl(videoUrl) ?: ""
                 youTubePlayer.loadVideo(videoId, 0f)
+                youtubePlayers = youTubePlayer
             }
 
             override fun onStateChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer, state: PlayerConstants.PlayerState) {
@@ -49,5 +52,10 @@ object ImagePickerUtil {
         youtubePlayerView.addYouTubePlayerListener(listener)
         youtubePlayerView.enableAutomaticInitialization = false
         youtubePlayerView.initialize(listener, options)
+    }
+
+    fun stopVideo() {
+        youtubePlayers?.pause() // Pause the video
+        youtubePlayers = null // Clear the reference
     }
 }

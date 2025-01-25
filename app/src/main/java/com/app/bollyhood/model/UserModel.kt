@@ -5,5 +5,6 @@ data class UserModel(
     val apply_images: ArrayList<String>,
     val id: String,
     val image: String,
-    val name: String
+    val name: String,
+    val videoUrl: String
 )
