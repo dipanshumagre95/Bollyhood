@@ -35,6 +35,9 @@ object ImagePickerUtil {
      fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView) {
         val options = IFramePlayerOptions.Builder()
             .controls(0)
+            .modestBranding(0)
+            .autoplay(0)
+            .rel(0)
             .build()
 
 
@@ -42,6 +45,7 @@ object ImagePickerUtil {
             override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
                 val videoId = extractVideoIdFromUrl(videoUrl) ?: ""
                 youTubePlayer.loadVideo(videoId, 0f)
+                youTubePlayer.cueVideo(videoId, 0f)
                 youtubePlayers = youTubePlayer
             }
 

@@ -44,6 +44,7 @@
                 android:layout_marginEnd="@dimen/_10sdp">
 
                 <LinearLayout
+                    android:id="@+id/llfirstImage"
                     android:layout_width="@dimen/_75sdp"
                     android:layout_height="@dimen/_85sdp"
                     android:layout_weight="1"
@@ -75,6 +76,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llsecondImage"
                     android:layout_width="@dimen/_75sdp"
                     android:layout_height="@dimen/_85sdp"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -108,6 +110,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llthirdImage"
                     android:layout_width="@dimen/_75sdp"
                     android:layout_height="@dimen/_85sdp"
                     android:layout_weight="1"
@@ -151,6 +154,7 @@
                 android:layout_marginEnd="@dimen/_10sdp">
 
                 <LinearLayout
+                    android:id="@+id/llfourthImage"
                     android:layout_width="@dimen/_75sdp"
                     android:layout_height="@dimen/_85sdp"
                     android:background="@drawable/rectangle_app_background">
@@ -181,6 +185,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llfifthImage"
                     android:layout_width="@dimen/_75sdp"
                     android:layout_height="@dimen/_85sdp"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -216,10 +221,10 @@
             <RelativeLayout
                 android:id="@+id/llVideoView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_140sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_below="@+id/llsecondphotos"
                 android:background="@drawable/rectangle_app_background">
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
@@ -153,11 +154,16 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         dialogView.setContentView(R.layout.dialog_casting_selection)
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        val firstImage=dialogView.findViewById<ImageView>(R.id.firstImage)
-        val secondImage=dialogView.findViewById<ImageView>(R.id.secondImage)
-        val thirdImage=dialogView.findViewById<ImageView>(R.id.thirdImage)
-        val fourthImage=dialogView.findViewById<ImageView>(R.id.fourthImage)
+        var firstImage=dialogView.findViewById<ImageView>(R.id.firstImage)
+        var secondImage=dialogView.findViewById<ImageView>(R.id.secondImage)
+        var thirdImage=dialogView.findViewById<ImageView>(R.id.thirdImage)
+        var fourthImage=dialogView.findViewById<ImageView>(R.id.fourthImage)
         val fifthImage=dialogView.findViewById<ImageView>(R.id.fifthImage)
+        var llfirstImage=dialogView.findViewById<LinearLayout>(R.id.llfirstImage)
+        var llsecondImage=dialogView.findViewById<LinearLayout>(R.id.llsecondImage)
+        var llthirdImage=dialogView.findViewById<LinearLayout>(R.id.llthirdImage)
+        var llfourthImage=dialogView.findViewById<LinearLayout>(R.id.llfourthImage)
+        val llfifthImage=dialogView.findViewById<LinearLayout>(R.id.llfifthImage)
         val btn_fit=dialogView.findViewById<TextView>(R.id.tvfit)
         val btn_notFit=dialogView.findViewById<TextView>(R.id.tvNotfit)
         val btn_maybe=dialogView.findViewById<TextView>(R.id.tvMaybe)
@@ -206,12 +212,17 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         })
 
         if (!userModel.apply_images.isNullOrEmpty()) {
-            val imageViews = listOf(firstImage,secondImage,thirdImage,fourthImage,fifthImage)
+            val imageView = listOf(firstImage,secondImage,thirdImage,fourthImage,fifthImage)
+            val imageViews = listOf(llfirstImage,llsecondImage,llthirdImage,llfourthImage,llfifthImage)
+            val images = userModel.apply_images ?: emptyList()
+            imageViews.forEachIndexed { index, imageView ->
+                imageView.visibility = if (index < images.size) View.VISIBLE else View.GONE
+            }
             for (i in 0 until minOf(userModel.apply_images.size, 5)) {
                 Glide.with(requireContext()).load(userModel.apply_images[i])
                     .error(R.drawable.upload_to_the_cloud_svg)
                     .centerCrop()
-                    .into(imageViews[i])
+                    .into(imageView[i])
             }
         }
         dialogView.show()
