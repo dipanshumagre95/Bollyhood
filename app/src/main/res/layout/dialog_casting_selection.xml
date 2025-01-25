@@ -1,115 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/llMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/multicolor_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:id="@+id/llMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/multicolor_button">
+            android:layout_margin="@dimen/_2sdp"
+            android:background="@drawable/rectangle_chatwhite">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvuser_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/urbanist_semibold"
+                android:text=""
+                android:textColor="@color/black" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_photo"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/tvuser_name"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp" />
+
 
             <RelativeLayout
+                android:id="@+id/llVideoView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_2sdp"
-                android:background="@drawable/rectangle_chatwhite">
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_below="@+id/rv_photo"
+                android:background="@drawable/rectangle_app_background">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvuser_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist_semibold"/>
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_photo"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_below="@+id/tvuser_name"
-                    android:layout_marginTop="@dimen/_5sdp"/>
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_2sdp"
+                    >
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvtext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_below="@+id/rv_photo"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_10sdp"/>
+                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                        android:id="@+id/youtube_player_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:layout_below="@+id/tvtext"
-                    android:weightSum="3">
+                    <View
+                        android:id="@+id/playButton"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circled_play_icon"/>
 
+                </androidx.cardview.widget.CardView>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvfit"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:text="Fit"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_15sdp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/rectangle_skincolor"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvNotfit"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:text="Not Fit"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins_medium"
-                        android:background="@drawable/rectangle_pink"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvMaybe"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:text="Maybe"
-                        android:textColor="@color/black"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:textSize="@dimen/_15sdp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/border_gray"/>
-                </LinearLayout>
 
             </RelativeLayout>
 
-        </RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llVideoView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvtext"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:weightSum="3">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvfit"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_skincolor"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="Fit"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvNotfit"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_pink"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="Not Fit"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMaybe"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_gray"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="Maybe"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp" />
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

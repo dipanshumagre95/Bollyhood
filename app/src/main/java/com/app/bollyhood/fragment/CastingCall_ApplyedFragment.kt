@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -29,6 +30,11 @@ import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import java.util.regex.Pattern
 
 class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAdapter.onClickItems,
     ImagesAdapter.onItemClick {
@@ -140,14 +146,14 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         val photoList: ArrayList<PhotoModel> = ArrayList()
 
         if (!userModel.apply_images.isNullOrEmpty()) {
-            for (i in userModel.apply_images) {
-                val model = PhotoModel(0, i)
+            for (index in 0 until minOf(5, userModel.apply_images.size)) {
+                val model = PhotoModel(0, userModel.apply_images[index])
                 photoList.add(model)
             }
         }
+
         val dialogView = Dialog(requireContext())
         dialogView.setContentView(R.layout.dialog_casting_selection)
-        dialogView.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val recyclerphoto=dialogView.findViewById<RecyclerView>(R.id.rv_photo)
@@ -156,6 +162,15 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         val btn_maybe=dialogView.findViewById<TextView>(R.id.tvMaybe)
         val tvName=dialogView.findViewById<TextView>(R.id.tvuser_name)
         val tvRequestText=dialogView.findViewById<TextView>(R.id.tvtext)
+        val videoView=dialogView.findViewById<RelativeLayout>(R.id.llVideoView)
+        val youtubePlayerView=dialogView.findViewById<YouTubePlayerView>(R.id.youtube_player_view)
+        val playButton=dialogView.findViewById<View>(R.id.playButton)
+
+        if (!userModel.videoUrl.isNullOrBlank()){
+            playVideo(userModel.videoUrl,youtubePlayerView,playButton)
+        }else{
+            videoView.visibility=View.GONE
+        }
 
         tvName.setText(userModel.name+" Applied For Role")
         tvRequestText.setText("Accept Casting Request From ${userModel.name} ?")
@@ -196,8 +211,44 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
     }
 
     override fun onRemoveImage(pos: Int, photoModel: PhotoModel) {
-
     }
 
+    private fun extractVideoIdFromUrl(url: String): String? {
+        val pattern = "^(?:https?://)?(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)([a-zA-Z0-9_-]{11}).*"
+        val compiledPattern = Pattern.compile(pattern)
+        val matcher = compiledPattern.matcher(url)
 
+        return if (matcher.matches()) {
+            matcher.group(1) // Extract the video ID
+        } else {
+            null
+        }
+    }
+
+    private fun playVideo(videoUrl: String, youtubePlayerView: YouTubePlayerView,playButton: View) {
+        val options = IFramePlayerOptions.Builder()
+            .controls(0)
+            .build()
+
+
+        val listener = object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
+                playButton.setOnClickListener {
+                    val videoId = extractVideoIdFromUrl(videoUrl) ?: ""
+                    if (videoId.isNotEmpty()) {
+                        youTubePlayer.loadVideo(videoId, 0f)
+                    } else {
+                        playButton.isEnabled = false
+                    }
+                }
+            }
+
+            override fun onStateChange(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer, state: PlayerConstants.PlayerState) {
+            }
+        }
+
+        youtubePlayerView.addYouTubePlayerListener(listener)
+        youtubePlayerView.enableAutomaticInitialization = false
+        youtubePlayerView.initialize(listener, options)
+    }
 }
