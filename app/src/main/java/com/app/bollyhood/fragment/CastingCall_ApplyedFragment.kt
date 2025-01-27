@@ -134,7 +134,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
             }
 
             R.id.ivBack ->{
-                (requireActivity() as MainActivity).setBookingColor()
+                (requireActivity() as MainActivity).loadFragment(AllCastingCallFragment())
             }
         }
     }
