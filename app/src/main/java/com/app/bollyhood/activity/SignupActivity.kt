@@ -1,15 +1,20 @@
 package com.app.bollyhood.activity
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.view.Gravity
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ArrayAdapter
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -57,14 +62,19 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
             mobileNumber = intent.getStringExtra(StaticData.mobileNumber)
         }
 
-        binding.acSelectToday.setOnTouchListener { _, _ ->
+        /*binding.acSelectToday.setOnTouchListener { _, _ ->
             binding.acSelectToday.showDropDown()
             false
-        }
+        }*/
+
+        /*binding.selectView.setOnClickListener(OnClickListener {
+            showBottomSheet(companyList!!)
+        })*/
 
         binding.companyView.setOnClickListener(this)
         binding.viewIndividual.setOnClickListener(this)
         binding.tvSignUp.setOnClickListener(this)
+        binding.acSelectToday.setOnClickListener(this)
     }
 
     private fun addObserevs() {
@@ -93,7 +103,6 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
             if (res.status == "1") {
                 if (isindiviual){
                     indiviaulList?.addAll(res.result)
-                    setCategoryAdapter(indiviaulList!!)
                     isindiviual=false
                     viewModel.getSignupCategory("2")
                 }else{
@@ -116,26 +125,6 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
 
             }
         })
-    }
-
-    private fun setCategoryAdapter(result: ArrayList<CategoryModel>) {
-
-        val stringList = arrayListOf<String>()
-        result.forEach {
-            stringList.add(it.category_name)
-        }
-
-        val arrayAdapter: ArrayAdapter<String> =
-            ArrayAdapter<String>(mContext, R.layout.dropdown, stringList)
-        binding.acSelectToday.threshold = 0
-        binding.acSelectToday.dropDownVerticalOffset = 0
-        binding.acSelectToday.setAdapter(arrayAdapter)
-
-        binding.acSelectToday.onItemClickListener =
-            OnItemClickListener { parent, view, position, id ->
-                categoryId = result[position].id
-            }
-
     }
 
     private fun setSpannableString() {
@@ -183,7 +172,7 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                 user_type = "2"
                 binding.acSelectToday.setText("Select Category")
                 categoryId=""
-                setCategoryAdapter(companyList!!)
+              //  setCategoryAdapter(companyList!!)
             }
 
             R.id.view_individual -> {
@@ -194,7 +183,16 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                 binding.acSelectToday.setText("Select Category")
                 categoryId=""
                 user_type = "1"
-                setCategoryAdapter(indiviaulList!!)
+             //   setCategoryAdapter(indiviaulList!!)
+            }
+
+            R.id.acSelectToday  ->{
+                if (user_type=="1") {
+                    showBottomSheet(indiviaulList!!)
+                }
+                else if (user_type=="2"){
+                    showBottomSheet(companyList!!)
+                }
             }
 
             R.id.tvSignUp  ->{
@@ -242,6 +240,48 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    private fun showBottomSheet(list: ArrayList<CategoryModel>) {
+        var posstion=0
+        val dialog= Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.bottom_sheet_layout)
+
+        val numberPicker = dialog.findViewById<NumberPicker>(R.id.numberPicker)
+        val tvSelectedCategory = dialog.findViewById<TextView>(R.id.tvselectedCategory)
+        val doneButton = dialog.findViewById<TextView>(R.id.tvDone)
+        val cancelButton = dialog.findViewById<TextView>(R.id.tvCancel)
+
+        tvSelectedCategory.text=list[0].category_name
+
+
+        val displayedValues = list.map { it.category_name }.toTypedArray()
+        numberPicker.minValue=0
+        numberPicker.maxValue=list.size-1
+        numberPicker.displayedValues=displayedValues
+
+        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            val selectedCategorys = list[newVal]
+            posstion=newVal
+            tvSelectedCategory.text= selectedCategorys.category_name
+        }
+
+        doneButton.setOnClickListener(OnClickListener {
+            categoryId = list[posstion].id
+            binding.acSelectToday.text=list[posstion].category_name.toString()
+            dialog.dismiss()
+        })
+
+        cancelButton.setOnClickListener(OnClickListener {
+            dialog.dismiss()
+        })
+
+        dialog.show()
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.attributes?.windowAnimations=R.style.BottomSheetDialogTheme
+        dialog.window?.setGravity(Gravity.BOTTOM)
     }
 
 }

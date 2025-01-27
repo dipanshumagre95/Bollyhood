@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/curve_rectangle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_2sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Category"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvselectedCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Category"
+            android:textSize="14sp"
+            android:layout_below="@+id/tvtext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="#FE885B"
+            android:fontFamily="@font/poppins_medium"/>
+
+
+        <android.widget.NumberPicker
+            android:id="@+id/numberPicker"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_below="@+id/tvselectedCategory"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_below="@+id/numberPicker">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCancel"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/rectangle_app_background"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDone"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                android:textSize="20sp"
+                android:padding="@dimen/_5sdp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:background="@drawable/rectangle_app_background"
+                android:fontFamily="@font/poppins_medium"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
