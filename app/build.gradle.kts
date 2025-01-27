@@ -135,5 +135,7 @@ dependencies {
 
     implementation ("com.google.android.exoplayer:exoplayer:2.18.2")
     implementation ("com.airbnb.android:lottie:6.1.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
+
 
 }

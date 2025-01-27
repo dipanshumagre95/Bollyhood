@@ -24,6 +24,7 @@ class StaticData {
         const val cate_name="cate_name"
         const val currency="INR"
         const val amount="49900"
+        const val edit=""
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"

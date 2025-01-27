@@ -162,4 +162,9 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
             ).show()
         }
     }
+
+    override fun editCasting(castingModel: CastingCallModel) {
+        val castingString = Gson().toJson(castingModel)
+        startActivity(Intent(requireContext(), Upload_CastingCall::class.java).putExtra(StaticData.userModel,castingString).putExtra(StaticData.edit,"edit"))
+    }
 }

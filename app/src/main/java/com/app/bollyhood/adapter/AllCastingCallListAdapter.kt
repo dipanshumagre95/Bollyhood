@@ -91,7 +91,7 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         }
 
         editOption.setOnClickListener {
-            Toast.makeText(context, "Edit clicked for item $position", Toast.LENGTH_SHORT).show()
+            onitemclick.editCasting(castingModel)
             popupWindow.dismiss()
         }
 
@@ -115,5 +115,7 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         fun onItemClick(castingModel:CastingCallModel)
 
         fun pinCasting(castingModel:CastingCallModel)
+
+        fun editCasting(castingModel: CastingCallModel)
     }
 }

@@ -34,9 +34,12 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.extensions.isvalidField
 import com.app.bollyhood.extensions.isvalidProductionHouseName
 import com.app.bollyhood.extensions.isvalidUploadProfile
+import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -104,6 +107,17 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
     private fun intiUi()
     {
+        if (intent.hasExtra(StaticData.edit))
+        {
+            val castingCallModel = Gson().fromJson(
+                intent.getStringExtra(StaticData.userModel),
+                CastingCallModel::class.java
+            )
+
+            if (castingCallModel!=null){
+                setData(castingCallModel)
+            }
+        }
         setHeightData()
         setSkinColorData()
         setBodyTypeData()
@@ -476,18 +490,12 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
         when(view?.id){
 
             R.id.llverified_profile ->{
-                binding.llverifiedProfile.setBackgroundResource(R.drawable.rectangle_black_button)
-                binding.llanyoneApply.setBackgroundResource(R.drawable.border_gray)
-                binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.white))
-                binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.black))
+                setVerifiedCasting()
                 is_verify_profile="1"
             }
 
             R.id.llanyone_apply ->{
-                binding.llanyoneApply.setBackgroundResource(R.drawable.rectangle_black_button)
-                binding.llverifiedProfile.setBackgroundResource(R.drawable.border_gray)
-                binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.black))
-                binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.white))
+                setAnyoneCanApply()
                 is_verify_profile="2"
             }
 
@@ -791,6 +799,105 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
         } catch (e: IOException) {
             e.printStackTrace()
             null
+        }
+    }
+
+    private fun setVerifiedCasting(){
+        binding.llverifiedProfile.setBackgroundResource(R.drawable.rectangle_black_button)
+        binding.llanyoneApply.setBackgroundResource(R.drawable.border_gray)
+        binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.white))
+        binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.black))
+    }
+
+    private fun setAnyoneCanApply()
+    {
+        binding.llanyoneApply.setBackgroundResource(R.drawable.rectangle_black_button)
+        binding.llverifiedProfile.setBackgroundResource(R.drawable.border_gray)
+        binding.tvVerifiedProfile.setTextColor(ContextCompat.getColor(this, R.color.black))
+        binding.tvAnyoneCanApply.setTextColor(ContextCompat.getColor(this, R.color.white))
+    }
+
+    private fun setData(castingCallModel: CastingCallModel){
+        castingCallModel.let {
+            if (it.company_logo.isNotEmpty()) {
+                Glide.with(this).
+                load(it.company_logo).
+                centerCrop().
+                into(binding.cvProfile)
+
+                if (!it.company_name.isNullOrEmpty()){
+                    binding.edtproductionHouse.setText(it.company_name)
+                }
+
+                if (!it.role.isNullOrEmpty()){
+                    binding.edttitle.setText(it.role)
+                }
+
+                if (!it.organization.isNullOrEmpty()){
+                    binding.edtWhatYouRole.setText(it.organization)
+                }
+
+                if (!it.requirement.isNullOrEmpty()){
+                    binding.edtSkillNRequiment.setText(it.requirement)
+                }
+
+                if (!it.shifting.isNullOrEmpty()){
+                    binding.acshift.setText(it.shifting)
+                }
+
+
+                if (!it.gender.isNullOrEmpty()){
+                    binding.acgender.setText(it.gender)
+                }
+
+                if (!it.location.isNullOrEmpty()){
+                    binding.edtLocation.setText(it.location)
+                }
+
+                if (!it.height.isNullOrEmpty()){
+                    binding.acheight.setText(it.height)
+                }
+
+                if (!it.passport.isNullOrEmpty()){
+                    binding.acPassPort.setText(it.passport)
+                }
+
+                if (!it.body_type.isNullOrEmpty()){
+                    binding.acBodyType.setText(it.body_type)
+                }
+
+                if (!it.age.isNullOrEmpty()){
+                    binding.acage.setText(it.age)
+                }
+
+                if (!it.skin_clor.isNullOrEmpty()){
+                    binding.acSkinColor.setText(it.skin_clor)
+                }
+
+                if (!it.price.isNullOrEmpty()){
+                    binding.edtperday.setText(it.price)
+                }
+
+                if (it.price_type.equals("Project Basis"))
+                {
+                    binding.rrperday.visibility=View.GONE
+                }else{
+                    binding.rrperday.visibility=View.VISIBLE
+                    binding.acChooseType.setText("Day Basis")
+                }
+
+                if (!it.casting_fee_type.isNullOrEmpty()){
+                    binding.acCastingFeesPplicable.setText(it.casting_fee_type)
+                }
+
+                if (it.is_verify_casting.equals("1")){
+                    setVerifiedCasting()
+                    is_verify_profile="1"
+                }else{
+                    setAnyoneCanApply()
+                    is_verify_profile="2"
+                }
+            }
         }
     }
 }

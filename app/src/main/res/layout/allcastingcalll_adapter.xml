@@ -90,8 +90,13 @@
 
                 <ImageView
                     android:id="@+id/three_dots"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:focusable="true"
                     android:src="@drawable/black_dots"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_alignParentEnd="true"/>
