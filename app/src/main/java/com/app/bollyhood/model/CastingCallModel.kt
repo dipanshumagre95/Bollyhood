@@ -12,7 +12,7 @@ data class CastingCallModel(
     val company_logo: String,
     val company_name: String,
     val organization: String,
-    val shifting: String,
+    val shift_time: String,
     val date: String,
     val description: String,
     val requirement: String,

@@ -841,8 +841,8 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     binding.edtSkillNRequiment.setText(it.requirement)
                 }
 
-                if (!it.shifting.isNullOrEmpty()){
-                    binding.acshift.setText(it.shifting)
+                if (!it.shift_time.isNullOrEmpty()){
+                    binding.acshift.setText(it.shift_time)
                 }
 
 

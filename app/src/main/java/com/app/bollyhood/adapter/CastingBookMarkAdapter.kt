@@ -65,7 +65,7 @@ class CastingBookMarkAdapter(
                 .into(holder.binding.ivLogo)
         }
 
-        holder.binding.tvShift.text = castingModels[position].shifting + " Hr Shift"
+        holder.binding.tvShift.text = castingModels[position].shift_time + " Hr Shift"
 
         holder.binding.tvDesc.text = castingModels[position].description
         holder.binding.tvDate.text = castingModels[position].date

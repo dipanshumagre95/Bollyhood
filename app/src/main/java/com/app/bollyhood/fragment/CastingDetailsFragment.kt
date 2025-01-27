@@ -95,8 +95,8 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                 it.tvLocation.text = castingCallModel.location
             }
 
-            if (!castingCallModel.shifting.isNullOrEmpty()) {
-                it.tvShift.text = castingCallModel.shifting + " Shift"
+            if (!castingCallModel.shift_time.isNullOrEmpty()) {
+                it.tvShift.text = castingCallModel.shift_time + " Shift"
             }
 
             if (!castingCallModel.modify_date.isNullOrEmpty()) {

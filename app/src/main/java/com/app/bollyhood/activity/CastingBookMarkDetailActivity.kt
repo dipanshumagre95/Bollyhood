@@ -146,7 +146,7 @@ class CastingBookMarkDetailActivity : AppCompatActivity() {
             tvOrganization.text = castingCallModel.organization
             tvCompunyName.text = castingCallModel.company_name
             tvLocation.text = castingCallModel.location
-            tvShift.text = castingCallModel.shifting + "Hr Shift"
+            tvShift.text = castingCallModel.shift_time + "Hr Shift"
             tvDaysAgo.text = castingCallModel.date
             tvCastingRequirement.text = castingCallModel.requirement
             tvSkillRequirement.text = castingCallModel.skill

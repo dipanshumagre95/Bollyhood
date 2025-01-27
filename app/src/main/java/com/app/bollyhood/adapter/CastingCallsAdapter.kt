@@ -114,8 +114,8 @@ class CastingCallsAdapter(
                 .into(holder.binding.ivLogo)
         }
 
-        if (!castingModels[position].shifting.isNullOrEmpty()) {
-            holder.binding.tvShift.text = castingModels[position].shifting + " Shift"
+        if (!castingModels[position].shift_time.isNullOrEmpty()) {
+            holder.binding.tvShift.text = castingModels[position].shift_time + " Shift"
         }
 
         if (!castingModels[position].role.isNullOrEmpty()) {
