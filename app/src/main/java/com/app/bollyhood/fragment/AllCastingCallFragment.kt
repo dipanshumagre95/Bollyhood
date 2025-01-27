@@ -150,4 +150,16 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
         castingDetailsFragment.arguments = bundle
        (requireActivity() as MainActivity).loadFragment(castingDetailsFragment)
     }
+
+    override fun pinCasting(castingModel: CastingCallModel) {
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.makeCastingPin(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 }

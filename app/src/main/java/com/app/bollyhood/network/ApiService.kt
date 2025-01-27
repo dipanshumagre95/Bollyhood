@@ -354,7 +354,11 @@ interface ApiService {
         @Field("plan_id") plan_id: String
     ): Response<SuccessResponse>
 
-
-
+    @FormUrlEncoded
+    @POST("casting_list_pin.php")
+    suspend fun makeCastingPin(
+        @Field("uid") uid: String,
+        @Field("id") id: String
+    ): Response<CastingCallResponse>
 
 }

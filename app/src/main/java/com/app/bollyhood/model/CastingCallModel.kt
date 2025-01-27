@@ -17,6 +17,7 @@ data class CastingCallModel(
     val description: String,
     val requirement: String,
     val skill: String,
+    val pin_type: String,
     val role: String,
     val modify_date: String,
     val applyed_users:ArrayList<UserModel>,

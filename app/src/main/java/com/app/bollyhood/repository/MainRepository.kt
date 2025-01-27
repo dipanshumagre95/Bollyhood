@@ -332,6 +332,11 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     suspend fun sendPayment(payment_id: String, uid: String, plan_id: String) =
         apiService.sendPayment(
             payment_id, uid, plan_id
+    )
+
+    suspend fun makeCastingPin(uid: String, castingId: String) =
+        apiService.makeCastingPin(
+            uid, castingId
         )
 
 }

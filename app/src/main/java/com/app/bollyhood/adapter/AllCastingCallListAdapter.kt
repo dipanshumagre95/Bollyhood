@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
@@ -57,16 +58,15 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         })
 
         holder.binding.threeDots.setOnClickListener(View.OnClickListener {
-            showCustomMenu(holder.binding.threeDots, position)
+            showCustomMenu(castingModel.pin_type,holder.binding.threeDots, position,castingModel)
         })
     }
 
-    private fun showCustomMenu(anchor: View, position: Int) {
+    private fun showCustomMenu(pin_type:String,anchor: View, position: Int,castingModel:CastingCallModel) {
 
         val inflater = LayoutInflater.from(context)
         val menuView = inflater.inflate(R.layout.menu_options_layout, null)
 
-        // Create the PopupWindow
         val popupWindow = PopupWindow(
             menuView,
             ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -78,10 +78,15 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         val editOption = menuView.findViewById<RelativeLayout>(R.id.menu_edit)
         val hideAlertsOption = menuView.findViewById<RelativeLayout>(R.id.menu_hide_alerts)
         val deleteOption = menuView.findViewById<RelativeLayout>(R.id.menu_delete)
+        val tvPin = menuView.findViewById<TextView>(R.id.tvPin)
+
+        if (pin_type=="1"){
+            tvPin.text="Unpin"
+        }
 
 
         pinOption.setOnClickListener {
-            Toast.makeText(context, "Pin clicked for item $position", Toast.LENGTH_SHORT).show()
+            onitemclick.pinCasting(castingModel)
             popupWindow.dismiss()
         }
 
@@ -108,5 +113,7 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
     interface OnClickInterface
     {
         fun onItemClick(castingModel:CastingCallModel)
+
+        fun pinCasting(castingModel:CastingCallModel)
     }
 }
