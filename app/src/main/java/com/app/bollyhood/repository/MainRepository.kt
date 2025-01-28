@@ -337,6 +337,47 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     suspend fun makeCastingPin(uid: String, castingId: String) =
         apiService.makeCastingPin(
             uid, castingId
-        )
+    )
+
+    suspend fun updateCastingCall(
+        uid:RequestBody,
+        castingId:RequestBody,
+        company_name:RequestBody,
+        organization:RequestBody,
+        requirement:RequestBody,
+        shifting:RequestBody,
+        gender:RequestBody,
+        location:RequestBody,
+        height:RequestBody,
+        passport:RequestBody,
+        body_type:RequestBody,
+        skin_clor:RequestBody,
+        age:RequestBody,
+        price:RequestBody,
+        role:RequestBody,
+        priceType:RequestBody,
+        castingFeeType:RequestBody,
+        is_verify_casting:RequestBody,
+        company_logo:MultipartBody.Part?
+    )=apiService.updateCastingCall(
+        uid,
+        castingId,
+        company_name,
+        organization,
+        requirement,
+        shifting,
+        gender,
+        location,
+        height,
+        passport,
+        body_type,
+        skin_clor,
+        age,
+        price,
+        role,
+        priceType,
+        castingFeeType,
+        is_verify_casting,
+        company_logo)
 
 }

@@ -1145,6 +1145,69 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             }
         }
     }
+
+    fun updateCastingCall(
+        uid: RequestBody,
+        castingId: RequestBody,
+        company_name: RequestBody,
+        organization: RequestBody,
+        requirement: RequestBody,
+        shifting: RequestBody,
+        gender: RequestBody,
+        location: RequestBody,
+        height: RequestBody,
+        passport: RequestBody,
+        body_type: RequestBody,
+        skin_clor: RequestBody,
+        age: RequestBody,
+        price: RequestBody,
+        role: RequestBody,
+        priceType:RequestBody,
+        castingFeeType:RequestBody,
+        is_verify_casting:RequestBody,
+        company_logo: MultipartBody.Part?
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.updateCastingCall(
+                    uid,
+                    castingId,
+                    company_name,
+                    organization,
+                    requirement,
+                    shifting,
+                    gender,
+                    location,
+                    height,
+                    passport,
+                    body_type,
+                    skin_clor,
+                    age,
+                    price,
+                    role,
+                    priceType,
+                    castingFeeType,
+                    is_verify_casting,
+                    company_logo
+                )
+
+                if (response.isSuccessful && response.body() != null) {
+                    castingUploadedLiveData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to upload casting call: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
+            }
+        }
+    }
 }
 
 

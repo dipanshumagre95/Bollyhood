@@ -361,4 +361,28 @@ interface ApiService {
         @Field("id") id: String
     ): Response<CastingCallResponse>
 
+    @Multipart
+    @POST("edit_casting.php")
+    suspend fun updateCastingCall(
+        @Part("uid") uid: RequestBody,
+        @Part("id") id: RequestBody,
+        @Part("company_name") company_name: RequestBody,
+        @Part("organization") organization: RequestBody,
+        @Part("requirement") requirement: RequestBody,
+        @Part("shift_time") shifting: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part("height") height: RequestBody,
+        @Part("passport") passport: RequestBody,
+        @Part("body_type") body_type: RequestBody,
+        @Part("skin_clor") skin_clor: RequestBody,
+        @Part("age") age: RequestBody,
+        @Part("price") price: RequestBody?,
+        @Part("role") role: RequestBody?,
+        @Part("price_type") priceType: RequestBody?,
+        @Part("casting_fee_type") castingFeeType: RequestBody?,
+        @Part("is_verify_casting") is_verify_casting: RequestBody?,
+        @Part company_logo: MultipartBody.Part?,
+    ): Response<SuccessResponse>
+
 }

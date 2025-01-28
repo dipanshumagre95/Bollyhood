@@ -55,6 +55,7 @@ import java.util.Locale
 class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
     lateinit var binding:ActivityUploadCastingCallBinding
+    lateinit var castingCallModel:CastingCallModel
     private val viewModel: DataViewModel by viewModels()
     private var heightList: ArrayList<String> = arrayListOf()
     private var daysList: ArrayList<String> = arrayListOf()
@@ -65,6 +66,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
     private var passPortList: ArrayList<String> = arrayListOf()
     private var castingFeeList: ArrayList<String> = arrayListOf()
     private var ageList: ArrayList<String> = arrayListOf()
+    private var castingedit=false
     private var height: String = ""
     private var gender: String = ""
     private var shift: String = ""
@@ -109,7 +111,8 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
     {
         if (intent.hasExtra(StaticData.edit))
         {
-            val castingCallModel = Gson().fromJson(
+            castingedit=true
+            castingCallModel = Gson().fromJson(
                 intent.getStringExtra(StaticData.userModel),
                 CastingCallModel::class.java
             )
@@ -504,7 +507,11 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             }
 
             R.id.tvUpdateProfile ->{
-                createCastingCallApi()
+                if (castingedit){
+                    updateCastingCallApi()
+                }else {
+                    createCastingCallApi()
+                }
             }
 
             R.id.rrProfile ->{
@@ -514,6 +521,158 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     checkPermission()
                 }
             }
+        }
+    }
+
+    private fun updateCastingCallApi() {
+        if (isNetworkAvailable(this)) {
+            if (isvalidProductionHouseName(
+                    this, binding.edtproductionHouse.text.toString().trim()
+                )&& isvalidField(
+                    this,binding.edttitle.text.toString().trim(),
+                    "Please enter Casting Title"
+                ) &&isvalidField(
+                    this,binding.edtSkillNRequiment.text.toString().trim()
+                    ,"Please enter Skill & Requiment"
+                )&&isvalidField(
+                    this,binding.edtWhatYouRole.text.toString().trim()
+                    ,"Please enter Role"
+                )
+            ) {
+
+                val uid: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(this).getvalue(StaticData.id).toString()
+                )
+
+                val castingId: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    castingCallModel.id
+                )
+
+                val company_name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtproductionHouse.text.toString().trim()
+                )
+
+                val role: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edttitle.text.toString().trim()
+                )
+
+                val organization: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtWhatYouRole.text.toString().trim()
+                )
+
+                val requirement: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtSkillNRequiment.text.toString().trim()
+                )
+
+
+                val shifting: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acshift.text.toString().trim()
+                )
+
+                val gender: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acgender.text.toString().trim()
+                )
+
+
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLocation.text.toString().trim()
+                )
+
+                val height: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acheight.text.toString().trim()
+                )
+
+                val passport: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acPassPort.text.toString().trim()
+                )
+
+                val body_type: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acBodyType.text.toString().trim()
+                )
+
+                val age: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acage.text.toString().trim()
+                )
+
+                val skin_clor: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acSkinColor.text.toString().trim()
+                )
+
+                val price: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtperday.text.toString().trim()
+                )
+
+                val priceType: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acChooseType.text.toString().trim()
+                )
+
+
+                val castingFeeType: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acCastingFeesPplicable.text.toString().trim()
+                )
+
+                val is_verify_casting: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    is_verify_profile
+                )
+
+
+                var company_logo: MultipartBody.Part? = null
+                if (profilePath.isNotEmpty()) {
+                    val file = File(profilePath)
+                    // create RequestBody instance from file
+                    val requestFile =
+                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    company_logo = MultipartBody.Part.createFormData(
+                        "company_logo", file.name, requestFile
+                    )
+                }
+
+                viewModel.updateCastingCall(
+                    uid,
+                    castingId,
+                    company_name,
+                    organization,
+                    requirement,
+                    shifting,
+                    gender,
+                    location,
+                    height,
+                    passport,
+                    body_type,
+                    skin_clor,
+                    age,
+                    price,
+                    role,
+                    priceType,
+                    castingFeeType,
+                    is_verify_casting,
+                    company_logo
+                )
+            }
+        } else {
+            Toast.makeText(
+                this,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -844,7 +1003,6 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                 if (!it.shift_time.isNullOrEmpty()){
                     binding.acshift.setText(it.shift_time)
                 }
-
 
                 if (!it.gender.isNullOrEmpty()){
                     binding.acgender.setText(it.gender)

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.MainActivity
@@ -27,6 +28,9 @@ import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdapter.OnClickInterface {
@@ -164,7 +168,15 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
     }
 
     override fun editCasting(castingModel: CastingCallModel) {
-        val castingString = Gson().toJson(castingModel)
-        startActivity(Intent(requireContext(), Upload_CastingCall::class.java).putExtra(StaticData.userModel,castingString).putExtra(StaticData.edit,"edit"))
+        lifecycleScope.launch {
+            val castingString = withContext(Dispatchers.IO) {
+                Gson().toJson(castingModel)
+            }
+            val intent = Intent(requireContext(), Upload_CastingCall::class.java).apply {
+                putExtra(StaticData.userModel, castingString)
+                putExtra(StaticData.edit, "edit")
+            }
+            startActivity(intent)
+        }
     }
 }
