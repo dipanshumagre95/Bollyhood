@@ -1,19 +1,17 @@
 package com.app.bollyhood.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.adapter.CastingBookMarkAdapter
-import com.app.bollyhood.adapter.CastingCallsAdapter
 import com.app.bollyhood.databinding.ActivityCastingBookMarkBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.model.CastingBookMarkModel
 import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -72,7 +70,7 @@ class CastingBookMarkActivity : AppCompatActivity() {
         viewModel.castingBookMarkCallsLiveData.observe(this, Observer {
             if (it.status.equals("1")) {
                 castingBookMarkModels.clear()
-                castingBookMarkModels.addAll(it.result)
+                castingBookMarkModels.addAll(it.result.active)
 
                 if (castingBookMarkModels.size > 0) {
                     binding.rvCastingCalls.visibility = View.VISIBLE

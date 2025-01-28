@@ -334,9 +334,9 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
             payment_id, uid, plan_id
     )
 
-    suspend fun makeCastingPin(uid: String, castingId: String) =
+    suspend fun makeCastingPin(uid: String, castingId: String, status:String) =
         apiService.makeCastingPin(
-            uid, castingId
+            uid, castingId,status
     )
 
     suspend fun updateCastingCall(

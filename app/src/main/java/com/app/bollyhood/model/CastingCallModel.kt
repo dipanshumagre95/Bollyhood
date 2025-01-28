@@ -4,7 +4,12 @@ package com.app.bollyhood.model
 data class CastingCallResponse(
     val status: String,
     val msg: String,
-    val result: ArrayList<CastingCallModel>
+    val result: CastingCallList
+)
+
+data class CastingCallList(
+    val active:ArrayList<CastingCallModel>,
+    val inactive:ArrayList<CastingCallModel>
 )
 
 data class CastingCallModel(
@@ -29,6 +34,7 @@ data class CastingCallModel(
     val passport: String,
     val body_type: String,
     val age: String,
+    val status: String,
     val skin_clor: String,
     val type: String,
     val price_discussed: String,

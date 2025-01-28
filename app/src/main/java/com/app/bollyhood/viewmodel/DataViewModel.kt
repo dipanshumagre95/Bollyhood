@@ -1124,11 +1124,11 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-    fun makeCastingPin(uid: String, castingId: String) {
+    fun makeCastingPin(uid: String, castingId: String , status:String) {
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val response = mainRepository.makeCastingPin(uid, castingId)
+                val response = mainRepository.makeCastingPin(uid, castingId,status)
                 if (response.isSuccessful && response.body() != null) {
                     castingCallsLiveData.postValue(response.body())
                 } else {

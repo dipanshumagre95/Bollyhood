@@ -358,7 +358,8 @@ interface ApiService {
     @POST("casting_list_pin.php")
     suspend fun makeCastingPin(
         @Field("uid") uid: String,
-        @Field("id") id: String
+        @Field("id") id: String,
+        @Field("status") status: String
     ): Response<CastingCallResponse>
 
     @Multipart

@@ -196,6 +196,6 @@
     <string name="locations_a">Locations Around Mumbai</string>
     <string name="pin">Pin</string>
     <string name="edit">Edit</string>
-    <string name="hide_alerts">Hide Alerts</string>
+    <string name="hide_alerts">Close</string>
     <string name="delete_post">Delete Post</string>
 </resources>

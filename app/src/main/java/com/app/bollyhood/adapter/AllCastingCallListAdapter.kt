@@ -1,6 +1,7 @@
 package com.app.bollyhood.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,16 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
             holder.binding.tvcastingName.text=castingModel.role
         }
 
+        if (castingModel.status=="1"){
+            holder.binding.tvcastingStatus.text="Casting Call is Active"
+            holder.binding.tvcastingStatus.setTextColor(Color.parseColor("#00ED6D"))
+            holder.binding.ivstatusIcon.visibility=View.VISIBLE
+        }else{
+            holder.binding.tvcastingStatus.text="Casting Call is Closed"
+            holder.binding.tvcastingStatus.setTextColor(Color.parseColor("#FF5740"))
+            holder.binding.ivstatusIcon.visibility=View.GONE
+        }
+
         if (!castingModel.apply_casting_count.isNullOrEmpty()&&castingModel.apply_casting_count!="0"){
             holder.binding.tvapplyCount.visibility=View.VISIBLE
             holder.binding.tvapplyCount.text=castingModel.apply_casting_count
@@ -58,11 +69,11 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         })
 
         holder.binding.threeDots.setOnClickListener(View.OnClickListener {
-            showCustomMenu(castingModel.pin_type,holder.binding.threeDots, position,castingModel)
+            showCustomMenu(holder.binding.threeDots, position,castingModel)
         })
     }
 
-    private fun showCustomMenu(pin_type:String,anchor: View, position: Int,castingModel:CastingCallModel) {
+    private fun showCustomMenu(anchor: View, position: Int,castingModel:CastingCallModel) {
 
         val inflater = LayoutInflater.from(context)
         val menuView = inflater.inflate(R.layout.menu_options_layout, null)
@@ -79,9 +90,16 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         val hideAlertsOption = menuView.findViewById<RelativeLayout>(R.id.menu_hide_alerts)
         val deleteOption = menuView.findViewById<RelativeLayout>(R.id.menu_delete)
         val tvPin = menuView.findViewById<TextView>(R.id.tvPin)
+        val tvStatus = menuView.findViewById<TextView>(R.id.tvStatus)
 
-        if (pin_type=="1"){
+        if (castingModel.pin_type=="1"){
             tvPin.text="Unpin"
+        }
+
+        if (castingModel.status=="1"){
+            tvStatus.text="Close"
+        }else{
+            tvStatus.text="Active"
         }
 
 
@@ -96,7 +114,11 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         }
 
         hideAlertsOption.setOnClickListener {
-            Toast.makeText(context, "Hide Alerts clicked for item $position", Toast.LENGTH_SHORT).show()
+            if (castingModel.status=="1"){
+                onitemclick.changeCastingStatus(castingModel,"0")
+            }else{
+                onitemclick.changeCastingStatus(castingModel,"1")
+            }
             popupWindow.dismiss()
         }
 
@@ -117,5 +139,7 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         fun pinCasting(castingModel:CastingCallModel)
 
         fun editCasting(castingModel: CastingCallModel)
+
+        fun changeCastingStatus(castingModel: CastingCallModel,status:String)
     }
 }

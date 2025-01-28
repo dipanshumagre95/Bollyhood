@@ -37,7 +37,10 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
 
     lateinit var binding:FragmentAllCastingCallBinding
     private val viewModel: DataViewModel by viewModels()
-    private val castingModels: ArrayList<CastingCallModel> = arrayListOf()
+    private val activeCastingList: ArrayList<CastingCallModel> = arrayListOf()
+    private val closedCastingList: ArrayList<CastingCallModel> = arrayListOf()
+    private var isActive=true
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,9 +64,11 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
 
         viewModel.castingCallsLiveData.observe(requireActivity(), Observer {
             if (it.status.equals("1")) {
-                castingModels.clear()
-                castingModels.addAll(it.result)
-                setActiveAdapter(castingModels)
+                activeCastingList.clear()
+                activeCastingList.addAll(it.result.active)
+                closedCastingList.clear()
+                closedCastingList.addAll(it.result.inactive)
+                setView()
             }
         })
     }
@@ -131,17 +136,43 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
             }
 
             R.id.tvActive ->{
-                binding.tvActive.setBackgroundResource(R.drawable.rectangle_black_button)
-                binding.tvClose.setBackgroundResource(R.drawable.border_gray)
-                binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                isActive=true
+                setView()
             }
 
             R.id.tvClose ->{
-                binding.tvActive.setBackgroundResource(R.drawable.border_gray)
-                binding.tvClose.setBackgroundResource(R.drawable.rectangle_black_button)
-                binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                isActive=false
+                setView()
+            }
+        }
+    }
+
+    private fun setView() {
+        if (isActive){
+            binding.tvActive.setBackgroundResource(R.drawable.rectangle_black_button)
+            binding.tvClose.setBackgroundResource(R.drawable.border_gray)
+            binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            if (!activeCastingList.isNullOrEmpty()){
+                binding.noData.visibility=View.GONE
+                binding.rvAllCatingcall.visibility=View.VISIBLE
+                setActiveAdapter(activeCastingList)
+            }else{
+                binding.rvAllCatingcall.visibility=View.GONE
+                binding.noData.visibility=View.VISIBLE
+            }
+        }else{
+            binding.tvActive.setBackgroundResource(R.drawable.border_gray)
+            binding.tvClose.setBackgroundResource(R.drawable.rectangle_black_button)
+            binding.tvActive.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            binding.tvClose.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            if (!closedCastingList.isNullOrEmpty()){
+                binding.noData.visibility=View.GONE
+                binding.rvAllCatingcall.visibility=View.VISIBLE
+                setActiveAdapter(closedCastingList)
+            }else{
+                binding.rvAllCatingcall.visibility=View.GONE
+                binding.noData.visibility=View.VISIBLE
             }
         }
     }
@@ -157,7 +188,7 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
 
     override fun pinCasting(castingModel: CastingCallModel) {
         if (isNetworkAvailable(requireContext())) {
-            viewModel.makeCastingPin(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id)
+            viewModel.makeCastingPin(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id,"")
         } else {
             Toast.makeText(
                 requireContext(),
@@ -177,6 +208,18 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
                 putExtra(StaticData.edit, "edit")
             }
             startActivity(intent)
+        }
+    }
+
+    override fun changeCastingStatus(castingModel: CastingCallModel,status:String) {
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.makeCastingPin(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id,status)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

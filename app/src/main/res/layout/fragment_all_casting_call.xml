@@ -222,7 +222,7 @@
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvNoChatHistory"
+                android:id="@+id/noData"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"

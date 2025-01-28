@@ -108,9 +108,16 @@ class CastingCallFragment : Fragment(),OnClickListener {
 
         viewModel.castingCallsLiveData.observe(requireActivity(), Observer {
             if (it.status.equals("1")) {
-                castingModels.clear()
-                castingModels.addAll(it.result)
-                setData(castingModels)
+                if (!it.result.active.isNullOrEmpty()) {
+                    binding.noData.visibility=View.GONE
+                    binding.rvCastingCalls.visibility=View.VISIBLE
+                    castingModels.clear()
+                    castingModels.addAll(it.result.active)
+                    setData(castingModels)
+                }else{
+                    binding.noData.visibility=View.VISIBLE
+                    binding.rvCastingCalls.visibility=View.GONE
+                }
             }
         })
 

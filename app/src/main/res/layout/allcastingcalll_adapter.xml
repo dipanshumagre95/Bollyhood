@@ -129,6 +129,7 @@
                         android:layout_width="@dimen/_8sdp"
                         android:layout_height="@dimen/_8sdp"
                         android:layout_gravity="center"
+                        android:visibility="gone"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:src="@drawable/ellipse_385"/>
                 </LinearLayout>
