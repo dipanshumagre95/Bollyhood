@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.AllcastingcalllAdapterBinding
@@ -123,7 +122,7 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         }
 
         deleteOption.setOnClickListener {
-            Toast.makeText(context, "Delete clicked for item $position", Toast.LENGTH_SHORT).show()
+            onitemclick.deleteCastingCall(castingModel)
             popupWindow.dismiss()
         }
 
@@ -141,5 +140,7 @@ class AllCastingCallListAdapter(val context: Context,val onitemclick:AllCastingC
         fun editCasting(castingModel: CastingCallModel)
 
         fun changeCastingStatus(castingModel: CastingCallModel,status:String)
+
+        fun deleteCastingCall(castingModel: CastingCallModel)
     }
 }

@@ -222,4 +222,16 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
             ).show()
         }
     }
+
+    override fun deleteCastingCall(castingModel: CastingCallModel) {
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.deleteCastingCall(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 }

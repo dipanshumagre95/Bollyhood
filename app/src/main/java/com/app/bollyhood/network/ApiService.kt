@@ -386,4 +386,11 @@ interface ApiService {
         @Part company_logo: MultipartBody.Part?,
     ): Response<SuccessResponse>
 
+    @FormUrlEncoded
+    @POST("casting_delete.php")
+    suspend fun deleteCastingCall(
+        @Field("uid") uid: String,
+        @Field("id") id: String
+    ): Response<CastingCallResponse>
+
 }

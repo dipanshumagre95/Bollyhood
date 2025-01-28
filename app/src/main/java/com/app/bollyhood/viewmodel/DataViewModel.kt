@@ -1208,6 +1208,29 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             }
         }
     }
+
+
+    fun deleteCastingCall(uid: String, castingId: String) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.deleteCastingCall(uid, castingId)
+                if (response.isSuccessful && response.body() != null) {
+                    castingCallsLiveData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
+            }
+        }
+    }
 }
 
 

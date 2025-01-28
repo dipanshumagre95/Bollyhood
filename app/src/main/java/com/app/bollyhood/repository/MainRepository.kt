@@ -380,4 +380,9 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         is_verify_casting,
         company_logo)
 
+    suspend fun deleteCastingCall(uid: String, castingId: String) =
+        apiService.deleteCastingCall(
+            uid, castingId
+        )
+
 }
