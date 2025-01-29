@@ -2,10 +2,20 @@ package com.app.bollyhood.util
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
+import com.app.bollyhood.model.Folder
 import com.app.bollyhood.model.WorkLinkProfileData
 
 object DialogsUtils {
@@ -27,7 +37,6 @@ object DialogsUtils {
         val linkName3 = dialogView.findViewById<TextView>(R.id.edtAddWorkLink3)
         val addButton = dialogView.findViewById<TextView>(R.id.tvAddLinks)
 
-        // Pre-fill values if available
         if (workLinkList.isNotEmpty()) {
             workLinkList.forEachIndexed { index, worklink ->
                 when (index) {
@@ -93,4 +102,36 @@ object DialogsUtils {
         return youtubeRegex.matches(url)
     }
 
+
+    fun createFolderButton(context: Context, onAddFolder: (Folder) -> Unit) {
+
+        val dialog= Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.create_folder_dialog)
+
+        val createFolderButton = dialog.findViewById<RelativeLayout>(R.id.createFolderButton)
+        val addFolderView = dialog.findViewById<LinearLayout>(R.id.addFolderView)
+        val addButton = dialog.findViewById<TextView>(R.id.addButton)
+        val folderName = dialog.findViewById<EditText>(R.id.folderName)
+        val rvFolderList = dialog.findViewById<RecyclerView>(R.id.rvFolderList)
+
+        createFolderButton.setOnClickListener(View.OnClickListener {
+            addFolderView.visibility=View.VISIBLE
+        })
+
+        addButton.setOnClickListener(View.OnClickListener {
+            if (folderName.text.isNotEmpty()) {
+                onAddFolder(Folder("", folderName.text.toString().trim()))
+                dialog.dismiss()
+            }else{
+                Toast.makeText(context,"Enter Folder Name",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        dialog.show()
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.attributes?.windowAnimations=R.style.BottomSheetDialogTheme
+        dialog.window?.setGravity(Gravity.BOTTOM)
+    }
 }

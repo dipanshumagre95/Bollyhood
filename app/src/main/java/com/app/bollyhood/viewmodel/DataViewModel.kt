@@ -698,11 +698,11 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-    fun addRemoveBookMark(uid: String?, bookmark_uid: String?, bookmark_mode: String?) {
+    fun addRemoveBookMark(uid: String?, bookmark_uid: String?, bookmark_mode: String?,folder_id: String?,folder_name: String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val response = mainRepository.addRemoveBookMark(uid, bookmark_uid, bookmark_mode)
+                val response = mainRepository.addRemoveBookMark(uid, bookmark_uid, bookmark_mode,folder_id,folder_name)
                 if (response.isSuccessful && response.body() != null) {
                     addRemoveBookMarkLiveData.postValue(response.body())
                 } else {

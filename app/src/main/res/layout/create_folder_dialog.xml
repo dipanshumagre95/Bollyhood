@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/curve_rectangle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_2sdp">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_3sdp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/gray_bg_10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Collection's"
+            android:layout_below="@+id/view"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <RelativeLayout
+            android:id="@+id/createFolderButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvtext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:background="@drawable/background_with_blackborder">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvpostcastingcall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Folder"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/poppins_medium"
+                tools:ignore="TextSizeCheck"/>
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/plus__1_"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circle_transparent"
+                android:layout_toRightOf="@+id/tvpostcastingcall"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/addFolderView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/createFolderButton"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/folderName"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/field_bg"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Enter Folder Name"
+                android:inputType="text"
+                android:maxLength="20"
+                android:layout_gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/colorgrey"
+                android:textSize="@dimen/_10sdp"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/addButton"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:text="Add"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:background="@drawable/rectangle_app_background"
+                android:fontFamily="@font/poppins_medium"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFolderList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            android:layout_below="@+id/addFolderView"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_below="@+id/rvFolderList"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

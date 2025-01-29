@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.MainActivity
-import com.app.bollyhood.activity.SubscriptionPlanActivity
 import com.app.bollyhood.activity.YoutubeActivity
 import com.app.bollyhood.adapter.ImagesAdapter
 import com.app.bollyhood.adapter.WorkAdapter
@@ -39,6 +38,7 @@ import com.app.bollyhood.model.ExpertiseModel
 import com.app.bollyhood.model.PhotoModel
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.DialogsUtils.createFolderButton
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -673,7 +673,9 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
                 viewModel.addRemoveBookMark(
                     PrefManager(requireContext()).getvalue(StaticData.id),
                     expertiseModel?.id,
-                    "2"
+                    "2",
+                    "",
+                    ""
                 )
             } else {
                 Toast.makeText(
@@ -754,9 +756,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
             R.id.llbookmark ->{
                 if (isNetworkAvailable(requireContext())) {
                     if (singleCategoryModel?.is_bookmarked == 0) {
-                        viewModel.addRemoveBookMark(
-                            PrefManager(requireContext()).getvalue(StaticData.id), expertiseModel?.id, "1"
-                        )
+                        makeProfileBookMark()
                     } else {
                         removeBookMarkDialog()
                     }
@@ -797,6 +797,15 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
 
 
         dialogView.show()
+    }
+
+    private fun  makeProfileBookMark()
+    {
+        createFolderButton(requireContext()) { folder ->
+            viewModel.addRemoveBookMark(
+                PrefManager(requireContext()).getvalue(StaticData.id), singleCategoryModel?.id, "1",folder.folder_id,folder.folder_name
+            )
+        }
     }
 
 }

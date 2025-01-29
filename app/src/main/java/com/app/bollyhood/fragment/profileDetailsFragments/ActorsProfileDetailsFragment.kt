@@ -33,6 +33,7 @@ import com.app.bollyhood.fragment.AllActorsFragment
 import com.app.bollyhood.model.PhotoModel
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.DialogsUtils.createFolderButton
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -144,9 +145,7 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
             R.id.llbookmark ->{
                 if (isNetworkAvailable(requireContext())) {
                     if (singleCategoryModel?.is_bookmarked == 0) {
-                        viewModel.addRemoveBookMark(
-                            PrefManager(requireContext()).getvalue(StaticData.id), singleCategoryModel?.id, "1"
-                        )
+                        makeProfileBookMark()
                     } else {
                         removeBookMarkDialog()
                     }
@@ -180,7 +179,9 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
                 viewModel.addRemoveBookMark(
                     PrefManager(requireContext()).getvalue(StaticData.id),
                     singleCategoryModel?.id,
-                    "2"
+                    "2",
+                    "",
+                    ""
                 )
             } else {
                 Toast.makeText(
@@ -455,6 +456,15 @@ class ActorsProfileDetailsFragment : Fragment(),OnClickListener,ActorsProfileWor
         binding.adapter =
             ActorsProfileWorkLinkAda(requireContext(), worklinklist, this@ActorsProfileDetailsFragment)
         binding.rrworkLink.adapter = binding.adapter
+    }
+
+    private fun  makeProfileBookMark()
+    {
+        createFolderButton(requireContext()) { folder ->
+            viewModel.addRemoveBookMark(
+                PrefManager(requireContext()).getvalue(StaticData.id), singleCategoryModel?.id, "1",folder.folder_id,folder.folder_name
+            )
+        }
     }
 
     override fun onitemClick(pos: Int, work: WorkLinkProfileData) {

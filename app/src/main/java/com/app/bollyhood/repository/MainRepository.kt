@@ -260,8 +260,10 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
 
     suspend fun addRemoveBookMark(
         uid: String?, bookmark_uid: String?,
-        bookmark_mode: String?
-    ) = apiService.addRemoveBookMark(uid, bookmark_uid, bookmark_mode)
+        bookmark_mode: String?,
+        folder_id: String?,
+        folder_name: String?
+    ) = apiService.addRemoveBookMark(uid, bookmark_uid, bookmark_mode,folder_id,folder_name)
 
     suspend fun getBookMark(
         uid: String?

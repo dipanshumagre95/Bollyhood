@@ -242,7 +242,9 @@ interface ApiService {
     suspend fun addRemoveBookMark(
         @Field("uid") uid: String?,
         @Field("bookmark_uid") bookmark_uid: String?,
-        @Field("bookmark_mode") bookmark_mode: String?
+        @Field("bookmark_mode") bookmark_mode: String?,
+        @Field("folder_id") folder_id: String?,
+        @Field("folder_name") folder_name: String?
     ): Response<SuccessResponse>
 
     @FormUrlEncoded

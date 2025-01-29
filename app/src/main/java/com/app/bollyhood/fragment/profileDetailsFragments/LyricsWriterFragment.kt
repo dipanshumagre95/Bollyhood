@@ -33,6 +33,7 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.fragment.AllActorsFragment
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.DialogsUtils.createFolderButton
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -142,9 +143,7 @@ class LyricsWriterFragment : Fragment(), OnClickListener, ActorsProfileWorkLinkA
             R.id.llbookmark ->{
                 if (isNetworkAvailable(requireContext())) {
                     if (singleCategoryModel?.is_bookmarked == 0) {
-                        viewModel.addRemoveBookMark(
-                            PrefManager(requireContext()).getvalue(StaticData.id), singleCategoryModel?.id, "1"
-                        )
+                        makeProfileBookMark()
                     } else {
                         removeBookMarkDialog()
                     }
@@ -178,7 +177,9 @@ class LyricsWriterFragment : Fragment(), OnClickListener, ActorsProfileWorkLinkA
                 viewModel.addRemoveBookMark(
                     PrefManager(requireContext()).getvalue(StaticData.id),
                     singleCategoryModel?.id,
-                    "2"
+                    "2",
+                    "",
+                    ""
                 )
             } else {
                 Toast.makeText(
@@ -343,5 +344,14 @@ class LyricsWriterFragment : Fragment(), OnClickListener, ActorsProfileWorkLinkA
         startActivity(
             Intent(requireContext(), YoutubeActivity::class.java).putExtra("videoId", work.worklink_url)
         )
+    }
+
+    private fun makeProfileBookMark()
+    {
+        createFolderButton(requireContext()) { folder ->
+            viewModel.addRemoveBookMark(
+                PrefManager(requireContext()).getvalue(StaticData.id), singleCategoryModel?.id, "1",folder.folder_id,folder.folder_name
+            )
+        }
     }
 }
