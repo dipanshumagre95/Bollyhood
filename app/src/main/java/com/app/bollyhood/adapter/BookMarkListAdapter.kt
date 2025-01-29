@@ -5,21 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.bollyhood.databinding.AdpBookBinding
-import com.app.bollyhood.databinding.AdpBookmarkBinding
+import com.app.bollyhood.databinding.AdpBookmarkListBinding
 import com.app.bollyhood.model.BookingModel
 import com.bumptech.glide.Glide
 
-class BookAdapter(val requireContext: Context, val bookList: ArrayList<BookingModel>,
-    val onclick:onItemClick) :
-    RecyclerView.Adapter<BookAdapter.MyViewHolder>() {
+class BookMarkListAdapter(val requireContext: Context, val bookList: ArrayList<BookingModel>,
+                          val onclick:onItemClick) :
+    RecyclerView.Adapter<BookMarkListAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            AdpBookBinding.inflate(
+            AdpBookmarkListBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
-
     }
 
     override fun getItemCount(): Int {
@@ -47,7 +45,7 @@ class BookAdapter(val requireContext: Context, val bookList: ArrayList<BookingMo
 
     }
 
-    class MyViewHolder(val binding: AdpBookBinding) : RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(val binding: AdpBookmarkListBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface onItemClick{
         fun onClick(position: Int,bookingModel: BookingModel)

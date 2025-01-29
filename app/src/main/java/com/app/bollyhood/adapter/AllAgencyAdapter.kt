@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.AllAgencyActivity
 import com.app.bollyhood.databinding.AdpAgencyBinding
-import com.app.bollyhood.databinding.AdpBookBinding
 import com.app.bollyhood.model.castinglist.CastingDataModel
 import com.bumptech.glide.Glide
 

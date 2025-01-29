@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.AdpAgencyUserBinding
-import com.app.bollyhood.databinding.AdpBookBinding
 import com.app.bollyhood.model.castinglist.CastingUserData
 import com.bumptech.glide.Glide
 
