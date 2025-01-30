@@ -1048,7 +1048,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
                     binding.acCastingFeesPplicable.setText(it.casting_fee_type)
                 }
 
-                if (it.is_verify_casting.equals("1")){
+                if (!it.is_verify_casting.isNullOrEmpty()&&it.is_verify_casting.equals("1")){
                     setVerifiedCasting()
                     is_verify_profile="1"
                 }else{
