@@ -188,7 +188,7 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
 
     override fun pinCasting(castingModel: CastingCallModel) {
         if (isNetworkAvailable(requireContext())) {
-            viewModel.makeCastingPin(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id,"")
+            viewModel.makeCastingPin(PrefManager(requireContext()).getvalue(StaticData.id).toString(),castingModel.id,castingModel.status)
         } else {
             Toast.makeText(
                 requireContext(),
