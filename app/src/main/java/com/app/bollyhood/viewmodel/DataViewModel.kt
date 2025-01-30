@@ -26,6 +26,7 @@ import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import com.app.bollyhood.repository.MainRepository
 import com.app.bollyhood.util.StaticData
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
@@ -64,20 +65,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var cmsLiveData = MutableLiveData<CMSResponse>()
     var subCategoryLiveData = MutableLiveData<SubCategoryResponse>()
     var castingCallsLiveData = MutableLiveData<CastingCallResponse>()
-
     var castingBookMarkCallsLiveData = MutableLiveData<CastingCallResponse>()
-
     var castingCallsApplyLiveData = MutableLiveData<SuccessResponse>()
     var agencyLiveData = MutableLiveData<CastingListResponse>()
-
     var sendMessageLiveData = MutableLiveData<SendMessageResponse>()
-
     var sendPaymentLiveData = MutableLiveData<SuccessResponse>()
-
     var chatHistoryLiveData = MutableLiveData<ChatResponse>()
-
     var castingBookmark = MutableLiveData<SuccessResponse>()
-
     var actorsList = MutableLiveData<ActorsresponseModel>()
 
     fun splashTime() {
@@ -1217,6 +1211,30 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val response = mainRepository.deleteCastingCall(uid, castingId)
                 if (response.isSuccessful && response.body() != null) {
                     castingCallsLiveData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            } finally {
+                isLoading.postValue(false)
+            }
+        }
+    }
+
+    fun getUserDetails(uid: String) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.getUserDetails(uid)
+                if (response.isSuccessful && response.body() != null) {
+                    if (!response.body()?.result.isNullOrEmpty()) {
+                        Gson().toJson(response.body()?.result)
+                    }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()

@@ -16,6 +16,7 @@ import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
+import com.app.bollyhood.model.UserDetailsResponse
 import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import okhttp3.MultipartBody
@@ -33,6 +34,7 @@ interface ApiService {
 
     @GET("category.php")
     suspend fun getCategory(): Response<CategoryResponse>
+
     @GET("category_type.php")
     suspend fun getSignupCategory(@Query("category_type") category_type: String): Response<CategoryResponse>
 
@@ -394,5 +396,8 @@ interface ApiService {
         @Field("uid") uid: String,
         @Field("id") id: String
     ): Response<CastingCallResponse>
+
+    @GET("user_details.php")
+    suspend fun getUserDetails(@Query("uid") uid: String): Response<UserDetailsResponse>
 
 }

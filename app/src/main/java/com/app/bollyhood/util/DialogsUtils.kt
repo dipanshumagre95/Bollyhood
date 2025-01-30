@@ -19,6 +19,8 @@ import com.app.bollyhood.R
 import com.app.bollyhood.adapter.FolderAdapter
 import com.app.bollyhood.model.Folder
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.google.common.reflect.TypeToken
+import com.google.gson.Gson
 
 object DialogsUtils {
 
@@ -106,7 +108,7 @@ object DialogsUtils {
 
 
     fun createFolderButton(context: Context,
-                           onAddFolder: (Folder) -> Unit) {
+                           onAddFolder: (Folder) -> Unit){
 
         val dialog= Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -119,7 +121,14 @@ object DialogsUtils {
         val rvFolderList = dialog.findViewById<RecyclerView>(R.id.rvFolderList)
         val yourListtext = dialog.findViewById<TextView>(R.id.tvtext2)
 
-        var folderList=listOf(Folder("id","Dipanshu"),Folder("id","Dipanshu"))
+        val json = PrefManager(context).getvalue(StaticData.folderData)
+        val folderList: ArrayList<Folder> = if (json != null) {
+            val type = object : TypeToken<ArrayList<Folder>>() {}.type
+            Gson().fromJson(json, type)
+        } else {
+            ArrayList()
+        }
+
         if (!folderList.isNullOrEmpty()){
             rvFolderList.visibility=View.VISIBLE
             yourListtext.visibility=View.VISIBLE

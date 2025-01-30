@@ -25,6 +25,7 @@ class StaticData {
         const val currency="INR"
         const val amount="49900"
         const val edit=""
+        const val folderData="FOLDER_DATA"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"
