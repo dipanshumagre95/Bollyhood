@@ -25,6 +25,7 @@ import com.app.bollyhood.model.SuccessResponse
 import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import com.app.bollyhood.repository.MainRepository
+import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -699,6 +700,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val response = mainRepository.addRemoveBookMark(uid, bookmark_uid, bookmark_mode,folder_id,folder_name)
                 if (response.isSuccessful && response.body() != null) {
                     addRemoveBookMarkLiveData.postValue(response.body())
+                    getUserDetails(uid)
                 } else {
                     val errorMessage = "Failed to add/remove bookmark: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1226,14 +1228,14 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-    fun getUserDetails(uid: String) {
+    fun getUserDetails(uid: String?) {
         viewModelScope.launch {
-            isLoading.postValue(true)
             try {
-                val response = mainRepository.getUserDetails(uid)
+                val response = mainRepository.getUserDetails(uid!!)
                 if (response.isSuccessful && response.body() != null) {
                     if (!response.body()?.result.isNullOrEmpty()) {
-                        Gson().toJson(response.body()?.result)
+                        val folderString = Gson().toJson(response.body()?.result)
+                        PrefManager(Mcontext).setvalue(StaticData.folderData, folderString)
                     }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
@@ -1244,8 +1246,6 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val errorMessage = "Something went wrong. Please try again."
                 Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
                 Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
-                isLoading.postValue(false)
             }
         }
     }

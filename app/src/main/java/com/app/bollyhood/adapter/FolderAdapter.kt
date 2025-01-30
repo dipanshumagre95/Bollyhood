@@ -1,6 +1,7 @@
 package com.app.bollyhood.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.FolderAdapterBinding
@@ -27,6 +28,10 @@ class FolderAdapter(
         if (!folder.folder_name.isNullOrEmpty()){
             holder.binding.folderName.text=folder.folder_name
         }
+
+        holder.binding.llmain.setOnClickListener(View.OnClickListener {
+            listener.onFolderClick(folder)
+        })
 
     }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
+        android:id="@+id/llmain"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
         android:elevation="@dimen/_3sdp"

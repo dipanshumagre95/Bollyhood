@@ -109,7 +109,6 @@ object DialogsUtils {
 
     fun createFolderButton(context: Context,
                            onAddFolder: (Folder) -> Unit){
-
         val dialog= Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.create_folder_dialog)
@@ -121,42 +120,58 @@ object DialogsUtils {
         val rvFolderList = dialog.findViewById<RecyclerView>(R.id.rvFolderList)
         val yourListtext = dialog.findViewById<TextView>(R.id.tvtext2)
 
-        val json = PrefManager(context).getvalue(StaticData.folderData)
-        val folderList: ArrayList<Folder> = if (json != null) {
-            val type = object : TypeToken<ArrayList<Folder>>() {}.type
-            Gson().fromJson(json, type)
-        } else {
-            ArrayList()
-        }
+        try {
+            val json = PrefManager(context).getvalue(StaticData.folderData)
+            val folderList: ArrayList<Folder> = if (json != null) {
+                val type = object : TypeToken<ArrayList<Folder>>() {}.type
+                Gson().fromJson(json, type)
+            } else {
+                ArrayList()
+            }
 
-        if (!folderList.isNullOrEmpty()){
-            rvFolderList.visibility=View.VISIBLE
-            yourListtext.visibility=View.VISIBLE
-            rvFolderList.layoutManager = LinearLayoutManager(context)
-            val adapter = FolderAdapter(folderList, object : FolderAdapter.OnFolderClickListener {
-                override fun onFolderClick(folder: Folder) {
-                    onAddFolder(folder)
+            if (!folderList.isNullOrEmpty()){
+                rvFolderList.visibility= View.VISIBLE
+                yourListtext.visibility= View.VISIBLE
+                rvFolderList.layoutManager = LinearLayoutManager(context)
+                val adapter = FolderAdapter(folderList, object : FolderAdapter.OnFolderClickListener {
+                    override fun onFolderClick(folder: Folder) {
+                        onAddFolder(folder)
+                        dialog.dismiss()
+                    }
+                })
+                rvFolderList.adapter = adapter
+            }else{
+                rvFolderList.visibility= View.GONE
+                yourListtext.visibility= View.GONE
+            }
+
+            createFolderButton.setOnClickListener(View.OnClickListener {
+                addFolderView.visibility= View.VISIBLE
+            })
+
+            addButton.setOnClickListener {
+                val folderNameText = folderName.text.toString().trim()
+
+                if (folderNameText.isEmpty()) {
+                    Toast.makeText(context, "Enter Folder Name", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val isFolderPresent = folderList.any { folder ->
+                    folder.folder_name == folderNameText
+                }
+
+                if (isFolderPresent) {
+                    Toast.makeText(context, "Folder Already Exists", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Add the folder if it doesn't exist
+                    onAddFolder(Folder("", folderNameText, "", ""))
                     dialog.dismiss()
                 }
-            })
-            rvFolderList.adapter = adapter
-        }else{
-            rvFolderList.visibility=View.GONE
-            yourListtext.visibility=View.GONE
-        }
-
-        createFolderButton.setOnClickListener(View.OnClickListener {
-            addFolderView.visibility=View.VISIBLE
-        })
-
-        addButton.setOnClickListener(View.OnClickListener {
-            if (folderName.text.isNotEmpty()) {
-                onAddFolder(Folder("", folderName.text.toString().trim()))
-                dialog.dismiss()
-            }else{
-                Toast.makeText(context,"Enter Folder Name",Toast.LENGTH_SHORT).show()
             }
-        })
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
 
         dialog.show()
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
