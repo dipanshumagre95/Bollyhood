@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:elevation="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/whitebackground">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/_10sdp"
+            android:src="@drawable/folder_icon"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/folderName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/image"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="@dimen/_5sdp"/>
+
+    </RelativeLayout>
+</layout>

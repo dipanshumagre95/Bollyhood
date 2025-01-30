@@ -115,13 +115,28 @@
 
         </LinearLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvtext2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Folder's"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/addFolderView"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFolderList"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_120sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:visibility="gone"
-            android:layout_below="@+id/addFolderView"
+            android:layout_below="@+id/tvtext2"
             />
 
         <View

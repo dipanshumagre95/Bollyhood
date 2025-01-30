@@ -13,8 +13,10 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
+import com.app.bollyhood.adapter.FolderAdapter
 import com.app.bollyhood.model.Folder
 import com.app.bollyhood.model.WorkLinkProfileData
 
@@ -103,7 +105,8 @@ object DialogsUtils {
     }
 
 
-    fun createFolderButton(context: Context, onAddFolder: (Folder) -> Unit) {
+    fun createFolderButton(context: Context,
+                           onAddFolder: (Folder) -> Unit) {
 
         val dialog= Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -114,6 +117,24 @@ object DialogsUtils {
         val addButton = dialog.findViewById<TextView>(R.id.addButton)
         val folderName = dialog.findViewById<EditText>(R.id.folderName)
         val rvFolderList = dialog.findViewById<RecyclerView>(R.id.rvFolderList)
+        val yourListtext = dialog.findViewById<TextView>(R.id.tvtext2)
+
+        var folderList=listOf(Folder("id","Dipanshu"),Folder("id","Dipanshu"))
+        if (!folderList.isNullOrEmpty()){
+            rvFolderList.visibility=View.VISIBLE
+            yourListtext.visibility=View.VISIBLE
+            rvFolderList.layoutManager = LinearLayoutManager(context)
+            val adapter = FolderAdapter(folderList, object : FolderAdapter.OnFolderClickListener {
+                override fun onFolderClick(folder: Folder) {
+                    onAddFolder(folder)
+                    dialog.dismiss()
+                }
+            })
+            rvFolderList.adapter = adapter
+        }else{
+            rvFolderList.visibility=View.GONE
+            yourListtext.visibility=View.GONE
+        }
 
         createFolderButton.setOnClickListener(View.OnClickListener {
             addFolderView.visibility=View.VISIBLE
