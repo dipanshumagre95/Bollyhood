@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
+        android:id="@+id/llmain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/_8sdp"
@@ -29,7 +30,6 @@
                     android:id="@+id/ivImage"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
-                    android:src="@drawable/singer"
                     android:background="@drawable/circle_transparent"
                     />
 
@@ -69,9 +69,9 @@
                         android:fontFamily="@font/poppins_regular"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="Sharvan patil"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:id="@+id/ivBookMark"
@@ -98,7 +98,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="#80797C7B"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="2 min ago"
+                    android:text=""
                     tools:ignore="TextSizeCheck"/>
 
             </RelativeLayout>

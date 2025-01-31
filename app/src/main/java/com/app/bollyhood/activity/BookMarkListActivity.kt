@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -15,10 +16,12 @@ import com.app.bollyhood.databinding.ActivityBookMarkListBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BookMarkModel
 import com.app.bollyhood.model.Folder
+import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +31,7 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
     private val viewModel: DataViewModel by viewModels()
     private val bookMarkList: ArrayList<BookMarkModel> = arrayListOf()
     lateinit var folder:Folder
+    lateinit var categorie_name:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +97,22 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
                 binding.rvbookmarklist.visibility = View.GONE
             }
         })
+
+        viewModel.profileLiveData.observe(this, Observer {
+            if (it.status == "1") {
+                setProfileDeta(it.result)
+            } else {
+                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun setProfileDeta(profileModel: ProfileModel) {
+        startActivity(
+            Intent(this, BookmarkProfilesActivity::class.java).
+            putExtra(StaticData.userModel, Gson().toJson(profileModel)).
+            putExtra(StaticData.cate_name,categorie_name)
+        )
     }
 
     private fun setAdapter(bookMarkList: ArrayList<BookMarkModel>) {
@@ -105,8 +125,9 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
         }
     }
 
-    override fun onClick(position: Int, bookingModel: BookMarkModel) {
-
+    override fun onClick(bookmarkModel: BookMarkModel) {
+        categorie_name=bookmarkModel.category_name
+        viewModel.getProfile(bookmarkModel.id)
     }
 
     override fun onClick(view: View?) {
