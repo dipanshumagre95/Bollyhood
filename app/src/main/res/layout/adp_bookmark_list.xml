@@ -38,6 +38,7 @@
                     android:layout_width="@dimen/_10sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:layout_alignParentBottom="true"
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"

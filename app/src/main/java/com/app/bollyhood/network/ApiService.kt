@@ -252,7 +252,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("all_bookmark.php")
     suspend fun myBookMark(
-        @Field("uid") uid: String?
+        @Field("uid") uid: String?,
+        @Field("folder_id") folder_id: String?
     ): Response<BookMarkResponse>
 
 

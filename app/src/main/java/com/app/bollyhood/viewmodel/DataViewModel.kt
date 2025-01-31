@@ -717,11 +717,11 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     }
 
 
-    fun myBookMark(uid: String?) {
+    fun myBookMark(uid: String?,folder_id:String?) {
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val response = mainRepository.getBookMark(uid)
+                val response = mainRepository.getBookMark(uid,folder_id)
                 if (response.isSuccessful && response.body() != null) {
                     bookMarkLiveData.postValue(response.body())
                 } else {

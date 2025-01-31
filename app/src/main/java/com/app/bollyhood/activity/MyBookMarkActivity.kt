@@ -1,22 +1,23 @@
 package com.app.bollyhood.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.adapter.BookMarkAdapter
 import com.app.bollyhood.databinding.ActivityMyBookMarkBinding
-import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BookMarkModel
+import com.app.bollyhood.model.Folder
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.google.common.reflect.TypeToken
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,75 +35,54 @@ class MyBookMarkActivity : AppCompatActivity(), BookMarkAdapter.onItemClick,OnCl
         mContext = this
         initUI()
         addListner()
-        addObserevs()
     }
 
     private fun initUI() {
-    }
 
+        try {
+            val json = PrefManager(this).getvalue(StaticData.folderData)
+            val folderList: ArrayList<Folder> = if (json != null) {
+                val type = object : TypeToken<ArrayList<Folder>>() {}.type
+                Gson().fromJson(json, type)
+            } else {
+                ArrayList()
+            }
 
-    override fun onResume() {
-        super.onResume()
-        if (isNetworkAvailable(mContext)) {
-            viewModel.myBookMark(PrefManager(mContext).getvalue(StaticData.id))
-        } else {
-            Toast.makeText(
-                mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-            ).show()
+            if (!folderList.isNullOrEmpty()) {
+                binding.rvBookMark.visibility = View.VISIBLE
+                binding.NoFavourites.visibility = View.GONE
+                setAdapter(folderList)
+            } else {
+                binding.rvBookMark.visibility = View.GONE
+                binding.NoFavourites.visibility = View.VISIBLE
+            }
+        }catch (e:Exception) {
+            e.printStackTrace()
         }
-
     }
 
     private fun addListner() {
         binding.ivBack.setOnClickListener(this)
     }
 
-    private fun addObserevs() {
-        viewModel.isLoading.observe(this, Observer {
-            if (it) {
-                binding.pbLoadData.visibility = View.VISIBLE
-            } else {
-                binding.pbLoadData.visibility = View.GONE
-            }
-        })
-
-        viewModel.bookMarkLiveData.observe(this, Observer {
-            if (it.status == "1") {
-                bookMarkList.clear()
-                bookMarkList.addAll(it.result)
-                if (bookMarkList.size > 0) {
-                    binding.tvNoFavourites.visibility = View.GONE
-                    binding.rvBookMark.visibility = View.VISIBLE
-                    setAdapter(bookMarkList)
-                } else {
-                    binding.tvNoFavourites.visibility = View.VISIBLE
-                    binding.rvBookMark.visibility = View.GONE
-                }
-            } else {
-                binding.tvNoFavourites.visibility = View.VISIBLE
-                binding.rvBookMark.visibility = View.GONE
-            }
-        })
-    }
-
-    private fun setAdapter(bookMarkList: ArrayList<BookMarkModel>) {
+    private fun setAdapter(folderList: ArrayList<Folder>) {
         binding.apply {
             rvBookMark.layoutManager = GridLayoutManager(mContext, 2)
             rvBookMark.setHasFixedSize(true)
-            adapter = BookMarkAdapter(mContext, bookMarkList, this@MyBookMarkActivity)
+            adapter = BookMarkAdapter(mContext, folderList, this@MyBookMarkActivity)
             rvBookMark.adapter = adapter
             adapter?.notifyDataSetChanged()
         }
     }
 
 
-    override fun onClick(position: Int, model: BookMarkModel) {
-        /*startActivity(
-            Intent(mContext, ProfileDetailActivity::class.java).putExtra(
-                StaticData.userModel,
-                Gson().toJson(model)
-            )
-        )*/
+    override fun onClick(model: Folder) {
+        startActivity(
+            Intent(mContext, BookMarkListActivity::class.java).putExtra(
+                "id",
+                model.folder_id
+            ).putExtra("name",model.folder_name)
+        )
     }
 
     override fun onClick(view: View?) {

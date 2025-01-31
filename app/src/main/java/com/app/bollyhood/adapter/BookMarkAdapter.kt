@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.activity.MyBookMarkActivity
 import com.app.bollyhood.databinding.AdpBookmarkBinding
-import com.app.bollyhood.model.BookMarkModel
+import com.app.bollyhood.model.Folder
 
 class BookMarkAdapter(
     val mContext: MyBookMarkActivity,
-    val bookMarkList: ArrayList<BookMarkModel>,
+    val folderList: ArrayList<Folder>,
     val onclick: onItemClick
 ) : RecyclerView.Adapter<BookMarkAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(
@@ -25,16 +25,20 @@ class BookMarkAdapter(
     }
 
     override fun getItemCount(): Int {
-        return bookMarkList.size
+        return folderList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val model = bookMarkList[position]
+        val model = folderList[position]
+
+        if (!model.folder_name.isNullOrEmpty()) {
+            holder.binding.folderName.text = model.folder_name
+        }
     }
 
     class MyViewHolder(val binding: AdpBookmarkBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface onItemClick {
-        fun onClick(position: Int, model: BookMarkModel)
+        fun onClick(model:Folder)
     }
 }
