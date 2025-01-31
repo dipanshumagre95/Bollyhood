@@ -26,6 +26,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
+import com.app.bollyhood.activity.BookmarkProfilesActivity
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.YoutubeActivity
 import com.app.bollyhood.adapter.ActorsProfileWorkLinkAda
@@ -119,17 +120,22 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
     }
 
     private fun initUi() {
-        (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
-
         val bundle = arguments
         if (bundle!=null&&bundle?.getString(StaticData.previousFragment)=="AllActosFragment") {
-            singleCategoryModel = Gson().fromJson(
-                bundle.getString(StaticData.userModel),
-                SingleCategoryModel::class.java
-            )
-            previousFragment = bundle.getString(StaticData.previousFragment).toString()
-            setProfile(singleCategoryModel)
+            (requireActivity() as MainActivity).binding.llBottom.setBackgroundResource(R.drawable.rectangle_curve)
+            getDataFromJson(bundle)
+        }else if (bundle!=null&&bundle?.getString(StaticData.previousFragment)=="BookMark"){
+            getDataFromJson(bundle)
         }
+    }
+
+    private fun getDataFromJson(bundle: Bundle) {
+        singleCategoryModel = Gson().fromJson(
+            bundle.getString(StaticData.userModel),
+            SingleCategoryModel::class.java
+        )
+        previousFragment = bundle.getString(StaticData.previousFragment).toString()
+        setProfile(singleCategoryModel)
     }
 
     override fun onClick(item: View?) {
@@ -138,6 +144,8 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
             R.id.llBack ->{
                 if (previousFragment.equals("AllActosFragment")){
                     (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
+                }else if (previousFragment.equals("BookMark")){
+                    (requireActivity() as BookmarkProfilesActivity).closeActivity()
                 }else {
                     (requireActivity() as MainActivity).setHomeColor()
                 }
@@ -257,10 +265,14 @@ class DancerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileWor
 
             is_bookmark = singleCategoryModel.is_bookmarked
 
-            if (singleCategoryModel.is_bookmarked == 1) {
-                ivBookMark.setBackgroundResource(R.drawable.ic_addedbookmark)
-            } else {
-                ivBookMark.setBackgroundResource(R.drawable.ic_bookmark)
+            if (!previousFragment.equals("BookMark")) {
+                if (singleCategoryModel.is_bookmarked == 1) {
+                    ivBookMark.setBackgroundResource(R.drawable.ic_addedbookmark)
+                } else {
+                    ivBookMark.setBackgroundResource(R.drawable.ic_bookmark)
+                }
+            }else{
+                llbookmark.visibility=View.GONE
             }
 
             if (!singleCategoryModel.videos_url.isNullOrEmpty()) {

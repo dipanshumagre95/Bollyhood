@@ -49,78 +49,27 @@ class BookmarkProfilesActivity : AppCompatActivity() {
 
     private fun setProfileUi(model:ProfileModel) {
         if (model!=null){
-            when(categorie_name){
-                Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString(),Categorie.MUSICLABEL.toString(),
-                Categorie.LOCATIONMANAGER.toString()->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val companyProfileFragment = CompanyProfileFragment()
-                    companyProfileFragment.arguments = bundle
-                    loadFragment(companyProfileFragment)
-                }
-
-                Categorie.ACTOR.toString() ->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val actorsProfileDetailsFragment = ActorsProfileDetailsFragment()
-                    actorsProfileDetailsFragment.arguments = bundle
-                    loadFragment(actorsProfileDetailsFragment)
-                }
-
-                Categorie.SINGER.toString() ->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val singerProfileDetailFragment = SingerProfileDetailsFragment()
-                    singerProfileDetailFragment.arguments = bundle
-                    loadFragment(singerProfileDetailFragment)
-                }
-
-                Categorie.DJ.toString() ->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val djProfileDetailFragment = DjProfileDetailFragment()
-                    djProfileDetailFragment.arguments = bundle
-                    loadFragment(djProfileDetailFragment)
-                }
-
-                Categorie.DANCER.toString() ->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val dancerProfileDetailFragment = DancerProfileDetailFragment()
-                    dancerProfileDetailFragment.arguments = bundle
-                    loadFragment(dancerProfileDetailFragment)
-                }
-
-                Categorie.INFLUENCER.toString() ->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val influencerProfileDetailFragment = InfluencerProfileDetailFragment()
-                    influencerProfileDetailFragment.arguments = bundle
-                    loadFragment(influencerProfileDetailFragment)
-                }
-
-                else->{
-                    val bundle = Bundle()
-                    bundle.putString(StaticData.userModel, Gson().toJson(model))
-                    bundle.putString(StaticData.previousFragment,"BookMark")
-
-                    val profileDetailFragment = ProfileDetailFragment()
-                    profileDetailFragment.arguments = bundle
-                    loadFragment(profileDetailFragment)
-                }
+            val bundle = Bundle().apply {
+                putString(StaticData.userModel, Gson().toJson(model))
+                putString(StaticData.previousFragment, "BookMark")
             }
+
+            val fragment = when (categorie_name) {
+                Categorie.CAMERALIGHT.toString(),
+                Categorie.EVENTPLANNER.toString(),
+                Categorie.MUSICLABEL.toString(),
+                Categorie.LOCATIONMANAGER.toString() -> CompanyProfileFragment()
+                Categorie.ACTOR.toString() -> ActorsProfileDetailsFragment()
+                Categorie.SINGER.toString() -> SingerProfileDetailsFragment()
+                Categorie.DJ.toString() -> DjProfileDetailFragment()
+                Categorie.DANCER.toString() -> DancerProfileDetailFragment()
+                Categorie.INFLUENCER.toString() -> InfluencerProfileDetailFragment()
+
+                else -> ProfileDetailFragment()
+            }
+
+            fragment.arguments = bundle
+            loadFragment(fragment)
         }
     }
 
