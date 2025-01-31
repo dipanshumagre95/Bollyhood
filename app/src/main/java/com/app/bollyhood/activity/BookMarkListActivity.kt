@@ -18,13 +18,13 @@ import com.app.bollyhood.model.Folder
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick, OnClickListener{
 
     lateinit var binding: ActivityBookMarkListBinding
-    lateinit var mContext: MyBookMarkActivity
     private val viewModel: DataViewModel by viewModels()
     private val bookMarkList: ArrayList<BookMarkModel> = arrayListOf()
     lateinit var folder:Folder
@@ -40,17 +40,23 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
     }
 
     private fun initUI() {
+        if (PrefManager(this).getvalue(StaticData.image)?.isNotEmpty() == true) {
+            Glide.with(this).load(PrefManager(this).getvalue(StaticData.image))
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
+                .into(binding.cvProfile)
+        }
 
         if (intent.hasExtra("id"))
         {
             folder=Folder(intent.getStringExtra("id")!!,intent.getStringExtra("name")!!,"","")
         }
 
-        if (isNetworkAvailable(mContext)) {
-           viewModel.myBookMark(PrefManager(mContext).getvalue(StaticData.id),folder.folder_id)
+        if (isNetworkAvailable(this)) {
+           viewModel.myBookMark(PrefManager(this).getvalue(StaticData.id),folder.folder_id)
            } else {
               Toast.makeText(
-               mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
+               this, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
                ).show()
        }
     }
@@ -91,9 +97,9 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
 
     private fun setAdapter(bookMarkList: ArrayList<BookMarkModel>) {
         binding.apply {
-            rvbookmarklist.layoutManager = LinearLayoutManager(mContext)
+            rvbookmarklist.layoutManager = LinearLayoutManager(this@BookMarkListActivity)
             rvbookmarklist.setHasFixedSize(true)
-            adapter = BookMarkListAdapter(mContext, bookMarkList, this@BookMarkListActivity)
+            adapter = BookMarkListAdapter(this@BookMarkListActivity, bookMarkList, this@BookMarkListActivity)
             rvbookmarklist.adapter = adapter
             adapter?.notifyDataSetChanged()
         }

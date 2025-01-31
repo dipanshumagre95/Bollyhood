@@ -1,6 +1,7 @@
 package com.app.bollyhood.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.activity.MyBookMarkActivity
@@ -34,6 +35,10 @@ class BookMarkAdapter(
         if (!model.folder_name.isNullOrEmpty()) {
             holder.binding.folderName.text = model.folder_name
         }
+
+        holder.binding.llMain.setOnClickListener(View.OnClickListener {
+            onclick.onClick(model)
+        })
     }
 
     class MyViewHolder(val binding: AdpBookmarkBinding) : RecyclerView.ViewHolder(binding.root)

@@ -16,6 +16,7 @@ import com.app.bollyhood.model.Folder
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.bumptech.glide.Glide
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +39,13 @@ class MyBookMarkActivity : AppCompatActivity(), BookMarkAdapter.onItemClick,OnCl
     }
 
     private fun initUI() {
+
+        if (PrefManager(this).getvalue(StaticData.image)?.isNotEmpty() == true) {
+            Glide.with(this).load(PrefManager(this).getvalue(StaticData.image))
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
+                .into(binding.cvProfile)
+        }
 
         try {
             val json = PrefManager(this).getvalue(StaticData.folderData)

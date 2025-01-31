@@ -1233,7 +1233,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.getUserDetails(uid!!)
                 if (response.isSuccessful && response.body() != null) {
-                    if (!response.body()?.result.isNullOrEmpty()) {
+                    if (response.body()?.result!=null) {
                         val folderString = Gson().toJson(response.body()?.result)
                         PrefManager(Mcontext).setvalue(StaticData.folderData, folderString)
                     }
