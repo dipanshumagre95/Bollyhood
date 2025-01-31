@@ -211,6 +211,12 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
             videoView.visibility=View.GONE
         }
 
+        if (userModel.is_bookmarked == 1) {
+            llBookmark.text="Profile Already BookMark"
+        } else {
+            llBookmark.text="Bookmark this profile"
+        }
+
         tvName.setText(userModel.name+" Applied For Role")
         tvRequestText.setText("Accept Casting Request From ${userModel.name} ?")
 
@@ -246,11 +252,11 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
 
         llBookmark.setOnClickListener(OnClickListener {
             if (isNetworkAvailable(requireContext())) {
-                /*if (userModel?.is_bookmarked == 0) {
+                if (userModel?.is_bookmarked == 0) {
                     makeProfileBookMark(userModel.id)
                 } else {
                     removeBookMarkDialog(userModel.id)
-                }*/
+                }
             } else {
                 Toast.makeText(
                     requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
