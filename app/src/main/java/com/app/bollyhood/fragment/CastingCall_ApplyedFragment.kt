@@ -80,6 +80,20 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
             }
         })
+
+
+        viewModel.appliedUserList.observe(requireActivity(), Observer {
+            if (it.status == "1") {
+                if (!it.result.isNullOrEmpty()){
+                    setAdapter(it.result)
+                }else{
+                    binding.tvnoData.visibility=View.VISIBLE
+                    binding.rvcatingcallListed.visibility=View.GONE
+                }
+            } else {
+                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun addLitsner() {
@@ -105,8 +119,16 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                 bundle.getString(StaticData.userModel),
                 CastingCallModel::class.java
             )
-
             setData()
+            if (isNetworkAvailable(requireContext())) {
+                viewModel.getAppliedUserData(
+                    PrefManager(requireContext()).getvalue(StaticData.id),castingCallModel.id
+                )
+            } else {
+                Toast.makeText(
+                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -130,13 +152,6 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         if (castingCallModel.company_logo.isNotEmpty()) {
             Glide.with(requireContext()).load(castingCallModel.company_logo)
                 .into(binding.ivImage)
-        }
-
-        if (!castingCallModel.applyed_users.isNullOrEmpty()){
-            setAdapter(castingCallModel.applyed_users)
-        }else{
-            binding.tvnoData.visibility=View.VISIBLE
-            binding.rvcatingcallListed.visibility=View.GONE
         }
     }
 

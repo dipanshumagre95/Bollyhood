@@ -127,7 +127,7 @@
                     android:textSize="@dimen/_10sdp"
                     android:layout_below="@id/tvtime"
                     android:gravity="center"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:background="@drawable/red_dart"
                     android:textColor="@color/white"
                     android:layout_marginEnd="@dimen/_10sdp"

@@ -22,6 +22,7 @@ import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
+import com.app.bollyhood.model.UserAppliedData
 import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import com.app.bollyhood.repository.MainRepository
@@ -74,6 +75,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var chatHistoryLiveData = MutableLiveData<ChatResponse>()
     var castingBookmark = MutableLiveData<SuccessResponse>()
     var actorsList = MutableLiveData<ActorsresponseModel>()
+    var appliedUserList = MutableLiveData<UserAppliedData>()
 
     fun splashTime() {
 
@@ -1236,6 +1238,27 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     if (response.body()?.result!=null) {
                         val folderString = Gson().toJson(response.body()?.result)
                         PrefManager(Mcontext).setvalue(StaticData.folderData, folderString)
+                    }
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun getAppliedUserData(uid: String?,castingId: String) {
+        viewModelScope.launch {
+            try {
+                val response = mainRepository.getAppliedUserData(uid!!,castingId)
+                if (response.isSuccessful && response.body() != null) {
+                    if (response.body()?.result!=null) {
+                        appliedUserList.postValue(response.body())
                     }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"

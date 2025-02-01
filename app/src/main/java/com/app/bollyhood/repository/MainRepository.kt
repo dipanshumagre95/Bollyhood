@@ -393,4 +393,10 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
             uid
     )
 
+    suspend fun getAppliedUserData(uid: String,castingId: String) =
+        apiService.getAppliedUserData(
+            uid,
+            castingId
+        )
+
 }

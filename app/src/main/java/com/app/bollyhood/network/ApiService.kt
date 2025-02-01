@@ -16,6 +16,7 @@ import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
+import com.app.bollyhood.model.UserAppliedData
 import com.app.bollyhood.model.UserDetailsResponse
 import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
@@ -400,5 +401,8 @@ interface ApiService {
 
     @GET("user_details.php")
     suspend fun getUserDetails(@Query("uid") uid: String): Response<UserDetailsResponse>
+
+    @GET("casting_apply_users.php")
+    suspend fun getAppliedUserData(@Query("uid") uid: String,@Query("casting_id") casting_id: String?): Response<UserAppliedData>
 
 }

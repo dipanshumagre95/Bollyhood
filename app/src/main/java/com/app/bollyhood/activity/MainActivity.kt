@@ -6,13 +6,11 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -207,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             vProfile.visibility=View.GONE
         }
 
-        loadFragment(HomeFragment())
+         loadFragmentforHome(HomeFragment())
 
     }
 
@@ -236,7 +234,7 @@ class MainActivity : AppCompatActivity() {
             vProfile.visibility=View.GONE
         }
 
-        loadFragment(fragment)
+        loadFragmentforHome(fragment)
     }
 
     override fun onBackPressed() {
@@ -284,7 +282,7 @@ class MainActivity : AppCompatActivity() {
             tvProfile.setTextColor(ContextCompat.getColor(mContext, R.color.darkgrey))
             vProfile.visibility=View.GONE
         }
-        loadFragment(ChatFragment())
+        loadFragmentforHome(ChatFragment())
     }
 
     private fun setProfileColor() {
@@ -312,7 +310,7 @@ class MainActivity : AppCompatActivity() {
             vProfile.visibility=View.VISIBLE
         }
 
-        loadFragment(ProfileFragment())
+        loadFragmentforHome(ProfileFragment())
     }
 
     override fun onResume() {
@@ -324,6 +322,14 @@ class MainActivity : AppCompatActivity() {
         // load fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    fun loadFragmentforHome(fragment: Fragment)
+    {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
             .commit()
     }
 }
