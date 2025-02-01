@@ -5,7 +5,7 @@ class StaticData {
         const val RAZORPAY_API_KEY = "rzp_test_BXsStmq1yc7yro"
         const val BASE_URL = "https://www.spotlyapp.co/Admin/API/"
         const val fcmToken = "fcmToken"
-        const val SPALSH_TIME_OUT = 3000
+        const val SPALSH_TIME_OUT = 1000
         const val mobileNumber = "mobileNumber"
         const val isLogin = "isLogin"
         const val id = "id"
