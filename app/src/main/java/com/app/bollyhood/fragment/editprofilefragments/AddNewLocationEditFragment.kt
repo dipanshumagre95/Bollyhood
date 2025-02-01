@@ -23,6 +23,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -39,13 +41,7 @@ import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentAddNewLocationEditBinding
-import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.extensions.isvalidDescriptions
-import com.app.bollyhood.extensions.isvalidEmailAddress
-import com.app.bollyhood.extensions.isvalidName
-import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
-import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
@@ -53,11 +49,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -74,10 +65,9 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
     lateinit var mContext: Context
     private var isCamera = false
     private var isGallery = false
-    private var profilePath = ""
     private var category_Id: String = ""
-    private var workLinkList: ArrayList<WorkLinkProfileData> = arrayListOf()
-    private var showreelLinkList: ArrayList<VideoLink> = arrayListOf()
+    private var shiftTimeList: ArrayList<String> = arrayListOf()
+    private var depositList: ArrayList<String> = arrayListOf()
     private var imagesurl: ArrayList<String> = arrayListOf()
     private val imageResultLaunchers = mutableMapOf<Int, ActivityResultLauncher<Intent>>()
 
@@ -94,7 +84,9 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         initUI()
         addListner()
         addObserevs()
+        setShiftTimeData()
         setSpannableString()
+        setSecurityDepositData()
         return binding.root
     }
 
@@ -104,10 +96,10 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         binding.edtName.addTextChangedListener(this)
         binding.edtDescriptions.addTextChangedListener(this)
         binding.edtEmailAddress.addTextChangedListener(this)
-        binding.edtAchievements.addTextChangedListener(this)
-        binding.edtLanguages.addTextChangedListener(this)
-        binding.edtEvents.addTextChangedListener(this)
-        binding.edtGenre.addTextChangedListener(this)
+        binding.edtLocation.addTextChangedListener(this)
+        binding.edtAcCount.addTextChangedListener(this)
+        binding.edtAmount.addTextChangedListener(this)
+        binding.edtParkings.addTextChangedListener(this)
     }
 
     private fun addListner() {
@@ -121,6 +113,50 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             fifthimage.setOnClickListener(this@AddNewLocationEditFragment)
             siximage.setOnClickListener(this@AddNewLocationEditFragment)
         }
+
+        binding.acSecurityDeposit.setOnTouchListener { v, event ->
+            binding.acSecurityDeposit.showDropDown()
+            false
+        }
+
+        binding.acShiftstype.setOnTouchListener { v, event ->
+            binding.acShiftstype.showDropDown()
+            false
+        }
+    }
+
+    private fun setShiftTimeData() {
+        shiftTimeList.clear()
+        shiftTimeList.add("12Hr")
+        shiftTimeList.add("24Hr")
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(requireContext(), R.layout.dropdown, shiftTimeList)
+        binding.acShiftstype.threshold = 0
+        binding.acShiftstype.dropDownVerticalOffset = 0
+        binding.acShiftstype.setAdapter(arrayAdapter)
+
+        binding.acShiftstype.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                shiftTimeList[position]
+            }
+    }
+
+    private fun setSecurityDepositData() {
+        depositList.clear()
+        depositList.add("12Hr")
+        depositList.add("24Hr")
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(requireContext(), R.layout.dropdown, depositList)
+        binding.acSecurityDeposit.threshold = 0
+        binding.acSecurityDeposit.dropDownVerticalOffset = 0
+        binding.acSecurityDeposit.setAdapter(arrayAdapter)
+
+        binding.acSecurityDeposit.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                depositList[position]
+            }
     }
 
     override fun onClick(view: View?) {
@@ -174,7 +210,6 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             }
 
             R.id.tvUpdateProfile->{
-                updateDjProfile()
             }
         }
     }
@@ -200,20 +235,20 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     binding.llEmail.setHintEnabled(true)
                 }
 
-                binding.edtAchievements.getText().hashCode() ->{
-                    binding.llAchievements.setHintEnabled(true)
+                binding.edtLocation.getText().hashCode() ->{
+                    binding.llLocation.setHintEnabled(true)
                 }
 
-                binding.edtLanguages.getText().hashCode() ->{
-                    binding.llLanguages.setHintEnabled(true)
+                binding.edtAcCount.getText().hashCode() ->{
+                    binding.llAcCount.setHintEnabled(true)
                 }
 
-                binding.edtEvents.getText().hashCode() ->{
-                    binding.llEvents.setHintEnabled(true)
+                binding.edtAmount.getText().hashCode() ->{
+                    binding.llAmount.setHintEnabled(true)
                 }
 
-                binding.edtGenre.getText().hashCode() ->{
-                    binding.llGenre.setHintEnabled(true)
+                binding.edtParkings.getText().hashCode() ->{
+                    binding.llParkings.setHintEnabled(true)
                 }
             }
         }else if (charSequence?.length!! <= 0){
@@ -230,20 +265,20 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     binding.llEmail.setHintEnabled(false)
                 }
 
-                binding.edtAchievements.getText().hashCode() ->{
-                    binding.llAchievements.setHintEnabled(false)
+                binding.edtLocation.getText().hashCode() ->{
+                    binding.llLocation.setHintEnabled(false)
                 }
 
-                binding.edtLanguages.getText().hashCode() ->{
-                    binding.llLanguages.setHintEnabled(false)
+                binding.edtAcCount.getText().hashCode() ->{
+                    binding.llAcCount.setHintEnabled(false)
                 }
 
-                binding.edtEvents.getText().hashCode() ->{
-                    binding.llEvents.setHintEnabled(false)
+                binding.edtAmount.getText().hashCode() ->{
+                    binding.llAmount.setHintEnabled(false)
                 }
 
-                binding.edtGenre.getText().hashCode() ->{
-                    binding.llGenre.setHintEnabled(false)
+                binding.edtParkings.getText().hashCode() ->{
+                    binding.llParkings.setHintEnabled(false)
                 }
             }
         }
@@ -265,33 +300,14 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         viewModel.profileLiveData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 val profileModel = it.result
-                setDjProfileData(profileModel)
+                setShootLocationData(profileModel)
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
         })
-
-        viewModel.updateProfileLiveData.observe(requireActivity()) {
-            if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-                setPrefData(it.result)
-            } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-            }
-        }
-
     }
 
-    private fun setPrefData(result: ProfileModel) {
-        PrefManager(mContext).setvalue(StaticData.isLogin, true)
-        PrefManager(mContext).setvalue(StaticData.id, result.id)
-        PrefManager(mContext).setvalue(StaticData.name, result.name)
-        PrefManager(mContext).setvalue(StaticData.email, result.email)
-        PrefManager(mContext).setvalue(StaticData.mobile, result.mobile)
-        PrefManager(mContext).setvalue(StaticData.image, result.image)
-    }
-
-    private fun setDjProfileData(profileModel: ProfileModel) {
+    private fun setShootLocationData(profileModel: ProfileModel) {
         if (!profileModel.image.isNullOrEmpty()) {
             Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
                 .error(R.drawable.ic_profile).into(requireActivity().findViewById(R.id.cvProfile))
@@ -301,12 +317,10 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         binding.edtEmailAddress.setText(profileModel.email)
         binding.edtDescriptions.setText(profileModel.description)
         category_Id = profileModel.categories[0].category_id
-        binding.edtAchievements.setText(profileModel.achievements)
-        binding.edtEvents.setText(profileModel.events)
-        binding.edtGenre.setText(profileModel.genre)
-        binding.edtLanguages.setText(profileModel.location)
-        binding.edtEvents.setText(profileModel.events)
-        binding.edtGenre.setText(profileModel.genre)
+        binding.edtParkings.setText(profileModel.achievements)
+        binding.edtLocation.setText(profileModel.events)
+        binding.acShiftstype.setText("")
+        binding.acSecurityDeposit.setText(profileModel.events)
 
         if (!profileModel.imagefile.isNullOrEmpty()) {
             val imageViews = listOf(binding.firstImage, binding.secondimage, binding.thirdimage,binding.fourthImage,binding.fifthimage,binding.siximage)
@@ -463,175 +477,6 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             else -> {
                 Toast.makeText(mContext, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-
-    private fun updateDjProfile()
-    {
-        if (isNetworkAvailable(mContext)) {
-            if (isvalidName(
-                    mContext, binding.edtName.text.toString().trim()
-                ) && isvalidEmailAddress(
-                    mContext, binding.edtEmailAddress.text.toString().trim()
-                ) && isvalidDescriptions(
-                    mContext, binding.edtDescriptions.text.toString().trim()
-                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
-            ) {
-
-                val name: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtName.text.toString().trim()
-                )
-                val email: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtEmailAddress.text.toString().trim()
-                )
-
-                /*val mobileNumber: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtMobileNumber.text.toString().trim()
-                )*/
-
-
-                val user_Id: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    PrefManager(mContext).getvalue(StaticData.id).toString()
-                )
-
-                val cat_Id: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(), "1"
-                )
-
-
-                val desc: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtDescriptions.text.toString().trim()
-                )
-
-                val achievements: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtAchievements.text.toString().trim()
-                )
-
-                val location: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtLanguages.text.toString().trim()
-                )
-
-                val languages: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    ""
-                )
-
-                val dancer_form: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    ""
-                )
-
-                val what_i_do: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    ""
-                )
-
-                val events: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtEvents.text.toString().trim()
-                )
-
-                val genre: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtGenre.text.toString().trim()
-                )
-
-                val categoryId: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(), category_Id
-                )
-
-
-                var profileBody: MultipartBody.Part? = null
-                if (profilePath.isNotEmpty()) {
-                    val file = File(profilePath)
-                    val requestFile =
-                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                    profileBody = MultipartBody.Part.createFormData(
-                        "image", file.name, requestFile
-                    )
-                }
-
-                var imageBody: MultipartBody.Part?=null
-                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
-                for (image in imagesurl){
-                    if (image.isNotEmpty()) {
-                        val file = File(image)
-                        if (file != null) {
-                            val requestFile =
-                                RequestBody.create(
-                                    "multipart/form-data".toMediaTypeOrNull(),
-                                    file
-                                )
-
-                            imageBody = MultipartBody.Part.createFormData(
-                                "imagefile[]", file.name, requestFile
-                            )
-                            imagefile.add(imageBody)
-                        }
-                    }
-                }
-
-                val jsonArray = JSONArray()
-                for (i in 0 until workLinkList.size) {
-                    val jsonObject = JSONObject()
-                    jsonObject.put("worklink_name", workLinkList[i].worklink_name)
-                    jsonObject.put("worklink_url", workLinkList[i].worklink_url)
-                    jsonArray.put(jsonObject)
-                }
-
-
-                val workLink: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(), jsonArray.toString()
-                )
-
-                val jsonSingerArray = JSONArray()
-                for (i in 0 until showreelLinkList.size) {
-                    val jsonObject = JSONObject()
-                    jsonObject.put("video_name", showreelLinkList[i].video_name)
-                    jsonObject.put("video_url", showreelLinkList[i].video_url)
-                    jsonSingerArray.put(jsonObject)
-                }
-
-
-                val showreel: RequestBody = RequestBody.create(
-                    "multipart/form-data".toMediaTypeOrNull(), jsonSingerArray.toString()
-                )
-
-              /*  viewModel.updateSingerProfile(
-                    name,
-                    email,
-                    user_Id,
-                    cat_Id,
-                    mobileNumber,
-                    desc,
-                    achievements,
-                    languages,
-                    location,
-                    dancer_form,
-                    what_i_do,
-                    events,
-                    genre,
-                    showreel,
-                    workLink,
-                    categoryId,
-                    profileBody,
-                    imagefile
-                )*/
-            }
-        } else {
-            Toast.makeText(
-                mContext,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 

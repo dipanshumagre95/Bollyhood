@@ -7,7 +7,7 @@
 
         <variable
             name="adapter"
-            type="com.app.bollyhood.adapter.BannerAdapter" />
+            type="com.app.bollyhood.adapter.ImageViewPagerAdapter" />
 
     </data>
 
@@ -31,7 +31,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/shootLoccationImage"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:scaleType="fitXY"
@@ -41,7 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/llBack"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -50,14 +50,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:src="@drawable/white_heart"
+                <RelativeLayout
+                    android:id="@+id/llBookmark"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/round_pink_color"
+                    android:backgroundTint="@color/white"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iconHeart"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/white_heart"
+                        />
+
+                </RelativeLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -66,10 +78,10 @@
                     android:background="@drawable/rectangle_lightcornerwhite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2">
+                    app:layout_constraintTop_toBottomOf="@+id/shootLoccationImage">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView"
+                        android:id="@+id/tvLocationName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
@@ -98,10 +110,10 @@
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvLocationName" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/rating"
+                        android:id="@+id/tvrating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -123,9 +135,10 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialTextView">
+                        app:layout_constraintTop_toBottomOf="@+id/tvLocationName">
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvRupes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
@@ -136,6 +149,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvShift"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_regular"
@@ -153,7 +167,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="20sp"
-                        android:background="@color/gray"
+                        android:background="#ECEBEB"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/llprice" />
@@ -214,6 +228,7 @@
                                 android:src="@drawable/parking_icon"/>
 
                             <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvParking"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="5 Parkings"
@@ -274,6 +289,7 @@
                                 android:src="@drawable/deposit_icon"/>
 
                             <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvDeposit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Deposit"
@@ -303,6 +319,7 @@
                                 android:src="@drawable/furniture_icon"/>
 
                             <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvAcCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="6 Ac"
@@ -354,18 +371,42 @@
 
                     </LinearLayout>
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/rvImages"
+                    <RelativeLayout
+                        android:id="@+id/llrvimageView"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:adapter="@{adapter}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"/>
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                        <View
+                            android:id="@+id/leftSide"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:background="@drawable/left_side_arrow"/>
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/rvImages"
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:adapter="@{adapter}"
+                            android:layout_gravity="center_horizontal"/>
+
+                        <View
+                            android:id="@+id/rightSide"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/right_side_arrow"/>
+
+                    </RelativeLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txHostedBy"
@@ -378,7 +419,7 @@
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rvImages" />
+                        app:layout_constraintTop_toBottomOf="@+id/llrvimageView" />
 
                     <RelativeLayout
                         android:id="@+id/llhosting_profile"
@@ -390,7 +431,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/txHostedBy">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/ivhosted_profile"
+                            android:id="@+id/tvManagerProfile"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="@dimen/_15sdp"
@@ -408,30 +449,32 @@
                         </androidx.cardview.widget.CardView>
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/hoster_name"
+                            android:id="@+id/tvmanageerName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_toRightOf="@+id/ivhosted_profile"
+                            android:layout_toRightOf="@+id/tvManagerProfile"
                             android:fontFamily="@font/inter_semibold"
                             android:text="Bablo Yadav"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvRatingManager"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/hoster_name"
+                            android:layout_below="@+id/tvmanageerName"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:layout_toRightOf="@+id/ivhosted_profile"
+                            android:layout_toRightOf="@+id/tvManagerProfile"
                             android:fontFamily="@font/inter_regular"
                             android:text="⭐️ 4.9 (1.2K review)"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <RelativeLayout
+                            android:id="@+id/tvMessage"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_alignParentEnd="true"
@@ -451,6 +494,7 @@
                     </RelativeLayout>
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/contactBtn"
                         android:layout_width="match_parent"
                         android:layout_height="63dp"
                         android:layout_marginTop="@dimen/_15sdp"

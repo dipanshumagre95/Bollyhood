@@ -115,8 +115,7 @@
                             android:maxLength="50"
                             android:maxLines="1"
                             android:paddingStart="@dimen/_10sdp"
-                            android:singleLine="true"
-                            tools:ignore="TouchTargetSizeCheck"/>
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,8 +137,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:text="About Location"
-                            tools:ignore="TextSizeCheck"/>
+                            android:text="About Location" />
 
 
                         <EditText
@@ -158,8 +156,7 @@
                             android:padding="@dimen/_5sdp"
                             android:paddingStart="@dimen/_10sdp"
                             android:scrollbars="vertical"
-                            android:singleLine="true"
-                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"/>
+                            android:singleLine="true" />
 
                     </RelativeLayout>
 
@@ -202,8 +199,7 @@
                             android:inputType="textEmailAddress"
                             android:maxLength="50"
                             android:paddingStart="@dimen/_10sdp"
-                            android:singleLine="true"
-                            tools:ignore="TouchTargetSizeCheck"/>
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -238,8 +234,7 @@
                                 android:padding="@dimen/_5sdp"
                                 android:text="WHAT WE OFFER"
                                 android:textColor="#212121"
-                                android:textSize="@dimen/_11sdp"
-                                tools:ignore="TextSizeCheck"/>
+                                android:textSize="@dimen/_11sdp" />
 
                             <ImageView
                                 android:layout_width="90dp"
@@ -281,13 +276,12 @@
                                     android:hint="Location"
                                     android:inputType="textMultiLine"
                                     android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    tools:ignore="TouchTargetSizeCheck"/>
+                                    android:paddingStart="@dimen/_10sdp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llParkings"
+                                android:id="@+id/llGenre"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_below="@+id/llDescriptions"
@@ -302,18 +296,17 @@
                                 app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                                 <EditText
-                                    android:id="@+id/edtParkings"
+                                    android:id="@+id/edtGenre"
                                     style="@style/style_sec_sec"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@android:color/transparent"
-                                    android:hint="Parkings"
+                                    android:hint="Genre"
                                     android:inputType="text"
                                     android:maxLength="50"
                                     android:paddingStart="@dimen/_10sdp"
-                                    android:singleLine="true"
-                                    tools:ignore="TouchTargetSizeCheck"/>
+                                    android:singleLine="true" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -327,154 +320,41 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <RelativeLayout
-                                android:id="@+id/rrSecurityDeposit"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:orientation="horizontal">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvSecurityDeposit"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:text="Shift"
-                                    android:textColorHint="#757575"
-                                    android:textSize="10sp" />
-
-                                <AutoCompleteTextView
-                                    android:id="@+id/acSecurityDeposit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/tvSecurityDeposit"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:background="@android:color/transparent"
-                                    android:clickable="false"
-                                    android:dropDownAnchor="@id/acSecurityDeposit"
-                                    android:focusable="false"
-                                    android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Select Shift"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/black"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:visibility="visible"
-                                    tools:ignore="TouchTargetSizeCheck"/>
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginEnd="@dimen/_5sdp"
-                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/rrShiftstype"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:orientation="horizontal">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvShiftstype"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:text="Shift"
-                                    android:textColorHint="#757575"
-                                    android:textSize="10sp" />
-
-                                <AutoCompleteTextView
-                                    android:id="@+id/acShiftstype"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/tvShiftstype"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:background="@android:color/transparent"
-                                    android:clickable="false"
-                                    android:dropDownAnchor="@id/acShiftstype"
-                                    android:focusable="false"
-                                    android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Select Shift"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:paddingEnd="@dimen/_20sdp"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/black"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:visibility="visible"
-                                    tools:ignore="TouchTargetSizeCheck"/>
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginEnd="@dimen/_5sdp"
-                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_15sdp"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llAcCount"
-                                android:layout_width="@dimen/_150sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                                <EditText
-                                    android:id="@+id/edtAcCount"
-                                    style="@style/style_sec_sec"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@android:color/transparent"
-                                    android:hint="AcCount"
-                                    android:inputType="textMultiLine"
-                                    android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    tools:ignore="TouchTargetSizeCheck"/>
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llAmount"
+                                android:id="@+id/llEvents"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_below="@+id/llDescriptions"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                app:hintAnimationEnabled="true"
+                                app:hintEnabled="false"
+                                app:hintTextAppearance="@style/TextInputLayoutHintText">
+
+                                <EditText
+                                    android:id="@+id/edtEvents"
+                                    style="@style/style_sec_sec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Event Types"
+                                    android:inputType="text"
+                                    android:maxLength="50"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/llLanguages"
+                                android:layout_width="@dimen/_150sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_below="@+id/llDescriptions"
                                 android:layout_weight="1"
                                 android:background="@drawable/rectangle_gray_with_black_border"
                                 android:gravity="center"
@@ -485,20 +365,21 @@
                                 app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                                 <EditText
-                                    android:id="@+id/edtAmount"
+                                    android:id="@+id/edtLanguages"
                                     style="@style/style_sec_sec"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@android:color/transparent"
-                                    android:hint="Amount"
+                                    android:hint="Languages"
                                     android:inputType="text"
                                     android:maxLength="50"
                                     android:paddingStart="@dimen/_10sdp"
-                                    android:singleLine="true"
-                                    tools:ignore="TouchTargetSizeCheck"/>
+                                    android:singleLine="true" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -523,8 +404,7 @@
                                 android:padding="@dimen/_5sdp"
                                 android:text="LOCATION PHOTOS "
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_11sdp"
-                                tools:ignore="TextSizeCheck"/>
+                                android:textSize="@dimen/_11sdp" />
 
                             <ImageView
                                 android:layout_width="90dp"
@@ -841,8 +721,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_alignParentStart="true"
-                                android:layout_gravity="center"
-                                tools:ignore="TouchTargetSizeCheck"/>
+                                android:layout_gravity="center" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tvteam_condition"
