@@ -18,6 +18,7 @@ import com.app.bollyhood.fragment.editprofilefragments.DopNDirectorEditFragment
 import com.app.bollyhood.fragment.editprofilefragments.InfluencerEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.LyricsWriterEditProfileFragment
 import com.app.bollyhood.fragment.editprofilefragments.MusicialBandEditProfileFragment
+import com.app.bollyhood.fragment.editprofilefragments.ShootLocationManagerEditProfile
 import com.app.bollyhood.fragment.editprofilefragments.SingerEditProfileFragment
 import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.util.PrefManager
@@ -97,6 +98,10 @@ class MyProfileActivity : AppCompatActivity(){
 
                 Categorie.PRODUCTIONHOUSE.toString()->{
                     loadFragment(CompanyEditProfileFragment())
+                }
+
+                Categorie.SHOOTLOCATION.toString()->{
+                    loadFragment(ShootLocationManagerEditProfile())
                 }
             }
         }
