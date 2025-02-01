@@ -67,7 +67,7 @@
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:fontFamily="@font/urbanist_bold"
+                        android:fontFamily="@font/urbanist_semibold"
                         android:maxLines="2"
                         android:text="Elements Villa \nMadh"
                         android:textColor="@color/black"
@@ -120,7 +120,7 @@
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="25,000/"
                             android:textColor="@color/black"
                             android:textSize="23sp"
@@ -161,7 +161,7 @@
                         android:inputType="textMultiLine"
                         android:text="The best modern bungalow artistic modern elevation features with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen &amp; Family Room Bungalow with Swimming pool and....Read More"
                         android:textColor="#757575"
-                        android:textSize="@dimen/_13sdp"
+                        android:textSize="16sp"
                         app:layout_constraintTop_toBottomOf="@+id/view" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -170,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_bold"
+                        android:fontFamily="@font/inter_semibold"
                         android:text="What we offer"
                         android:textColor="@color/black"
                         android:textSize="24sp"
@@ -184,6 +184,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
+                        android:gravity="center_vertical"
                         android:weightSum="4"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -191,16 +192,16 @@
 
                         <RelativeLayout
                             android:layout_width="@dimen/_55sdp"
-                            android:layout_height="match_parent"
+                            android:layout_height="85dp"
                             android:layout_weight="1"
-                            android:elevation="@dimen/_5sdp"
-                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:elevation="@dimen/_10sdp"
+                            android:background="@drawable/whitebackground"
                             android:gravity="center_vertical">
 
                             <ImageView
                                 android:id="@+id/image1"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/parking_icon"/>
 
@@ -208,9 +209,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="5 Parkings"
-                                android:textSize="12sp"
+                                android:textSize="10sp"
                                 android:textColor="#666667"
-                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
                                 android:layout_centerHorizontal="true"
                                 android:layout_below="@+id/image1"/>
@@ -219,17 +220,17 @@
 
                         <RelativeLayout
                             android:layout_width="@dimen/_55sdp"
-                            android:layout_height="match_parent"
+                            android:layout_height="85dp"
                             android:layout_weight="1"
-                            android:elevation="@dimen/_5sdp"
+                            android:elevation="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:background="@drawable/whitebackground"
                             android:gravity="center_vertical">
 
                             <ImageView
                                 android:id="@+id/image2"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
                                 android:padding="@dimen/_2sdp"
                                 android:scaleType="fitXY"
@@ -239,9 +240,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Care Taker"
-                                android:textSize="12sp"
+                                android:textSize="10sp"
                                 android:textColor="#666667"
-                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
                                 android:layout_centerHorizontal="true"
                                 android:layout_below="@+id/image2"/>
@@ -250,16 +251,17 @@
 
                         <RelativeLayout
                             android:layout_width="@dimen/_55sdp"
-                            android:layout_height="match_parent"
+                            android:layout_height="85dp"
                             android:layout_weight="1"
+                            android:elevation="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:background="@drawable/whitebackground"
                             android:gravity="center_vertical">
 
                             <ImageView
                                 android:id="@+id/image3"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/deposit_icon"/>
 
@@ -267,9 +269,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Deposit"
-                                android:textSize="12sp"
+                                android:textSize="10sp"
                                 android:textColor="#666667"
-                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
                                 android:layout_centerHorizontal="true"
                                 android:layout_below="@+id/image3"/>
@@ -277,17 +279,18 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_width="@dimen/_55sdp"
-                            android:layout_height="match_parent"
+                            android:layout_width="70sp"
+                            android:layout_height="85dp"
                             android:layout_weight="1"
+                            android:elevation="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/rectangle_gray_with_black_border"
+                            android:background="@drawable/whitebackground"
                             android:gravity="center_vertical">
 
                             <ImageView
                                 android:id="@+id/image4"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/furniture_icon"/>
 
@@ -295,9 +298,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="6 Ac"
-                                android:textSize="12sp"
+                                android:textSize="10sp"
                                 android:textColor="#666667"
-                                android:layout_marginTop="@dimen/_3sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
                                 android:layout_centerHorizontal="true"
                                 android:layout_below="@+id/image4"/>
@@ -371,7 +374,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_bold"
+                        android:fontFamily="@font/inter_semibold"
                         android:text="Hosted by"
                         android:textColor="@color/black"
                         android:textSize="24sp"
