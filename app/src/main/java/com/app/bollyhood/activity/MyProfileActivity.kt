@@ -91,8 +91,7 @@ class MyProfileActivity : AppCompatActivity(){
                 }
 
                 Categorie.CAMERALIGHT.toString(),Categorie.EVENTPLANNER.toString()
-                    ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(),
-                    Categorie.LOCATIONMANAGER.toString()->{
+                    ,Categorie.CASTINGCALLS.toString(),Categorie.MUSICLABEL.toString(), ->{
                     loadFragment(CompanyEditProfileFragment())
                 }
 
@@ -100,7 +99,7 @@ class MyProfileActivity : AppCompatActivity(){
                     loadFragment(CompanyEditProfileFragment())
                 }
 
-                Categorie.SHOOTLOCATION.toString()->{
+                Categorie.LOCATIONMANAGER.toString()->{
                     loadFragment(ShootLocationManagerEditProfile())
                 }
             }
