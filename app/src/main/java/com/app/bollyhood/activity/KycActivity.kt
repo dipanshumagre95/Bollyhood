@@ -75,7 +75,7 @@ class KycActivity : AppCompatActivity(),OnClickListener {
             }
         })
 
-        viewModel.kycUploadLiveData.observe(this, Observer {
+        viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
                    binding.photoView.visibility=View.GONE
                    binding.succssView.visibility=View.VISIBLE

@@ -97,7 +97,7 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
             }
         })
 
-        viewModel.castingUploadedLiveData.observe(this, Observer{
+        viewModel.successData.observe(this, Observer{
             if (it.status == "1") {
                 Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
                 finish()

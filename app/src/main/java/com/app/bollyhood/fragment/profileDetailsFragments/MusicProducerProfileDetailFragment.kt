@@ -240,7 +240,7 @@ class MusicProducerProfileDetailFragment : Fragment(), WorkAdapter.onItemClick, 
             }
         })
 
-        viewModel.addRemoveBookMarkLiveData.observe(requireActivity(), Observer {
+        viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (it.msg.equals("Bookmark Successfully")){
                     binding.ivBookMark.setImageResource(R.drawable.ic_addedbookmark)

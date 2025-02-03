@@ -81,7 +81,7 @@ class LyricsWriterFragment : Fragment(), OnClickListener, ActorsProfileWorkLinkA
             }
         })
 
-        viewModel.addRemoveBookMarkLiveData.observe(requireActivity(), Observer {
+        viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (it.msg.equals("Bookmarked Successfully")){
                     singleCategoryModel?.is_bookmarked=1

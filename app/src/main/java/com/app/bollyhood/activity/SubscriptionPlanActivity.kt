@@ -102,7 +102,7 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick,Pa
             }
         })
 
-        viewModel.sendPaymentLiveData.observe(this, Observer {
+        viewModel.successData.observe(this, Observer {
             if (it.status.equals("1")) {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
                 startActivity(Intent(mContext, PaymentSuccessActivity::class.java))

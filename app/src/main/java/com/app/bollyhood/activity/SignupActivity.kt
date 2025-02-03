@@ -114,7 +114,7 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
         })
 
 
-        viewModel.signupLiveData.observe(this, Observer {
+        viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
                 startActivity(Intent(mContext, LoginActivity::class.java))

@@ -244,7 +244,7 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
         })
 
 
-        viewModel.castingBookmark.observe(requireActivity(), Observer {
+        viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 if (is_Bookmark){
                     castingCallModel.is_casting_bookmark=0

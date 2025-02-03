@@ -72,7 +72,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
             }
         })
 
-        viewModel.addRemoveBookMarkLiveData.observe(requireActivity(), Observer {
+        viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 dialogView.dismiss()
                 Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()

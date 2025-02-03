@@ -46,23 +46,23 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     val splashLiveData = MutableLiveData(false)
     var categoryLiveData = MutableLiveData<CategoryResponse>()
     var categoryLiveDataforSignup = MutableLiveData<CategoryResponse>()
-    var signupLiveData = MutableLiveData<SuccessResponse>()
+  //  var signupLiveData = MutableLiveData<SuccessResponse>()
     var otpLiveData = MutableLiveData<OtpResponse>()
-    var logoutLiveData = MutableLiveData<SuccessResponse>()
+ //   var logoutLiveData = MutableLiveData<SuccessResponse>()
     var forgotLiveData = MutableLiveData<OtpResponse>()
     var successData = MutableLiveData<SuccessResponse>()
     var loginLiveData = MutableLiveData<LoginResponse>()
     var changePasswordLiveData = MutableLiveData<SuccessResponse>()
-    var castingUploadedLiveData = MutableLiveData<SuccessResponse>()
-    var kycUploadLiveData = MutableLiveData<SuccessResponse>()
+//   var castingUploadedLiveData = MutableLiveData<SuccessResponse>()
+//    var kycUploadLiveData = MutableLiveData<SuccessResponse>()
     var profileLiveData = MutableLiveData<ProfileResponse>()
     var updateProfileLiveData = MutableLiveData<ProfileResponse>()
     var bannerLiveData = MutableLiveData<BannerResponse>()
     var expertiseLiveData = MutableLiveData<ExpertiseResponse>()
     var expertiseProfileLiveData = MutableLiveData<ExpertiseResponse>()
-    var addRemoveBookMarkLiveData = MutableLiveData<SuccessResponse>()
+ //   var addRemoveBookMarkLiveData = MutableLiveData<SuccessResponse>()
     var bookMarkLiveData = MutableLiveData<BookMarkResponse>()
-    var addBookLiveData = MutableLiveData<SuccessResponse>()
+//    var addBookLiveData = MutableLiveData<SuccessResponse>()
     var myBookLiveData = MutableLiveData<BookingResponse>()
     var subscriptionPlanLiveData = MutableLiveData<PlanResponse>()
     var checkSubscriptionLiveData = MutableLiveData<SubscriptionResponse>()
@@ -70,12 +70,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var subCategoryLiveData = MutableLiveData<SubCategoryResponse>()
     var castingCallsLiveData = MutableLiveData<CastingCallResponse>()
     var castingBookMarkCallsLiveData = MutableLiveData<CastingCallResponse>()
-    var castingCallsApplyLiveData = MutableLiveData<SuccessResponse>()
+ //   var castingCallsApplyLiveData = MutableLiveData<SuccessResponse>()
     var agencyLiveData = MutableLiveData<CastingListResponse>()
     var sendMessageLiveData = MutableLiveData<SendMessageResponse>()
-    var sendPaymentLiveData = MutableLiveData<SuccessResponse>()
+ //   var sendPaymentLiveData = MutableLiveData<SuccessResponse>()
     var chatHistoryLiveData = MutableLiveData<ChatResponse>()
-    var castingBookmark = MutableLiveData<SuccessResponse>()
+ //   var castingBookmark = MutableLiveData<SuccessResponse>()
     var actorsList = MutableLiveData<ActorsresponseModel>()
     var appliedUserList = MutableLiveData<UserAppliedData>()
     var shootLocationList = MutableLiveData<ShootLocationResponseModel>()
@@ -178,7 +178,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     subCategoryId
                 )
                 if (response.isSuccessful && response.body() != null) {
-                    signupLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Signup failed: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -225,7 +225,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.doLogout(uid)
                 if (response.isSuccessful && response.body() != null) {
-                    logoutLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Logout failed: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -340,7 +340,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 )
 
                 if (response.isSuccessful && response.body() != null) {
-                    castingUploadedLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to upload casting call: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -434,8 +434,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 )
 
                 if (response.isSuccessful && response.body() != null) {
-                    // Successful upload
-                    kycUploadLiveData.postValue(response.body() as SuccessResponse)
+                    successData.postValue(response.body() as SuccessResponse)
                 } else {
                     val errorMessage = "Failed to upload KYC: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -704,7 +703,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.addRemoveBookMark(uid, bookmark_uid, bookmark_mode,folder_id,folder_name)
                 if (response.isSuccessful && response.body() != null) {
-                    addRemoveBookMarkLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                     getUserDetails(uid)
                 } else {
                     val errorMessage = "Failed to add/remove bookmark: ${response.message()}"
@@ -752,7 +751,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.addCastingBookMark(uid, casting_id, bookmark_mode)
                 if (response.isSuccessful && response.body() != null) {
-                    castingBookmark.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to update bookmark: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -788,7 +787,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     booking_uid
                 )
                 if (response.isSuccessful && response.body() != null) {
-                    addBookLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to add booking: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1006,7 +1005,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.getCastingApply(uid, casting_id, images, video)
                 if (response.isSuccessful && response.body() != null) {
-                    castingCallsApplyLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to apply for casting call: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1062,7 +1061,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val response = mainRepository.sendPayment(payment_id, uid, plan_id)
 
                 if (response.isSuccessful && response.body() != null) {
-                    sendPaymentLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to process payment: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1194,7 +1193,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 )
 
                 if (response.isSuccessful && response.body() != null) {
-                    castingUploadedLiveData.postValue(response.body())
+                    successData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to upload casting call: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()

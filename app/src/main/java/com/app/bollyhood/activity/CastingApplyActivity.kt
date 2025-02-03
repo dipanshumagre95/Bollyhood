@@ -153,7 +153,7 @@ class CastingApplyActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.castingCallsApplyLiveData.observe(this, Observer {
+        viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
               //  Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
                 castingCallSuccessDialog()

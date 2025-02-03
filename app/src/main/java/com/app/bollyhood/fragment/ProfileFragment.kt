@@ -104,7 +104,7 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        viewModel.logoutLiveData.observe(requireActivity(), Observer {
+        viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 val fcmToken = PrefManager(requireContext()).getvalue(StaticData.fcmToken)
                 PrefManager(requireContext()).clearValue()
