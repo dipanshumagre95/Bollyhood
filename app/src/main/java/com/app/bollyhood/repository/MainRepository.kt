@@ -1,5 +1,6 @@
 package com.app.bollyhood.repository
 
+import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
 import com.app.bollyhood.network.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -397,6 +398,14 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         apiService.getAppliedUserData(
             uid,
             castingId
-        )
+    )
 
+    suspend fun addNewShootLocation(createLocationRequestModel: CreateLocationRequestModel) =
+        apiService.addNewShootLocation(createLocationRequestModel)
+
+    suspend fun getShootLocations(uid: String,locationId: String) =
+        apiService.getShootLocations(
+            uid,
+            locationId
+        )
 }

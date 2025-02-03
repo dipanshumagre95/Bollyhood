@@ -13,6 +13,8 @@ import com.app.bollyhood.model.OtpResponse
 import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
+import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
 import com.app.bollyhood.model.SuccessResponse
@@ -23,6 +25,7 @@ import com.app.bollyhood.model.castinglist.CastingListResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -405,4 +408,15 @@ interface ApiService {
     @GET("casting_apply_users.php")
     suspend fun getAppliedUserData(@Query("uid") uid: String,@Query("casting_id") casting_id: String?): Response<UserAppliedData>
 
+    @Multipart
+    @POST("edit_casting.php")
+    suspend fun addNewShootLocation(
+        @Body createLocationRequestModel: CreateLocationRequestModel
+    ): Response<SuccessResponse>
+
+    @POST("edit_casting.php")
+    suspend fun getShootLocations(
+        @Field("uid") uid: String,
+        @Field("locationId") id: String
+    ): Response<ShootLocationResponseModel>
 }
