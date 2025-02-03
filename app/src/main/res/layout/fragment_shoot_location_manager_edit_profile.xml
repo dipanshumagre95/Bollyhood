@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="locationListAdapter"
+            type="com.app.bollyhood.adapter.LocationListAdapter" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -361,6 +369,50 @@
                                 tools:ignore="TouchTargetSizeCheck"/>
 
                         </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/relativeLayout9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/ss">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Listed Properties"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/urbanist_semibold"
+                                android:textSize="16sp"
+                                />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvAddAnother"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add Another"
+                                android:textColor="#FE885B"
+                                android:drawableLeft="@drawable/plus__1_"
+                                android:drawableTint="#FE885B"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/urbanist_semibold"
+                                android:textSize="16sp"/>
+                        </RelativeLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvlocation_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:adapter="@{locationListAdapter}"
+                            app:layout_constraintBottom_toTopOf="@+id/tvload_more"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/relativeLayout9" />
 
                         <RelativeLayout
                             android:id="@+id/llteamNcondition"

@@ -33,10 +33,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
+import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentShootLocationManagerEditProfileBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -87,6 +89,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
         addListner()
         addObserevs()
         setSpannableString()
+        setLocationListAdapter()
         return binding.root
     }
 
@@ -112,6 +115,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
             tvUpdateProfile.setOnClickListener(this@ShootLocationManagerEditProfile)
             ivBack.setOnClickListener(this@ShootLocationManagerEditProfile)
             rrProfile.setOnClickListener(this@ShootLocationManagerEditProfile)
+            tvAddAnother.setOnClickListener(this@ShootLocationManagerEditProfile)
         }
     }
 
@@ -131,6 +135,10 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
                 } else {
                     checkPermission()
                 }
+            }
+
+            R.id.tvAddAnother ->{
+
             }
         }
     }
@@ -501,5 +509,17 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
                 }
             }
         }
+
+    private fun setLocationListAdapter()
+    {
+        binding.apply {
+            rvlocationImage.layoutManager =
+                LinearLayoutManager(requireContext())
+            rvlocationImage.setHasFixedSize(true)
+            locationListAdapter = LocationListAdapter(false)
+            rvlocationImage.adapter = locationListAdapter
+            locationListAdapter?.notifyDataSetChanged()
+        }
+    }
 
 }
