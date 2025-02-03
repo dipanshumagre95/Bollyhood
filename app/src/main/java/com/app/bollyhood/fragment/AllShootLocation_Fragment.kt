@@ -15,7 +15,7 @@ import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.databinding.FragmentAllShootLocationBinding
 import com.app.bollyhood.viewmodel.DataViewModel
 
-class AllShootLocation_Fragment : Fragment() {
+class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
 
     lateinit var binding: FragmentAllShootLocationBinding
     private val viewModel: DataViewModel by viewModels()
@@ -70,10 +70,18 @@ class AllShootLocation_Fragment : Fragment() {
             rvlocationImage.layoutManager =
                 LinearLayoutManager(requireContext())
             rvlocationImage.setHasFixedSize(true)
-            locationListAdapter = LocationListAdapter(true)
+            locationListAdapter = LocationListAdapter(true,this@AllShootLocation_Fragment)
             rvlocationImage.adapter = locationListAdapter
             locationListAdapter?.notifyDataSetChanged()
         }
+    }
+
+    override fun itemClicked() {
+
+    }
+
+    override fun editClicked() {
+
     }
 
 }

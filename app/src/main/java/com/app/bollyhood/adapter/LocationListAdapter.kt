@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.LocationEditListAdapterBinding
 import com.app.bollyhood.databinding.LocationListAdapterBinding
 
-class LocationListAdapter(private val isEdit: Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LocationListAdapter(private val isEdit: Boolean,private var onItemClickInterface:LocationListAdapter.onItemClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_PRIMARY = 1
@@ -21,12 +21,12 @@ class LocationListAdapter(private val isEdit: Boolean) : RecyclerView.Adapter<Re
         return when (viewType) {
             VIEW_TYPE_PRIMARY -> {
                 val binding = LocationListAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                PrimaryViewHolder(binding)
+                PrimaryViewHolder(binding,onItemClickInterface)
             }
 
             VIEW_TYPE_SECONDARY -> {
                 val binding = LocationEditListAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                SecondaryViewHolder(binding)
+                SecondaryViewHolder(binding,onItemClickInterface)
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -38,17 +38,36 @@ class LocationListAdapter(private val isEdit: Boolean) : RecyclerView.Adapter<Re
 
     }
 
-    class PrimaryViewHolder(private val binding: LocationListAdapterBinding) :
+    class PrimaryViewHolder(private val binding: LocationListAdapterBinding,
+                            onItemClickInterface: onItemClick) :
         RecyclerView.ViewHolder(binding.root) {
-        /*fun bind(item: LocationItem) {
-            binding.textView.text = item.name
-        }*/
+        init {
+            binding.root.setOnClickListener {
+                onItemClickInterface.editClicked()
+            }
+        }
     }
 
-    class SecondaryViewHolder(private val binding: LocationEditListAdapterBinding) :
+    class SecondaryViewHolder(
+        private val binding: LocationEditListAdapterBinding,
+        onItemClickInterface: onItemClick
+    ) :
         RecyclerView.ViewHolder(binding.root) {
-       /* fun bind(item: LocationItem) {
-            binding.anotherTextView.text = item.name
-        }*/
+        init {
+            binding.icEdit.setOnClickListener {
+                onItemClickInterface.editClicked()
+            }
+
+            binding.root.setOnClickListener {
+                onItemClickInterface.editClicked()
+            }
+        }
+    }
+
+
+    interface onItemClick
+    {
+        fun itemClicked()
+        fun editClicked()
     }
 }

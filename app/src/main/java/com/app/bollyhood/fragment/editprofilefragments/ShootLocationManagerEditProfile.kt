@@ -39,7 +39,6 @@ import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.LocationListAdapter
-import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentShootLocationManagerEditProfileBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.extensions.isvalidDescriptions
@@ -48,7 +47,6 @@ import com.app.bollyhood.extensions.isvalidMobileNumber
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
-import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -66,7 +64,7 @@ import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
-class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onItemClick,
+class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdapter.onItemClick,
     OnClickListener {
 
     lateinit var binding: FragmentShootLocationManagerEditProfileBinding
@@ -138,7 +136,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
             }
 
             R.id.tvAddAnother ->{
-
+                (requireActivity() as MyProfileActivity).loadFragment(AddNewLocationEditFragment())
             }
         }
     }
@@ -242,15 +240,34 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
     private fun setProfileData(profileModel: ProfileModel) {
         if (!profileModel.image.isNullOrEmpty()) {
             Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile).into(requireActivity().findViewById(R.id.cvProfile))
+                .error(R.drawable.ic_profile).into(binding.cvProfile)
         }
-        binding.edtName.setText(profileModel.name)
-        binding.edtEmailAddress.setText(profileModel.email)
-        binding.edtMobileNumber.setText(profileModel.mobile)
-        binding.edtDescriptions.setText(profileModel.description)
-        binding.edtCategory.setText(profileModel.categories[0].category_name)
+
+        if (!profileModel.name.isNullOrBlank()) {
+            binding.edtName.setText(profileModel.name)
+        }
+
+        if (!profileModel.email.isNullOrBlank()) {
+            binding.edtEmailAddress.setText(profileModel.email)
+        }
+
+        if (!profileModel.mobile.isNullOrBlank()) {
+            binding.edtMobileNumber.setText(profileModel.mobile)
+        }
+
+        if (!profileModel.description.isNullOrBlank()) {
+            binding.edtDescriptions.setText(profileModel.description)
+        }
+
+        if (!profileModel.categories.isNullOrEmpty()) {
+            binding.edtCategory.setText(profileModel.categories[0].category_name)
+        }
+
         category_Id = profileModel.categories[0].category_id
-        binding.edtLocation.setText(profileModel.location)
+
+        if (!profileModel.location.isNullOrBlank()) {
+            binding.edtLocation.setText(profileModel.location)
+        }
     }
 
     private fun checkPermission(): Boolean {
@@ -330,10 +347,6 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
 
         binding.tvteamCondition.setMovementMethod(LinkMovementMethod.getInstance())
         binding.tvteamCondition.setText(spanTxt, TextView.BufferType.SPANNABLE)
-    }
-
-    override fun onitemClick(pos: Int, work: WorkLinkProfileData) {
-
     }
 
     private fun updateActorProfile()
@@ -516,10 +529,23 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onI
             rvlocationImage.layoutManager =
                 LinearLayoutManager(requireContext())
             rvlocationImage.setHasFixedSize(true)
-            locationListAdapter = LocationListAdapter(false)
+            locationListAdapter = LocationListAdapter(false,this@ShootLocationManagerEditProfile)
             rvlocationImage.adapter = locationListAdapter
             locationListAdapter?.notifyDataSetChanged()
         }
+    }
+
+    override fun itemClicked() {
+        (requireActivity() as MyProfileActivity).loadFragment(AddNewLocationEditFragment())
+    }
+
+    override fun editClicked() {
+        val bundle = Bundle()
+        bundle.putString(StaticData.edit, "edit")
+        val addNewLocationEditFragment = AddNewLocationEditFragment()
+        addNewLocationEditFragment.arguments = bundle
+
+        (requireActivity() as MyProfileActivity).loadFragment(addNewLocationEditFragment)
     }
 
 }

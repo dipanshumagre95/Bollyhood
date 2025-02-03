@@ -107,11 +107,20 @@ class MyProfileActivity : AppCompatActivity(){
     }
 
     fun loadFragment(fragment: Fragment) {
-        // load fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_containers, fragment)
+            .addToBackStack(null)
             .commit()
     }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack() // Go to previous fragment
+        } else {
+            super.onBackPressed() // Exit activity
+        }
+    }
+
 
     fun closeActivity(){
         val intent = Intent()

@@ -38,13 +38,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
+import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentAddNewLocationEditBinding
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
-import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
@@ -65,6 +65,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
     lateinit var mContext: Context
     private var isCamera = false
     private var isGallery = false
+    private var isEdit=false
     private var category_Id: String = ""
     private var shiftTimeList: ArrayList<String> = arrayListOf()
     private var depositList: ArrayList<String> = arrayListOf()
@@ -91,7 +92,12 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
     }
 
     private fun initUI() {
-        viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        val bundle = arguments
+        if (bundle!=null) {
+            isEdit=if(bundle.getString(StaticData.edit).toString()=="edit")true else false
+        }else{
+            //viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        }
         initializeImageResultLaunchers()
         binding.edtName.addTextChangedListener(this)
         binding.edtDescriptions.addTextChangedListener(this)
@@ -112,6 +118,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             fourthImage.setOnClickListener(this@AddNewLocationEditFragment)
             fifthimage.setOnClickListener(this@AddNewLocationEditFragment)
             siximage.setOnClickListener(this@AddNewLocationEditFragment)
+            ivBack.setOnClickListener(this@AddNewLocationEditFragment)
         }
 
         binding.acSecurityDeposit.setOnTouchListener { v, event ->
@@ -209,7 +216,16 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                 }
             }
 
+            R.id.ivBack ->{
+                (requireActivity() as MyProfileActivity).loadFragment(ShootLocationManagerEditProfile())
+            }
+
             R.id.tvUpdateProfile->{
+                if (isEdit){
+
+                }else{
+
+                }
             }
         }
     }
