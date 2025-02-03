@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160sp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/rectangle_apply_button">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/_5sdp"
+            android:layout_margin="0.5sp"
+            app:cardBackgroundColor="@color/grey"
+            app:cardCornerRadius="26dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/singer"
+                    android:scaleType="fitXY"/>
+
+                <View
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:background="@drawable/edit"
+                    android:backgroundTint="@color/white"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/location_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Elements Bunglow"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_above="@+id/location_city"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:textSize="15sp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/location_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Madh , Mumbai"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="-3dp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/map_point"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/urbanist_regular"
+                    android:textSize="10sp"
+                    android:layout_alignParentBottom="true"
+                    />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

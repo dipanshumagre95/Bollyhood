@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.adapter.FeaturedLocationsAdapter
-import com.app.bollyhood.adapter.LocationList_Adapter
+import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.databinding.FragmentAllShootLocationBinding
 import com.app.bollyhood.viewmodel.DataViewModel
 
@@ -70,7 +70,7 @@ class AllShootLocation_Fragment : Fragment() {
             rvlocationImage.layoutManager =
                 LinearLayoutManager(requireContext())
             rvlocationImage.setHasFixedSize(true)
-            locationListAdapter = LocationList_Adapter()
+            locationListAdapter = LocationListAdapter(true)
             rvlocationImage.adapter = locationListAdapter
             locationListAdapter?.notifyDataSetChanged()
         }

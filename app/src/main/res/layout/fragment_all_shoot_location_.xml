@@ -12,7 +12,7 @@
 
         <variable
             name="locationListAdapter"
-            type="com.app.bollyhood.adapter.LocationList_Adapter" />
+            type="com.app.bollyhood.adapter.LocationListAdapter" />
 
     </data>
 
