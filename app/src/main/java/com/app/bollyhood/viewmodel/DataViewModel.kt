@@ -1282,10 +1282,10 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-    fun getShootLocations(uid: String?,ManagerId: String) {
+    fun getShootLocations(uid: String?) {
         viewModelScope.launch {
             try {
-                val response = mainRepository.getShootLocations(uid!!,ManagerId)
+                val response = mainRepository.getShootLocations(uid!!)
                 if (response.isSuccessful && response.body() != null) {
                     if (response.body()?.result!=null) {
                         shootLocationList.postValue(response.body())

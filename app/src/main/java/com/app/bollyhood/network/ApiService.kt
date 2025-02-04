@@ -417,6 +417,5 @@ interface ApiService {
     @POST("edit_casting.php")
     suspend fun getShootLocations(
         @Field("uid") uid: String,
-        @Field("ManagerId") id: String
     ): Response<ShootLocationResponseModel>
 }

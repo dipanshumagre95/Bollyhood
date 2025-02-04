@@ -33,6 +33,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity
@@ -46,6 +47,7 @@ import com.app.bollyhood.extensions.isvalidMobileNumber
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -90,15 +92,6 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
     }
 
     private fun initUI() {
-        if (isNetworkAvailable(requireContext())) {
-            viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
-        } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
         binding.edtName.addTextChangedListener(this)
         binding.edtCategory.addTextChangedListener(this)
         binding.edtMobileNumber.addTextChangedListener(this)
@@ -223,6 +216,14 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
         }
+
+        viewModel.shootLocationList.observe(requireActivity(), Observer {
+            if (it.status == "1"&&!it.result.isNullOrEmpty()) {
+                setLocationListAdapter(it.result)
+            } else {
+                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
 
@@ -521,20 +522,34 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
             }
         }
 
-    /*private fun setLocationListAdapter()
+    private fun setLocationListAdapter(shootLocationList: ArrayList<ShootLocationModel>)
     {
         binding.apply {
             rvlocationImage.layoutManager =
                 LinearLayoutManager(requireContext())
             rvlocationImage.setHasFixedSize(true)
-            locationListAdapter = LocationListAdapter(false,this@ShootLocationManagerEditProfile)
+            locationListAdapter = LocationListAdapter(requireContext(),false,shootLocationList,this@ShootLocationManagerEditProfile)
             rvlocationImage.adapter = locationListAdapter
             locationListAdapter?.notifyDataSetChanged()
         }
-    }*/
+    }
 
     override fun itemClicked() {
         (requireActivity() as MyProfileActivity).loadFragment(AddNewLocationEditFragment())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getShootLocations(PrefManager(requireContext()).getvalue(StaticData.id).toString())
+            viewModel.getProfile(PrefManager(requireContext()).getvalue(StaticData.id).toString())
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun editClicked() {

@@ -98,7 +98,7 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
     override fun onResume() {
         super.onResume()
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getShootLocations("","")
+            viewModel.getShootLocations("")
         } else {
             Toast.makeText(
                 requireContext(),
