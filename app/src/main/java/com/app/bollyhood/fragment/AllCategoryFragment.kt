@@ -179,6 +179,15 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
                 (activity as MainActivity).loadFragment(productionHouseFragment)
             }
 
+            Categorie.LOCATIONMANAGER.toString() ->{
+                val bundle = Bundle()
+                bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
+
+                val allshootlocationFragment = AllShootLocation_Fragment()
+                allshootlocationFragment.arguments = bundle
+                (activity as MainActivity).loadFragment(allshootlocationFragment)
+            }
+
             else ->{
                 val bundle = Bundle()
                   bundle.putString(StaticData.previousFragment, "AllCategoryFragment")
