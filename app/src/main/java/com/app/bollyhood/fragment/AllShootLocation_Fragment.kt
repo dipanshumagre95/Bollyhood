@@ -1,5 +1,6 @@
 package com.app.bollyhood.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
+import com.app.bollyhood.activity.MainActivity
+import com.app.bollyhood.activity.MyProfileActivity
+import com.app.bollyhood.activity.ShootingLocationDetails
 import com.app.bollyhood.adapter.FeaturedLocationsAdapter
 import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.databinding.FragmentAllShootLocationBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 
 class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
@@ -87,8 +92,10 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
         }
     }
 
-    override fun itemClicked() {
-
+    override fun itemClicked(locationId:String) {
+        startActivity(
+            Intent(requireContext(),ShootingLocationDetails::class.java)
+            .putExtra(StaticData.id,locationId))
     }
 
     override fun editClicked() {

@@ -25,12 +25,12 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
         return when (viewType) {
             VIEW_TYPE_PRIMARY -> {
                 val binding = LocationListAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                PrimaryViewHolder(binding,onItemClickInterface)
+                PrimaryViewHolder(binding)
             }
 
             VIEW_TYPE_SECONDARY -> {
                 val binding = LocationEditListAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                SecondaryViewHolder(binding,onItemClickInterface)
+                SecondaryViewHolder(binding)
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -41,21 +41,15 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = shootLocationList[position]
         when (holder) {
-            is PrimaryViewHolder -> holder.bind(item,context)
-            is SecondaryViewHolder -> holder.bind(item,context)
+            is PrimaryViewHolder -> holder.bind(item,context,onItemClickInterface)
+            is SecondaryViewHolder -> holder.bind(item,context,onItemClickInterface)
         }
     }
 
-    class PrimaryViewHolder(private val binding: LocationListAdapterBinding,
-                            onItemClickInterface: onItemClick) :
+    class PrimaryViewHolder(private val binding: LocationListAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.root.setOnClickListener {
-                onItemClickInterface.editClicked()
-            }
-        }
 
-        fun bind(item: ShootLocationModel,context: Context) {
+        fun bind(item: ShootLocationModel,context: Context,onItemClickInterface: onItemClick) {
             if (!item.locationImage.isNullOrEmpty()){
             Glide.with(context).load(item.locationImage[0])
                 .error(R.drawable.upload_to_the_cloud_svg)
@@ -70,25 +64,21 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
             if (!item.location.isNullOrBlank()) {
                 binding.locationCity.text = item.location
             }
-        }
-    }
-
-    class SecondaryViewHolder(
-        private val binding: LocationEditListAdapterBinding,
-        onItemClickInterface: onItemClick
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.icEdit.setOnClickListener {
-                onItemClickInterface.editClicked()
-            }
 
             binding.root.setOnClickListener {
                 onItemClickInterface.editClicked()
             }
         }
+    }
 
-        fun bind(item: ShootLocationModel,context: Context) {
+    class SecondaryViewHolder(
+        private val binding: LocationEditListAdapterBinding,
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+        }
+
+        fun bind(item: ShootLocationModel,context: Context,onItemClickInterface: onItemClick) {
             if (!item.locationImage.isNullOrEmpty()){
                 Glide.with(context).load(item.locationImage[0])
                     .error(R.drawable.upload_to_the_cloud_svg)
@@ -103,13 +93,21 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
             if (!item.location.isNullOrBlank()) {
                 binding.locationCity.text = item.location
             }
+
+            binding.icEdit.setOnClickListener {
+                onItemClickInterface.editClicked()
+            }
+
+            binding.root.setOnClickListener {
+                onItemClickInterface.itemClicked(item.locationId)
+            }
         }
     }
 
 
     interface onItemClick
     {
-        fun itemClicked()
+        fun itemClicked(locationId:String)
         fun editClicked()
     }
 }
