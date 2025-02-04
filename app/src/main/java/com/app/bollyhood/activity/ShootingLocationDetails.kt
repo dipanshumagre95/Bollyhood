@@ -50,8 +50,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
     }
 
     private fun setLocationData(shootLocationModel: ShootLocationModel) {
-        if (!shootLocationModel.locationName.isNullOrBlank()){
-            binding.tvLocationName.text=shootLocationModel.locationName
+        if (!shootLocationModel.property_name.isNullOrBlank()){
+            binding.tvLocationName.text=shootLocationModel.property_name
         }else{
             binding.tvLocationName.visibility=View.GONE
         }
@@ -74,14 +74,14 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             binding.tvRupes.visibility=View.GONE
         }
 
-        if (!shootLocationModel.shiftTime.isNullOrBlank()){
-            binding.tvShift.text=shootLocationModel.shiftTime
+        if (!shootLocationModel.shift_type.isNullOrBlank()){
+            binding.tvShift.text=shootLocationModel.shift_type
         }else{
             binding.tvShift.visibility=View.GONE
         }
 
-        if (!shootLocationModel.locationDescription.isNullOrBlank()){
-            binding.tvDescription.text=shootLocationModel.locationDescription
+        if (!shootLocationModel.description.isNullOrBlank()){
+            binding.tvDescription.text=shootLocationModel.description
         }else{
             binding.tvDescription.visibility=View.GONE
         }
@@ -92,27 +92,27 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             binding.tvParking.visibility=View.GONE
         }
 
-        if (!shootLocationModel.careTaker.isNullOrBlank()){
+        if (!shootLocationModel.care_taker.isNullOrBlank()&&!shootLocationModel.care_taker.equals("Yes")){
             binding.llcareTaker.visibility=View.VISIBLE
         }else{
             binding.llcareTaker.visibility=View.GONE
         }
 
-        if (!shootLocationModel.securityAmount.isNullOrBlank()){
+        if (!shootLocationModel.security_deposit.isNullOrBlank()&&!shootLocationModel.security_deposit.equals("Yes")){
             binding.lldeposit.visibility=View.VISIBLE
         }else{
             binding.lldeposit.visibility=View.GONE
         }
 
-        if (!shootLocationModel.acCount.isNullOrBlank()){
-            binding.tvAcCount.text=shootLocationModel.acCount
+        if (!shootLocationModel.air_conditioner.isNullOrBlank()){
+            binding.tvAcCount.text=shootLocationModel.air_conditioner
         }else{
             binding.lldeposit.visibility=View.GONE
         }
 
-        if (!shootLocationModel.locationImage.isNullOrEmpty()){
+        if (!shootLocationModel.images.isNullOrEmpty()){
             binding.rvImages.visibility=View.VISIBLE
-            setAdapter(shootLocationModel.locationImage)
+            setAdapter(shootLocationModel.images)
         }else{
             binding.rvImages.visibility=View.GONE
         }

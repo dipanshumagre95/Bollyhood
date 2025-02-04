@@ -50,15 +50,15 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ShootLocationModel,context: Context,onItemClickInterface: onItemClick) {
-            if (!item.locationImage.isNullOrEmpty()){
-            Glide.with(context).load(item.locationImage[0])
+            if (!item.images.isNullOrEmpty()){
+            Glide.with(context).load(item.images[0])
                 .error(R.drawable.upload_to_the_cloud_svg)
                 .centerCrop()
                 .into(binding.ivimage)
                 }
 
-            if (!item.locationName.isNullOrBlank()) {
-                binding.locationName.text = item.locationName
+            if (!item.property_name.isNullOrBlank()) {
+                binding.locationName.text = item.property_name
             }
 
             if (!item.location.isNullOrBlank()) {
@@ -79,15 +79,15 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
         }
 
         fun bind(item: ShootLocationModel,context: Context,onItemClickInterface: onItemClick) {
-            if (!item.locationImage.isNullOrEmpty()){
-                Glide.with(context).load(item.locationImage[0])
+            if (!item.images.isNullOrEmpty()){
+                Glide.with(context).load(item.images[0])
                     .error(R.drawable.upload_to_the_cloud_svg)
                     .centerCrop()
                     .into(binding.ivimage)
             }
 
-            if (!item.locationName.isNullOrBlank()) {
-                binding.locationName.text = item.locationName
+            if (!item.property_name.isNullOrBlank()) {
+                binding.locationName.text = item.property_name
             }
 
             if (!item.location.isNullOrBlank()) {

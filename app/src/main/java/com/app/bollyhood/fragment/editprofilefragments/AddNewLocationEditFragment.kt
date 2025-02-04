@@ -366,43 +366,43 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
     }
 
     private fun setShootLocationData(shootLocationModel: ShootLocationModel) {
-        if (!shootLocationModel.locationName.isNullOrBlank()){
-            binding.edtName.setText(shootLocationModel.locationName)
+        if (!shootLocationModel.property_name.isNullOrBlank()){
+            binding.edtName.setText(shootLocationModel.property_name)
         }
 
         if (!shootLocationModel.email.isNullOrBlank()){
             binding.edtEmailAddress.setText(shootLocationModel.email)
         }
 
-        if (!shootLocationModel.locationDescription.isNullOrBlank()){
-            binding.edtDescriptions.setText(shootLocationModel.locationDescription)
+        if (!shootLocationModel.description.isNullOrBlank()){
+            binding.edtDescriptions.setText(shootLocationModel.description)
         }
 
         if (!shootLocationModel.location.isNullOrBlank()){
             binding.edtLocation.setText(shootLocationModel.location)
         }
 
-        if (!shootLocationModel.securityAmount.isNullOrBlank()){
-            binding.acSecurityDeposit.setText(shootLocationModel.securityAmount)
+        if (!shootLocationModel.security_deposit.isNullOrBlank()){
+            binding.acSecurityDeposit.setText(shootLocationModel.security_deposit)
         }
 
         if (!shootLocationModel.parking.isNullOrBlank()){
             binding.acParkings.setText(shootLocationModel.parking)
         }
 
-        if (!shootLocationModel.shiftTime.isNullOrBlank()){
-            binding.acShiftstype.setText(shootLocationModel.shiftTime)
+        if (!shootLocationModel.shift_type.isNullOrBlank()){
+            binding.acShiftstype.setText(shootLocationModel.shift_type)
         }
 
-        if (!shootLocationModel.acCount.isNullOrBlank()){
-            binding.acAirConditioner.setText(shootLocationModel.acCount)
+        if (!shootLocationModel.air_conditioner.isNullOrBlank()){
+            binding.acAirConditioner.setText(shootLocationModel.air_conditioner)
         }
 
-        if (!shootLocationModel.locationImage.isNullOrEmpty()) {
+        if (!shootLocationModel.images.isNullOrEmpty()) {
             val imageViews = listOf(binding.firstImage, binding.secondimage, binding.thirdimage,binding.fourthImage,binding.fifthimage,binding.siximage)
 
-            for (i in 0 until shootLocationModel.locationImage.size) {
-                Glide.with(mContext).load(shootLocationModel.locationImage[i])
+            for (i in 0 until shootLocationModel.images.size) {
+                Glide.with(mContext).load(shootLocationModel.images[i])
                     .error(R.drawable.upload_to_the_cloud_svg)
                     .centerCrop()
                     .into(imageViews[i])
