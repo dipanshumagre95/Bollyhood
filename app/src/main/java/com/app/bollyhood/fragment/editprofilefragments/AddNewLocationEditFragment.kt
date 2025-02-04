@@ -105,7 +105,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         val bundle = arguments
         if (bundle!=null) {
             isEdit=if(bundle.getString(StaticData.edit).toString()=="edit")true else false
-            viewModel.getShootLocations(PrefManager(mContext).getvalue(StaticData.id).toString(),bundle.getString(StaticData.id).toString())
+            viewModel.getShootLocation(bundle.getString(StaticData.id).toString())
         }
 
         initializeImageResultLaunchers()
@@ -320,7 +320,11 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         })
 
         viewModel.shootLocation.observe(requireActivity(), Observer {
-         setShootLocationData(it)
+            if (it.status == "1") {
+                setShootLocationData(it.result)
+            } else {
+                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+            }
         })
 
         viewModel.successData.observe(requireActivity(), Observer {

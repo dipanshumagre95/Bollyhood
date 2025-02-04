@@ -543,7 +543,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
     override fun onResume() {
         super.onResume()
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getShootLocations(PrefManager(requireContext()).getvalue(StaticData.id).toString())
+            viewModel.getShootLocationList(PrefManager(requireContext()).getvalue(StaticData.id).toString())
             viewModel.getProfile(PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
             Toast.makeText(

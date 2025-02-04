@@ -12,8 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
-import com.app.bollyhood.activity.MainActivity
-import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.ShootingLocationDetails
 import com.app.bollyhood.adapter.FeaturedLocationsAdapter
 import com.app.bollyhood.adapter.LocationListAdapter
@@ -105,7 +103,7 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
     override fun onResume() {
         super.onResume()
         if (isNetworkAvailable(requireContext())) {
-            viewModel.getShootLocations("")
+            viewModel.getShootLocationList("")
         } else {
             Toast.makeText(
                 requireContext(),

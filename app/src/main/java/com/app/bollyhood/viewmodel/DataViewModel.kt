@@ -19,7 +19,7 @@ import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
-import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationListResponseModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
@@ -65,8 +65,8 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var chatHistoryLiveData = MutableLiveData<ChatResponse>()
     var actorsList = MutableLiveData<ActorsresponseModel>()
     var appliedUserList = MutableLiveData<UserAppliedData>()
-    var shootLocationList = MutableLiveData<ShootLocationResponseModel>()
-    var shootLocation = MutableLiveData<ShootLocationModel>()
+    var shootLocationList = MutableLiveData<ShootLocationListResponseModel>()
+    var shootLocation = MutableLiveData<ShootLocationResponseModel>()
 
     fun splashTime() {
 
@@ -1282,10 +1282,10 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-    fun getShootLocations(uid: String?) {
+    fun getShootLocationList(uid: String?) {
         viewModelScope.launch {
             try {
-                val response = mainRepository.getShootLocations(uid!!)
+                val response = mainRepository.getShootLocationList(uid!!)
                 if (response.isSuccessful && response.body() != null) {
                     if (response.body()?.result!=null) {
                         shootLocationList.postValue(response.body())
@@ -1302,54 +1302,25 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             }
         }
     }
+
+    fun getShootLocation(locationId: String?) {
+        viewModelScope.launch {
+            try {
+                val response = mainRepository.getShootLocation(locationId!!)
+                if (response.isSuccessful && response.body() != null) {
+                    if (response.body()?.result!=null) {
+                        shootLocation.postValue(response.body())
+                    }
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

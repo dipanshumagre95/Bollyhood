@@ -14,6 +14,7 @@ import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationListResponseModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
@@ -415,7 +416,12 @@ interface ApiService {
     ): Response<SuccessResponse>
 
     @POST("edit_casting.php")
-    suspend fun getShootLocations(
+    suspend fun getShootLocationList(
         @Field("uid") uid: String,
+    ): Response<ShootLocationListResponseModel>
+
+    @POST("edit_casting.php")
+    suspend fun getShootLocation(
+        @Field("locationId") locationId: String,
     ): Response<ShootLocationResponseModel>
 }

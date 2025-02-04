@@ -242,6 +242,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/llcareTaker"
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="85dp"
                             android:layout_weight="1"
@@ -273,6 +274,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/lldeposit"
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="85dp"
                             android:layout_weight="1"
@@ -441,6 +443,7 @@
                             app:cardCornerRadius="10dp">
 
                             <ImageView
+                                android:id="@+id/managerImage"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"

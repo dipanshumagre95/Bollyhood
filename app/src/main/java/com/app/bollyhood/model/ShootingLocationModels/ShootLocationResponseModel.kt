@@ -1,6 +1,6 @@
 package com.app.bollyhood.model.ShootingLocationModels
 
-data class ShootLocationResponseModel(
+data class ShootLocationListResponseModel(
     val status: String,
     val msg: String,
     val result:ArrayList<ShootLocationModel>
@@ -24,4 +24,10 @@ data class ShootLocationModel(
     val managerId:String,
     val managerName:String,
     val managerProfileName:String,
+)
+
+data class ShootLocationResponseModel(
+    val status: String,
+    val msg: String,
+    val result:ShootLocationModel
 )
