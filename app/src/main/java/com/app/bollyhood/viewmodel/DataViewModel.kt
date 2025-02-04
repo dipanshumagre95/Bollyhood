@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.bollyhood.model.BannerResponse
 import com.app.bollyhood.model.BookMarkResponse
-import com.app.bollyhood.model.BookingResponse
 import com.app.bollyhood.model.CMSResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
@@ -20,6 +19,7 @@ import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
 import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
 import com.app.bollyhood.model.SubscriptionResponse
@@ -66,6 +66,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var actorsList = MutableLiveData<ActorsresponseModel>()
     var appliedUserList = MutableLiveData<UserAppliedData>()
     var shootLocationList = MutableLiveData<ShootLocationResponseModel>()
+    var shootLocation = MutableLiveData<ShootLocationModel>()
 
     fun splashTime() {
 

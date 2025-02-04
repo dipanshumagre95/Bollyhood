@@ -19,7 +19,7 @@ data class ShootLocationModel(
     val amount:String,
     val careTaker:String,
     val acCount:String,
-    val image:String,
+    val managerimage:String,
     val locationImage:ArrayList<String>,
     val managerId:String,
     val managerName:String,

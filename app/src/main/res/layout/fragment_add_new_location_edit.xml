@@ -344,7 +344,7 @@
                                     android:layout_marginTop="@dimen/_5sdp"
                                     android:paddingStart="@dimen/_10sdp"
                                     android:paddingEnd="@dimen/_20sdp"
-                                    android:text="Shift"
+                                    android:text="Security Deposit"
                                     android:textColorHint="#757575"
                                     android:textSize="10sp" />
 

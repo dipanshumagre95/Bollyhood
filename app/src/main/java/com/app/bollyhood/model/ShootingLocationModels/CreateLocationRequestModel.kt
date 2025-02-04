@@ -17,5 +17,5 @@ data class CreateLocationRequestModel(
     @Part var amount:RequestBody?,
     @Part var careTaker:RequestBody?,
     @Part var acCount: RequestBody?,
-    @Part var locationImage: MultipartBody.Part?,
+    @Part var locationImage: ArrayList<MultipartBody.Part>,
 )

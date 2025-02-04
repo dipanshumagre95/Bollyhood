@@ -42,13 +42,23 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentAddNewLocationEditBinding
-import com.app.bollyhood.model.ProfileModel
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isvalidDescriptions
+import com.app.bollyhood.extensions.isvalidEmailAddress
+import com.app.bollyhood.extensions.isvalidName
+import com.app.bollyhood.extensions.isvalidTeamNCondition
+import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
+import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -95,9 +105,9 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         val bundle = arguments
         if (bundle!=null) {
             isEdit=if(bundle.getString(StaticData.edit).toString()=="edit")true else false
-        }else{
-            //viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+            viewModel.getShootLocations(PrefManager(mContext).getvalue(StaticData.id).toString(),bundle.getString(StaticData.id).toString())
         }
+
         initializeImageResultLaunchers()
         binding.edtName.addTextChangedListener(this)
         binding.edtDescriptions.addTextChangedListener(this)
@@ -151,8 +161,8 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
     private fun setSecurityDepositData() {
         depositList.clear()
-        depositList.add("12Hr")
-        depositList.add("24Hr")
+        depositList.add("Yes")
+        depositList.add("No")
 
         val arrayAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(requireContext(), R.layout.dropdown, depositList)
@@ -221,11 +231,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             }
 
             R.id.tvUpdateProfile->{
-                if (isEdit){
-
-                }else{
-
-                }
+                AddNewLocation()
             }
         }
     }
@@ -313,36 +319,54 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             }
         })
 
-        viewModel.profileLiveData.observe(requireActivity(), Observer {
+        viewModel.shootLocation.observe(requireActivity(), Observer {
+         setShootLocationData(it)
+        })
+
+        viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
-                val profileModel = it.result
-                setShootLocationData(profileModel)
+                Toast.makeText(requireContext(),it.msg,Toast.LENGTH_SHORT).show()
+                (requireActivity() as MyProfileActivity).onBackPressed()
             } else {
                 Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun setShootLocationData(profileModel: ProfileModel) {
-        if (!profileModel.image.isNullOrEmpty()) {
-            Glide.with(mContext).load(profileModel.image).error(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile).into(requireActivity().findViewById(R.id.cvProfile))
+    private fun setShootLocationData(shootLocationModel: ShootLocationModel) {
+        if (!shootLocationModel.locationName.isNullOrBlank()){
+            binding.edtName.setText(shootLocationModel.locationName)
         }
 
-        binding.edtName.setText(profileModel.name)
-        binding.edtEmailAddress.setText(profileModel.email)
-        binding.edtDescriptions.setText(profileModel.description)
-        category_Id = profileModel.categories[0].category_id
-        binding.edtParkings.setText(profileModel.achievements)
-        binding.edtLocation.setText(profileModel.events)
-        binding.acShiftstype.setText("")
-        binding.acSecurityDeposit.setText(profileModel.events)
+        if (!shootLocationModel.email.isNullOrBlank()){
+            binding.edtEmailAddress.setText(shootLocationModel.email)
+        }
 
-        if (!profileModel.imagefile.isNullOrEmpty()) {
+        if (!shootLocationModel.locationDescription.isNullOrBlank()){
+            binding.edtDescriptions.setText(shootLocationModel.locationDescription)
+        }
+
+        if (!shootLocationModel.location.isNullOrBlank()){
+            binding.edtLocation.setText(shootLocationModel.location)
+        }
+
+        if (!shootLocationModel.securityAmount.isNullOrBlank()){
+            binding.acSecurityDeposit.setText(shootLocationModel.securityAmount)
+        }
+
+        if (!shootLocationModel.shiftTime.isNullOrBlank()){
+            binding.acShiftstype.setText(shootLocationModel.shiftTime)
+        }
+
+        if (!shootLocationModel.acCount.isNullOrBlank()){
+            binding.edtAcCount.setText(shootLocationModel.acCount)
+        }
+
+        if (!shootLocationModel.locationImage.isNullOrEmpty()) {
             val imageViews = listOf(binding.firstImage, binding.secondimage, binding.thirdimage,binding.fourthImage,binding.fifthimage,binding.siximage)
 
-            for (i in 0 until profileModel.imagefile.size) {
-                Glide.with(mContext).load(profileModel.imagefile[i])
+            for (i in 0 until shootLocationModel.locationImage.size) {
+                Glide.with(mContext).load(shootLocationModel.locationImage[i])
                     .error(R.drawable.upload_to_the_cloud_svg)
                     .centerCrop()
                     .into(imageViews[i])
@@ -430,7 +454,6 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
     }
 
     override fun onitemClick(pos: Int, work: WorkLinkProfileData) {
-
     }
 
     private fun dialogForImage(imageNumber: Int) {
@@ -489,7 +512,6 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     setImage(imageNumber, uri)
                 }
             }
-
             else -> {
                 Toast.makeText(mContext, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
@@ -505,6 +527,132 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             5 -> binding.fifthimage.setImageURI(uri)
             6 -> binding.siximage.setImageURI(uri)
             else -> throw IllegalArgumentException("Invalid image number")
+        }
+    }
+
+    private fun AddNewLocation()
+    {
+        if (isNetworkAvailable(mContext)) {
+            if (isvalidName(
+                    mContext, binding.edtName.text.toString().trim()
+                ) && isvalidEmailAddress(
+                    mContext, binding.edtEmailAddress.text.toString().trim()
+                ) && isvalidDescriptions(
+                    mContext, binding.edtDescriptions.text.toString().trim()
+                ) && isvalidTeamNCondition(mContext,binding.cbteamNcondition.isChecked)
+            ) {
+
+                val uid: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(mContext).getvalue(StaticData.id).toString()
+                )
+
+                var locationId: RequestBody? =null
+                if (isEdit) {
+                    locationId = RequestBody.create(
+                        "multipart/form-data".toMediaTypeOrNull(),
+                        PrefManager(mContext).getvalue(StaticData.id).toString()
+                    )
+                }else{
+                    locationId = RequestBody.create(
+                        "multipart/form-data".toMediaTypeOrNull(),
+                        ""
+                    )
+                }
+
+                val locationName: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+
+
+                val locationDescription: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+
+                val email: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtEmailAddress.text.toString().trim()
+                )
+
+                val parking: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtParkings.text.toString().trim()
+                )
+
+                val location: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtLocation.text.toString().toString()
+                )
+
+                val securityAmount: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtAmount.text.toString().trim()
+                )
+
+                val shiftTime: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.acSecurityDeposit.text.toString().trim()
+                )
+
+                val amount: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val careTaker: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    ""
+                )
+
+                val acCount: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtAcCount.text.toString().trim()
+                )
+
+                var imageBody: MultipartBody.Part?=null
+                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                for (image in imagesurl){
+                    if (image.isNotEmpty()) {
+                        val file = File(image)
+                        if (file != null) {
+                            val requestFile =
+                                RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    file
+                                )
+
+                            imageBody = MultipartBody.Part.createFormData(
+                                "imagefile[]", file.name, requestFile
+                            )
+                            imagefile.add(imageBody)
+                        }
+                    }
+                }
+
+                viewModel.addNewShootLocation(CreateLocationRequestModel(
+                    uid,
+                    locationId,
+                    locationName,
+                    locationDescription,
+                    email,
+                    parking,
+                    location,
+                    securityAmount,
+                    shiftTime,
+                    amount,
+                    careTaker,
+                    acCount,
+                    imagefile))
+            }
+        } else {
+            Toast.makeText(
+                mContext,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
