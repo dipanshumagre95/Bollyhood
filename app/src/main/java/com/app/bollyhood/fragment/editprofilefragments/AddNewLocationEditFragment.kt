@@ -564,13 +564,18 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     )
                 }
 
-                val locationName: RequestBody = RequestBody.create(
+                val property_name: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     binding.edtName.text.toString().trim()
                 )
 
 
-                val locationDescription: RequestBody = RequestBody.create(
+                val description: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtDescriptions.text.toString().trim()
+                )
+
+                val phone: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     binding.edtDescriptions.text.toString().trim()
                 )
@@ -591,12 +596,12 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     binding.edtLocation.text.toString().toString()
                 )
 
-                val securityAmount: RequestBody = RequestBody.create(
+                val security_deposit: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     binding.edtAmount.text.toString().trim()
                 )
 
-                val shiftTime: RequestBody = RequestBody.create(
+                val shift_type: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     binding.acSecurityDeposit.text.toString().trim()
                 )
@@ -606,18 +611,18 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     ""
                 )
 
-                val careTaker: RequestBody = RequestBody.create(
+                val care_taker: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     ""
                 )
 
-                val acCount: RequestBody = RequestBody.create(
+                val air_conditioner: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
                     binding.edtAcCount.text.toString().trim()
                 )
 
                 var imageBody: MultipartBody.Part?=null
-                val imagefile: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+                val images: ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
                 for (image in imagesurl){
                     if (image.isNotEmpty()) {
                         val file = File(image)
@@ -631,7 +636,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                             imageBody = MultipartBody.Part.createFormData(
                                 "imagefile[]", file.name, requestFile
                             )
-                            imagefile.add(imageBody)
+                            images.add(imageBody)
                         }
                     }
                 }
@@ -639,17 +644,18 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                 viewModel.addNewShootLocation(CreateLocationRequestModel(
                     uid,
                     locationId,
-                    locationName,
-                    locationDescription,
+                    property_name,
+                    description,
+                    phone,
                     email,
                     parking,
                     location,
-                    securityAmount,
-                    shiftTime,
+                    security_deposit,
+                    shift_type,
                     amount,
-                    careTaker,
-                    acCount,
-                    imagefile))
+                    care_taker,
+                    air_conditioner,
+                    images))
             }
         } else {
             Toast.makeText(
