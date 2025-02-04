@@ -287,7 +287,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llParkings"
+                                android:id="@+id/llAmount"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_below="@+id/llDescriptions"
@@ -302,13 +302,13 @@
                                 app:hintTextAppearance="@style/TextInputLayoutHintText">
 
                                 <EditText
-                                    android:id="@+id/edtParkings"
+                                    android:id="@+id/edtAmount"
                                     style="@style/style_sec_sec"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@android:color/transparent"
-                                    android:hint="Parkings"
+                                    android:hint="Amount"
                                     android:inputType="text"
                                     android:maxLength="50"
                                     android:paddingStart="@dimen/_10sdp"
@@ -360,7 +360,7 @@
                                     android:dropDownAnchor="@id/acSecurityDeposit"
                                     android:focusable="false"
                                     android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Select Shift"
+                                    android:hint="Select"
                                     android:paddingStart="@dimen/_10sdp"
                                     android:paddingEnd="@dimen/_20sdp"
                                     android:textColor="@color/black"
@@ -411,7 +411,7 @@
                                     android:dropDownAnchor="@id/acShiftstype"
                                     android:focusable="false"
                                     android:fontFamily="@font/neueeinstellung_regular"
-                                    android:hint="Select Shift"
+                                    android:hint="Select"
                                     android:paddingStart="@dimen/_10sdp"
                                     android:paddingEnd="@dimen/_20sdp"
                                     android:textColor="@color/black"
@@ -432,7 +432,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_10sdp"
@@ -440,65 +440,108 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llAcCount"
-                                android:layout_width="@dimen/_150sdp"
+                            <RelativeLayout
+                                android:id="@+id/rrAc"
+                                android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:layout_weight="1"
+                                android:layout_gravity="center"
                                 android:layout_marginEnd="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                                <EditText
-                                    android:id="@+id/edtAcCount"
-                                    style="@style/style_sec_sec"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@android:color/transparent"
-                                    android:hint="AcCount"
-                                    android:inputType="textMultiLine"
-                                    android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    tools:ignore="TouchTargetSizeCheck"/>
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llAmount"
-                                android:layout_width="@dimen/_150sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:layout_gravity="center_horizontal"
                                 android:layout_weight="1"
                                 android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
+                                android:orientation="horizontal">
 
-                                <EditText
-                                    android:id="@+id/edtAmount"
-                                    style="@style/style_sec_sec"
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvAirConditioner"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Air Conditioner"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/acAirConditioner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
+                                    android:layout_below="@+id/tvAirConditioner"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
                                     android:background="@android:color/transparent"
-                                    android:hint="Amount"
-                                    android:inputType="text"
-                                    android:maxLength="50"
+                                    android:clickable="false"
+                                    android:dropDownAnchor="@id/acAirConditioner"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Select"
                                     android:paddingStart="@dimen/_10sdp"
-                                    android:singleLine="true"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible"
                                     tools:ignore="TouchTargetSizeCheck"/>
 
-                            </com.google.android.material.textfield.TextInputLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/rrParkings"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rectangle_gray_with_black_border"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvParkings"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:text="Parkings"
+                                    android:textColorHint="#757575"
+                                    android:textSize="10sp" />
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/acParkings"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/tvParkings"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="false"
+                                    android:dropDownAnchor="@id/acParkings"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/neueeinstellung_regular"
+                                    android:hint="Select"
+                                    android:paddingStart="@dimen/_10sdp"
+                                    android:paddingEnd="@dimen/_20sdp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible"
+                                    tools:ignore="TouchTargetSizeCheck"/>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                            </RelativeLayout>
+
                         </LinearLayout>
 
                         <LinearLayout

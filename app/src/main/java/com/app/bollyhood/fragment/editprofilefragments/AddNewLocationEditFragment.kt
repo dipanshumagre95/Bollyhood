@@ -98,6 +98,8 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         setShiftTimeData()
         setSpannableString()
         setSecurityDepositData()
+        setAirCondisnerData()
+        setParkingData()
         return binding.root
     }
 
@@ -113,9 +115,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         binding.edtDescriptions.addTextChangedListener(this)
         binding.edtEmailAddress.addTextChangedListener(this)
         binding.edtLocation.addTextChangedListener(this)
-        binding.edtAcCount.addTextChangedListener(this)
         binding.edtAmount.addTextChangedListener(this)
-        binding.edtParkings.addTextChangedListener(this)
     }
 
     private fun addListner() {
@@ -138,6 +138,16 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
         binding.acShiftstype.setOnTouchListener { v, event ->
             binding.acShiftstype.showDropDown()
+            false
+        }
+
+        binding.acParkings.setOnTouchListener { v, event ->
+            binding.acParkings.showDropDown()
+            false
+        }
+
+        binding.acAirConditioner.setOnTouchListener { v, event ->
+            binding.acAirConditioner.showDropDown()
             false
         }
     }
@@ -171,6 +181,40 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         binding.acSecurityDeposit.setAdapter(arrayAdapter)
 
         binding.acSecurityDeposit.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                depositList[position]
+            }
+    }
+
+    private fun setAirCondisnerData() {
+        depositList.clear()
+        depositList.add("Yes")
+        depositList.add("No")
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(requireContext(), R.layout.dropdown, depositList)
+        binding.acAirConditioner.threshold = 0
+        binding.acAirConditioner.dropDownVerticalOffset = 0
+        binding.acAirConditioner.setAdapter(arrayAdapter)
+
+        binding.acAirConditioner.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                depositList[position]
+            }
+    }
+
+    private fun setParkingData() {
+        depositList.clear()
+        depositList.add("Yes")
+        depositList.add("No")
+
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(requireContext(), R.layout.dropdown, depositList)
+        binding.acParkings.threshold = 0
+        binding.acParkings.dropDownVerticalOffset = 0
+        binding.acParkings.setAdapter(arrayAdapter)
+
+        binding.acParkings.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 depositList[position]
             }
@@ -261,16 +305,8 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     binding.llLocation.setHintEnabled(true)
                 }
 
-                binding.edtAcCount.getText().hashCode() ->{
-                    binding.llAcCount.setHintEnabled(true)
-                }
-
                 binding.edtAmount.getText().hashCode() ->{
                     binding.llAmount.setHintEnabled(true)
-                }
-
-                binding.edtParkings.getText().hashCode() ->{
-                    binding.llParkings.setHintEnabled(true)
                 }
             }
         }else if (charSequence?.length!! <= 0){
@@ -291,16 +327,8 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     binding.llLocation.setHintEnabled(false)
                 }
 
-                binding.edtAcCount.getText().hashCode() ->{
-                    binding.llAcCount.setHintEnabled(false)
-                }
-
                 binding.edtAmount.getText().hashCode() ->{
                     binding.llAmount.setHintEnabled(false)
-                }
-
-                binding.edtParkings.getText().hashCode() ->{
-                    binding.llParkings.setHintEnabled(false)
                 }
             }
         }
@@ -358,12 +386,16 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             binding.acSecurityDeposit.setText(shootLocationModel.securityAmount)
         }
 
+        if (!shootLocationModel.parking.isNullOrBlank()){
+            binding.acParkings.setText(shootLocationModel.parking)
+        }
+
         if (!shootLocationModel.shiftTime.isNullOrBlank()){
             binding.acShiftstype.setText(shootLocationModel.shiftTime)
         }
 
         if (!shootLocationModel.acCount.isNullOrBlank()){
-            binding.edtAcCount.setText(shootLocationModel.acCount)
+            binding.acAirConditioner.setText(shootLocationModel.acCount)
         }
 
         if (!shootLocationModel.locationImage.isNullOrEmpty()) {
@@ -588,7 +620,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
                 val parking: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtParkings.text.toString().trim()
+                    binding.acParkings.text.toString().trim()
                 )
 
                 val location: RequestBody = RequestBody.create(
@@ -598,27 +630,27 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
                 val security_deposit: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtAmount.text.toString().trim()
+                    binding.acSecurityDeposit.text.toString().trim()
                 )
 
                 val shift_type: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.acSecurityDeposit.text.toString().trim()
+                    binding.acShiftstype.text.toString().trim()
                 )
 
                 val amount: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    ""
+                    binding.edtAmount.text.toString().trim()
                 )
 
                 val care_taker: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    ""
+                    "Yes"
                 )
 
                 val air_conditioner: RequestBody = RequestBody.create(
                     "multipart/form-data".toMediaTypeOrNull(),
-                    binding.edtAcCount.text.toString().trim()
+                    binding.acAirConditioner.text.toString().trim()
                 )
 
                 var imageBody: MultipartBody.Part?=null
