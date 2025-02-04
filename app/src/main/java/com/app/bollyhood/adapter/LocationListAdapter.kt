@@ -1,12 +1,16 @@
 package com.app.bollyhood.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bollyhood.R
 import com.app.bollyhood.databinding.LocationEditListAdapterBinding
 import com.app.bollyhood.databinding.LocationListAdapterBinding
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.bumptech.glide.Glide
 
-class LocationListAdapter(private val isEdit: Boolean,private var onItemClickInterface:LocationListAdapter.onItemClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLocationList: ArrayList<ShootLocationModel>, private var onItemClickInterface:LocationListAdapter.onItemClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_PRIMARY = 1
@@ -32,10 +36,14 @@ class LocationListAdapter(private val isEdit: Boolean,private var onItemClickInt
         }
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = shootLocationList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+        val item = shootLocationList[position]
+        when (holder) {
+            is PrimaryViewHolder -> holder.bind(item,context)
+            is SecondaryViewHolder -> holder.bind(item,context)
+        }
     }
 
     class PrimaryViewHolder(private val binding: LocationListAdapterBinding,
@@ -44,6 +52,23 @@ class LocationListAdapter(private val isEdit: Boolean,private var onItemClickInt
         init {
             binding.root.setOnClickListener {
                 onItemClickInterface.editClicked()
+            }
+        }
+
+        fun bind(item: ShootLocationModel,context: Context) {
+            if (!item.locationImage.isNullOrEmpty()){
+            Glide.with(context).load(item.locationImage[0])
+                .error(R.drawable.upload_to_the_cloud_svg)
+                .centerCrop()
+                .into(binding.ivimage)
+                }
+
+            if (!item.locationName.isNullOrBlank()) {
+                binding.locationName.text = item.locationName
+            }
+
+            if (!item.location.isNullOrBlank()) {
+                binding.locationCity.text = item.location
             }
         }
     }
@@ -60,6 +85,23 @@ class LocationListAdapter(private val isEdit: Boolean,private var onItemClickInt
 
             binding.root.setOnClickListener {
                 onItemClickInterface.editClicked()
+            }
+        }
+
+        fun bind(item: ShootLocationModel,context: Context) {
+            if (!item.locationImage.isNullOrEmpty()){
+                Glide.with(context).load(item.locationImage[0])
+                    .error(R.drawable.upload_to_the_cloud_svg)
+                    .centerCrop()
+                    .into(binding.ivimage)
+            }
+
+            if (!item.locationName.isNullOrBlank()) {
+                binding.locationName.text = item.locationName
+            }
+
+            if (!item.location.isNullOrBlank()) {
+                binding.locationCity.text = item.location
             }
         }
     }

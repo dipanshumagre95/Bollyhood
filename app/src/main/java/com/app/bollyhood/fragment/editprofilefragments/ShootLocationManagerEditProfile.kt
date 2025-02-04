@@ -33,7 +33,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity
@@ -87,7 +86,6 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
         addListner()
         addObserevs()
         setSpannableString()
-        setLocationListAdapter()
         return binding.root
     }
 
@@ -523,7 +521,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
             }
         }
 
-    private fun setLocationListAdapter()
+    /*private fun setLocationListAdapter()
     {
         binding.apply {
             rvlocationImage.layoutManager =
@@ -533,7 +531,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
             rvlocationImage.adapter = locationListAdapter
             locationListAdapter?.notifyDataSetChanged()
         }
-    }
+    }*/
 
     override fun itemClicked() {
         (requireActivity() as MyProfileActivity).loadFragment(AddNewLocationEditFragment())

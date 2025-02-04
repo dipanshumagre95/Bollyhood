@@ -403,9 +403,9 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     suspend fun addNewShootLocation(createLocationRequestModel: CreateLocationRequestModel) =
         apiService.addNewShootLocation(createLocationRequestModel)
 
-    suspend fun getShootLocations(uid: String,locationId: String) =
+    suspend fun getShootLocations(uid: String,ManagerId: String) =
         apiService.getShootLocations(
             uid,
-            locationId
+            ManagerId
         )
 }

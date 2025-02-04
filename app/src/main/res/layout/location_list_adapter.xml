@@ -26,12 +26,14 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/ivimage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/singer"
                     android:scaleType="fitXY"/>
 
                 <ImageView
+                    android:id="@+id/ivBookmark"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/love_icon"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +14,8 @@ import com.app.bollyhood.R
 import com.app.bollyhood.adapter.FeaturedLocationsAdapter
 import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.databinding.FragmentAllShootLocationBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.viewmodel.DataViewModel
 
 class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
@@ -41,6 +44,14 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
                 binding.pbLoadData.visibility = View.GONE
             }
         })
+
+        viewModel.shootLocationList.observe(requireActivity(), Observer {
+            if (it.status == "1"&&!it.result.isNullOrEmpty()) {
+                setLocationListAdapter(it.result)
+            } else {
+                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun addListner() {
@@ -64,13 +75,13 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
         }
     }
 
-    private fun setLocationListAdapter()
+    private fun setLocationListAdapter(shootLocationList: ArrayList<ShootLocationModel>)
     {
         binding.apply {
             rvlocationImage.layoutManager =
                 LinearLayoutManager(requireContext())
             rvlocationImage.setHasFixedSize(true)
-            locationListAdapter = LocationListAdapter(true,this@AllShootLocation_Fragment)
+            locationListAdapter = LocationListAdapter(requireContext(),true,shootLocationList,this@AllShootLocation_Fragment)
             rvlocationImage.adapter = locationListAdapter
             locationListAdapter?.notifyDataSetChanged()
         }
@@ -82,6 +93,19 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
 
     override fun editClicked() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getShootLocations("","")
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 }
