@@ -13,7 +13,6 @@ import com.app.bollyhood.model.OtpResponse
 import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
-import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationListResponseModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
@@ -26,7 +25,6 @@ import com.app.bollyhood.model.castinglist.CastingListResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -412,7 +410,20 @@ interface ApiService {
     @Multipart
     @POST("create_shoot_location.php")
     suspend fun addNewShootLocation(
-        @Body createLocationRequestModel: CreateLocationRequestModel
+        @Part ("uid") uid:RequestBody?,
+        @Part ("id") id:RequestBody?,
+        @Part ("property_name") property_name:RequestBody?,
+        @Part ("description") description:RequestBody?,
+        @Part ("phone") phone:RequestBody?,
+        @Part ("email") email:RequestBody?,
+        @Part ("parking") parking:RequestBody?,
+        @Part ("location") location:RequestBody?,
+        @Part ("security_deposit") security_deposit:RequestBody?,
+        @Part ("shift_type") shift_type:RequestBody?,
+        @Part ("amount") amount:RequestBody?,
+        @Part ("care_taker") care_taker:RequestBody?,
+        @Part ("air_conditioner") air_conditioner: RequestBody?,
+        @Part images: ArrayList<MultipartBody.Part>
     ): Response<SuccessResponse>
 
     @POST("edit_casting.php")

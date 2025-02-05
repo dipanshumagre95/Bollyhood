@@ -1244,6 +1244,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
 
     fun getAppliedUserData(uid: String?,castingId: String) {
         viewModelScope.launch {
+            isLoading.postValue(true)
             try {
                 val response = mainRepository.getAppliedUserData(uid!!,castingId)
                 if (response.isSuccessful && response.body() != null) {
@@ -1259,14 +1260,47 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val errorMessage = "Something went wrong. Please try again."
                 Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
                 Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
             }
         }
     }
 
-    fun addNewShootLocation(createLocationRequestModel: CreateLocationRequestModel) {
+    fun addNewShootLocation(
+        uid:RequestBody?,
+        locationId:RequestBody?,
+        property_name:RequestBody?,
+        description:RequestBody?,
+        phone:RequestBody?,
+        email:RequestBody?,
+        parking:RequestBody?,
+        location:RequestBody?,
+        security_deposit:RequestBody?,
+        shift_type:RequestBody?,
+        amount:RequestBody?,
+        care_taker:RequestBody?,
+        air_conditioner: RequestBody?,
+        images: ArrayList<MultipartBody.Part>
+    ) {
         viewModelScope.launch {
+            isLoading.postValue(true)
             try {
-                val response = mainRepository.addNewShootLocation(createLocationRequestModel)
+                val response = mainRepository.addNewShootLocation(
+                    uid,
+                    locationId,
+                    property_name,
+                    description,
+                    phone,
+                    email,
+                    parking,
+                    location,
+                    security_deposit,
+                    shift_type,
+                    amount,
+                    care_taker,
+                    air_conditioner,
+                    images
+                )
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
@@ -1278,12 +1312,15 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val errorMessage = "Something went wrong. Please try again."
                 Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
                 Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
             }
         }
     }
 
     fun getShootLocationList(uid: String?) {
         viewModelScope.launch {
+            isLoading.postValue(true)
             try {
                 val response = mainRepository.getShootLocationList(uid!!)
                 if (response.isSuccessful && response.body() != null) {
@@ -1299,12 +1336,15 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val errorMessage = "Something went wrong. Please try again."
                 Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
                 Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
             }
         }
     }
 
     fun getShootLocation(locationId: String?) {
         viewModelScope.launch {
+            isLoading.postValue(true)
             try {
                 val response = mainRepository.getShootLocation(locationId!!)
                 if (response.isSuccessful && response.body() != null) {
@@ -1320,6 +1360,8 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val errorMessage = "Something went wrong. Please try again."
                 Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
                 Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
             }
         }
     }

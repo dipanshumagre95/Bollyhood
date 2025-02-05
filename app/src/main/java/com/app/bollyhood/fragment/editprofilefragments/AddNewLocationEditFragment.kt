@@ -47,7 +47,6 @@ import com.app.bollyhood.extensions.isvalidDescriptions
 import com.app.bollyhood.extensions.isvalidEmailAddress
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
-import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.PathUtils
@@ -673,7 +672,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     }
                 }
 
-                viewModel.addNewShootLocation(CreateLocationRequestModel(
+                viewModel.addNewShootLocation(
                     uid,
                     locationId,
                     property_name,
@@ -687,7 +686,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                     amount,
                     care_taker,
                     air_conditioner,
-                    images))
+                    images)
             }
         } else {
             Toast.makeText(
