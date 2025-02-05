@@ -417,7 +417,7 @@ interface ApiService {
         @Part ("phone") phone:RequestBody?,
         @Part ("email") email:RequestBody?,
         @Part ("parking") parking:RequestBody?,
-        @Part ("location") location:RequestBody?,
+        @Part ("property_location") location:RequestBody?,
         @Part ("security_deposit") security_deposit:RequestBody?,
         @Part ("shift_type") shift_type:RequestBody?,
         @Part ("amount") amount:RequestBody?,

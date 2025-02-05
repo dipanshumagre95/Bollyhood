@@ -499,7 +499,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/contactBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="63dp"
+                        android:layout_height="50dp"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/rectangle_apply_button"

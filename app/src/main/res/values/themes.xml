@@ -59,4 +59,10 @@
         <item name="android:windowExitAnimation">@anim/slide_out_down</item>
     </style>
 
+    <style name="CustomTimePicker" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">#EF4F6A</item>
+        <item name="colorAccent">#EF4F6A</item>
+    </style>
+
+
 </resources>
