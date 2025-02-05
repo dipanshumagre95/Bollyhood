@@ -6,7 +6,7 @@ import retrofit2.http.Part
 
 data class CreateLocationRequestModel(
     @Part var uid:RequestBody?,
-    @Part var locationId:RequestBody?,
+    @Part var id:RequestBody?,
     @Part var property_name:RequestBody?,
     @Part var description:RequestBody?,
     @Part var phone:RequestBody?,

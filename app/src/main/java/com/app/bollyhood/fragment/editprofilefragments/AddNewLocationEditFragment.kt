@@ -666,7 +666,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                                 )
 
                             imageBody = MultipartBody.Part.createFormData(
-                                "imagefile[]", file.name, requestFile
+                                "images[]", file.name, requestFile
                             )
                             images.add(imageBody)
                         }

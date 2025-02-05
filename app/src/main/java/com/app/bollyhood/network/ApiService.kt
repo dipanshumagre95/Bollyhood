@@ -410,7 +410,7 @@ interface ApiService {
     suspend fun getAppliedUserData(@Query("uid") uid: String,@Query("casting_id") casting_id: String?): Response<UserAppliedData>
 
     @Multipart
-    @POST("edit_casting.php")
+    @POST("create_shoot_location.php")
     suspend fun addNewShootLocation(
         @Body createLocationRequestModel: CreateLocationRequestModel
     ): Response<SuccessResponse>
