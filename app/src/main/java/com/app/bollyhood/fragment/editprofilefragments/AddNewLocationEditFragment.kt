@@ -248,7 +248,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
             R.id.fourthImage->{
                 if (checkPermission()){
-                    dialogForImage(1)
+                    dialogForImage(4)
                 }else{
                     checkPermission()
                 }
@@ -256,7 +256,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
             R.id.fifthimage->{
                 if (checkPermission()){
-                    dialogForImage(2)
+                    dialogForImage(5)
                 }else{
                     checkPermission()
                 }
@@ -264,7 +264,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
 
             R.id.siximage->{
                 if (checkPermission()){
-                    dialogForImage(3)
+                    dialogForImage(6)
                 }else{
                     checkPermission()
                 }
