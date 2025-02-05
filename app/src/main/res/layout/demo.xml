@@ -3,759 +3,475 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.app.bollyhood.adapter.ImageViewPagerAdapter" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:id="@+id/llmain"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/rvImages"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_130sdp"
-                    android:layout_marginStart="-10dp"
-                    android:layout_marginEnd="-10dp"
-                    android:background="@drawable/pagebackground">
+                    android:layout_height="@dimen/_260sdp"
+                    android:adapter="@{adapter}"
+                    android:background="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                    <RelativeLayout
-                        android:id="@+id/ivBack"
+                <ImageView
+                    android:id="@+id/llBack"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/white_back_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/leftSide"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@drawable/left_side_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/rvImages"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/rightSide"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/right_side_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/rvImages"
+                    app:layout_constraintEnd_toEndOf="@+id/rvImages"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/llBookmark"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/round_pink_color"
+                    android:backgroundTint="@color/white"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iconHeart"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/white_heart"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-20dp"
+                    android:background="@drawable/rectangle_lightcornerwhite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvImages">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/location_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_25sdp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:drawableStart="@drawable/map_point"
+                        android:drawablePadding="@dimen/_2sdp"
+                        android:drawableTint="@color/black"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:text="Madh , Mumbai"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/white_border"
-                            android:paddingStart="@dimen/_7sdp"
-                            android:paddingTop="@dimen/_4sdp"
-                            android:paddingEnd="@dimen/_7sdp"
-                            android:paddingBottom="@dimen/_7sdp"
-                            android:src="@drawable/icon_back" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvLocationName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/location_city"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:maxLines="1"
+                        android:text="Elements Villa Madh"
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_below="@+id/tvLocationName"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/casting_appled_user_bg">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvrating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:text="⭐️ 4.9 (1.2K review)"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:id="@+id/llprice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvRupes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="25,000/"
+                                android:textColor="@color/black"
+                                android:textSize="23sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvShift"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="12hr"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+                        </LinearLayout>
 
                     </RelativeLayout>
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txwhat_we_offer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_25sdp"
-                        android:text="Add New Location"
-                        android:textColor="@color/white"
-                        android:textSize="25dp"
-                        android:layout_centerHorizontal="true"
-                        app:fontFamily="@font/urbanist_semibold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/ellipse_5"
-                        android:layout_marginEnd="-30dp"
-                        android:layout_alignParentEnd="true" />
-
-                    <ImageView
-                        android:layout_width="180dp"
-                        android:layout_height="120dp"
-                        android:src="@drawable/ellipse_5"
-                        android:layout_marginEnd="-30dp"
-                        android:layout_marginTop="-10dp"
-                        android:layout_alignParentEnd="true" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/llmain"
-                    android:layout_marginTop="@dimen/_20sdp">
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/lledtName"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/rectangle_gray_with_black_border"
-                        android:gravity="center"
-                        android:padding="@dimen/_5sdp"
-                        android:fontFamily="@font/roboto_regular"
-                        app:hintAnimationEnabled="true"
-                        app:hintEnabled="false"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                        <EditText
-                            android:id="@+id/edtName"
-                            style="@style/style_sec_sec"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:hint="Add Name"
-                            android:fontFamily="@font/roboto_regular"
-                            android:inputType="textPersonName"
-                            android:maxLength="50"
-                            android:maxLines="1"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/llDescriptions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/lledtName"
-                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_below="@+id/view1"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/rectangle_gray_with_black_border">
+                        android:fontFamily="@font/inter_medium"
+                        android:text="What we offer"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
 
-                        <TextView
-                            android:id="@+id/discriptionhint"
-                            style="@style/TextInputLayoutHintText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="About Location" />
-
-
-                        <EditText
-                            android:id="@+id/edtDescriptions"
-                            style="@style/style_sec_sec"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/discriptionhint"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:inputType="textMultiLine"
-                            android:fontFamily="@font/roboto_regular"
-                            android:maxLength="250"
-                            android:padding="@dimen/_5sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:scrollbars="vertical"
-                            android:singleLine="true" />
-
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/textcount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/llDescriptions"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:textColor="#757575"
-                        android:textSize="@dimen/_7sdp"
-                        android:visibility="gone" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/llEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_below="@+id/textcount"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/rectangle_gray_with_black_border"
-                        android:gravity="center"
-                        android:padding="@dimen/_5sdp"
-                        android:fontFamily="@font/roboto_regular"
-                        app:hintAnimationEnabled="true"
-                        app:hintEnabled="false"
-                        app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                        <EditText
-                            android:id="@+id/edtEmailAddress"
-                            style="@style/style_sec_sec"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:hint="Email"
-                            android:fontFamily="@font/roboto_regular"
-                            android:inputType="textEmailAddress"
-                            android:maxLength="50"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@+id/txwhat_we_offer"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:background="@color/black" />
 
                     <LinearLayout
-                        android:id="@+id/profile_influencer"
+                        android:id="@+id/lloffer"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/llEmail"
-                        android:visibility="visible"
+                        android:layout_height="95dp"
+                        android:layout_below="@+id/line1"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvAddWorkLink"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="90sp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/right_line" />
-
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/roboto_medium"
-                                android:padding="@dimen/_5sdp"
-                                android:text="WHAT WE OFFER"
-                                android:textColor="#212121"
-                                android:textSize="@dimen/_11sdp" />
-
-                            <ImageView
-                                android:layout_width="90dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/left_line" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_15sdp"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llLocation"
-                                android:layout_width="@dimen/_150sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                                <EditText
-                                    android:id="@+id/edtLocation"
-                                    style="@style/style_sec_sec"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@android:color/transparent"
-                                    android:hint="Location"
-                                    android:inputType="textMultiLine"
-                                    android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llGenre"
-                                android:layout_width="@dimen/_150sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                                <EditText
-                                    android:id="@+id/edtGenre"
-                                    style="@style/style_sec_sec"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@android:color/transparent"
-                                    android:hint="Genre"
-                                    android:inputType="text"
-                                    android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_15sdp"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llEvents"
-                                android:layout_width="@dimen/_150sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                                <EditText
-                                    android:id="@+id/edtEvents"
-                                    style="@style/style_sec_sec"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@android:color/transparent"
-                                    android:hint="Event Types"
-                                    android:inputType="text"
-                                    android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/llLanguages"
-                                android:layout_width="@dimen/_150sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_below="@+id/llDescriptions"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_gray_with_black_border"
-                                android:gravity="center"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:hintAnimationEnabled="true"
-                                app:hintEnabled="false"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText">
-
-                                <EditText
-                                    android:id="@+id/edtLanguages"
-                                    style="@style/style_sec_sec"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@android:color/transparent"
-                                    android:hint="Languages"
-                                    android:inputType="text"
-                                    android:maxLength="50"
-                                    android:paddingStart="@dimen/_10sdp"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/txworkLink"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="90sp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/right_line" />
-
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/roboto_medium"
-                                android:padding="@dimen/_5sdp"
-                                android:text="LOCATION PHOTOS "
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_11sdp" />
-
-                            <ImageView
-                                android:layout_width="90dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/left_line" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/singerphoto"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_100sdp"
-                            android:layout_below="@id/llworkLink"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="@dimen/_15sdp"
-                            android:weightSum="3">
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_65sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_app_background">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/_1sdp"
-                                    android:elevation="@dimen/_5sdp"
-                                    app:cardBackgroundColor="@color/grey"
-                                    app:cardCornerRadius="@dimen/_10sdp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/upload_to_the_cloud_svg">
-
-
-                                        <ImageView
-                                            android:id="@+id/firstImage"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:adjustViewBounds="true"
-                                            android:contentDescription="@string/app_name"
-                                            android:scaleType="center" />
-
-                                    </RelativeLayout>
-
-                                </androidx.cardview.widget.CardView>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_65sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_app_background">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/_1sdp"
-                                    android:elevation="@dimen/_5sdp"
-                                    app:cardBackgroundColor="@color/grey"
-                                    app:cardCornerRadius="@dimen/_10sdp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/upload_to_the_cloud_svg">
-
-
-                                        <ImageView
-                                            android:id="@+id/secondimage"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:adjustViewBounds="true"
-                                            android:contentDescription="@string/app_name"
-                                            android:scaleType="center" />
-
-                                    </RelativeLayout>
-
-                                </androidx.cardview.widget.CardView>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_65sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_app_background">
-
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/_1sdp"
-                                    android:elevation="@dimen/_5sdp"
-                                    app:cardBackgroundColor="@color/grey"
-                                    app:cardCornerRadius="@dimen/_10sdp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/upload_to_the_cloud_svg">
-
-
-                                        <ImageView
-                                            android:id="@+id/thirdimage"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:adjustViewBounds="true"
-                                            android:contentDescription="@string/app_name"
-                                            android:scaleType="center"
-
-                                            />
-
-                                    </RelativeLayout>
-
-                                </androidx.cardview.widget.CardView>
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/second3"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_100sdp"
-                            android:layout_below="@id/first3"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="@dimen/_15sdp"
-                            android:weightSum="3">
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_65sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_app_background">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/_1sdp"
-                                    android:elevation="@dimen/_5sdp"
-                                    app:cardBackgroundColor="@color/grey"
-                                    app:cardCornerRadius="@dimen/_10sdp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/upload_to_the_cloud_svg">
-
-
-                                        <ImageView
-                                            android:id="@+id/fourthImage"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:adjustViewBounds="true"
-                                            android:contentDescription="@string/app_name"
-                                            android:scaleType="centerCrop" />
-
-                                        <ProgressBar
-                                            android:id="@+id/progressBar4"
-                                            style="?android:attr/progressBarStyleLarge"
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center"
-                                            android:theme="@style/CircularProgress"
-                                            android:visibility="gone"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintLeft_toLeftOf="parent"
-                                            app:layout_constraintRight_toRightOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent" />
-
-                                    </RelativeLayout>
-
-
-                                </androidx.cardview.widget.CardView>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_65sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_app_background">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/_1sdp"
-                                    android:elevation="@dimen/_5sdp"
-                                    app:cardBackgroundColor="@color/grey"
-                                    app:cardCornerRadius="@dimen/_10sdp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/upload_to_the_cloud_svg">
-
-
-                                        <ImageView
-                                            android:id="@+id/fifthimage"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:adjustViewBounds="true"
-                                            android:contentDescription="@string/app_name"
-                                            android:scaleType="centerCrop" />
-
-                                        <ProgressBar
-                                            android:id="@+id/progressBar5"
-                                            style="?android:attr/progressBarStyleLarge"
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center"
-                                            android:theme="@style/CircularProgress"
-                                            android:visibility="gone"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintLeft_toLeftOf="parent"
-                                            app:layout_constraintRight_toRightOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent" />
-
-                                    </RelativeLayout>
-
-                                </androidx.cardview.widget.CardView>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_65sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                android:background="@drawable/rectangle_app_background">
-
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="@dimen/_1sdp"
-                                    android:elevation="@dimen/_5sdp"
-                                    app:cardBackgroundColor="@color/grey"
-                                    app:cardCornerRadius="@dimen/_10sdp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/upload_to_the_cloud_svg">
-
-
-                                        <ImageView
-                                            android:id="@+id/siximage"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:adjustViewBounds="true"
-                                            android:contentDescription="@string/app_name"
-                                            android:scaleType="centerCrop" />
-
-                                        <ProgressBar
-                                            android:id="@+id/progressBar6"
-                                            style="?android:attr/progressBarStyleLarge"
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center"
-                                            android:theme="@style/CircularProgress"
-                                            android:visibility="gone"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintLeft_toLeftOf="parent"
-                                            app:layout_constraintRight_toRightOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent" />
-
-                                    </RelativeLayout>
-
-
-                                </androidx.cardview.widget.CardView>
-                            </LinearLayout>
-                        </LinearLayout>
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:weightSum="4">
 
                         <RelativeLayout
-                            android:id="@+id/llteamNcondition"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginStart="30sp"
-                            android:layout_marginEnd="24sp"
-                            android:layout_marginBottom="@dimen/_5sdp">
+                            android:layout_width="@dimen/_55sdp"
+                            android:layout_height="85dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
+                            android:gravity="center_vertical">
 
-                            <CheckBox
-                                android:id="@+id/cbteamNcondition"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_alignParentStart="true"
-                                android:layout_gravity="center" />
+                            <ImageView
+                                android:id="@+id/image1"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/parking_icon" />
 
                             <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvteam_condition"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_toRightOf="@+id/cbteamNcondition"
-                                android:fontFamily="@font/poppins_regular"
-                                android:gravity="center_vertical"
-                                android:singleLine="true"
-                                android:textSize="9dp" />
+                                android:id="@+id/tvParking"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/image1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="5 Parkings"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
+
                         </RelativeLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tvUpdateProfile"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-                            android:layout_marginBottom="15dp"
-                            android:background="@drawable/rectangle_app_background"
-                            android:fontFamily="@font/urbanist_semibold"
-                            android:gravity="center"
-                            android:text="@string/str_update_profile"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_15sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                        <RelativeLayout
+                            android:id="@+id/llcareTaker"
+                            android:layout_width="@dimen/_55sdp"
+                            android:layout_height="85dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:id="@+id/image2"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerHorizontal="true"
+                                android:padding="@dimen/_2sdp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/person_icon" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/image2"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="Care Taker"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/lldeposit"
+                            android:layout_width="@dimen/_55sdp"
+                            android:layout_height="85dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:id="@+id/image3"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/deposit_icon" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvDeposit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/image3"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="Deposit"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="70sp"
+                            android:layout_height="85dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:id="@+id/image4"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/furniture_icon" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvAcCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/image4"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="6 Ac"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvabout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lloffer"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="About"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvabout"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/_5sdp"
+                        android:text="The best modern bungalow artistic modern elevation features with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen &amp; Family Room Bungalow with Swimming pool and....Read More"
+                        android:textColor="#757575"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txHostedBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvDescription"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Hosted by"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/llhosting_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txHostedBy"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/tvManagerProfile"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:elevation="@dimen/_5sdp"
+                            app:cardBackgroundColor="@color/grey"
+                            app:cardCornerRadius="10dp">
+
+                            <ImageView
+                                android:id="@+id/managerImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/singer" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvmanageerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_toRightOf="@+id/tvManagerProfile"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="Bablo Yadav"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvRatingManager"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvmanageerName"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_toRightOf="@+id/tvManagerProfile"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="⭐️ 4.9 (1.2K review)"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RelativeLayout
+                            android:id="@+id/tvMessage"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:background="@drawable/rectangle_app_background"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/ic_chat"
+                                android:backgroundTint="@color/white" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/contactBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llhosting_profile"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_app_background"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="Contact Now"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp" />
+
                 </RelativeLayout>
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -764,7 +480,6 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
-            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:theme="@style/CircularProgress"
             android:visibility="gone"

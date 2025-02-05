@@ -30,15 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/shootLoccationImage"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/rvImages"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/singer"
+                    android:layout_height="@dimen/_260sdp"
+                    android:adapter="@{adapter}"
+                    android:layout_gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
                     android:id="@+id/llBack"
@@ -48,6 +48,28 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:src="@drawable/white_back_icon"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/leftSide"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@drawable/left_side_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/rvImages"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/rightSide"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/right_side_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/rvImages"
+                    app:layout_constraintEnd_toEndOf="@+id/rvImages"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <RelativeLayout
@@ -71,153 +93,135 @@
 
                 </RelativeLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
+                    android:id="@+id/relativeLayout11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-20dp"
                     android:background="@drawable/rectangle_lightcornerwhite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shootLoccationImage">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvLocationName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:fontFamily="@font/urbanist_semibold"
-                        android:maxLines="2"
-                        android:text="Elements Villa \nMadh"
-                        android:textColor="@color/black"
-                        android:textSize="34sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/rvImages">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/location_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:drawableStart="@drawable/map_point"
                         android:drawablePadding="@dimen/_2sdp"
                         android:drawableTint="@color/black"
                         android:fontFamily="@font/urbanist_regular"
                         android:text="Madh , Mumbai"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvLocationName" />
+                        android:textSize="12sp" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvrating"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvLocationName"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="@dimen/_13sdp"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        android:fontFamily="@font/urbanist_regular"
-                        android:text="⭐️ 4.9 (1.2K review)"
+                        android:layout_below="@+id/location_city"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:maxLines="1"
+                        android:text="Elements Villa Madh"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/location_city" />
+                        android:textSize="25sp" />
 
-                    <LinearLayout
-                        android:id="@+id/llprice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_14sdp"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvLocationName">
+                    <RelativeLayout
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_below="@+id/tvLocationName"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@drawable/casting_appled_user_bg">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tvRupes"
+                            android:id="@+id/tvrating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="25,000/"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:text="⭐️ 4.9 (1.2K review)"
                             android:textColor="@color/black"
-                            android:textSize="23sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+                            android:textSize="14sp" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tvShift"
+                        <LinearLayout
+                            android:id="@+id/llprice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_regular"
-                            android:text="12hr"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
-                    </LinearLayout>
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="horizontal">
 
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="match_parent"
-                        android:layout_height=".5sp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="20sp"
-                        android:background="#ECEBEB"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/llprice" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvRupes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="25,000/"
+                                android:textColor="@color/black"
+                                android:textSize="23sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:fontFamily="@font/urbanist_regular"
-                        android:inputType="textMultiLine"
-                        android:text="The best modern bungalow artistic modern elevation features with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen &amp; Family Room Bungalow with Swimming pool and....Read More"
-                        android:textColor="#757575"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toBottomOf="@+id/view" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvShift"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="12hr"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txwhat_we_offer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_below="@+id/view1"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_semibold"
+                        android:fontFamily="@font/inter_medium"
                         android:text="What we offer"
                         android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+                        android:textSize="24sp" />
+
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@+id/txwhat_we_offer"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:background="@color/black" />
 
                     <LinearLayout
                         android:id="@+id/lloffer"
                         android:layout_width="match_parent"
                         android:layout_height="95dp"
+                        android:layout_below="@+id/line1"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:gravity="center_vertical"
-                        android:weightSum="4"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txwhat_we_offer">
+                        android:weightSum="4">
 
                         <RelativeLayout
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="85dp"
                             android:layout_weight="1"
-                            android:elevation="@dimen/_10sdp"
                             android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
                             android:gravity="center_vertical">
 
                             <ImageView
@@ -225,19 +229,19 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
-                                android:src="@drawable/parking_icon"/>
+                                android:src="@drawable/parking_icon" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tvParking"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5 Parkings"
-                                android:textSize="10sp"
-                                android:textColor="#666667"
+                                android:layout_below="@+id/image1"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
-                                android:layout_centerHorizontal="true"
-                                android:layout_below="@+id/image1"/>
+                                android:text="5 Parkings"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
 
                         </RelativeLayout>
 
@@ -245,10 +249,10 @@
                             android:id="@+id/llcareTaker"
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="85dp"
-                            android:layout_weight="1"
-                            android:elevation="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="1"
                             android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
                             android:gravity="center_vertical">
 
                             <ImageView
@@ -258,18 +262,18 @@
                                 android:layout_centerHorizontal="true"
                                 android:padding="@dimen/_2sdp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/person_icon"/>
+                                android:src="@drawable/person_icon" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Care Taker"
-                                android:textSize="10sp"
-                                android:textColor="#666667"
+                                android:layout_below="@+id/image2"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
-                                android:layout_centerHorizontal="true"
-                                android:layout_below="@+id/image2"/>
+                                android:text="Care Taker"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
 
                         </RelativeLayout>
 
@@ -277,10 +281,10 @@
                             android:id="@+id/lldeposit"
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="85dp"
-                            android:layout_weight="1"
-                            android:elevation="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="1"
                             android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
                             android:gravity="center_vertical">
 
                             <ImageView
@@ -288,29 +292,29 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
-                                android:src="@drawable/deposit_icon"/>
+                                android:src="@drawable/deposit_icon" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tvDeposit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Deposit"
-                                android:textSize="10sp"
-                                android:textColor="#666667"
+                                android:layout_below="@+id/image3"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
-                                android:layout_centerHorizontal="true"
-                                android:layout_below="@+id/image3"/>
+                                android:text="Deposit"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
 
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:layout_width="70sp"
                             android:layout_height="85dp"
-                            android:layout_weight="1"
-                            android:elevation="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_weight="1"
                             android:background="@drawable/whitebackground"
+                            android:elevation="@dimen/_5sdp"
                             android:gravity="center_vertical">
 
                             <ImageView
@@ -318,119 +322,69 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:layout_centerHorizontal="true"
-                                android:src="@drawable/furniture_icon"/>
+                                android:src="@drawable/furniture_icon" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tvAcCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="6 Ac"
-                                android:textSize="10sp"
-                                android:textColor="#666667"
+                                android:layout_below="@+id/image4"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
-                                android:layout_centerHorizontal="true"
-                                android:layout_below="@+id/image4"/>
+                                android:text="6 Ac"
+                                android:textColor="#666667"
+                                android:textSize="10sp" />
 
                         </RelativeLayout>
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvabout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lloffer"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="About"
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal"
+                        android:layout_below="@+id/tvabout"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lloffer"
-                        >
-
-                        <View
-                            android:layout_width="100dp"
-                            android:layout_height=".5dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@color/gray" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/urbanist_semibold"
-                            android:text="Image Gallery"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-
-                        <View
-                            android:layout_width="100dp"
-                            android:layout_height=".5dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@color/gray" />
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/llrvimageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                        <View
-                            android:id="@+id/leftSide"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:background="@drawable/left_side_arrow"/>
-
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/rvImages"
-                            android:layout_width="match_parent"
-                            android:layout_height="160dp"
-                            android:adapter="@{adapter}"
-                            android:layout_gravity="center_horizontal"/>
-
-                        <View
-                            android:id="@+id/rightSide"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/right_side_arrow"/>
-
-                    </RelativeLayout>
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/_5sdp"
+                        android:text="The best modern bungalow artistic modern elevation features with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen &amp; Family Room Bungalow with Swimming pool and....Read More"
+                        android:textColor="#757575"
+                        android:textSize="16sp" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txHostedBy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_below="@+id/tvDescription"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_semibold"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Hosted by"
                         android:textColor="@color/black"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/llrvimageView" />
+                        android:textSize="24sp" />
 
                     <RelativeLayout
                         android:id="@+id/llhosting_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txHostedBy">
+                        android:layout_below="@+id/txHostedBy"
+                        android:layout_marginTop="@dimen/_10sdp">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/tvManagerProfile"
@@ -489,8 +443,8 @@
                             <TextView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:backgroundTint="@color/white"
-                                android:background="@drawable/ic_chat" />
+                                android:background="@drawable/ic_chat"
+                                android:backgroundTint="@color/white" />
 
                         </RelativeLayout>
 
@@ -499,23 +453,22 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/contactBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/rectangle_apply_button"
-                        android:fontFamily="@font/inter_semibold"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llhosting_profile"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:background="@drawable/rectangle_app_background"
+                        android:fontFamily="@font/satoshi_bold"
                         android:gravity="center"
+                        android:padding="@dimen/_10sdp"
                         android:text="Contact Now"
+                        android:textAllCaps="true"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/llhosting_profile" />
+                        android:textSize="@dimen/_13sdp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
