@@ -554,10 +554,10 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
         }
     }
 
-    override fun editClicked() {
+    override fun editClicked(shootLocationModel: ShootLocationModel) {
         val bundle = Bundle()
         bundle.putString(StaticData.edit, "edit")
-        bundle.putString(StaticData.id, "edit")
+        bundle.putString(StaticData.id, shootLocationModel.id)
         val addNewLocationEditFragment = AddNewLocationEditFragment()
         addNewLocationEditFragment.arguments = bundle
 

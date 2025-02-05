@@ -98,7 +98,7 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
             .putExtra(StaticData.id,locationId))
     }
 
-    override fun editClicked() {
+    override fun editClicked(shootLocationModel: ShootLocationModel) {
 
     }
 

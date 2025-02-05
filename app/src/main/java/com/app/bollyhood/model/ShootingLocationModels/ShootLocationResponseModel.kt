@@ -7,7 +7,7 @@ data class ShootLocationListResponseModel(
 )
 
 data class ShootLocationModel(
-    val locationId:String,
+    val id:String,
     val property_name:String,
     val description:String,
     val email:String,

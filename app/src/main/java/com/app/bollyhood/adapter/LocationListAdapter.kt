@@ -66,7 +66,7 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
             }
 
             binding.root.setOnClickListener {
-                onItemClickInterface.editClicked()
+                onItemClickInterface.editClicked(item)
             }
         }
     }
@@ -95,11 +95,11 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
             }
 
             binding.icEdit.setOnClickListener {
-                onItemClickInterface.editClicked()
+                onItemClickInterface.editClicked(item)
             }
 
             binding.root.setOnClickListener {
-                onItemClickInterface.itemClicked(item.locationId)
+                onItemClickInterface.itemClicked(item.id)
             }
         }
     }
@@ -108,6 +108,6 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
     interface onItemClick
     {
         fun itemClicked(locationId:String)
-        fun editClicked()
+        fun editClicked(shootLocationModel: ShootLocationModel)
     }
 }
