@@ -426,7 +426,8 @@ interface ApiService {
         @Part images: ArrayList<MultipartBody.Part>
     ): Response<SuccessResponse>
 
-    @POST("edit_casting.php")
+    @FormUrlEncoded
+    @POST("get_shoot_location.php")
     suspend fun getShootLocationList(
         @Field("uid") uid: String,
     ): Response<ShootLocationListResponseModel>

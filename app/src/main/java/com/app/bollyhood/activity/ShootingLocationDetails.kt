@@ -75,8 +75,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             binding.tvLocationName.visibility=View.GONE
         }
 
-        if (!shootLocationModel.location.isNullOrBlank()){
-            binding.locationCity.text=shootLocationModel.location
+        if (!shootLocationModel.property_location.isNullOrBlank()){
+            binding.locationCity.text=shootLocationModel.property_location
         }else{
             binding.locationCity.visibility=View.GONE
         }

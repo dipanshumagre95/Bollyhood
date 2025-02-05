@@ -6,8 +6,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160sp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/rectangle_apply_button">
 
         <androidx.cardview.widget.CardView
@@ -16,7 +16,7 @@
             android:elevation="@dimen/_5sdp"
             android:layout_margin="0.5sp"
             app:cardBackgroundColor="@color/grey"
-            app:cardCornerRadius="26dp"
+            app:cardCornerRadius="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

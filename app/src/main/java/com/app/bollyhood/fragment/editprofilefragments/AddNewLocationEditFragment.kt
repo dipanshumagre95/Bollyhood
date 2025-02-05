@@ -377,8 +377,8 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             binding.edtDescriptions.setText(shootLocationModel.description)
         }
 
-        if (!shootLocationModel.location.isNullOrBlank()){
-            binding.edtLocation.setText(shootLocationModel.location)
+        if (!shootLocationModel.property_location.isNullOrBlank()){
+            binding.edtLocation.setText(shootLocationModel.property_location)
         }
 
         if (!shootLocationModel.security_deposit.isNullOrBlank()){

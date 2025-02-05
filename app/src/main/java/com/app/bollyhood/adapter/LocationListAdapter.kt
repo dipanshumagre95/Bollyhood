@@ -61,8 +61,8 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
                 binding.locationName.text = item.property_name
             }
 
-            if (!item.location.isNullOrBlank()) {
-                binding.locationCity.text = item.location
+            if (!item.property_location.isNullOrBlank()) {
+                binding.locationCity.text = item.property_location
             }
 
             binding.root.setOnClickListener {
@@ -90,8 +90,8 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
                 binding.locationName.text = item.property_name
             }
 
-            if (!item.location.isNullOrBlank()) {
-                binding.locationCity.text = item.location
+            if (!item.property_location.isNullOrBlank()) {
+                binding.locationCity.text = item.property_location
             }
 
             binding.icEdit.setOnClickListener {

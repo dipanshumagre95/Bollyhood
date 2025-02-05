@@ -13,7 +13,7 @@ data class ShootLocationModel(
     val email:String,
     val phone:String,
     val parking:String,
-    val location:String,
+    val property_location:String,
     val security_deposit:String,
     val shift_type:String,
     val rating:String,

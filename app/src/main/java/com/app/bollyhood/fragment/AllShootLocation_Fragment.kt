@@ -20,7 +20,9 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick {
 
     lateinit var binding: FragmentAllShootLocationBinding
