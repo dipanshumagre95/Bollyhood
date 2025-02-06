@@ -137,6 +137,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
 
         if (!shootLocationModel.images.isNullOrEmpty()){
             binding.rvImages.visibility=View.VISIBLE
+            ImageList.clear()
+            ImageList=shootLocationModel.images
             setAdapter(shootLocationModel.images)
         }else{
             binding.rvImages.visibility=View.GONE

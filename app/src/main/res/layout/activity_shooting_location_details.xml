@@ -124,7 +124,7 @@
                         android:layout_below="@+id/location_city"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginEnd="@dimen/_1sdp"
-                        android:layout_marginTop="-5dp"
+                        android:layout_marginTop="-8dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:maxLines="1"
                         android:text="Elements Villa Madh"
@@ -136,9 +136,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_below="@+id/tvLocationName"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:background="@drawable/casting_appled_user_bg">
 
                         <com.google.android.material.textview.MaterialTextView
