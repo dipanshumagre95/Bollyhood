@@ -411,7 +411,7 @@ interface ApiService {
     @POST("create_shoot_location.php")
     suspend fun addNewShootLocation(
         @Part ("uid") uid:RequestBody?,
-        @Part ("id") id:RequestBody?,
+        @Part ("locationId") locationId:RequestBody?,
         @Part ("property_name") property_name:RequestBody?,
         @Part ("description") description:RequestBody?,
         @Part ("phone") phone:RequestBody?,

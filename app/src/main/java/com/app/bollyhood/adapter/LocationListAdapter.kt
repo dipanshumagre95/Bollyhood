@@ -66,7 +66,7 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
             }
 
             binding.root.setOnClickListener {
-                onItemClickInterface.itemClicked(item.id)
+                onItemClickInterface.itemClicked(item.locationId)
             }
         }
     }
@@ -99,7 +99,7 @@ class LocationListAdapter(val context: Context,val isEdit: Boolean,val shootLoca
             }
 
             binding.root.setOnClickListener {
-                onItemClickInterface.itemClicked(item.id)
+                onItemClickInterface.itemClicked(item.locationId)
             }
         }
     }
