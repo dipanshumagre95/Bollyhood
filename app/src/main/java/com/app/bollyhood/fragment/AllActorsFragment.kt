@@ -183,15 +183,17 @@ class AllActorsFragment : Fragment(),OnClickListener,AllActorsAdapter.onItemCLic
     override fun onClick(item: View?) {
         when(item?.id) {
             R.id.ivBack -> {
-                if (PrefManager(requireContext()).getvalue(StaticData.previousFragment).equals("AllCategoryFragment")) {
+                if (PrefManager(requireContext()).getvalue(StaticData.previousFragment)
+                        .equals("AllCategoryFragment")
+                ) {
                     backpress(AllCategoryFragment())
-                }else{
+                } else {
                     (requireActivity() as MainActivity).setHomeColor()
                 }
             }
 
             R.id.cvProfile -> {
-                 startActivity(Intent(requireContext(),MyProfileActivity::class.java))
+                startActivity(Intent(requireContext(), MyProfileActivity::class.java))
             }
 
             R.id.tvload_more ->{
