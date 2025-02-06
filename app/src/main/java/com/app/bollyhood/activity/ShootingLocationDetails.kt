@@ -99,7 +99,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         }
 
         if (!shootLocationModel.shift_type.isNullOrBlank()){
-            binding.tvShift.text=shootLocationModel.shift_type
+            val name=shootLocationModel.shift_type
+            binding.tvShift.text="/$name"
         }else{
             binding.tvShift.visibility=View.GONE
         }
@@ -111,27 +112,27 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         }
 
         if (!shootLocationModel.parking.isNullOrBlank()&&shootLocationModel.parking.equals("Yes")){
-            binding.tvParking.visibility=View.VISIBLE
+            binding.llparking.visibility=View.VISIBLE
         }else{
-            binding.tvParking.visibility=View.GONE
+            binding.llparking.visibility=View.GONE
         }
 
-        if (!shootLocationModel.care_taker.isNullOrBlank()&&!shootLocationModel.care_taker.equals("Yes")){
+        if (!shootLocationModel.care_taker.isNullOrBlank()&&shootLocationModel.care_taker.equals("Yes")){
             binding.llcareTaker.visibility=View.VISIBLE
         }else{
             binding.llcareTaker.visibility=View.GONE
         }
 
-        if (!shootLocationModel.security_deposit.isNullOrBlank()&&!shootLocationModel.security_deposit.equals("Yes")){
+        if (!shootLocationModel.security_deposit.isNullOrBlank()&&shootLocationModel.security_deposit.equals("Yes")){
             binding.lldeposit.visibility=View.VISIBLE
         }else{
             binding.lldeposit.visibility=View.GONE
         }
 
         if (!shootLocationModel.air_conditioner.isNullOrBlank()&&shootLocationModel.air_conditioner.equals("Yes")){
-            binding.tvAcCount.visibility=View.VISIBLE
+            binding.llac.visibility=View.VISIBLE
         }else{
-            binding.lldeposit.visibility=View.GONE
+            binding.llac.visibility=View.GONE
         }
 
         if (!shootLocationModel.images.isNullOrEmpty()){

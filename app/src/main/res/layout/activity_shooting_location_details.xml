@@ -33,7 +33,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/rvImages"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_260sdp"
+                    android:layout_height="@dimen/_250sdp"
                     android:adapter="@{adapter}"
                     android:layout_gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +44,8 @@
                     android:id="@+id/llBack"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:src="@drawable/white_back_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -78,8 +78,8 @@
                     android:layout_height="@dimen/_30sdp"
                     android:background="@drawable/round_pink_color"
                     android:backgroundTint="@color/white"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -97,7 +97,7 @@
                     android:id="@+id/relativeLayout11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-20dp"
+                    android:layout_marginTop="-40dp"
                     android:background="@drawable/rectangle_lightcornerwhite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -107,12 +107,12 @@
                         android:id="@+id/location_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:drawableStart="@drawable/map_point"
                         android:drawablePadding="@dimen/_2sdp"
                         android:drawableTint="@color/black"
-                        android:fontFamily="@font/urbanist_regular"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Madh , Mumbai"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
@@ -122,9 +122,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/location_city"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:fontFamily="@font/urbanist_semibold"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_1sdp"
+                        android:layout_marginTop="-5dp"
+                        android:fontFamily="@font/poppins_semibold"
                         android:maxLines="1"
                         android:text="Elements Villa Madh"
                         android:textColor="@color/black"
@@ -135,9 +136,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_below="@+id/tvLocationName"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:background="@drawable/casting_appled_user_bg">
 
                         <com.google.android.material.textview.MaterialTextView
@@ -146,7 +147,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/urbanist_regular"
+                            android:fontFamily="@font/poppins_regular"
                             android:text="⭐️ 4.9 (1.2K review)"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -164,10 +165,10 @@
                                 android:id="@+id/tvRupes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_medium"
+                                android:fontFamily="@font/poppins_medium"
                                 android:text="25,000/"
                                 android:textColor="@color/black"
-                                android:textSize="23sp"
+                                android:textSize="20sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
 
@@ -175,10 +176,10 @@
                                 android:id="@+id/tvShift"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter_regular"
-                                android:text="12hr"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="/12hr"
                                 android:textColor="@color/black"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
                         </LinearLayout>
@@ -190,19 +191,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/view1"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="What we offer"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                     <View
                         android:id="@+id/line1"
                         android:layout_width="@dimen/_90sdp"
                         android:layout_height="@dimen/_1sdp"
+                        android:layout_marginTop="-5dp"
                         android:layout_below="@+id/txwhat_we_offer"
-                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_22sdp"
                         android:background="@color/black" />
 
                     <LinearLayout
@@ -210,13 +212,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="95dp"
                         android:layout_below="@+id/line1"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:gravity="center_vertical"
                         android:weightSum="4">
 
                         <RelativeLayout
+                            android:id="@+id/llparking"
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="85dp"
                             android:layout_weight="1"
@@ -238,7 +241,7 @@
                                 android:layout_below="@+id/image1"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:fontFamily="@font/inter_regular"
+                                android:fontFamily="@font/poppins_regular"
                                 android:text="Parkings"
                                 android:textColor="#666667"
                                 android:textSize="10sp" />
@@ -270,7 +273,7 @@
                                 android:layout_below="@+id/image2"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:fontFamily="@font/inter_regular"
+                                android:fontFamily="@font/poppins_regular"
                                 android:text="Care Taker"
                                 android:textColor="#666667"
                                 android:textSize="10sp" />
@@ -301,7 +304,7 @@
                                 android:layout_below="@+id/image3"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:fontFamily="@font/inter_regular"
+                                android:fontFamily="@font/poppins_regular"
                                 android:text="Deposit"
                                 android:textColor="#666667"
                                 android:textSize="10sp" />
@@ -309,6 +312,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/llac"
                             android:layout_width="70sp"
                             android:layout_height="85dp"
                             android:layout_marginStart="@dimen/_10sdp"
@@ -331,8 +335,8 @@
                                 android:layout_below="@+id/image4"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:fontFamily="@font/inter_regular"
-                                android:text="6 Ac"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Ac"
                                 android:textColor="#666667"
                                 android:textSize="10sp" />
 
@@ -345,25 +349,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/lloffer"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_medium"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="About"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvabout"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:fontFamily="@font/urbanist_regular"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:fontFamily="@font/poppins_regular"
                         android:inputType="textMultiLine"
+                        android:gravity="start"
                         android:padding="@dimen/_5sdp"
-                        android:text="The best modern bungalow artistic modern elevation features with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen &amp; Family Room Bungalow with Swimming pool and....Read More"
                         android:textColor="#757575"
                         android:textSize="16sp" />
 
@@ -372,19 +376,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvDescription"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_medium"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Hosted by"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="18sp" />
 
                     <RelativeLayout
                         android:id="@+id/llhosting_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/txHostedBy"
-                        android:layout_marginTop="@dimen/_10sdp">
+                        android:layout_below="@+id/txHostedBy">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/tvManagerProfile"
@@ -412,7 +415,7 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:layout_toRightOf="@+id/tvManagerProfile"
-                            android:fontFamily="@font/inter_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Bablo Yadav"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -425,7 +428,7 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:layout_toRightOf="@+id/tvManagerProfile"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/poppins_regular"
                             android:text="⭐️ 4.9 (1.2K review)"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -460,7 +463,7 @@
                         android:layout_marginEnd="@dimen/_25sdp"
                         android:layout_marginBottom="@dimen/_15sdp"
                         android:background="@drawable/rectangle_app_background"
-                        android:fontFamily="@font/satoshi_bold"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
                         android:text="Contact Now"

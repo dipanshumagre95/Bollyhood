@@ -1231,10 +1231,8 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.getUserDetails(uid!!)
                 if (response.isSuccessful && response.body() != null) {
-                    if (response.body()?.result!=null) {
                         val folderString = Gson().toJson(response.body()?.result)
                         PrefManager(Mcontext).setvalue(StaticData.folderData, folderString)
-                    }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1254,9 +1252,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.getAppliedUserData(uid!!,castingId)
                 if (response.isSuccessful && response.body() != null) {
-                    if (response.body()?.result!=null) {
                         appliedUserList.postValue(response.body())
-                    }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1330,9 +1326,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.getShootLocationList(uid!!)
                 if (response.isSuccessful && response.body() != null) {
-                    if (response.body()?.result!=null) {
                         shootLocationList.postValue(response.body())
-                    }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
@@ -1354,9 +1348,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             try {
                 val response = mainRepository.getShootLocation(locationId!!)
                 if (response.isSuccessful && response.body() != null) {
-                    if (response.body()?.result!=null) {
                         shootLocation.postValue(response.body())
-                    }
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()

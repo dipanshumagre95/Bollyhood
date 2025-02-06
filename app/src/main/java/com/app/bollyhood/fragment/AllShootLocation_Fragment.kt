@@ -58,9 +58,12 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
 
         viewModel.shootLocationList.observe(requireActivity(), Observer {
             if (it.status == "1"&&!it.result.isNullOrEmpty()) {
+                binding.tvNodata.visibility=View.GONE
+                binding.rvlocationImage.visibility=View.VISIBLE
                 setLocationListAdapter(it.result)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                binding.tvNodata.visibility=View.VISIBLE
+                binding.rvlocationImage.visibility=View.GONE
             }
         })
     }
@@ -115,6 +118,9 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
 
     override fun onResume() {
         super.onResume()
+        binding.tvusername.text = "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
+
+        (requireActivity() as MainActivity).showToolbar(false)
         if (isNetworkAvailable(requireContext())) {
             viewModel.getShootLocationList("")
         } else {

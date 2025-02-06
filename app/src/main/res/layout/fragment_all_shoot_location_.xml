@@ -24,70 +24,82 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_115sdp"
+            android:layout_height="@dimen/_125sdp"
             android:background="@drawable/shoot_location_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <RelativeLayout
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
+                android:id="@+id/rrMain"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:gravity="center_vertical"
+                android:layout_marginRight="@dimen/_15sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/white_border"
-                    android:paddingStart="@dimen/_7sdp"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_7sdp"
-                    android:src="@drawable/icon_back" />
+
+                <RelativeLayout
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/white_border"
+                        android:paddingTop="@dimen/_4sdp"
+                        android:paddingEnd="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_7sdp"
+                        android:paddingBottom="@dimen/_7sdp"
+                        android:src="@drawable/icon_back" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/ivBack"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toStartOf="@+id/cvProfile">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvusername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:text="Hi Akshay,"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvHeader_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvusername"
+                        android:layout_marginTop="-2dp"
+                        android:fontFamily="@font/urbanist_regular"
+                        android:text="Explore 500+ Actors From Mumbai"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </RelativeLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cvProfile"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:src="@drawable/ic_profile" />
 
             </RelativeLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvusername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_22sdp"
-                android:fontFamily="@font/urbanist_bold"
-                android:text="Hi Akshay,"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_17sdp"
-                app:layout_constraintStart_toEndOf="@+id/ivBack"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvHeader_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:fontFamily="@font/urbanist_regular"
-                android:text="Showing Location Around Mumbai"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintStart_toEndOf="@+id/ivBack"
-                app:layout_constraintTop_toBottomOf="@+id/tvusername"
-                tools:ignore="TextSizeCheck"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cvProfile"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:src="@drawable/ic_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="90dp"
@@ -317,13 +329,17 @@
             android:text="No data found"
             android:textSize="@dimen/_12sdp"
             android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:visibility="gone"
             android:textColor="@color/black"
             android:fontFamily="@font/urbanist_semibold"
             app:layout_constraintBottom_toTopOf="@+id/tvload_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout7"/>
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout9"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvload_more"
