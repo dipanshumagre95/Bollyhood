@@ -51,11 +51,9 @@ interface ApiService {
     @POST("sign_up.php")
     suspend fun doSignup(
         @Field("name") name: String,
-        @Field("password") password: String,
         @Field("categories") cat_id: String,
         @Field("mobile") mobile: String,
-        @Field("user_type") user_type: String,
-        @Field("sub_categories") sub_categories: String,
+        @Field("user_type") user_type: String
     ): Response<SuccessResponse>
 
     @FormUrlEncoded

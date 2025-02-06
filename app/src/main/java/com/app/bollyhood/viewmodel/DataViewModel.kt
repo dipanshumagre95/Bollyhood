@@ -155,22 +155,18 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
 
     fun doSignup(
         name: String,
-        password: String,
         cat_id: String,
         mobile: String,
-        user_type: String,
-        subCategoryId: String
+        user_type: String
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
                 val response = mainRepository.doSignup(
                     name,
-                    password,
                     cat_id,
                     mobile,
-                    user_type,
-                    subCategoryId
+                    user_type
                 )
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())

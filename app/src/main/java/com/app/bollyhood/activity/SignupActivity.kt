@@ -226,11 +226,9 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
 
                 viewModel.doSignup(
                     name,
-                    password,
                     cat_id,
                     mobileNumber,
-                    type,
-                    subCatId
+                    type
                 )
             }
 

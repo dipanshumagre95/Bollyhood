@@ -17,14 +17,11 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
 
     suspend fun doSignup(
         name: String,
-        password: String,
         cat_id: String,
         mobile: String,
-        user_type: String,
-        subcatgory_Id: String,
+        user_type: String
     ) = apiService.doSignup(
-        name, password, cat_id, mobile, user_type,
-        subcatgory_Id
+        name,cat_id, mobile, user_type
     )
 
     suspend fun sendOtp(id: String) = apiService.doSendOtp(id)
