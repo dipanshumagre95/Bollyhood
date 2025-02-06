@@ -437,4 +437,7 @@ interface ApiService {
     suspend fun getShootLocation(
         @Field("locationId") locationId: String,
     ): Response<ShootLocationResponseModel>
+
+    @POST("tranding_location.php")
+    suspend fun getFeatureLocationList(): Response<ShootLocationListResponseModel>
 }

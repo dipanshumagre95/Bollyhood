@@ -29,7 +29,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnClickListener {
+class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnClickListener,FeaturedLocationsAdapter.OnFeaturedItemClick {
 
     lateinit var binding: FragmentAllShootLocationBinding
     private val viewModel: DataViewModel by viewModels()
@@ -66,6 +66,17 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
                 binding.rvlocationImage.visibility=View.GONE
             }
         })
+
+        viewModel.featureLocationList.observe(requireActivity(), Observer {
+            if (it.status == "1"&&!it.result.isNullOrEmpty()) {
+                binding.tvfeaturedata.visibility=View.GONE
+                binding.rvfeaturedlocation.visibility=View.VISIBLE
+                setFeatureLocationAdapter(it.result)
+            } else {
+                binding.tvfeaturedata.visibility=View.VISIBLE
+                binding.rvfeaturedlocation.visibility=View.GONE
+            }
+        })
     }
 
     private fun addListner() {
@@ -81,13 +92,13 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
         }
     }
 
-    private fun setFeatureLocationAdapter()
+    private fun setFeatureLocationAdapter(shootLocationList: ArrayList<ShootLocationModel>)
     {
         binding.apply {
             rvfeaturedlocation.layoutManager =
-                LinearLayoutManager(requireContext())
+                LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
             rvfeaturedlocation.setHasFixedSize(true)
-            featuredLocation = FeaturedLocationsAdapter()
+            featuredLocation = FeaturedLocationsAdapter(requireContext(),shootLocationList,this@AllShootLocation_Fragment)
             rvfeaturedlocation.adapter = featuredLocation
             featuredLocation?.notifyDataSetChanged()
 
@@ -123,6 +134,7 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
         (requireActivity() as MainActivity).showToolbar(false)
         if (isNetworkAvailable(requireContext())) {
             viewModel.getShootLocationList("")
+            viewModel.getFeatureLocationList()
         } else {
             Toast.makeText(
                 requireContext(),
@@ -153,5 +165,11 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
         parentFragmentManager.commit {
             replace(R.id.fragment_container,fragment)
         }
+    }
+
+    override fun tandingItemClicked(locationId: String) {
+        startActivity(
+            Intent(requireContext(),ShootingLocationDetails::class.java)
+                .putExtra(StaticData.id,locationId))
     }
 }
