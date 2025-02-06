@@ -270,7 +270,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             }
 
             R.id.ivBack ->{
-                (requireActivity() as MyProfileActivity).loadFragment(ShootLocationManagerEditProfile())
+                (requireActivity() as MyProfileActivity).loadmoreFragment(ShootLocationManagerEditProfile())
             }
 
             R.id.tvUpdateProfile->{

@@ -148,11 +148,7 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
         when(view?.id){
 
             R.id.ivBack ->{
-                    if (PrefManager(requireContext()).getvalue(StaticData.previousFragment).equals("AllCategoryFragment")) {
-                        backpress(AllCategoryFragment())
-                    }else{
-                        (requireActivity() as MainActivity).setHomeColor()
-                    }
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.cvProfile ->{

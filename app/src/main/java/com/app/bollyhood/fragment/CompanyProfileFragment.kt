@@ -151,13 +151,7 @@ class CompanyProfileFragment : Fragment(),OnClickListener {
         when(view?.id){
 
             R.id.ivBack ->{
-                if (previousFragment.equals("AllActosFragment")){
-                    (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
-                }else if(previousFragment.equals("ProductionHouseFragment")){
-                    (requireActivity() as MainActivity).loadFragment(ProductionHouseFragment())
-                }else {
-                    (requireActivity() as MainActivity).setHomeColor()
-                }
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.cvProfile ->{

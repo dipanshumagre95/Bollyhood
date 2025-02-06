@@ -33,7 +33,6 @@ import com.app.bollyhood.adapter.ImagesAdapter
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentMusicProducerProfileDetailBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.fragment.AllActorsFragment
 import com.app.bollyhood.model.ExpertiseModel
 import com.app.bollyhood.model.PhotoModel
 import com.app.bollyhood.model.SingleCategoryModel
@@ -333,11 +332,7 @@ class MusicProducerProfileDetailFragment : Fragment(), WorkAdapter.onItemClick, 
         when(item?.id){
 
             R.id.llBack ->{
-                if (previousFragment.equals("AllActosFragment")){
-                    (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
-                }else {
-                    (requireActivity() as MainActivity).setHomeColor()
-                }
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.llbookmark ->{

@@ -128,7 +128,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
             }
 
             R.id.tvAddAnother ->{
-                (requireActivity() as MyProfileActivity).loadFragment(AddNewLocationEditFragment())
+                (requireActivity() as MyProfileActivity).loadmoreFragment(AddNewLocationEditFragment())
             }
         }
     }
@@ -561,7 +561,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
         val addNewLocationEditFragment = AddNewLocationEditFragment()
         addNewLocationEditFragment.arguments = bundle
 
-        (requireActivity() as MyProfileActivity).loadFragment(addNewLocationEditFragment)
+        (requireActivity() as MyProfileActivity).loadmoreFragment(addNewLocationEditFragment)
     }
 
 }

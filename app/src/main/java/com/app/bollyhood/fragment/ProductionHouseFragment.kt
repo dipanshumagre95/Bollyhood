@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -172,11 +171,7 @@ class ProductionHouseFragment : Fragment(),OnClickListener,ProductionHouseAdapte
             }
 
             R.id.ivBack ->{
-                if (PrefManager(requireContext()).getvalue(StaticData.previousFragment).equals("AllCategoryFragment")) {
-                    backpress(AllCategoryFragment())
-                }else{
-                    (requireActivity() as MainActivity).setHomeColor()
-                }
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.tvload_more ->{
@@ -191,12 +186,6 @@ class ProductionHouseFragment : Fragment(),OnClickListener,ProductionHouseAdapte
         binding.tvusername.text = "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
 
         (requireActivity() as MainActivity).showToolbar(false)
-    }
-
-    fun backpress(fragment:Fragment){
-        parentFragmentManager.commit {
-            replace(R.id.fragment_container,fragment)
-        }
     }
 
     override fun onItemClick(singleCategoryModel: SingleCategoryModel) {

@@ -132,7 +132,7 @@ class AllCastingCallFragment : Fragment(),OnClickListener,AllCastingCallListAdap
             }
 
             R.id.ivBack ->{
-                (requireActivity() as MainActivity).setHomeColor()
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.tvActive ->{

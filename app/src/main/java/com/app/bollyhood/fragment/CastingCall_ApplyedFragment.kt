@@ -181,7 +181,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
             }
 
             R.id.ivBack ->{
-                (requireActivity() as MainActivity).loadFragment(AllCastingCallFragment())
+                (requireActivity() as MainActivity).onBackPressed()
             }
         }
     }

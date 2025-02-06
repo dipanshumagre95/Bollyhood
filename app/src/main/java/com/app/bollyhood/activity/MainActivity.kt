@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -237,10 +238,6 @@ class MainActivity : AppCompatActivity() {
         loadFragmentforHome(fragment)
     }
 
-    override fun onBackPressed() {
-        showExitAppDialog()
-    }
-
     private fun showExitAppDialog() {
         val alert = AlertDialog.Builder(this@MainActivity)
         alert.setMessage("Are you sure you want to exit app?")
@@ -319,17 +316,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadFragment(fragment: Fragment) {
-        // load fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
             .commit()
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount >0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            showExitAppDialog()
+        }
     }
 
     fun loadFragmentforHome(fragment: Fragment)
     {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
             .commit()
     }
 }

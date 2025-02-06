@@ -213,15 +213,11 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
             "Hi " + (PrefManager(requireContext()).getvalue(StaticData.name)?.split(" ")?.getOrNull(0) ?: "User") + ","
     }
 
-    fun backpress(){
-        (requireActivity() as MainActivity).setHomeColor()
-    }
-
     override fun onClick(view: View?) {
         when(view?.id){
 
             R.id.ivBack ->{
-                backpress()
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.cvProfile ->{

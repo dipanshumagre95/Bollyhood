@@ -26,13 +26,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
-import com.app.bollyhood.activity.BookmarkProfilesActivity
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.activity.YoutubeActivity
 import com.app.bollyhood.adapter.ActorsProfileWorkLinkAda
 import com.app.bollyhood.databinding.FragmentFilmCrewProfileDetailBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
-import com.app.bollyhood.fragment.AllActorsFragment
 import com.app.bollyhood.model.PhotoModel
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -142,13 +140,7 @@ class FilmCrewProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileW
         when(item?.id){
 
             R.id.llBack ->{
-                if (previousFragment.equals("AllActosFragment")){
-                    (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
-                }else if (previousFragment.equals("BookMark")){
-                    (requireActivity() as BookmarkProfilesActivity).closeActivity()
-                }else {
-                    (requireActivity() as MainActivity).setHomeColor()
-                }
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.llbookmark ->{

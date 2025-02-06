@@ -144,11 +144,6 @@ class ChatFragment : Fragment(), ChatAdapter.onItemClick,OnClickListener,ActiveC
     }
 
 
-    fun backpress(){
-        (requireActivity() as MainActivity).setHomeColor()
-    }
-
-
     override fun onChatItemClick(pos: Int, expertiseModel: ExpertiseModel) {
         lunchChatHistoryActivity(pos,expertiseModel)
     }
@@ -165,7 +160,7 @@ class ChatFragment : Fragment(), ChatAdapter.onItemClick,OnClickListener,ActiveC
         when(item?.id){
 
             R.id.ivBack ->{
-                backpress()
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.cvProfile ->{

@@ -13,7 +13,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
@@ -271,7 +270,7 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
             }
 
             R.id.ivBack ->{
-                backpress(CastingCallFragment())
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.tvSave ->{
@@ -317,10 +316,4 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                 }
             }
         }
-
-    fun backpress(fragment:Fragment){
-        parentFragmentManager.commit {
-            replace(R.id.fragment_container,fragment)
-        }
-    }
 }

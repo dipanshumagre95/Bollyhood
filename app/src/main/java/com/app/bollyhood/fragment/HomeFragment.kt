@@ -175,6 +175,7 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
     }
 
     private fun setIndicactors(bannerList: ArrayList<BannerModel>) {
+        binding.slideDortll.removeAllViews()
         val dostArray= Array(bannerList.size){
             ImageView(requireContext())
         }

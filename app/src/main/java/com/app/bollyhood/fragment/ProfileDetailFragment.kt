@@ -746,11 +746,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
         when(item?.id){
 
             R.id.llBack ->{
-                if (previousFragment.equals("AllActosFragment")){
-                    (requireActivity() as MainActivity).loadFragment(AllActorsFragment())
-                }else {
-                    (requireActivity() as MainActivity).setHomeColor()
-                }
+                (requireActivity() as MainActivity).onBackPressed()
             }
 
             R.id.llbookmark ->{
