@@ -29,9 +29,7 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 @AndroidEntryPoint
 class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
@@ -40,6 +38,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
     private val viewModel: DataViewModel by viewModels()
     private var ImageList= ArrayList<String>()
     lateinit var dialog:Dialog
+    val dateList= ArrayList<DateModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +63,12 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
                 setLocationData(it.result)
             } else {
                 Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.dateList.observe(this, Observer {
+            if (!it.isNullOrEmpty()) {
+                dateList.addAll(it)
             }
         })
     }
@@ -173,6 +178,10 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         if (intent.hasExtra(StaticData.id)){
             viewModel.getShootLocation(intent.getStringExtra(StaticData.id))
         }
+
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        viewModel.generateDateList(year)
     }
 
     private fun setAdapter(ImageList: ArrayList<String>) {
@@ -235,10 +244,6 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             showTimePickerDialog(edtBookingEnd)
         }
 
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val dateList: MutableList<DateModel> = generateDateList(year)
-
         if (dateList.isEmpty()) {
             Toast.makeText(this, "No dates available", Toast.LENGTH_SHORT).show()
             return
@@ -284,27 +289,5 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             hour, minute, false // `false` ensures 12-hour format
         )
         timePickerDialog.show()
-    }
-
-
-    private fun generateDateList(year: Int): MutableList<DateModel> {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, Calendar.JANUARY)
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
-
-        val dateList = mutableListOf<DateModel>()
-
-        val totalDaysInYear = if (calendar.getActualMaximum(Calendar.DAY_OF_YEAR) == 366) 366 else 365
-
-        for (i in 0 until totalDaysInYear) {
-            val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
-            val month = SimpleDateFormat("MMM", Locale.getDefault()).format(calendar.time)
-            val fullDate = "$day/$month/${calendar.get(Calendar.YEAR)}"
-
-            dateList.add(DateModel(day, month, calendar.get(Calendar.YEAR).toString(), fullDate))
-            calendar.add(Calendar.DAY_OF_YEAR, 1) // Move to next day
-        }
-        return dateList
     }
 }
