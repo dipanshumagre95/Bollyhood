@@ -1,32 +1,32 @@
 package com.app.bollyhood.activity
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnClickListener
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
-import com.app.bollyhood.adapter.WorkAdapter
+import com.app.bollyhood.adapter.BookingListUsersAdapter
+import com.app.bollyhood.adapter.BookingNameListAdapter
+import com.app.bollyhood.adapter.DateAdapter
 import com.app.bollyhood.databinding.ActivityBookingDetailBinding
-import com.app.bollyhood.model.BookingModel
-import com.app.bollyhood.model.WorkLinkProfileData
-import com.app.bollyhood.util.StaticData
+import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.viewmodel.DataViewModel
-import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
 
 @AndroidEntryPoint
-class BookingDetailActivity : AppCompatActivity(), WorkAdapter.onItemClick {
+class BookingDetailActivity : AppCompatActivity(),OnClickListener,
+    BookingNameListAdapter.OnItemClickListener {
 
     lateinit var binding: ActivityBookingDetailBinding
     lateinit var mContext: BookingDetailActivity
     private val viewModel: DataViewModel by viewModels()
-    private var Id: String? = ""
-    lateinit var bookingModel: BookingModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_booking_detail)
@@ -37,95 +37,81 @@ class BookingDetailActivity : AppCompatActivity(), WorkAdapter.onItemClick {
     }
 
     private fun initUI() {
-        if (intent.extras != null) {
-            bookingModel = Gson().fromJson(
-                intent.getStringExtra(StaticData.userModel),
-                BookingModel::class.java
-            )
-            setData(bookingModel)
-        }
-/*
-        if (isNetworkAvailable(mContext)) {
-            viewModel.getExpertiseProfileDetail(Id, PrefManager(mContext).getvalue(StaticData.id))
-        } else {
-            Toast.makeText(
-                mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-            ).show()
-        }*/
-
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        viewModel.generateDateList(year)
+        val list= arrayListOf("All","Dipanshu","Ram","Manav")
+        setNameListAdapter(list)
+        setBookingListAdapter()
     }
 
     private fun addListner() {
-
-        binding.llBack.setOnClickListener {
-            finish()
+        binding.apply {
+            llBack.setOnClickListener(this@BookingDetailActivity)
         }
-
-
     }
 
     private fun addObserevs() {
-       /* viewModel.isLoading.observe(this, Observer {
-            if (it) {
-                binding.pbLoadData.visibility = View.VISIBLE
-            } else {
-                binding.pbLoadData.visibility = View.GONE
+        viewModel.dateList.observe(this, Observer {
+            if (!it.isNullOrEmpty()) {
+                setDataListAdapter(it)
             }
         })
-
-        viewModel.expertiseProfileLiveData.observe(this, Observer {
-            if (it.status == "1") {
-                setData(it.result[0])
-            } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-            }
-        })
-*/
     }
 
-    private fun setData(expertiseModel: BookingModel) {
+    private fun setNameListAdapter(list:ArrayList<String>) {
         binding.apply {
-            Glide.with(mContext)
-                .load(expertiseModel.image)
-                .into(ivImage)
-            tvName.text = expertiseModel.name
-
-            if (expertiseModel.is_verify == "1") {
-                ivVerified.visibility = View.VISIBLE
-            } else {
-                ivVerified.visibility = View.GONE
-            }
-
-
-            val stringList = arrayListOf<String>()
-
-            for (i in 0 until expertiseModel.categories.size) {
-                stringList.add(expertiseModel.categories[i].category_name)
-            }
-            tvCategory.text = stringList.joinToString(separator = " / ")
-
-            tvDescription.text = expertiseModel.description
-
-            tvJobsDone.text = expertiseModel.jobs_done
-            tvExperience.text = expertiseModel.experience
-            tvReviews.text = expertiseModel.reviews
-
-
-
-            rvWorkLinks.layoutManager =
-                LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-            rvWorkLinks.setHasFixedSize(true)
-            val adapter =
-                WorkAdapter(mContext, expertiseModel.work_links, this@BookingDetailActivity)
-            rvWorkLinks.adapter = adapter
+            rvlocationList.layoutManager =
+                LinearLayoutManager(this@BookingDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+            rvlocationList.setHasFixedSize(true)
+            shootingLocationNameList = BookingNameListAdapter(this@BookingDetailActivity,list,this@BookingDetailActivity)
+            rvlocationList.adapter = shootingLocationNameList
+            shootingLocationNameList?.notifyDataSetChanged()
         }
     }
 
-    override fun onitemClick(pos: Int, work: WorkLinkProfileData) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(work.worklink_url))
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.setPackage("com.google.android.youtube")
-        startActivity(intent)
+    private fun setBookingListAdapter() {
+        binding.apply {
+            rvBookingList.layoutManager =
+                LinearLayoutManager(this@BookingDetailActivity, LinearLayoutManager.VERTICAL, false)
+            rvBookingList.setHasFixedSize(true)
+            shootingLocationUserList = BookingListUsersAdapter(this@BookingDetailActivity)
+            rvBookingList.adapter = shootingLocationUserList
+            shootingLocationUserList?.notifyDataSetChanged()
+        }
     }
 
+    private fun setDataListAdapter(dateList: List<DateModel>)
+    {
+        if (dateList.isEmpty()) {
+            Toast.makeText(this, "No dates available", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        binding.rvDate?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val dateAdapter = DateAdapter(this, dateList) { selectedPosition ->
+            if (selectedPosition in dateList.indices) {
+                val fullDate = dateList[selectedPosition].fullDate
+                Toast.makeText(this, fullDate, Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.rvDate?.adapter = dateAdapter
+        binding.rvDate?.post { dateAdapter.scrollToToday(binding.rvDate) }
+        binding.apply {
+
+        }
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.llBack ->{
+                finish()
+            }
+        }
+    }
+
+
+    override fun onItemClick() {
+        TODO("Not yet implemented")
+    }
 }

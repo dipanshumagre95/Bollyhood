@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/itembg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:elevation="@dimen/_5sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/whitebackground">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8:30"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <View
+            android:id="@+id/verticalLine"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@color/colorgrey"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/tvStartTime"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toRightOf="@+id/verticalLine">
+
+            <ImageView
+                android:id="@+id/locationimage"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/camera_border"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cvProfile"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_toRightOf="@+id/locationimage"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:src="@drawable/singer" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/cvProfile"
+                android:maxLines="1"
+                android:text="Divya Patel"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_5sdp"/>
+
+            <ImageView
+                android:id="@+id/tvLocation"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_below="@+id/cvProfile"
+                android:layout_toRightOf="@+id/locationimage"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:src="@drawable/location_icon"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:scaleType="fitXY" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/userLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_toRightOf="@+id/tvLocation"
+                android:text="Elementor Banglow"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:maxLines="1"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="12sp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/locationimage"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_below="@+id/userLocation"
+                android:text="The best modern bungalow artistic modern elevation features with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen Family Room Bungalow with Swimming pool and the best modern bungalow artistic elevation with Ground plus 1 storied, 2 Bedrooms, Hall, Kitchen  Family Room Bungalow with Swimming pool and"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>
+

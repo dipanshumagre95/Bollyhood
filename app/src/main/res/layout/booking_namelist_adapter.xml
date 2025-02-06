@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/itembg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:background="@drawable/gray_bg_10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_1sdp"
+            android:background="@drawable/whitebackground">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/locationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>
+

@@ -12,13 +12,13 @@ import com.app.bollyhood.model.CMSResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
 import com.app.bollyhood.model.ChatResponse
+import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.model.ExpertiseResponse
 import com.app.bollyhood.model.LoginResponse
 import com.app.bollyhood.model.OtpResponse
 import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
-import com.app.bollyhood.model.ShootingLocationModels.CreateLocationRequestModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationListResponseModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
@@ -33,10 +33,15 @@ import com.app.bollyhood.util.StaticData
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -67,6 +72,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var appliedUserList = MutableLiveData<UserAppliedData>()
     var shootLocationList = MutableLiveData<ShootLocationListResponseModel>()
     var shootLocation = MutableLiveData<ShootLocationResponseModel>()
+    var dateList = MutableLiveData<List<DateModel>>()
 
     fun splashTime() {
 
@@ -1365,4 +1371,39 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
             }
         }
     }
+
+    fun generateDateList(year: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) { // Use Default Dispatcher for CPU-intensive work
+                val calendar = Calendar.getInstance().apply {
+                    set(Calendar.YEAR, year)
+                    set(Calendar.MONTH, Calendar.JANUARY)
+                    set(Calendar.DAY_OF_MONTH, 1)
+                }
+
+                val dateLists = mutableListOf<DateModel>()
+                val dateFormat = SimpleDateFormat("MMM", Locale.getDefault()) // Reuse formatter
+                val totalDaysInYear = calendar.getActualMaximum(Calendar.DAY_OF_YEAR)
+
+                repeat(totalDaysInYear) {
+                    val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
+                    val month = dateFormat.format(calendar.time)
+                    val fullDate = "$day/$month/${calendar.get(Calendar.YEAR)}"
+
+                    dateLists.add(
+                        DateModel(
+                            day,
+                            month,
+                            calendar.get(Calendar.YEAR).toString(),
+                            fullDate
+                        )
+                    )
+                    calendar.add(Calendar.DAY_OF_YEAR, 1) // Move to next day
+                }
+
+                dateList.postValue(dateLists) // Update LiveData on main thread
+            }
+        }
+    }
+
 }
