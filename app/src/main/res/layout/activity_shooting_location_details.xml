@@ -239,7 +239,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:fontFamily="@font/inter_regular"
-                                android:text="5 Parkings"
+                                android:text="Parkings"
                                 android:textColor="#666667"
                                 android:textSize="10sp" />
 

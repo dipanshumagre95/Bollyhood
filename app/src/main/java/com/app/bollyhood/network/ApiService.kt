@@ -432,7 +432,8 @@ interface ApiService {
         @Field("uid") uid: String,
     ): Response<ShootLocationListResponseModel>
 
-    @POST("edit_casting.php")
+    @FormUrlEncoded
+    @POST("get_shoot_location_by_id.php")
     suspend fun getShootLocation(
         @Field("locationId") locationId: String,
     ): Response<ShootLocationResponseModel>

@@ -105,8 +105,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             binding.tvDescription.visibility=View.GONE
         }
 
-        if (!shootLocationModel.parking.isNullOrBlank()){
-            binding.tvParking.text=shootLocationModel.parking
+        if (!shootLocationModel.parking.isNullOrBlank()&&shootLocationModel.parking.equals("Yes")){
+            binding.tvParking.visibility=View.VISIBLE
         }else{
             binding.tvParking.visibility=View.GONE
         }
@@ -123,8 +123,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             binding.lldeposit.visibility=View.GONE
         }
 
-        if (!shootLocationModel.air_conditioner.isNullOrBlank()){
-            binding.tvAcCount.text=shootLocationModel.air_conditioner
+        if (!shootLocationModel.air_conditioner.isNullOrBlank()&&shootLocationModel.air_conditioner.equals("Yes")){
+            binding.tvAcCount.visibility=View.VISIBLE
         }else{
             binding.lldeposit.visibility=View.GONE
         }
@@ -136,8 +136,8 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             binding.rvImages.visibility=View.GONE
         }
 
-        if (!shootLocationModel.managerName.isNullOrBlank()){
-            binding.tvmanageerName.text=shootLocationModel.managerName
+        if (!shootLocationModel.name.isNullOrBlank()){
+            binding.tvmanageerName.text=shootLocationModel.name
         }else{
             binding.tvmanageerName.visibility=View.GONE
         }
@@ -145,12 +145,12 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         if (!shootLocationModel.rating.isNullOrBlank()){
             binding.tvrating.text=shootLocationModel.rating
         }else{
-            binding.tvrating.visibility=View.GONE
+            binding.tvrating.visibility=View.VISIBLE
         }
 
-        if (!shootLocationModel.managerProfileName.isNullOrBlank()){
+        if (!shootLocationModel.image.isNullOrBlank()){
             Glide.with(this)
-                .load(shootLocationModel.managerimage)
+                .load(shootLocationModel.image)
                 .centerCrop()
                 .error(R.drawable.ic_profile)
                 .into(binding.managerImage)

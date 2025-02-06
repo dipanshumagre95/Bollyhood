@@ -20,11 +20,12 @@ data class ShootLocationModel(
     val amount:String,
     val care_taker:String,
     val air_conditioner:String,
-    val managerimage:String,
+    val create_at:String,
+    val modify_at:String,
     val images:ArrayList<String>,
-    val managerId:String,
-    val managerName:String,
-    val managerProfileName:String,
+    val id:String,
+    val name:String,
+    val image:String,
 )
 
 data class ShootLocationResponseModel(
