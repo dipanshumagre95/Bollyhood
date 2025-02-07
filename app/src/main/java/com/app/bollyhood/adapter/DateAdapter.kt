@@ -16,6 +16,7 @@ import java.util.Locale
 class DateAdapter(
     private val context: Context,
     private val dateList: List<DateModel>,
+    private val isFromDialog: Boolean,
     private val onDateSelected: (Int) -> Unit
 ) : RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
 
@@ -28,18 +29,28 @@ class DateAdapter(
             binding.tvDay.text = date.day
             binding.tvMonth.text = date.month
 
-            // Highlight the selected date
-            if (position == selectedPosition) {
-                binding.root.setBackgroundResource(R.drawable.bg_selected_date)
-                binding.tvDay.setTextColor(Color.WHITE)
-                binding.tvMonth.setTextColor(Color.WHITE)
-            } else {
-                binding.root.setBackgroundResource(R.drawable.bg_unselected_date)
-                binding.tvDay.setTextColor(Color.BLACK)
-                binding.tvMonth.setTextColor(Color.BLACK)
+            if (isFromDialog){
+                if (position == selectedPosition) {
+                    binding.root.setBackgroundResource(R.drawable.ic_calender_selected)
+                    binding.tvDay.setTextColor(Color.parseColor("#EF4F6A"))
+                    binding.tvMonth.setTextColor(Color.parseColor("#EF4F6A"))
+                } else {
+                    binding.root.setBackgroundResource(R.drawable.ic_calender_unselected)
+                    binding.tvDay.setTextColor(Color.WHITE)
+                    binding.tvMonth.setTextColor(Color.WHITE)
+                }
+            }else{
+                if (position == selectedPosition) {
+                    binding.root.setBackgroundResource(R.drawable.bg_selected_date)
+                    binding.tvDay.setTextColor(Color.BLACK)
+                    binding.tvMonth.setTextColor(Color.BLACK)
+                } else {
+                    binding.root.setBackgroundResource(R.drawable.bg_unselected_date)
+                    binding.tvDay.setTextColor(Color.WHITE)
+                    binding.tvMonth.setTextColor(Color.WHITE)
+                }
             }
 
-            // Handle item click
             binding.root.setOnClickListener {
                 if (selectedPosition != position) {
                     val previousPosition = selectedPosition
@@ -72,11 +83,20 @@ class DateAdapter(
     fun scrollToToday(recyclerView: RecyclerView) {
         val todayPosition = getTodayPosition()
         if (todayPosition != -1) {
-            selectedPosition = todayPosition
-            recyclerView.post {
-                (recyclerView.layoutManager as? LinearLayoutManager)
-                    ?.scrollToPositionWithOffset(todayPosition, 0)
-                notifyItemChanged(todayPosition)
+            if (todayPosition>6){
+                selectedPosition = todayPosition
+                recyclerView.post {
+                    (recyclerView.layoutManager as? LinearLayoutManager)
+                        ?.scrollToPositionWithOffset(todayPosition-2, 0)
+                    notifyItemChanged(todayPosition-2)
+                }
+            }else{
+                selectedPosition = todayPosition
+                recyclerView.post {
+                    (recyclerView.layoutManager as? LinearLayoutManager)
+                        ?.scrollToPositionWithOffset(todayPosition, 0)
+                    notifyItemChanged(todayPosition)
+                }
             }
         }
     }

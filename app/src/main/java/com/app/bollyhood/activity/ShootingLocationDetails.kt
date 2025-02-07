@@ -253,7 +253,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         }
 
         recyclerView?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val dateAdapter = DateAdapter(this, dateList) { selectedPosition ->
+        val dateAdapter = DateAdapter(this, dateList,true) { selectedPosition ->
             if (selectedPosition in dateList.indices) {
                 val fullDate = dateList[selectedPosition].fullDate
                 Toast.makeText(this, fullDate, Toast.LENGTH_SHORT).show()

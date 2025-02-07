@@ -102,7 +102,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         }
 
         binding.rvDate?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        val dateAdapter = DateAdapter(requireContext(), dateList) { selectedPosition ->
+        val dateAdapter = DateAdapter(requireContext(), dateList,false) { selectedPosition ->
             if (selectedPosition in dateList.indices) {
                 val fullDate = dateList[selectedPosition].fullDate
                 Toast.makeText(requireContext(), fullDate, Toast.LENGTH_SHORT).show()
