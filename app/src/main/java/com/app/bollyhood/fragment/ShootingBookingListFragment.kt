@@ -144,7 +144,11 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         val tvDescription = dialog.findViewById<TextView>(R.id.tvDescription)
         val acceptBtn = dialog.findViewById<RelativeLayout>(R.id.acceptBtn)
         val rejectBtn = dialog.findViewById<RelativeLayout>(R.id.rejectBtn)
+        val view = dialog.findViewById<View>(R.id.view)
 
+        view.setOnClickListener(OnClickListener {
+            dialog.dismiss()
+        })
 
 
         dialog.show()
