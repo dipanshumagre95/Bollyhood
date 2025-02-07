@@ -1,10 +1,17 @@
 package com.app.bollyhood.fragment
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,11 +27,12 @@ import com.app.bollyhood.databinding.FragmentShootingBookingListBinding
 import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.Calendar
 
 @AndroidEntryPoint
 class ShootingBookingListFragment : Fragment(), OnClickListener,
-    BookingNameListAdapter.OnItemClickListener  {
+    BookingNameListAdapter.OnItemClickListener,BookingListUsersAdapter.OnItemListener {
 
     private lateinit var binding: FragmentShootingBookingListBinding
     private val viewModel: DataViewModel by viewModels()
@@ -80,7 +88,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
             rvBookingList.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             rvBookingList.setHasFixedSize(true)
-            shootingLocationUserList = BookingListUsersAdapter(requireContext())
+            shootingLocationUserList = BookingListUsersAdapter(requireContext(),this@ShootingBookingListFragment)
             rvBookingList.adapter = shootingLocationUserList
             shootingLocationUserList?.notifyDataSetChanged()
         }
@@ -117,7 +125,39 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
 
     override fun onItemClick() {
-        TODO("Not yet implemented")
+
+    }
+
+    fun locationBookingConfrimDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.location_booking_details_formanager)
+
+        val userImage = dialog.findViewById<CircleImageView>(R.id.ivImage)
+        val tvname = dialog.findViewById<TextView>(R.id.tvname)
+        val tvPhone = dialog.findViewById<TextView>(R.id.tvPhone)
+        val tvEmail = dialog.findViewById<TextView>(R.id.tvEmail)
+        val llkyc = dialog.findViewById<RelativeLayout>(R.id.llkyc)
+        val profileCreatedDate = dialog.findViewById<TextView>(R.id.profileCreatedDate)
+        val tvdate = dialog.findViewById<TextView>(R.id.tvdate)
+        val tvTime = dialog.findViewById<TextView>(R.id.tvTime)
+        val tvDescription = dialog.findViewById<TextView>(R.id.tvDescription)
+        val acceptBtn = dialog.findViewById<RelativeLayout>(R.id.acceptBtn)
+        val rejectBtn = dialog.findViewById<RelativeLayout>(R.id.rejectBtn)
+
+
+
+        dialog.show()
+        dialog.window?.apply {
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            attributes?.windowAnimations = R.style.BottomSheetDialogTheme
+            setGravity(Gravity.BOTTOM)
+        }
+    }
+
+    override fun onClick() {
+        locationBookingConfrimDialog()
     }
 
 }

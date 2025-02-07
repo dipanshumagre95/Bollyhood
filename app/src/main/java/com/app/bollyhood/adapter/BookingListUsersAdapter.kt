@@ -2,17 +2,23 @@ package com.app.bollyhood.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.databinding.BookinglistUsersAdapterBinding
 
-class BookingListUsersAdapter(val context: Context): RecyclerView.Adapter<BookingListUsersAdapter.ViewHolder>() {
+class BookingListUsersAdapter(
+    val context: Context,
+    val onItemListener: BookingListUsersAdapter.OnItemListener
+): RecyclerView.Adapter<BookingListUsersAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: BookinglistUsersAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-
+            binding.root.setOnClickListener(View.OnClickListener {
+                onItemListener.onClick()
+            })
         }
     }
 
@@ -27,7 +33,7 @@ class BookingListUsersAdapter(val context: Context): RecyclerView.Adapter<Bookin
         holder.bind(position)
     }
 
-    interface OnItemClickListener{
-        fun onItemClick()
+    interface OnItemListener{
+        fun onClick()
     }
 }
