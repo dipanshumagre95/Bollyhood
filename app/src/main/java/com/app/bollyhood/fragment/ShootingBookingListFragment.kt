@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bollyhood.R
-import com.app.bollyhood.activity.BookingDetailActivity
 import com.app.bollyhood.activity.MainActivity
 import com.app.bollyhood.adapter.BookingListUsersAdapter
 import com.app.bollyhood.adapter.BookingNameListAdapter
@@ -28,7 +27,6 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
     BookingNameListAdapter.OnItemClickListener  {
 
     private lateinit var binding: FragmentShootingBookingListBinding
-    lateinit var mContext: BookingDetailActivity
     private val viewModel: DataViewModel by viewModels()
 
     override fun onCreateView(
