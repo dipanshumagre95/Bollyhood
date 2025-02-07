@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "734403017128",
-    "project_id": "spotlyapp-9c4ca",
-    "storage_bucket": "spotlyapp-9c4ca.firebasestorage.app"
+    "project_number": "104812531553",
+    "project_id": "spotlyapp-d520e",
+    "storage_bucket": "spotlyapp-d520e.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:734403017128:android:3a50f5305bcede890f859d",
+        "mobilesdk_app_id": "1:104812531553:android:17271e2fce142096bfff20",
         "android_client_info": {
           "package_name": "com.app.bollyhood"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCFj1Znm5vN2fpS7rAlrnfyYKQrHsTVcls"
+          "current_key": "AIzaSyARk4ZArQHqQrGmHIi2WQM6xM0RDb5lS2M"
         }
       ],
       "services": {
