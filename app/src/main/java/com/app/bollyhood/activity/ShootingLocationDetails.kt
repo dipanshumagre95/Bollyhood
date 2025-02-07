@@ -11,6 +11,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -23,13 +24,21 @@ import com.app.bollyhood.R
 import com.app.bollyhood.adapter.DateAdapter
 import com.app.bollyhood.adapter.ImageViewPagerAdapter
 import com.app.bollyhood.databinding.ActivityShootingLocationDetailsBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isStartTimeBeforeEndTime
+import com.app.bollyhood.extensions.isvalidEmailAddress
+import com.app.bollyhood.extensions.isvalidMobileNumber
+import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
@@ -37,6 +46,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
     lateinit var binding: ActivityShootingLocationDetailsBinding
     private val viewModel: DataViewModel by viewModels()
     private var ImageList= ArrayList<String>()
+    lateinit var shootLocationModel: ShootLocationModel
     lateinit var dialog:Dialog
     val dateList= ArrayList<DateModel>()
 
@@ -60,7 +70,16 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
 
         viewModel.shootLocation.observe(this, Observer {
             if (it.status=="1") {
+                shootLocationModel=it.result
                 setLocationData(it.result)
+            } else {
+                Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.successData.observe(this, Observer {
+            if (it.status=="1") {
+                dialog.dismiss()
             } else {
                 Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
             }
@@ -218,7 +237,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
             }
 
             R.id.contactBtn ->{
-                createFolderButton()
+                locationBookingDialog()
             }
 
             R.id.llBookmark ->{
@@ -227,8 +246,10 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         }
     }
 
-    fun createFolderButton() {
-        val dialog = Dialog(this)
+    fun locationBookingDialog() {
+        val calendar = Calendar.getInstance()
+        var fullDate = SimpleDateFormat("d/MMM/yyyy", Locale.getDefault()).format(calendar.time)
+        dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.locationbookrequestdialog)
 
@@ -239,13 +260,34 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         val edtBookingFrom = dialog.findViewById<TextView>(R.id.edtBookingfrom)
         val edtBookingEnd = dialog.findViewById<TextView>(R.id.edtBookingEnd)
         val recyclerView = dialog.findViewById<RecyclerView>(R.id.rv_date)
+        val tvSendOtp = dialog.findViewById<TextView>(R.id.tvSendOtp)
+        val loader = dialog.findViewById<ProgressBar>(R.id.pbLoadData)
 
         edtBookingFrom?.setOnClickListener {
             showTimePickerDialog(edtBookingFrom)
         }
+
         edtBookingEnd?.setOnClickListener {
             showTimePickerDialog(edtBookingEnd)
         }
+
+        tvSendOtp.setOnClickListener(OnClickListener {
+            if (isStartTimeBeforeEndTime(edtBookingFrom.text.toString().trim(), edtBookingEnd.text.toString().trim(), false)) {
+                addLocationBooking(
+                    shootLocationModel.locationId,
+                    edtName.text.toString().trim(),
+                    edtEmail.text.toString().trim(),
+                    edtMobileNumber.text.toString().trim(),
+                    edtBookingReason.text.toString().trim(),
+                    fullDate,
+                    edtBookingFrom.text.toString().trim(),
+                    edtBookingEnd.text.toString().trim(),
+                    loader
+                )
+            }else{
+                Toast.makeText(this,"Please Select Start Time Before End Time",Toast.LENGTH_SHORT).show()
+            }
+        })
 
         if (dateList.isEmpty()) {
             Toast.makeText(this, "No dates available", Toast.LENGTH_SHORT).show()
@@ -255,14 +297,12 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         recyclerView?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val dateAdapter = DateAdapter(this, dateList,true) { selectedPosition ->
             if (selectedPosition in dateList.indices) {
-                val fullDate = dateList[selectedPosition].fullDate
-                Toast.makeText(this, fullDate, Toast.LENGTH_SHORT).show()
+                fullDate = dateList[selectedPosition].fullDate
             }
         }
         recyclerView?.adapter = dateAdapter
         recyclerView?.post { dateAdapter.scrollToToday(recyclerView) } // Scroll to today's date
 
-        // Show Dialog
         dialog.show()
         dialog.window?.apply {
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -289,8 +329,51 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
 
                 txtSelectedTime.text = formattedTime
             },
-            hour, minute, false // `false` ensures 12-hour format
+            hour, minute, false
         )
         timePickerDialog.show()
+    }
+
+    private fun addLocationBooking(
+        location_id: String,
+        name: String,
+        email: String,
+        mobile: String,
+        booking_reason: String,
+        booking_date: String,
+        start_booking_time: String,
+        end_booking_time: String,
+        view:View
+    ){
+        if (isNetworkAvailable(this)) {
+            if (isvalidName(
+                    this,
+                    name
+                ) && isvalidEmailAddress(
+                    this,
+                    email
+                ) && isvalidMobileNumber(
+                    this,
+                    mobile)
+            ) {
+                view.visibility=View.VISIBLE
+                viewModel.addLocationBooking(
+                    PrefManager(this).getvalue(StaticData.id).toString(),
+                    location_id,
+                    name,
+                    email,
+                    mobile,
+                    booking_reason,
+                    booking_date,
+                    start_booking_time,
+                    end_booking_time
+                )
+            }
+        } else {
+            Toast.makeText(
+                this, getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

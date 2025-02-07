@@ -438,4 +438,19 @@ interface ApiService {
 
     @POST("tranding_location.php")
     suspend fun getFeatureLocationList(): Response<ShootLocationListResponseModel>
+
+    @FormUrlEncoded
+    @POST("shootlocation_booking.php")
+    suspend fun addLocationBooking(
+        @Field("uid") uid: String,
+        @Field("location_id") location_id: String,
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("mobile") mobile: String,
+        @Field("booking_reason") booking_reason: String,
+        @Field("booking_date") booking_date: String,
+        @Field("start_booking_time") start_booking_time: String,
+        @Field("end_booking_time") end_booking_time: String,
+    ): Response<SuccessResponse>
+
 }

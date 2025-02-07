@@ -439,4 +439,27 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
 
     suspend fun getFeatureLocationList() =
         apiService.getFeatureLocationList()
+
+    suspend fun addLocationBooking(
+        uid: String,
+        location_id: String,
+        name: String,
+        email: String,
+        mobile: String,
+        booking_reason: String,
+        booking_date: String,
+        start_booking_time: String,
+        end_booking_time: String
+    ) =
+        apiService.addLocationBooking(
+            uid,
+            location_id,
+            name,
+            email,
+            mobile,
+            booking_reason,
+            booking_date,
+            start_booking_time,
+            end_booking_time
+        )
 }

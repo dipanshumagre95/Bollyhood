@@ -1417,4 +1417,46 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
+    fun addLocationBooking(
+        uid: String,
+        location_id: String,
+        name: String,
+        email: String,
+        mobile: String,
+        booking_reason: String,
+        booking_date: String,
+        start_booking_time: String,
+        end_booking_time: String
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.addLocationBooking(
+                    uid,
+                    location_id,
+                    name,
+                    email,
+                    mobile,
+                    booking_reason,
+                    booking_date,
+                    start_booking_time,
+                    end_booking_time
+                )
+                if (response.isSuccessful && response.body() != null) {
+                    successData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
+            }
+        }
+    }
+
 }

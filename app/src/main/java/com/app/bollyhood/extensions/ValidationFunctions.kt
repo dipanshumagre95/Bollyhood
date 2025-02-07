@@ -278,6 +278,33 @@ fun isvalidOtp(context: Context, otp: String): Boolean {
     return isValid
 }
 
+fun isStartTimeBeforeEndTime(startTime: String, endTime: String, is24HourFormat: Boolean): Boolean {
+    val start = parseTime(startTime, is24HourFormat)
+    val end = parseTime(endTime, is24HourFormat)
+
+    return start < end
+}
+
+private fun parseTime(time: String, is24HourFormat: Boolean): Int {
+    val parts = time.split(" ", ":", ignoreCase = true)
+    val hour = parts[0].toInt()
+    val minute = parts[1].toInt()
+
+    var totalMinutes = hour * 60 + minute
+
+    if (!is24HourFormat && parts.size == 3) {
+        val period = parts[2].uppercase()
+        if (period == "PM" && hour != 12) {
+            totalMinutes += 12 * 60
+        } else if (period == "AM" && hour == 12) {
+            totalMinutes -= 12 * 60
+        }
+    }
+
+    return totalMinutes
+}
+
+
 fun isvalidBookNow(
     context: Context,
     fullName: String,
