@@ -3,6 +3,7 @@ package com.app.bollyhood.util
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.TimeZone
 
 class DateUtils {
 
@@ -105,7 +106,12 @@ class DateUtils {
             }
         }
 
-
+        fun dateToMilliseconds(dateString: String, format: String): String {
+            val sdf = SimpleDateFormat(format, Locale.getDefault())
+            sdf.timeZone = TimeZone.getTimeZone("UTC")
+            val date = sdf.parse(dateString)
+            return date?.time?.toString() ?: "0"
+        }
 
     }
 }

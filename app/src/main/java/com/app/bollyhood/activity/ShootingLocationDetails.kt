@@ -27,10 +27,12 @@ import com.app.bollyhood.databinding.ActivityShootingLocationDetailsBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.extensions.isStartTimeBeforeEndTime
 import com.app.bollyhood.extensions.isvalidEmailAddress
+import com.app.bollyhood.extensions.isvalidField
 import com.app.bollyhood.extensions.isvalidMobileNumber
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.app.bollyhood.util.DateUtils.Companion.dateToMilliseconds
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -248,7 +250,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
 
     fun locationBookingDialog() {
         val calendar = Calendar.getInstance()
-        var fullDate = SimpleDateFormat("d/MMM/yyyy", Locale.getDefault()).format(calendar.time)
+        var fullDate = SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault()).format(calendar.time)
         dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.locationbookrequestdialog)
@@ -354,9 +356,17 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
                     email
                 ) && isvalidMobileNumber(
                     this,
-                    mobile)
+                    mobile
+                ) && isvalidField(this,
+                    start_booking_time,
+                    "Please Select Booking Start Time"
+                )&& isvalidField(this,
+                    end_booking_time,
+                    "Please Select Booking End Time"
+                )
             ) {
                 view.visibility=View.VISIBLE
+                val dateToMilliseconds = dateToMilliseconds(booking_date, "dd/MMM/yyyy")
                 viewModel.addLocationBooking(
                     PrefManager(this).getvalue(StaticData.id).toString(),
                     location_id,
@@ -364,7 +374,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
                     email,
                     mobile,
                     booking_reason,
-                    booking_date,
+                    dateToMilliseconds,
                     start_booking_time,
                     end_booking_time
                 )
