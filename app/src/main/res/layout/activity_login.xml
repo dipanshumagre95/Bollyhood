@@ -72,7 +72,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/border_gray"
                         android:gravity="center"
-                        app:ccp_showFlag="false"
+                        app:ccp_showFlag="true"
+                        app:ccp_showPhoneCode="false"
                         app:ccp_showNameCode="false"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
