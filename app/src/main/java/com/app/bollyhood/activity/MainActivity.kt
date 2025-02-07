@@ -1,5 +1,6 @@
 package com.app.bollyhood.activity
 
+import Categorie
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,6 +25,7 @@ import com.app.bollyhood.fragment.AllCategoryFragment
 import com.app.bollyhood.fragment.ChatFragment
 import com.app.bollyhood.fragment.HomeFragment
 import com.app.bollyhood.fragment.ProfileFragment
+import com.app.bollyhood.fragment.ShootingBookingListFragment
 import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -68,8 +70,12 @@ class MainActivity : AppCompatActivity() {
 
             try {
                 when (categories[0].category_name) {
-                    "Casting Calls" -> {
+                    Categorie.CASTINGCALLS.toString() -> {
                         fragment = AllCastingCallFragment()
+                    }
+
+                    Categorie.LOCATIONMANAGER.toString() ->{
+                        fragment = ShootingBookingListFragment()
                     }
 
                     else -> {
