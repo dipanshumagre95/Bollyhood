@@ -13,6 +13,7 @@ import com.app.bollyhood.model.OtpResponse
 import com.app.bollyhood.model.PlanResponse
 import com.app.bollyhood.model.ProfileResponse
 import com.app.bollyhood.model.SendMessageResponse
+import com.app.bollyhood.model.ShootLocationBookingResponse
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationListResponseModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationResponseModel
 import com.app.bollyhood.model.SubCategoryResponse
@@ -452,5 +453,13 @@ interface ApiService {
         @Field("start_booking_time") start_booking_time: String,
         @Field("end_booking_time") end_booking_time: String,
     ): Response<SuccessResponse>
+
+
+    @FormUrlEncoded
+    @POST("shootlocation_booking.php")
+    suspend fun getLocationBookingData(
+        @Field("uid") uid: String,
+        @Field("booking_date") booking_date: String,
+    ): Response<ShootLocationBookingResponse>
 
 }

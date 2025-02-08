@@ -24,7 +24,13 @@ import com.app.bollyhood.adapter.BookingListUsersAdapter
 import com.app.bollyhood.adapter.BookingNameListAdapter
 import com.app.bollyhood.adapter.DateAdapter
 import com.app.bollyhood.databinding.FragmentShootingBookingListBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.DateModel
+import com.app.bollyhood.model.ShootLocationBookingList
+import com.app.bollyhood.model.ShootLocationNameModel
+import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
+import com.app.bollyhood.util.PrefManager
+import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
@@ -36,6 +42,9 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
     private lateinit var binding: FragmentShootingBookingListBinding
     private val viewModel: DataViewModel by viewModels()
+    lateinit var locationList: ArrayList<ShootLocationBookingList>
+    lateinit var locationFilterdList: ArrayList<ShootLocationBookingList>
+    lateinit var locationNameList: ArrayList<ShootLocationNameModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +62,8 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         viewModel.generateDateList(year)
-        val list= arrayListOf("All","Dipanshu","Ram","Manav")
-        setNameListAdapter(list)
-        setBookingListAdapter()
+
+        locationNameList.add(0,ShootLocationNameModel("0","All","0"))
     }
 
     private fun addListner() {
@@ -70,25 +78,50 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
                 setDataListAdapter(it)
             }
         })
+
+        viewModel.isLoading.observe(requireActivity(), Observer {
+            if (it) {
+                binding.pbLoadData.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadData.visibility = View.GONE
+            }
+        })
+
+        viewModel.locationBookingData.observe(requireActivity(), Observer {
+            if (it.status == "1") {
+                if (!it.result.locationBookingList.isNullOrEmpty()){
+                    locationList.clear()
+                    locationNameList.clear()
+                    locationList.addAll(it.result.locationBookingList)
+                    locationNameList.addAll(it.result.locationNameList)
+                    setBookingListAdapter(locationList)
+                    setNameListAdapter()
+                }else{
+                    binding.noBookingFound.visibility=View.VISIBLE
+                    binding.rvBookingList.visibility=View.GONE
+                    binding.rvlocationList.visibility=View.GONE
+                }
+            }
+        })
     }
 
-    private fun setNameListAdapter(list:ArrayList<String>) {
+    private fun setNameListAdapter() {
         binding.apply {
             rvlocationList.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             rvlocationList.setHasFixedSize(true)
-            shootingLocationNameList = BookingNameListAdapter(requireContext(),list,this@ShootingBookingListFragment)
+            shootingLocationNameList = BookingNameListAdapter(requireContext(),locationNameList,this@ShootingBookingListFragment)
             rvlocationList.adapter = shootingLocationNameList
             shootingLocationNameList?.notifyDataSetChanged()
         }
     }
 
-    private fun setBookingListAdapter() {
+    private fun setBookingListAdapter(locationBookingList:ArrayList<ShootLocationBookingList>) {
         binding.apply {
             rvBookingList.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             rvBookingList.setHasFixedSize(true)
-            shootingLocationUserList = BookingListUsersAdapter(requireContext(),this@ShootingBookingListFragment)
+            shootingLocationUserList = BookingListUsersAdapter(requireContext(),locationBookingList,this@ShootingBookingListFragment)
             rvBookingList.adapter = shootingLocationUserList
             shootingLocationUserList?.notifyDataSetChanged()
         }
@@ -111,7 +144,6 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         binding.rvDate?.adapter = dateAdapter
         binding.rvDate?.post { dateAdapter.scrollToToday(binding.rvDate) }
         binding.apply {
-
         }
     }
 
@@ -123,9 +155,16 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         }
     }
 
+    override fun onNameItemClick(shootLocationNameModel:ShootLocationNameModel) {
+        locationFilterdList.clear()
+        locationFilterdList.addAll(locationList.filter { it.location_id == shootLocationNameModel.location_id })
+        setBookingListAdapter(locationFilterdList)
+    }
 
-    override fun onItemClick() {
-
+    override fun onResume() {
+        super.onResume()
+        getLocationBookingList(getTodayMilliseconds())
+        (requireActivity() as MainActivity).showToolbar(false)
     }
 
     fun locationBookingConfrimDialog() {
@@ -160,7 +199,20 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         }
     }
 
-    override fun onClick() {
+    private fun getLocationBookingList(date:String)
+    {
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getLocationBookingData(PrefManager(requireContext()).getvalue(StaticData.id).toString(),date)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    override fun onBookingItemClick() {
         locationBookingConfrimDialog()
     }
 

@@ -9,14 +9,17 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.BookingNamelistAdapterBinding
+import com.app.bollyhood.model.ShootLocationNameModel
 
-class BookingNameListAdapter(val context: Context,val list:ArrayList<String>,var onItemClickListener:OnItemClickListener) : RecyclerView.Adapter<BookingNameListAdapter.ViewHolder>(){
+class BookingNameListAdapter(val context: Context, val locationNameList:ArrayList<ShootLocationNameModel>, var onItemClickListener:OnItemClickListener) : RecyclerView.Adapter<BookingNameListAdapter.ViewHolder>(){
+
+    var provoiousPosition=0
 
     inner class ViewHolder(val binding: BookingNamelistAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(position: Int) {
-            if (position==0) {
+        fun bind(shootLocationNameModel:ShootLocationNameModel,position: Int) {
+            if (shootLocationNameModel.isSelected=="1") {
                 binding.itembg.background=context.getDrawable(R.drawable.rectangle_app_background)
                 binding.locationName.setTextColor(Color.parseColor("#EF4F6A"))
             }else{
@@ -24,9 +27,13 @@ class BookingNameListAdapter(val context: Context,val list:ArrayList<String>,var
                 binding.locationName.setTextColor(ContextCompat.getColor(context, R.color.black))
             }
 
-            binding.locationName.text=list.get(position)
+            binding.locationName.text=shootLocationNameModel.name
+
             binding.root.setOnClickListener(View.OnClickListener {
-                onItemClickListener.onItemClick()
+                provoiousPosition=position
+                locationNameList.get(provoiousPosition).isSelected= "0"
+                locationNameList.get(position).isSelected="1"
+                onItemClickListener.onNameItemClick(shootLocationNameModel)
             })
         }
     }
@@ -36,13 +43,13 @@ class BookingNameListAdapter(val context: Context,val list:ArrayList<String>,var
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int= list.size
+    override fun getItemCount(): Int= locationNameList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(locationNameList.get(position),position)
     }
 
     interface OnItemClickListener{
-        fun onItemClick()
+        fun onNameItemClick(shootLocationNameModel:ShootLocationNameModel)
     }
 }

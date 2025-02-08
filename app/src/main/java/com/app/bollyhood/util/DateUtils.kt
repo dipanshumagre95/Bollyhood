@@ -113,5 +113,16 @@ class DateUtils {
             return date?.time?.toString() ?: "0"
         }
 
+        fun getTodayMilliseconds(): String {
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC")) // Use UTC for consistency
+            calendar.set(Calendar.HOUR_OF_DAY, 0) // Set to start of the day
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+
+            return calendar.timeInMillis.toString() // Convert to string
+        }
+
+
     }
 }

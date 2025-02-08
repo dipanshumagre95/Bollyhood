@@ -123,6 +123,22 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_below="@+id/rvlocationList"
                 android:layout_alignParentBottom="true"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/noBookingFound"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="No Booking Found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:visibility="visible"
+                android:layout_below="@+id/rvlocationList"
+                android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -143,5 +159,21 @@
             android:textSize="@dimen/_13sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="35dp" />
+
+
+
+        <ProgressBar
+            android:id="@+id/pbLoadData"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
