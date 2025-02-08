@@ -349,7 +349,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/neueeinstellung_semibold"
-                            android:text="My Casting BookMark"
+                            android:text="Booking's"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
 
@@ -358,7 +358,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_3sdp"
                             android:fontFamily="@font/neueeinstellung_medium"
-                            android:text="@string/str_favourites_desc"
+                            android:text="Get your booking details"
                             android:textColor="@color/darkgrey"
                             android:textSize="@dimen/_10sdp"
                             android:visibility="visible" />

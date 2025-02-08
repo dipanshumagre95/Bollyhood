@@ -1363,10 +1363,11 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
         }
     }
 
-    fun generateDateList(year: Int) {
+    fun generateDateList() {
         viewModelScope.launch {
             withContext(Dispatchers.Default) { // Use Default Dispatcher for CPU-intensive work
                 val calendar = Calendar.getInstance().apply {
+                    val year = get(Calendar.YEAR)
                     set(Calendar.YEAR, year)
                     set(Calendar.MONTH, Calendar.JANUARY)
                     set(Calendar.DAY_OF_MONTH, 1)

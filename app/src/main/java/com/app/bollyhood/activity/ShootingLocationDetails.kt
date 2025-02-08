@@ -203,10 +203,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         if (intent.hasExtra(StaticData.id)){
             viewModel.getShootLocation(intent.getStringExtra(StaticData.id))
         }
-
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        viewModel.generateDateList(year)
+        viewModel.generateDateList()
     }
 
     private fun setAdapter(ImageList: ArrayList<String>) {

@@ -34,7 +34,6 @@ import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
-import java.util.Calendar
 
 @AndroidEntryPoint
 class ShootingBookingListFragment : Fragment(), OnClickListener,
@@ -44,7 +43,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
     private val viewModel: DataViewModel by viewModels()
     lateinit var locationList: ArrayList<ShootLocationBookingList>
     lateinit var locationFilterdList: ArrayList<ShootLocationBookingList>
-    lateinit var locationNameList: ArrayList<ShootLocationNameModel>
+    private var locationNameList: ArrayList<ShootLocationNameModel> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,10 +58,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
     }
 
     private fun initUI() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        viewModel.generateDateList(year)
-
+        viewModel.generateDateList()
         locationNameList.add(0,ShootLocationNameModel("0","All","0"))
     }
 

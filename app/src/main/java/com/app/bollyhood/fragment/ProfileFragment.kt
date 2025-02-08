@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
+import com.app.bollyhood.activity.BookingActivitys
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.KycActivity
 import com.app.bollyhood.activity.LoginActivity
@@ -70,6 +71,10 @@ class ProfileFragment : Fragment() {
 
             rrBookMark.setOnClickListener {
                 startActivity(Intent(requireContext(), MyBookMarkActivity::class.java))
+            }
+
+            rrCastingBookMark.setOnClickListener{
+                startActivity(Intent(requireContext(), BookingActivitys::class.java))
             }
 
             rrKyc.setOnClickListener {
