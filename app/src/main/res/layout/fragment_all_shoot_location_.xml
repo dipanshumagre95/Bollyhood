@@ -179,7 +179,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvfeaturedlocation">
+            app:layout_constraintTop_toBottomOf="@+id/llParentView">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -206,35 +206,40 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvfeaturedlocation"
+        <RelativeLayout
+            android:id="@+id/llParentView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:adapter="@{featuredLocation}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout7" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout7">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvfeaturedata"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
-            android:text="No data found"
-            android:textSize="@dimen/_12sdp"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:visibility="gone"
-            android:textColor="@color/black"
-            android:fontFamily="@font/urbanist_semibold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout7"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvfeaturedlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:adapter="@{featuredLocation}"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvfeaturedata"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:text="No Featured Location found"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist_semibold"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ss"
