@@ -38,7 +38,6 @@ import com.app.bollyhood.R
 import com.app.bollyhood.activity.CMSActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
-import com.app.bollyhood.activity.ShootingLocationDetails
 import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.databinding.FragmentShootLocationManagerEditProfileBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
@@ -93,6 +92,15 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
     }
 
     private fun initUI() {
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getProfile(PrefManager(requireContext()).getvalue(StaticData.id).toString())
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
         binding.edtName.addTextChangedListener(this)
         binding.edtCategory.addTextChangedListener(this)
         binding.edtMobileNumber.addTextChangedListener(this)
@@ -536,15 +544,14 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
     }
 
     override fun itemClicked(locationId:String) {
-        startActivity(Intent(requireContext(),ShootingLocationDetails::class.java)
-            .putExtra(StaticData.id,locationId))
+        /*startActivity(Intent(requireContext(),ShootingLocationDetails::class.java)
+            .putExtra(StaticData.id,locationId))*/
     }
 
     override fun onResume() {
         super.onResume()
         if (isNetworkAvailable(requireContext())) {
             viewModel.getShootLocationList(PrefManager(requireContext()).getvalue(StaticData.id).toString())
-            viewModel.getProfile(PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
             Toast.makeText(
                 requireContext(),

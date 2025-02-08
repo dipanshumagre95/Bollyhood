@@ -82,6 +82,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         viewModel.successData.observe(this, Observer {
             if (it.status=="1") {
                 dialog.dismiss()
+                Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
             }
