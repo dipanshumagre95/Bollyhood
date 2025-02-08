@@ -2,6 +2,7 @@ package com.app.bollyhood.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
@@ -188,8 +189,19 @@ class DateUtils {
         fun getTodayDate(): String {
             val calendar = Calendar.getInstance()
             val dateFormat = SimpleDateFormat(StaticData.dateFormate, Locale.ENGLISH)
-            return dateFormat.format(calendar.time) // Format and return date
+            return dateFormat.format(calendar.time)
         }
 
+        fun getDateFromMilliseconds(milliseconds: String): String {
+            return try {
+                val millis = milliseconds.toLongOrNull() ?: return "Invalid Date"
+                val dateFormat = SimpleDateFormat(StaticData.dateFormate, Locale.ENGLISH).apply {
+                    timeZone = TimeZone.getDefault()
+                }
+                dateFormat.format(Date(millis))
+            } catch (e: Exception) {
+                "Invalid Date"
+            }
+        }
     }
 }

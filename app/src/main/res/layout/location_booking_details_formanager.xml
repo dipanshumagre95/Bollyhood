@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_below="@+id/llprofile"
-            android:layout_marginStart="@dimen/_10sdp">
+            android:layout_marginStart="@dimen/_12sdp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/lltime"
@@ -180,7 +180,7 @@
             android:textSize="14sp"
             android:layout_below="@+id/rrview"
             android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"/>
 
@@ -192,7 +192,7 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_marginTop="-5dp"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:fontFamily="@font/poppins_regular"
             android:layout_below="@+id/tvdate"/>
 
@@ -202,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_below="@+id/tvTime"
-            android:layout_marginStart="@dimen/_10sdp">
+            android:layout_marginStart="@dimen/_12sdp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/reason"
@@ -233,6 +233,8 @@
             android:layout_below="@+id/rrreason"
             android:paddingTop="@dimen/_5sdp"
             android:fontFamily="@font/poppins_regular"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"

@@ -12,7 +12,7 @@ data class ShootLocationBookingLists(
 )
 
 data class ShootLocationNameModel(
-    val location_id:String,
+    val locationId:String,
     val property_name:String,
     var isSelected:String="0",
 )

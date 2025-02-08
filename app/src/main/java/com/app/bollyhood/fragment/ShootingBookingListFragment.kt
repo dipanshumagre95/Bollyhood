@@ -29,12 +29,14 @@ import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.model.ShootLocationBookingList
 import com.app.bollyhood.model.ShootLocationNameModel
 import com.app.bollyhood.util.DateUtils.Companion.formatDate
+import com.app.bollyhood.util.DateUtils.Companion.getDateFromMilliseconds
 import com.app.bollyhood.util.DateUtils.Companion.getMillisecondsFromDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -165,7 +167,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
     override fun onNameItemClick(shootLocationNameModel:ShootLocationNameModel) {
         locationFilterdList.clear()
-        locationFilterdList.addAll(locationList.filter { it.location_id == shootLocationNameModel.location_id })
+        locationFilterdList.addAll(locationList.filter { it.location_id == shootLocationNameModel.locationId })
         if (locationFilterdList.isEmpty()){
             setBookingListAdapter(locationList)
         }else {
@@ -179,7 +181,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         (requireActivity() as MainActivity).showToolbar(false)
     }
 
-    fun locationBookingConfrimDialog() {
+    fun locationBookingConfrimDialog(shootLocationBookingList:ShootLocationBookingList) {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.location_booking_details_formanager)
@@ -197,10 +199,44 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         val rejectBtn = dialog.findViewById<RelativeLayout>(R.id.rejectBtn)
         val view = dialog.findViewById<View>(R.id.view)
 
+        if (!shootLocationBookingList.name.isNullOrEmpty()){
+            tvname.text=shootLocationBookingList.name
+        }
+
+        if (!shootLocationBookingList.mobile.isNullOrEmpty()){
+            val mobile = shootLocationBookingList.mobile
+            tvPhone.text="+91 $mobile"
+        }
+
+        if (!shootLocationBookingList.email.isNullOrEmpty()){
+            tvEmail.text=shootLocationBookingList.email
+        }
+
+        if (!shootLocationBookingList.booking_date.isNullOrEmpty()){
+            val formatDate =
+                formatDate(getDateFromMilliseconds(shootLocationBookingList.booking_date))
+            tvdate.text=formatDate
+        }
+
+        if (!shootLocationBookingList.start_booking_time.isNullOrEmpty()){
+            val start = shootLocationBookingList.start_booking_time
+            val end = shootLocationBookingList.end_booking_time
+            tvTime.text="$start to $end"
+        }
+
+        if (!shootLocationBookingList.booking_reason.isNullOrEmpty()){
+            tvDescription.text=shootLocationBookingList.booking_reason
+        }
+
+        Glide.with(requireContext())
+            .load(shootLocationBookingList.user_image)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .into(userImage)
+
         view.setOnClickListener(OnClickListener {
             dialog.dismiss()
         })
-
 
         dialog.show()
         dialog.window?.apply {
@@ -237,7 +273,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         }
     }
 
-    override fun onBookingItemClick() {
-        locationBookingConfrimDialog()
+    override fun onBookingItemClick(shootLocationBookingList:ShootLocationBookingList) {
+        locationBookingConfrimDialog(shootLocationBookingList)
     }
 }

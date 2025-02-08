@@ -44,7 +44,7 @@ class BookingListUsersAdapter(
             }
 
             binding.root.setOnClickListener(View.OnClickListener {
-                onItemListener.onBookingItemClick()
+                onItemListener.onBookingItemClick(shootLocationBookingList)
             })
         }
     }
@@ -62,6 +62,6 @@ class BookingListUsersAdapter(
     }
 
     interface OnItemListener{
-        fun onBookingItemClick()
+        fun onBookingItemClick(shootLocationBookingList:ShootLocationBookingList)
     }
 }
