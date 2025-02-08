@@ -27,12 +27,13 @@ class BookingNameListAdapter(val context: Context, val locationNameList:ArrayLis
                 binding.locationName.setTextColor(ContextCompat.getColor(context, R.color.black))
             }
 
-            binding.locationName.text=shootLocationNameModel.name
+            binding.locationName.text=shootLocationNameModel.property_name
 
             binding.root.setOnClickListener(View.OnClickListener {
-                provoiousPosition=position
                 locationNameList.get(provoiousPosition).isSelected= "0"
                 locationNameList.get(position).isSelected="1"
+                provoiousPosition=position
+                notifyDataSetChanged()
                 onItemClickListener.onNameItemClick(shootLocationNameModel)
             })
         }

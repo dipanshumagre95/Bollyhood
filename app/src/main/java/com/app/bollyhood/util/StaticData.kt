@@ -26,6 +26,7 @@ class StaticData {
         const val amount="49900"
         const val edit=""
         const val folderData="FOLDER_DATA"
+        const val dateFormate="d/MMM/yyyy"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"

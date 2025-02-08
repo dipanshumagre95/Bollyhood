@@ -21,28 +21,26 @@ class BookingListUsersAdapter(
 
         fun bind(shootLocationBookingList:ShootLocationBookingList) {
 
-            if (!shootLocationBookingList.start_booking_time.isNotEmpty()) {
-                binding.tvStartTime.text = shootLocationBookingList.start_booking_time
+            if (!shootLocationBookingList.start_booking_time.isNullOrEmpty()) {
+                binding.tvStartTime.text = shootLocationBookingList.start_booking_time.replace(Regex("(?i)\\s*(AM|PM)"), "").trim()
             }
 
-            if (!shootLocationBookingList.name.isNotEmpty()){
+            if (!shootLocationBookingList.name.isNullOrEmpty()){
                 binding.tvName.text=shootLocationBookingList.name
             }
 
-            if (!shootLocationBookingList.booking_reason.isNotEmpty()){
+            if (!shootLocationBookingList.booking_reason.isNullOrEmpty()){
                 binding.bookingReason.text=shootLocationBookingList.booking_reason
             }
 
-            if (!shootLocationBookingList.image.isNotEmpty()){
                 Glide.with(context)
                     .load(shootLocationBookingList.image)
                     .placeholder(R.drawable.ic_profile)
                     .error(R.drawable.ic_profile)
                     .into(binding.cvProfile)
-            }
 
-            if (!shootLocationBookingList.locationName.isNotEmpty()){
-                binding.userLocation.text=shootLocationBookingList.locationName
+            if (!shootLocationBookingList.property_name.isNullOrEmpty()){
+                binding.userLocation.text=shootLocationBookingList.property_name
             }
 
             binding.root.setOnClickListener(View.OnClickListener {

@@ -1390,10 +1390,10 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                             fullDate
                         )
                     )
-                    calendar.add(Calendar.DAY_OF_YEAR, 1) // Move to next day
+                    calendar.add(Calendar.DAY_OF_YEAR, 1)
                 }
 
-                dateList.postValue(dateLists) // Update LiveData on main thread
+                dateList.postValue(dateLists)
             }
         }
     }

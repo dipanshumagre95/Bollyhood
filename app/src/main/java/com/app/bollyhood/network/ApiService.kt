@@ -456,7 +456,7 @@ interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("shootlocation_booking.php")
+    @POST("get_all_booked_location.php")
     suspend fun getLocationBookingData(
         @Field("uid") uid: String,
         @Field("booking_date") booking_date: String,

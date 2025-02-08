@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ItemDateBinding
 import com.app.bollyhood.model.DateModel
+import com.app.bollyhood.util.StaticData
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -76,7 +77,7 @@ class DateAdapter(
 
     fun getTodayPosition(): Int {
         val calendar = Calendar.getInstance()
-        val todayDate = SimpleDateFormat("d/MMM/yyyy", Locale.getDefault()).format(calendar.time)
+        val todayDate = SimpleDateFormat(StaticData.dateFormate, Locale.getDefault()).format(calendar.time)
         return dateList.indexOfFirst { it.fullDate == todayDate }
     }
 

@@ -28,6 +28,9 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.model.ShootLocationBookingList
 import com.app.bollyhood.model.ShootLocationNameModel
+import com.app.bollyhood.util.DateUtils.Companion.formatDate
+import com.app.bollyhood.util.DateUtils.Companion.getMillisecondsFromDate
+import com.app.bollyhood.util.DateUtils.Companion.getTodayDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -41,8 +44,8 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
     private lateinit var binding: FragmentShootingBookingListBinding
     private val viewModel: DataViewModel by viewModels()
-    lateinit var locationList: ArrayList<ShootLocationBookingList>
-    lateinit var locationFilterdList: ArrayList<ShootLocationBookingList>
+    private var locationList: ArrayList<ShootLocationBookingList> = arrayListOf()
+    private var locationFilterdList: ArrayList<ShootLocationBookingList> = arrayListOf()
     private var locationNameList: ArrayList<ShootLocationNameModel> = arrayListOf()
 
     override fun onCreateView(
@@ -59,7 +62,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
     private fun initUI() {
         viewModel.generateDateList()
-        locationNameList.add(0,ShootLocationNameModel("0","All","0"))
+        setDateToUI("")
     }
 
     private fun addListner() {
@@ -85,11 +88,12 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
         viewModel.locationBookingData.observe(requireActivity(), Observer {
             if (it.status == "1") {
-                if (!it.result.locationBookingList.isNullOrEmpty()){
+                if (!it.result.location_booking_list.isNullOrEmpty()){
                     locationList.clear()
                     locationNameList.clear()
-                    locationList.addAll(it.result.locationBookingList)
-                    locationNameList.addAll(it.result.locationNameList)
+                    locationNameList.add(0,ShootLocationNameModel("0","All","1"))
+                    locationList.addAll(it.result.location_booking_list)
+                    locationNameList.addAll(it.result.location_name_list)
                     setBookingListAdapter(locationList)
                     setNameListAdapter()
                 }else{
@@ -134,7 +138,8 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         val dateAdapter = DateAdapter(requireContext(), dateList,false) { selectedPosition ->
             if (selectedPosition in dateList.indices) {
                 val fullDate = dateList[selectedPosition].fullDate
-                Toast.makeText(requireContext(), fullDate, Toast.LENGTH_SHORT).show()
+                setDateToUI(fullDate)
+                getLocationBookingList(getMillisecondsFromDate(fullDate))
             }
         }
         binding.rvDate?.adapter = dateAdapter
@@ -154,7 +159,11 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
     override fun onNameItemClick(shootLocationNameModel:ShootLocationNameModel) {
         locationFilterdList.clear()
         locationFilterdList.addAll(locationList.filter { it.location_id == shootLocationNameModel.location_id })
-        setBookingListAdapter(locationFilterdList)
+        if (locationFilterdList.isEmpty()){
+            setBookingListAdapter(locationList)
+        }else {
+            setBookingListAdapter(locationFilterdList)
+        }
     }
 
     override fun onResume() {
@@ -208,8 +217,20 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         }
     }
 
+    fun setDateToUI(givenDate:String)
+    {
+        binding.apply {
+            var date=""
+            if (givenDate.isNullOrEmpty()){
+                date = getTodayDate()
+            }else{
+                date=givenDate
+            }
+            tvdate.text= formatDate(date)
+        }
+    }
+
     override fun onBookingItemClick() {
         locationBookingConfrimDialog()
     }
-
 }
