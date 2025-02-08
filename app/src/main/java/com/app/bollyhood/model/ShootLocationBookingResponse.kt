@@ -28,7 +28,7 @@ data class ShootLocationBookingList(
     val property_name:String,
     val booking_reason: String,
     val booking_date: String,
-    val image:String,
+    val user_image:String,
     val start_booking_time: String,
     val end_booking_time: String,
     val created_at: String,

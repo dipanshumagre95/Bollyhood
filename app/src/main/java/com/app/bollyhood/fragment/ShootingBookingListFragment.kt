@@ -94,6 +94,9 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
                     locationNameList.add(0,ShootLocationNameModel("0","All","1"))
                     locationList.addAll(it.result.location_booking_list)
                     locationNameList.addAll(it.result.location_name_list)
+                    binding.noBookingFound.visibility=View.GONE
+                    binding.rvBookingList.visibility=View.VISIBLE
+                    binding.rvlocationList.visibility=View.VISIBLE
                     setBookingListAdapter(locationList)
                     setNameListAdapter()
                 }else{
@@ -101,6 +104,10 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
                     binding.rvBookingList.visibility=View.GONE
                     binding.rvlocationList.visibility=View.GONE
                 }
+            }else{
+                binding.noBookingFound.visibility=View.VISIBLE
+                binding.rvBookingList.visibility=View.GONE
+                binding.rvlocationList.visibility=View.GONE
             }
         })
     }

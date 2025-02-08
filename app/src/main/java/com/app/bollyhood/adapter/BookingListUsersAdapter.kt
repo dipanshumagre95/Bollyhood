@@ -34,7 +34,7 @@ class BookingListUsersAdapter(
             }
 
                 Glide.with(context)
-                    .load(shootLocationBookingList.image)
+                    .load(shootLocationBookingList.user_image)
                     .placeholder(R.drawable.ic_profile)
                     .error(R.drawable.ic_profile)
                     .into(binding.cvProfile)
