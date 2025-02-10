@@ -92,8 +92,8 @@ class YourBookingAdapter(val context: Context,val bookingModelList:ArrayList<Boo
                 binding.tvManagername.text=bookingModel.name
             }
 
-            if (!bookingModel.phone.isNullOrEmpty()){
-                val mobile = bookingModel.phone
+            if (!bookingModel.mobile.isNullOrEmpty()){
+                val mobile = bookingModel.mobile
                 binding.tvPhone.text="+91 $mobile"
             }
 
@@ -102,7 +102,7 @@ class YourBookingAdapter(val context: Context,val bookingModelList:ArrayList<Boo
             }
 
             Glide.with(context)
-                .load(bookingModel.image)
+                .load(bookingModel.user_image)
                 .centerCrop()
                 .error(R.drawable.ic_profile)
                 .into(binding.ivImage)
@@ -114,7 +114,7 @@ class YourBookingAdapter(val context: Context,val bookingModelList:ArrayList<Boo
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int =3
+    override fun getItemCount(): Int=bookingModelList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)

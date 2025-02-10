@@ -8,6 +8,7 @@ data class BookingResponse(
 )
 
 data class BookingModel(
+    val id:String,
     val property_name:String,
     val property_location:String,
     val booking_date:String,
@@ -15,7 +16,7 @@ data class BookingModel(
     val end_booking_time:String,
     val status:String,
     val name:String,
-    val image:String,
-    val phone:String,
-    val email:String
+    val email:String,
+    val mobile:String,
+    val user_image:String
 )

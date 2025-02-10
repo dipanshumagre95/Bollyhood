@@ -17,6 +17,7 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BookingModel
 import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.util.DateUtils.Companion.formatDate
+import com.app.bollyhood.util.DateUtils.Companion.getMillisecondsFromDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
 import com.app.bollyhood.util.PrefManager
@@ -99,6 +100,7 @@ class BookingActivitys : AppCompatActivity(),OnClickListener {
             if (selectedPosition in dateList.indices) {
                 val fullDate = dateList[selectedPosition].fullDate
                 setDateToUI(fullDate)
+                getYourBookingsDetails(getMillisecondsFromDate(fullDate))
             }
         }
         binding.rvDate?.adapter = dateAdapter

@@ -181,7 +181,7 @@ class DateUtils {
                 todayStr -> "Today - $dayWithSuffix $monthYear"
                 yesterdayStr -> "Yesterday - $dayWithSuffix $monthYear"
                 tomorrowStr -> "Tomorrow - $dayWithSuffix $monthYear"
-                else -> "  $dayWithSuffix $monthYear"
+                else -> "$dayWithSuffix $monthYear"
             }
         }
 

@@ -473,7 +473,7 @@ interface ApiService {
     ): Response<SuccessResponse>
 
     @FormUrlEncoded
-    @POST("get_all_booked_location.php")
+    @POST("get_booking_list.php")
     suspend fun getYourBookingsDetails(
         @Field("uid") uid: String,
         @Field("booking_date") booking_date: String
