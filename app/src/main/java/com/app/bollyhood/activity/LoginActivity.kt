@@ -10,7 +10,6 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -58,7 +57,7 @@ class LoginActivity : AppCompatActivity(),OnClickListener {
 
         viewModel.otpLiveData.observe(this, Observer {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.result.otp, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,"Otp",it.result.otp,StaticData.success)
                 PrefManager(mContext).setvalue(StaticData.image, it.result.image)
 
                 startActivity(

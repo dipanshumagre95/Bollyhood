@@ -7,6 +7,8 @@ import android.os.Build
 import android.util.Patterns
 import android.widget.Toast
 import com.app.bollyhood.R
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
+import com.app.bollyhood.util.StaticData
 
 
 fun isNetworkAvailable(context: Context): Boolean {
@@ -37,11 +39,7 @@ fun isNetworkAvailable(context: Context): Boolean {
 fun isvalidUploadProfile(context: Context, profilePath: String): Boolean {
     var isValid = true
     if (profilePath.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_upload_profile_picture),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,"Action Required",context.getString(R.string.str_upload_profile_picture), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -51,11 +49,7 @@ fun isvalidUploadProfile(context: Context, profilePath: String): Boolean {
 fun isvalidName(context: Context, edtName: String): Boolean {
     var isValid = true
     if (edtName.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_name),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,"Action Required",context.getString(R.string.str_error_name), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -64,11 +58,7 @@ fun isvalidName(context: Context, edtName: String): Boolean {
 fun isvalidProductionHouseName(context: Context, edtName: String): Boolean {
     var isValid = true
     if (edtName.isEmpty()) {
-        Toast.makeText(
-            context,
-            "Please enter Production House Name",
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,"Action Required","Please enter Production House Name", StaticData.alert)
         isValid = false
     }
     return isValid
@@ -77,11 +67,7 @@ fun isvalidProductionHouseName(context: Context, edtName: String): Boolean {
 fun isvalidField(context: Context, edtName: String ,msg:String): Boolean {
     var isValid = true
     if (edtName.isEmpty()) {
-        Toast.makeText(
-            context,
-            msg,
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,"Action Required",msg, StaticData.alert)
         isValid = false
     }
     return isValid
@@ -91,11 +77,7 @@ fun isvalidField(context: Context, edtName: String ,msg:String): Boolean {
 fun isvalidEmailAddress(context: Context, edtEmail: String): Boolean {
     var isValid = true
     if (edtEmail.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_email_address),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_email_address), StaticData.alert)
         isValid = false
     } else if (!Patterns.EMAIL_ADDRESS.matcher(edtEmail).matches()) {
         Toast.makeText(
@@ -111,11 +93,7 @@ fun isvalidEmailAddress(context: Context, edtEmail: String): Boolean {
 fun isvalidCategory(context: Context, edtCategory: String): Boolean {
     var isValid = true
     if (edtCategory.isEmpty() || edtCategory.equals("Select Category")) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_category),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_category), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -124,11 +102,7 @@ fun isvalidCategory(context: Context, edtCategory: String): Boolean {
 fun isvalidPassword(context: Context, edtPassword: String): Boolean {
     var isValid = true
     if (edtPassword.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_password),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_password), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -137,11 +111,7 @@ fun isvalidPassword(context: Context, edtPassword: String): Boolean {
 fun isValidOldPassword(context: Context, edtoldPassword: String): Boolean {
     var isValid = true
     if (edtoldPassword.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_old_password),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_old_password), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -150,11 +120,7 @@ fun isValidOldPassword(context: Context, edtoldPassword: String): Boolean {
 fun isvalidConfirmPassword(context: Context, edtConfirmPassword: String): Boolean {
     var isValid = true
     if (edtConfirmPassword.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_confirm_password),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_confirm_password), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -163,11 +129,7 @@ fun isvalidConfirmPassword(context: Context, edtConfirmPassword: String): Boolea
 fun isvalidTeamNCondition(context: Context, isChecked: Boolean): Boolean {
     var isValid = true
     if (!isChecked) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_teamsNcondition_checkbox),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_teamsNcondition_checkbox), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -181,11 +143,7 @@ fun isvalidBothPassword(
 ): Boolean {
     var isValid = true
     if (edtPassword != edtConfirmPassword) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_both_password_not_match),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_both_password_not_match), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -195,11 +153,7 @@ fun isvalidBothPassword(
 fun isvalidNewPassword(context: Context, edtNewPassword: String): Boolean {
     var isValid = true
     if (edtNewPassword.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_new_password),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_new_password), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -240,11 +194,7 @@ fun isvalidBothNewPassword(
 fun isvalidMobileNumber(context: Context, edtMobileNumber: String): Boolean {
     var isValid = true
     if (edtMobileNumber.isEmpty() || edtMobileNumber.length < 10) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_mobile_number),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_mobile_number), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -255,11 +205,7 @@ fun isvalidMobileNumber(context: Context, edtMobileNumber: String): Boolean {
 fun isvalidDescriptions(context: Context, edtDescription: String): Boolean {
     var isValid = true
     if (edtDescription.isEmpty()) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_descriptions),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_descriptions), StaticData.alert)
         isValid = false
     }
     return isValid
@@ -268,11 +214,7 @@ fun isvalidDescriptions(context: Context, edtDescription: String): Boolean {
 fun isvalidOtp(context: Context, otp: String): Boolean {
     var isValid = true
     if (otp.isEmpty() || otp.length < 6) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.str_error_otp),
-            Toast.LENGTH_SHORT
-        ).show()
+        showCustomToast(context,StaticData.actionRequired,context.getString(R.string.str_error_otp), StaticData.alert)
         isValid = false
     }
     return isValid

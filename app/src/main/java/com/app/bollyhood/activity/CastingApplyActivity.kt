@@ -402,7 +402,7 @@ class CastingApplyActivity : AppCompatActivity() {
                     alertTitle.visibility=View.VISIBLE
                 }
             }else{
-                Toast.makeText(this,"Please paste audition video link.",Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.actionRequired,"Please paste audition video link.",StaticData.alert)
             }
         })
 

@@ -568,7 +568,7 @@ class SingerEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                 showreelAdapter()
                 dialogView.dismiss()
             } else {
-                Toast.makeText(mContext, "Add at least one work link", Toast.LENGTH_SHORT).show()
+                showCustomToast(mContext,StaticData.actionRequired,"Add at least one work link",StaticData.alert)
             }
         }
 

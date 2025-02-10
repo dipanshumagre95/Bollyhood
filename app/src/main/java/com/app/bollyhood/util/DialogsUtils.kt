@@ -96,7 +96,7 @@ object DialogsUtils {
                 onLinksAdded(updatedWorkLinks)
                 dialogView.dismiss()
             } else {
-                Toast.makeText(context, "Add at least one work link", Toast.LENGTH_SHORT).show()
+                showCustomToast(context,StaticData.actionRequired,"Add at least one work link",StaticData.alert)
             }
         }
 
@@ -155,7 +155,7 @@ object DialogsUtils {
                 val folderNameText = folderName.text.toString().trim()
 
                 if (folderNameText.isEmpty()) {
-                    Toast.makeText(context, "Enter Folder Name", Toast.LENGTH_SHORT).show()
+                    showCustomToast(context,StaticData.actionRequired,"Enter Folder Name",StaticData.alert)
                     return@setOnClickListener
                 }
 
@@ -164,7 +164,7 @@ object DialogsUtils {
                 }
 
                 if (isFolderPresent) {
-                    Toast.makeText(context, "Folder Already Exists", Toast.LENGTH_SHORT).show()
+                    showCustomToast(context,StaticData.actionRequired,"Folder Already Exists",StaticData.alert)
                 } else {
                     // Add the folder if it doesn't exist
                     onAddFolder(Folder("", folderNameText, "", ""))

@@ -34,6 +34,7 @@ class StaticData {
         const val pleaseTryAgain="Please Try Again"
         const val successMsg="Successfully"
         const val networkIssue="Network Issue"
+        const val actionRequired="Action Required"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"

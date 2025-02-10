@@ -139,7 +139,7 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick,Pa
             options.put("prefill", prefill)
             checkout.open(this, options)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
+            showCustomToast(this,"Error in payment:",e.message.toString(),StaticData.alert)
             e.printStackTrace()
         }
     }

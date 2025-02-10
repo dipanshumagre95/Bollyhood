@@ -286,7 +286,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
                     loader
                 )
             }else{
-                Toast.makeText(this,"Please Select Start Time Before End Time",Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.actionRequired,"Please Select Start Time Before End Time",StaticData.alert)
             }
         })
 

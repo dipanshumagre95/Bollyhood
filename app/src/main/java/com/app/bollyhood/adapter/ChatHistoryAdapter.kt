@@ -16,7 +16,9 @@ import com.app.bollyhood.databinding.AdpChathistoryBinding
 import com.app.bollyhood.model.ChatModel
 import com.app.bollyhood.model.SenderDetails
 import com.app.bollyhood.util.DateUtils
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.DownloadReceiver
+import com.app.bollyhood.util.StaticData
 import com.bumptech.glide.Glide
 import com.google.common.io.Files.getFileExtension
 import java.io.File
@@ -68,7 +70,7 @@ class ChatHistoryAdapter(
                 }
             }else{
                 holder.binding.ivdownload.visibility = View.GONE
-                Toast.makeText(context,"File already downloaded",Toast.LENGTH_SHORT).show()
+                showCustomToast(context,StaticData.actionRequired,"File already downloaded", StaticData.alert)
             }
         }
     }
