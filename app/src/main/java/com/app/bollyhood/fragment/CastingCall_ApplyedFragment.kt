@@ -34,6 +34,7 @@ import com.app.bollyhood.model.PhotoModel
 import com.app.bollyhood.model.UserModel
 import com.app.bollyhood.util.DateUtils
 import com.app.bollyhood.util.DialogsUtils.createFolderButton
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -75,9 +76,9 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
         viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 dialogView.dismiss()
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

@@ -33,6 +33,7 @@ import com.app.bollyhood.util.DateUtils.Companion.getDateFromMilliseconds
 import com.app.bollyhood.util.DateUtils.Companion.getMillisecondsFromDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -93,9 +94,9 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
             if (it.status=="1")
             {
                 dialog.dismiss()
-                Toast.makeText(requireContext(),it.msg,Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(requireContext(),it.msg,Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
+            } else {
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

@@ -22,6 +22,7 @@ import com.app.bollyhood.activity.MyBookMarkActivity
 import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.databinding.FragmentProfileBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -117,8 +118,9 @@ class ProfileFragment : Fragment() {
 
                 startActivity(Intent(requireContext(), LoginActivity::class.java))
                 activity?.finishAffinity()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

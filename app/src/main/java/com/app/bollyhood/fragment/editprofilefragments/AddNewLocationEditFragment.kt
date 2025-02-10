@@ -49,6 +49,7 @@ import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -357,9 +358,9 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
         viewModel.successData.observe(requireActivity(), Observer {
             if (it.status == "1") {
                 Toast.makeText(requireContext(),it.msg,Toast.LENGTH_SHORT).show()
-                (requireActivity() as MyProfileActivity).onBackPressed()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

@@ -14,6 +14,7 @@ import com.app.bollyhood.adapter.PlanAdapter
 import com.app.bollyhood.databinding.ActivitySubscriptionPlanBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.PlanModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -104,11 +105,11 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick,Pa
 
         viewModel.successData.observe(this, Observer {
             if (it.status.equals("1")) {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
                 startActivity(Intent(mContext, PaymentSuccessActivity::class.java))
                 finish()
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

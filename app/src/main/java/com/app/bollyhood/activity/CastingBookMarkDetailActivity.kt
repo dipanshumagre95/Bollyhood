@@ -14,6 +14,7 @@ import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityCastingBookMarkDetailBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -130,10 +131,10 @@ class CastingBookMarkDetailActivity : AppCompatActivity() {
 
         viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
                 finish()
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

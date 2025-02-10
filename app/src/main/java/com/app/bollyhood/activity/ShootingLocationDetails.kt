@@ -33,6 +33,7 @@ import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.model.DateModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
 import com.app.bollyhood.util.DateUtils.Companion.dateToMilliseconds
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -82,9 +83,9 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
         viewModel.successData.observe(this, Observer {
             if (it.status=="1") {
                 dialog.dismiss()
-                Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

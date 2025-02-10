@@ -33,6 +33,7 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.SingleCategoryModel
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.DialogsUtils.createFolderButton
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -88,9 +89,9 @@ class LyricsWriterFragment : Fragment(), OnClickListener, ActorsProfileWorkLinkA
                     singleCategoryModel?.is_bookmarked=0
                     binding.ivBookMark.setBackgroundResource(R.drawable.ic_bookmark)
                 }
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

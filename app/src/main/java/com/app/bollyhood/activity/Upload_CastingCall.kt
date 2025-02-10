@@ -35,6 +35,7 @@ import com.app.bollyhood.extensions.isvalidField
 import com.app.bollyhood.extensions.isvalidProductionHouseName
 import com.app.bollyhood.extensions.isvalidUploadProfile
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -99,10 +100,10 @@ class Upload_CastingCall : AppCompatActivity(),TextWatcher,OnClickListener {
 
         viewModel.successData.observe(this, Observer{
             if (it.status == "1") {
-                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
                 finish()
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

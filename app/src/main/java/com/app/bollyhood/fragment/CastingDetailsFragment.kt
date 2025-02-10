@@ -23,6 +23,7 @@ import com.app.bollyhood.databinding.FragmentCastingDetailsBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CastingCallModel
 import com.app.bollyhood.util.DateUtils
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -254,10 +255,9 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                     binding.tvSave.text="Saved"
                     is_Bookmark=true
                 }
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
-               // finish()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

@@ -28,6 +28,7 @@ import com.app.bollyhood.extensions.isvalidCategory
 import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.CategoryModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,13 +117,11 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
 
         viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
                 startActivity(Intent(mContext, LoginActivity::class.java))
                 finishAffinity()
-
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

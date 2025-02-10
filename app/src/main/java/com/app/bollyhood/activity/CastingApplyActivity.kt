@@ -33,6 +33,7 @@ import com.app.bollyhood.databinding.ActivityCastingApplyBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -155,10 +156,10 @@ class CastingApplyActivity : AppCompatActivity() {
 
         viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
-              //  Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
                 castingCallSuccessDialog()
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 
