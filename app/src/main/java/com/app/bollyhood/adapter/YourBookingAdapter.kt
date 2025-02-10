@@ -34,7 +34,7 @@ class YourBookingAdapter(val context: Context,val bookingModelList:ArrayList<Boo
                     }
                 }
 
-                "1" -> {
+                "2" -> {
                     binding.apply {
                         statusBg.setBackgroundColor(Color.parseColor("#329932"))
                         bookingStatus.setTextColor(ContextCompat.getColor(context, R.color.white))
@@ -45,7 +45,7 @@ class YourBookingAdapter(val context: Context,val bookingModelList:ArrayList<Boo
                     }
                 }
 
-                "2" ->{
+                "1" ->{
                     binding.apply {
                         statusBg.setBackgroundColor(Color.parseColor("#ff3535"))
                         bookingStatus.setTextColor(ContextCompat.getColor(context, R.color.white))
