@@ -217,7 +217,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
         if (!shootLocationBookingList.mobile.isNullOrEmpty()){
             val mobile = shootLocationBookingList.mobile
-            tvPhone.text="+91 $mobile"
+            tvPhone.text="+91-$mobile"
         }
 
         if (!shootLocationBookingList.email.isNullOrEmpty()){

@@ -94,7 +94,7 @@ class YourBookingAdapter(val context: Context,val bookingModelList:ArrayList<Boo
 
             if (!bookingModel.mobile.isNullOrEmpty()){
                 val mobile = bookingModel.mobile
-                binding.tvPhone.text="+91 $mobile"
+                binding.tvPhone.text="+91-$mobile"
             }
 
             if (!bookingModel.email.isNullOrEmpty()){
