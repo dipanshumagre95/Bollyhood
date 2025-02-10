@@ -1,10 +1,12 @@
 package com.app.bollyhood.util
 
+import android.animation.ObjectAnimator
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -179,4 +181,46 @@ object DialogsUtils {
         dialog.window?.attributes?.windowAnimations=R.style.BottomSheetDialogTheme
         dialog.window?.setGravity(Gravity.BOTTOM)
     }
+
+    fun showCustomToast(context: Context,message: String, subMessage: String,type:String) {
+        val inflater = LayoutInflater.from(context)
+        val layout: View = inflater.inflate(R.layout.toast_message_dialog, null)
+
+        val tvMessage = layout.findViewById<TextView>(R.id.tvTitle)
+        val tvSubMessage = layout.findViewById<TextView>(R.id.tvmsg)
+        val progressBar = layout.findViewById<View>(R.id.progress_line)
+        val ivImage = layout.findViewById<View>(R.id.ivImage)
+
+        tvMessage.text = message
+        tvSubMessage.text = subMessage
+
+        when(type){
+            StaticData.success ->{
+                ivImage.setBackgroundResource(R.drawable.right_success_icon)
+                progressBar.setBackgroundResource(R.color.Green)
+            }
+
+            StaticData.close ->{
+                ivImage.setBackgroundResource(R.drawable.close_icon)
+                progressBar.setBackgroundResource(R.color.Red)
+            }
+
+            StaticData.alert ->{
+                ivImage.setBackgroundResource(R.drawable.alert_icon)
+                progressBar.setBackgroundResource(R.color.Yellow)
+            }
+        }
+
+        val toast = Toast(context)
+        toast.view = layout
+        toast.duration = Toast.LENGTH_LONG
+        toast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 80)
+
+        val animation = ObjectAnimator.ofFloat(progressBar, "scaleX", 0f, 1f)
+        animation.duration = 1000
+        animation.start()
+
+        toast.show()
+    }
+
 }

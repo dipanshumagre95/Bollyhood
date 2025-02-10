@@ -19,4 +19,7 @@
     <color name="pink">#FFC0CB</color>
     <color name="bgpink">#fcc2c4</color>
     <color name="text_color">#F94260</color>
+    <color name="Green">#00DF80</color>
+    <color name="Yellow">#FFD21E</color>
+    <color name="Red">#F04248</color>
 </resources>
