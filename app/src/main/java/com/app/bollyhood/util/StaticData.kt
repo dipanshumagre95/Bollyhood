@@ -30,6 +30,9 @@ class StaticData {
         const val success="0"
         const val close="1"
         const val alert="2"
+        const val errorOccurred="Error Occurred"
+        const val pleaseTryAgain="Please Try Again"
+        const val successMsg="Successfully"
 
         const val foregrounded: String = "foregrounded"
         const val killed: String = "killed"

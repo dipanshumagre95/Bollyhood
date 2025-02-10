@@ -182,7 +182,7 @@ object DialogsUtils {
         dialog.window?.setGravity(Gravity.BOTTOM)
     }
 
-    fun showCustomToast(context: Context,message: String, subMessage: String,type:String) {
+    fun showCustomToast(context: Context,title: String, subMessage: String,type:String) {
         val inflater = LayoutInflater.from(context)
         val layout: View = inflater.inflate(R.layout.toast_message_dialog, null)
 
@@ -191,7 +191,7 @@ object DialogsUtils {
         val progressBar = layout.findViewById<View>(R.id.progress_line)
         val ivImage = layout.findViewById<View>(R.id.ivImage)
 
-        tvMessage.text = message
+        tvMessage.text = title
         tvSubMessage.text = subMessage
 
         when(type){

@@ -2,7 +2,6 @@ package com.app.bollyhood.viewmodel
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,6 +29,7 @@ import com.app.bollyhood.model.UserAppliedData
 import com.app.bollyhood.model.actors.ActorsresponseModel
 import com.app.bollyhood.model.castinglist.CastingListResponse
 import com.app.bollyhood.repository.MainRepository
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.google.gson.Gson
@@ -96,13 +96,11 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     categoryLiveData.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to fetch categories: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -118,14 +116,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     actorsList.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch actors: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -141,14 +137,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     categoryLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch recent categories: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -175,14 +169,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Signup failed: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -199,14 +191,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     otpLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to send OTP: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -222,14 +212,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Logout failed: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -251,14 +239,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     loginLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Login failed: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -274,14 +260,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     Log.d("Profile", response.body().toString()) // Log for debugging
                     profileLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch profile: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -337,14 +321,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to upload casting call: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -397,14 +379,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     Log.d("okhttp", response.body().toString())
                     updateProfileLiveData.postValue(response.body() as ProfileResponse)
                 } else {
-                    val errorMessage = "Failed to update profile: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -431,15 +411,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body() as SuccessResponse)
                 } else {
-                    val errorMessage = "Failed to upload KYC: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -500,14 +478,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     Log.d("okhttp", response.body().toString())
                     updateProfileLiveData.postValue(response.body() as ProfileResponse)
                 } else {
-                    val errorMessage = "Failed to update singer profile: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -562,15 +538,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     Log.d("okhttp", response.body().toString())
                     updateProfileLiveData.postValue(response.body() as ProfileResponse)
                 } else {
-                    val errorMessage = "Failed to update influencer profile: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -608,14 +582,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     Log.d("okhttp", response.body().toString())
                     updateProfileLiveData.postValue(response.body() as ProfileResponse)
                 } else {
-                    val errorMessage = "Failed to update company profile: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -631,15 +603,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     bannerLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch banner: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -655,14 +625,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     expertiseLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch expertise: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             } finally {
                 isLoading.postValue(false)
             }
@@ -678,15 +646,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     expertiseLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch expertise: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -701,15 +667,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     successData.postValue(response.body())
                     getUserDetails(uid)
                 } else {
-                    val errorMessage = "Failed to add/remove bookmark: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -723,16 +687,14 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 val response = mainRepository.getBookMark(uid,folder_id)
                 if (response.isSuccessful && response.body() != null) {
                     bookMarkLiveData.postValue(response.body())
-                } else {
-                    val errorMessage = "Failed to fetch bookmarks: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                }else {
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -748,15 +710,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to update bookmark: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -784,15 +744,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to add booking: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -807,15 +765,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     subscriptionPlanLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch subscription plans: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -831,15 +787,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     checkSubscriptionLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch subscriptions: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -854,15 +808,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     cmsLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch CMS data: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -878,15 +830,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     subCategoryLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch subcategory data: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -902,15 +852,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     castingCallsLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch casting calls: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -926,15 +874,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     castingCallsLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch casting calls: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -950,15 +896,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     castingBookMarkCallsLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch casting bookmarks: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -974,15 +918,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     agencyLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch agency details: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1002,15 +944,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to apply for casting call: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1030,15 +970,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     sendMessageLiveData.postValue(response.body() as SendMessageResponse)
                 } else {
-                    val errorMessage = "Failed to send message: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1058,15 +996,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to process payment: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1082,14 +1018,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                     categoryLiveDataforSignup.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to fetch categories: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1105,15 +1039,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     chatHistoryLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to fetch chat history: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1127,15 +1059,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     castingCallsLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1190,15 +1120,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to upload casting call: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1213,15 +1141,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     castingCallsLiveData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            } finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            }  finally {
                 isLoading.postValue(false)
             }
         }
@@ -1235,14 +1161,12 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                         val folderString = Gson().toJson(response.body()?.result)
                         PrefManager(Mcontext).setvalue(StaticData.folderData, folderString)
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
             }
         }
     }
@@ -1255,15 +1179,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                         appliedUserList.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1307,15 +1229,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1329,15 +1249,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                         shootLocationList.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1351,15 +1269,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                         shootLocation.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1408,15 +1324,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     featureLocationList.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1450,15 +1364,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1478,15 +1390,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     locationBookingData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1511,15 +1421,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     successData.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
@@ -1539,15 +1447,13 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 if (response.isSuccessful && response.body() != null) {
                     locationBookingList.postValue(response.body())
                 } else {
-                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
-                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                    Log.e("API_ERROR", errorMessage)
+                    val errorMessage = "Failed to fetch categories: ${response.message()}"
+                    showCustomToast(Mcontext,StaticData.pleaseTryAgain,errorMessage,StaticData.alert)
                 }
             } catch (e: Exception) {
                 val errorMessage = "Something went wrong. Please try again."
-                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
-                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
-            }finally {
+                showCustomToast(Mcontext,StaticData.errorOccurred,errorMessage,StaticData.close)
+            } finally {
                 isLoading.postValue(false)
             }
         }
