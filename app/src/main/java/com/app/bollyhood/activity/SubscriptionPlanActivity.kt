@@ -99,7 +99,7 @@ class SubscriptionPlanActivity : AppCompatActivity(), PlanAdapter.onItemClick,Pa
                 planList.addAll(it.result)
                 setAdapter(planList)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

@@ -54,6 +54,7 @@ import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.DialogsUtils
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.InbuildLIsts
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
@@ -371,16 +372,16 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                 val profileModel = it.result
                 setProfileData(profileModel)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 
         viewModel.updateProfileLiveData.observe(requireActivity()) {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
                 setPrefData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         }
 

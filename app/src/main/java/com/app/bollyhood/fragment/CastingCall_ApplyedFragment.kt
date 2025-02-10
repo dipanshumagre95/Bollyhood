@@ -92,7 +92,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                     binding.rvcatingcallListed.visibility=View.GONE
                 }
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

@@ -19,6 +19,7 @@ import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityLoginBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.extensions.isvalidMobileNumber
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity(),OnClickListener {
                         binding.edtMobileNumber.text.toString().trim()
                     ))
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

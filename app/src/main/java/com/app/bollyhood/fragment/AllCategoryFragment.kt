@@ -22,6 +22,7 @@ import com.app.bollyhood.adapter.AllCategoryAdapter
 import com.app.bollyhood.databinding.FragmentAllCategoryBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CategoryModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -142,7 +143,7 @@ class AllCategoryFragment : Fragment(),AllCategoryAdapter.onItemClick,OnClickLis
                 }*/
                 setCategoryAdapter(categoryList)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

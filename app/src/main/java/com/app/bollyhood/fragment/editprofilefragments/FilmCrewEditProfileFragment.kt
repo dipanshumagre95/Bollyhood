@@ -48,6 +48,7 @@ import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.DialogsUtils
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -297,16 +298,16 @@ class FilmCrewEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemC
                 val profileModel = it.result
                 setDjProfileData(profileModel)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             }
         })
 
         viewModel.updateProfileLiveData.observe(requireActivity()) {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
                 setPrefData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
             }
         }
 

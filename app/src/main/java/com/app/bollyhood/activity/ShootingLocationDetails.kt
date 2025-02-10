@@ -76,7 +76,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
                 shootLocationModel=it.result
                 setLocationData(it.result)
             } else {
-                Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

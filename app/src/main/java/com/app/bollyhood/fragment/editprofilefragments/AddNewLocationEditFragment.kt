@@ -351,7 +351,7 @@ class AddNewLocationEditFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
             if (it.status == "1") {
                 setShootLocationData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

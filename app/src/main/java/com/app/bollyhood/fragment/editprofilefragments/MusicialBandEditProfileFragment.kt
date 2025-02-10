@@ -48,6 +48,7 @@ import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
 import com.app.bollyhood.util.DialogsUtils
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -313,16 +314,16 @@ class MusicialBandEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onI
                 val profileModel = it.result
                 setSingerProfileData(profileModel)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 
         viewModel.updateProfileLiveData.observe(requireActivity()) {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
                 setPrefData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         }
 

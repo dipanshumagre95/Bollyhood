@@ -13,6 +13,7 @@ import com.app.bollyhood.adapter.ExpertiseAdapter
 import com.app.bollyhood.databinding.ActivityAllExpertiseProfileBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ExpertiseModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -76,7 +77,7 @@ class AllExpertiseProfileActivity : AppCompatActivity(), ExpertiseAdapter.onItem
                 experiseList.addAll(it.result)
                 setExpertiseAdapter(experiseList)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

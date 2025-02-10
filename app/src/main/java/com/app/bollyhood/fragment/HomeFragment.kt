@@ -26,6 +26,7 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BannerModel
 import com.app.bollyhood.model.CategoryModel
 import com.app.bollyhood.model.ExpertiseModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -116,7 +117,7 @@ class HomeFragment : Fragment(), ExpertiseAdapter.onItemClick, CategoryAdapter.o
             } else {
                 binding.llMain.visibility=View.GONE
                 binding.tvNodata.visibility=View.VISIBLE
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

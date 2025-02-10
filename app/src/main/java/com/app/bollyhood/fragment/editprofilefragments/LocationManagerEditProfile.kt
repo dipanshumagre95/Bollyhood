@@ -31,6 +31,7 @@ import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.WorkLinkProfileData
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -164,16 +165,16 @@ class LocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onItemCl
                 val profileModel = it.result
                 setCompanyProfileData(profileModel)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 
         viewModel.updateProfileLiveData.observe(requireActivity()) {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
                 setPrefData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         }
 

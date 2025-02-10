@@ -110,7 +110,7 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
                   companyList?.addAll(res.result)
                 }
             } else {
-                Toast.makeText(mContext, res?.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,res.msg,StaticData.alert)
             }
         })
 

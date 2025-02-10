@@ -1,17 +1,17 @@
 package com.app.bollyhood.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityCmsactivityBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CMSModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,7 +66,7 @@ class CMSActivity : AppCompatActivity() {
             if (it.status == "1") {
                 setData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

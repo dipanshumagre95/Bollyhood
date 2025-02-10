@@ -41,6 +41,7 @@ import com.app.bollyhood.databinding.ActivityChatBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ChatModel
 import com.app.bollyhood.model.SenderDetails
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PermissionUtils
 import com.app.bollyhood.util.PrefManager
@@ -401,10 +402,8 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
                 if (chatModel.size > 2) {
                     binding.rvChatHistory.scrollToPosition(binding.adapter?.itemCount!!.toInt() - 1)
                 }
-
-
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

@@ -17,6 +17,7 @@ import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.BookMarkModel
 import com.app.bollyhood.model.Folder
 import com.app.bollyhood.model.ProfileModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -102,7 +103,7 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
             if (it.status == "1") {
                 setProfileDeta(it.result)
             } else {
-                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

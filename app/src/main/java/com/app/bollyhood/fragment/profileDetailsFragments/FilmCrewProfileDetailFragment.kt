@@ -113,7 +113,7 @@ class FilmCrewProfileDetailFragment : Fragment(),OnClickListener, ActorsProfileW
 
                 }
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

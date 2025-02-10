@@ -660,7 +660,7 @@ class ProfileDetailFragment : Fragment(),WorkAdapter.onItemClick,OnClickListener
 
                 }
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }

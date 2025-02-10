@@ -48,6 +48,7 @@ import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.extensions.isvalidTeamNCondition
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PathUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -219,10 +220,10 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
 
         viewModel.updateProfileLiveData.observe(requireActivity()) {
             if (it.status == "1") {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.successMsg,it.msg,StaticData.success)
                 setPrefData(it.result)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         }
 
@@ -230,7 +231,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
             if (it.status == "1"&&!it.result.isNullOrEmpty()) {
                 setLocationListAdapter(it.result)
             } else {
-                Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(requireContext(),StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
 

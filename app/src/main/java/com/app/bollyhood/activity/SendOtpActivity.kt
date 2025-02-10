@@ -17,6 +17,7 @@ import com.app.bollyhood.databinding.ActivitySendOtpBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.extensions.isvalidOtp
 import com.app.bollyhood.model.LoginModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -213,11 +214,9 @@ class SendOtpActivity : AppCompatActivity(),OnClickListener {
         viewModel.loginLiveData.observe(this, Observer {
             if (it.status == "1") {
                 setPrefData(it.result)
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
-
-
+                showCustomToast(this,StaticData.successMsg,it.msg,StaticData.success)
             } else {
-                Toast.makeText(mContext, it.msg, Toast.LENGTH_SHORT).show()
+                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
             }
         })
     }
