@@ -13,7 +13,14 @@ import com.app.bollyhood.R
 import com.app.bollyhood.adapter.DateAdapter
 import com.app.bollyhood.adapter.YourBookingAdapter
 import com.app.bollyhood.databinding.ActivityLocationBookingActivitysBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.model.BookingModel
 import com.app.bollyhood.model.DateModel
+import com.app.bollyhood.util.DateUtils.Companion.formatDate
+import com.app.bollyhood.util.DateUtils.Companion.getTodayDate
+import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
+import com.app.bollyhood.util.PrefManager
+import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,11 +52,30 @@ class BookingActivitys : AppCompatActivity(),OnClickListener {
                 setDataListAdapter(it)
             }
         })
+
+        viewModel.isLoading.observe(this, Observer {
+            if (it) {
+                binding.pbLoadData.visibility = View.VISIBLE
+            } else {
+                binding.pbLoadData.visibility = View.GONE
+            }
+        })
+
+        viewModel.locationBookingList.observe(this, Observer {
+            if (it.status == "1"&&!it.result.isNullOrEmpty()) {
+                binding.noBookingFound.visibility=View.GONE
+                binding.rvBookingList.visibility=View.VISIBLE
+                setBookingListAdapter(it.result)
+            } else {
+                binding.noBookingFound.visibility=View.VISIBLE
+                binding.rvBookingList.visibility=View.GONE
+            }
+        })
     }
 
     private fun initUi() {
         viewModel.generateDateList()
-        setBookingListAdapter()
+        setDateToUI("")
     }
 
     override fun onClick(view: View?) {
@@ -72,21 +98,52 @@ class BookingActivitys : AppCompatActivity(),OnClickListener {
         val dateAdapter = DateAdapter(this, dateList,false) { selectedPosition ->
             if (selectedPosition in dateList.indices) {
                 val fullDate = dateList[selectedPosition].fullDate
-                Toast.makeText(this, fullDate, Toast.LENGTH_SHORT).show()
+                setDateToUI(fullDate)
             }
         }
         binding.rvDate?.adapter = dateAdapter
         binding.rvDate?.post { dateAdapter.scrollToToday(binding.rvDate) }
     }
 
-    private fun setBookingListAdapter() {
+    private fun setBookingListAdapter(bookingModelList:ArrayList<BookingModel>) {
         binding.apply {
             rvBookingList.layoutManager =
                 LinearLayoutManager(this@BookingActivitys, LinearLayoutManager.VERTICAL, false)
             rvBookingList.setHasFixedSize(true)
-            yourBookingAdapter = YourBookingAdapter(this@BookingActivitys)
+            yourBookingAdapter = YourBookingAdapter(this@BookingActivitys,bookingModelList)
             rvBookingList.adapter = yourBookingAdapter
             yourBookingAdapter?.notifyDataSetChanged()
+        }
+    }
+
+    fun setDateToUI(givenDate:String)
+    {
+        binding.apply {
+            var date=""
+            if (givenDate.isNullOrEmpty()){
+                date = getTodayDate()
+            }else{
+                date=givenDate
+            }
+            tvDate.text= formatDate(date)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getYourBookingsDetails(getTodayMilliseconds())
+    }
+
+    private fun getYourBookingsDetails(date:String)
+    {
+        if (isNetworkAvailable(this)) {
+            viewModel.getYourBookingsDetails(PrefManager(this).getvalue(StaticData.id).toString(),date)
+        } else {
+            Toast.makeText(
+                this,
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

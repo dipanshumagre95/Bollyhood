@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.bollyhood.model.BannerResponse
 import com.app.bollyhood.model.BookMarkResponse
+import com.app.bollyhood.model.BookingResponse
 import com.app.bollyhood.model.CMSResponse
 import com.app.bollyhood.model.CastingCallResponse
 import com.app.bollyhood.model.CategoryResponse
@@ -76,6 +77,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var shootLocation = MutableLiveData<ShootLocationResponseModel>()
     var dateList = MutableLiveData<List<DateModel>>()
     var locationBookingData = MutableLiveData<ShootLocationBookingResponse>()
+    var locationBookingList = MutableLiveData<BookingResponse>()
 
     fun splashTime() {
 
@@ -1464,7 +1466,7 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
 
     fun getLocationBookingData(
         uid: String,
-        booking_date: String,
+        booking_date: String
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -1475,6 +1477,67 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
                 )
                 if (response.isSuccessful && response.body() != null) {
                     locationBookingData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
+            }
+        }
+    }
+
+
+    fun setLocationBookingConfirmation(
+        bookingStatus:String
+        ,location_id:String
+        ,uid:String
+        ,booking_id: String
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.setLocationBookingConfirmation(
+                    bookingStatus,
+                    location_id,
+                    uid,
+                    booking_id
+                )
+                if (response.isSuccessful && response.body() != null) {
+                    successData.postValue(response.body())
+                } else {
+                    val errorMessage = "Failed to Get Updated List: ${response.message()}"
+                    Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                    Log.e("API_ERROR", errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = "Something went wrong. Please try again."
+                Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("NETWORK_ERROR", "Exception: ${e.localizedMessage}")
+            }finally {
+                isLoading.postValue(false)
+            }
+        }
+    }
+
+
+    fun getYourBookingsDetails(
+        uid:String,
+        booking_date:String
+    ) {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val response = mainRepository.getYourBookingsDetails(
+                    uid,
+                    booking_date)
+                if (response.isSuccessful && response.body() != null) {
+                    locationBookingList.postValue(response.body())
                 } else {
                     val errorMessage = "Failed to Get Updated List: ${response.message()}"
                     Toast.makeText(Mcontext, errorMessage, Toast.LENGTH_LONG).show()

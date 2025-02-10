@@ -8,21 +8,14 @@ data class BookingResponse(
 )
 
 data class BookingModel(
-    val id: String,
-    val name: String,
-    val email:String,
-    val image: String,
-    val mobile: String,
-    val description: String,
-    val reviews: String,
-    val jobs_done: String,
-    val experience: String,
-    val work_links: ArrayList<WorkLinkProfileData>,
-    val is_verify: String,
-    val status: String,
-    val catt:String,
-    var is_bookmarked: Int,
-    val is_book: Int,
-    val new_work_links: ArrayList<WorkLinkProfileData>,
-    val categories: ArrayList<ExpertiseCategories>
+    val property_name:String,
+    val property_location:String,
+    val booking_date:String,
+    val start_booking_time:String,
+    val end_booking_time:String,
+    val status:String,
+    val name:String,
+    val image:String,
+    val phone:String,
+    val email:String
 )

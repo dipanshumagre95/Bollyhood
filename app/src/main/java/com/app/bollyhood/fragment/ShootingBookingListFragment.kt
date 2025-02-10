@@ -49,6 +49,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
     private var locationList: ArrayList<ShootLocationBookingList> = arrayListOf()
     private var locationFilterdList: ArrayList<ShootLocationBookingList> = arrayListOf()
     private var locationNameList: ArrayList<ShootLocationNameModel> = arrayListOf()
+    lateinit var dialog:Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,6 +86,16 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
                 binding.pbLoadData.visibility = View.VISIBLE
             } else {
                 binding.pbLoadData.visibility = View.GONE
+            }
+        })
+
+        viewModel.successData.observe(requireActivity(), Observer {
+            if (it.status=="1")
+            {
+                dialog.dismiss()
+                Toast.makeText(requireContext(),it.msg,Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(requireContext(),it.msg,Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -182,7 +193,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
     }
 
     fun locationBookingConfrimDialog(shootLocationBookingList:ShootLocationBookingList) {
-        val dialog = Dialog(requireContext())
+        dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.location_booking_details_formanager)
 
@@ -238,6 +249,14 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
             dialog.dismiss()
         })
 
+        rejectBtn.setOnClickListener(OnClickListener {
+            setBookingConfirmation("1",shootLocationBookingList.location_id,shootLocationBookingList.uid,shootLocationBookingList.id)
+        })
+
+        acceptBtn.setOnClickListener(OnClickListener {
+            setBookingConfirmation("2",shootLocationBookingList.location_id,shootLocationBookingList.uid,shootLocationBookingList.id)
+        })
+
         dialog.show()
         dialog.window?.apply {
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -275,5 +294,18 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
 
     override fun onBookingItemClick(shootLocationBookingList:ShootLocationBookingList) {
         locationBookingConfrimDialog(shootLocationBookingList)
+    }
+
+    private fun setBookingConfirmation(status:String,location_id:String,uid:String,booking_id:String)
+    {
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.setLocationBookingConfirmation(status,location_id,uid,booking_id)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.str_error_internet_connections),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

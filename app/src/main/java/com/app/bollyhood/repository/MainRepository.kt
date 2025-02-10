@@ -469,5 +469,23 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
     ) = apiService.getLocationBookingData(
             uid,
         booking_date,
-        )
+    )
+
+    suspend fun setLocationBookingConfirmation(bookingStatus:String
+                                       ,location_id:String
+                                       ,uid:String
+                                       ,booking_id: String
+    ) = apiService.setLocationBookingConfirmation(
+        bookingStatus,
+        location_id,
+        uid,
+        booking_id
+    )
+
+    suspend fun getYourBookingsDetails(uid:String,
+                                       booking_date:String
+    ) = apiService.getYourBookingsDetails(
+        uid,
+        booking_date
+    )
 }

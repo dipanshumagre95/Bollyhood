@@ -462,4 +462,21 @@ interface ApiService {
         @Field("booking_date") booking_date: String,
     ): Response<ShootLocationBookingResponse>
 
+
+    @FormUrlEncoded
+    @POST("location_booked_confirmation.php")
+    suspend fun setLocationBookingConfirmation(
+        @Field("status") status: String,
+        @Field("location_id") location_Id: String,
+        @Field("uid") uid: String,
+        @Field("id") id: String
+    ): Response<SuccessResponse>
+
+    @FormUrlEncoded
+    @POST("get_all_booked_location.php")
+    suspend fun getYourBookingsDetails(
+        @Field("uid") uid: String,
+        @Field("booking_date") booking_date: String
+    ): Response<BookingResponse>
+
 }
