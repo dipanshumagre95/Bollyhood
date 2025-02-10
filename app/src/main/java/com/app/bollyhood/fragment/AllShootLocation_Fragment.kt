@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -22,6 +21,7 @@ import com.app.bollyhood.adapter.LocationListAdapter
 import com.app.bollyhood.databinding.FragmentAllShootLocationBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ShootingLocationModels.ShootLocationModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -136,11 +136,7 @@ class AllShootLocation_Fragment : Fragment(),LocationListAdapter.onItemClick,OnC
             viewModel.getShootLocationList("")
             viewModel.getFeatureLocationList()
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

@@ -98,7 +98,11 @@ class CompanyEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
     }
 
     private fun initUI() {
-        viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        }else{
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
+        }
         binding.edtName.addTextChangedListener(this)
         binding.edtCategory.addTextChangedListener(this)
         binding.edtMobileNumber.addTextChangedListener(this)
@@ -437,11 +441,7 @@ class CompanyEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemCl
                 )
             }
         } else {
-            Toast.makeText(
-                mContext,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

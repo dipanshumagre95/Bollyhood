@@ -20,6 +20,7 @@ import com.app.bollyhood.util.DateUtils.Companion.formatDate
 import com.app.bollyhood.util.DateUtils.Companion.getMillisecondsFromDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayDate
 import com.app.bollyhood.util.DateUtils.Companion.getTodayMilliseconds
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -141,11 +142,7 @@ class BookingActivitys : AppCompatActivity(),OnClickListener {
         if (isNetworkAvailable(this)) {
             viewModel.getYourBookingsDetails(PrefManager(this).getvalue(StaticData.id).toString(),date)
         } else {
-            Toast.makeText(
-                this,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 }

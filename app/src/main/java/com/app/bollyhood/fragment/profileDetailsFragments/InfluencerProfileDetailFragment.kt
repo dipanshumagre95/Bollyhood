@@ -152,9 +152,7 @@ class InfluencerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfil
                         removeBookMarkDialog()
                     }
                 } else {
-                    Toast.makeText(
-                        requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                    ).show()
+                    showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
                 }
             }
 
@@ -164,9 +162,7 @@ class InfluencerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfil
                         PrefManager(requireContext()).getvalue(StaticData.id).toString()
                     )
                 } else {
-                    Toast.makeText(
-                        requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                    ).show()
+                    showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
                 }
             }
         }
@@ -186,9 +182,7 @@ class InfluencerProfileDetailFragment : Fragment(),OnClickListener, ActorsProfil
                     ""
                 )
             } else {
-                Toast.makeText(
-                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         }
 

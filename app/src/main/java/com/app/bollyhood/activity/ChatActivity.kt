@@ -229,9 +229,7 @@ class ChatActivity : AppCompatActivity(),TextWatcher,ChatHistoryAdapter.ChatHist
                 viewModel.getChatHistory(other_uid.toString(), uid.toString())
             }
         } else {
-            Toast.makeText(
-                mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
 
         binding.ivCall.setOnClickListener {

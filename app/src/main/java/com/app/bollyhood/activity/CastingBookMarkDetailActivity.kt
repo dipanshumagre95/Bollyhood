@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -75,11 +74,7 @@ class CastingBookMarkDetailActivity : AppCompatActivity() {
 
 
                 } else {
-                    Toast.makeText(
-                        mContext,
-                        getString(R.string.str_error_internet_connections),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
                 }
             } else {
                 removeBookMarkDialog()
@@ -105,9 +100,7 @@ class CastingBookMarkDetailActivity : AppCompatActivity() {
                     "2"
                 )
             } else {
-                Toast.makeText(
-                    mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         }
 

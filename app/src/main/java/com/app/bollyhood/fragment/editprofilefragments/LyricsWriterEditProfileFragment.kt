@@ -43,6 +43,7 @@ import com.app.bollyhood.activity.MyProfileActivity
 import com.app.bollyhood.activity.MyProfileActivity.Companion.REQUEST_ID_MULTIPLE_PERMISSIONS
 import com.app.bollyhood.adapter.WorkAdapter
 import com.app.bollyhood.databinding.FragmentLyricsWriterEditProfileBinding
+import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.ProfileModel
 import com.app.bollyhood.model.VideoLink
 import com.app.bollyhood.model.WorkLinkProfileData
@@ -92,7 +93,11 @@ class LyricsWriterEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onI
     }
 
     private fun initUI() {
-        viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        }else{
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
+        }
         binding.edtName.addTextChangedListener(this)
         binding.edtCategory.addTextChangedListener(this)
         binding.edtMobileNumber.addTextChangedListener(this)

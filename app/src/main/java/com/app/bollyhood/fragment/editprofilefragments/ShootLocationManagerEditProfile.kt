@@ -96,11 +96,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
         if (isNetworkAvailable(requireContext())) {
             viewModel.getProfile(PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
         binding.edtName.addTextChangedListener(this)
         binding.edtCategory.addTextChangedListener(this)
@@ -472,15 +468,9 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
                     profileBody,
                     imagefile
                 )
-
-
             }
         } else {
-            Toast.makeText(
-                mContext,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 
@@ -554,11 +544,7 @@ class ShootLocationManagerEditProfile : Fragment(), TextWatcher,LocationListAdap
         if (isNetworkAvailable(requireContext())) {
             viewModel.getShootLocationList(PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

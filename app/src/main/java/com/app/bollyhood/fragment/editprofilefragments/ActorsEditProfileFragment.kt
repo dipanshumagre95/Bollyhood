@@ -114,11 +114,7 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
         if (isNetworkAvailable(requireContext())) {
             viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
         initializeImageResultLaunchers()
         binding.edtName.addTextChangedListener(this)
@@ -754,15 +750,9 @@ class ActorsEditProfileFragment : Fragment(), TextWatcher,WorkAdapter.onItemClic
                     profileBody,
                     imagefile
                 )
-
-
             }
         } else {
-            Toast.makeText(
-                mContext,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

@@ -379,10 +379,7 @@ class ShootingLocationDetails : AppCompatActivity(),OnClickListener{
                 )
             }
         } else {
-            Toast.makeText(
-                this, getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 }

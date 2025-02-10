@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -20,6 +19,7 @@ import com.app.bollyhood.adapter.CastingCallsAdapter
 import com.app.bollyhood.databinding.FragmentCastingCallBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -84,11 +84,7 @@ class CastingCallFragment : Fragment(),OnClickListener {
         if (isNetworkAvailable(requireContext())) {
             viewModel.getCastingCalls(PrefManager(requireContext()).getvalue(StaticData.id).toString())
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
 
     }

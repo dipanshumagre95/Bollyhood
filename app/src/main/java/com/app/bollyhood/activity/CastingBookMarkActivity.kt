@@ -2,7 +2,6 @@ package com.app.bollyhood.activity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +12,7 @@ import com.app.bollyhood.adapter.CastingBookMarkAdapter
 import com.app.bollyhood.databinding.ActivityCastingBookMarkBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.CastingCallModel
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -42,9 +42,7 @@ class CastingBookMarkActivity : AppCompatActivity() {
                 PrefManager(mContext).getvalue(StaticData.id).toString()
             )
         } else {
-            Toast.makeText(
-                mContext, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
 
 

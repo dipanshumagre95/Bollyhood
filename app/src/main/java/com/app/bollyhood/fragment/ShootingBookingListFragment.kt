@@ -272,11 +272,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         if (isNetworkAvailable(requireContext())) {
             viewModel.getLocationBookingData(PrefManager(requireContext()).getvalue(StaticData.id).toString(),date)
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 
@@ -302,11 +298,7 @@ class ShootingBookingListFragment : Fragment(), OnClickListener,
         if (isNetworkAvailable(requireContext())) {
             viewModel.setLocationBookingConfirmation(status,location_id,uid,booking_id)
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 }

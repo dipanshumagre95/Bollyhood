@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -126,9 +125,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                     PrefManager(requireContext()).getvalue(StaticData.id),castingCallModel.id
                 )
             } else {
-                Toast.makeText(
-                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         }
     }
@@ -274,9 +271,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                     removeBookMarkDialog(userModel.id)
                 }
             } else {
-                Toast.makeText(
-                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         })
 
@@ -318,9 +313,7 @@ class CastingCall_ApplyedFragment : Fragment(),OnClickListener,CastingCallListAd
                     "2","",""
                 )
             } else {
-                Toast.makeText(
-                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         }
 

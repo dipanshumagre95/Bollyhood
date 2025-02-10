@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -221,9 +220,7 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
                     "2"
                 )
             } else {
-                Toast.makeText(
-                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         }
 
@@ -288,11 +285,7 @@ class CastingDetailsFragment : Fragment(),OnClickListener {
 
 
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.str_error_internet_connections),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
                     }
             }
 

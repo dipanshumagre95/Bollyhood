@@ -80,7 +80,6 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     var locationBookingList = MutableLiveData<BookingResponse>()
 
     fun splashTime() {
-
         viewModelScope.launch {
             delay(StaticData.SPALSH_TIME_OUT.toLong())
             splashLiveData.value = true

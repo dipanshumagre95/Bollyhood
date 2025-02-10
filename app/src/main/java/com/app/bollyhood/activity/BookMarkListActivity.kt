@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -60,9 +59,7 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
         if (isNetworkAvailable(this)) {
            viewModel.myBookMark(PrefManager(this).getvalue(StaticData.id),folder.folder_id)
            } else {
-              Toast.makeText(
-               this, getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-               ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
        }
     }
 
@@ -128,7 +125,11 @@ class BookMarkListActivity : AppCompatActivity(),BookMarkListAdapter.onItemClick
 
     override fun onClick(bookmarkModel: BookMarkModel) {
         categorie_name=bookmarkModel.category_name
-        viewModel.getProfile(bookmarkModel.id)
+        if (isNetworkAvailable(this)) {
+            viewModel.getProfile(bookmarkModel.id)
+        }else{
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
+        }
     }
 
     override fun onClick(view: View?) {

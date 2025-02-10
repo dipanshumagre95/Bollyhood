@@ -1,11 +1,10 @@
 package com.app.bollyhood.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +13,7 @@ import com.app.bollyhood.adapter.AllAgencyAdapter
 import com.app.bollyhood.databinding.ActivityAllAgencyBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.model.castinglist.CastingDataModel
-import com.app.bollyhood.model.castinglist.CastingUserData
+import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
@@ -46,10 +45,7 @@ class AllAgencyActivity : AppCompatActivity(), AllAgencyAdapter.onItemClick {
         if (isNetworkAvailable(this)) {
             viewModel.getAgency(PrefManager(this).getvalue(StaticData.id).toString())
         } else {
-            Toast.makeText(
-                this, getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

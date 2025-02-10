@@ -69,7 +69,11 @@ class LocationManagerEditProfile : Fragment(), TextWatcher, WorkAdapter.onItemCl
     }
 
     private fun initUI() {
-        viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        }else{
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
+        }
         binding.edtName.addTextChangedListener(this)
         binding.edtMobileNumber.addTextChangedListener(this)
         binding.edtDescriptions.addTextChangedListener(this)

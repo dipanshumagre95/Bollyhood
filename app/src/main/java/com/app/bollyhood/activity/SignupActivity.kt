@@ -16,7 +16,6 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -84,10 +83,7 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
             viewModel.getSignupCategory("1")
             isindiviual=true
         } else {
-            Toast.makeText(
-                mContext, getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
 
 
@@ -232,10 +228,7 @@ class SignupActivity : AppCompatActivity(),OnClickListener {
             }
 
         } else {
-            Toast.makeText(
-                mContext, getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

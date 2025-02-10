@@ -108,7 +108,11 @@ class DjEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, 
     }
 
     private fun initUI() {
-        viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        if (isNetworkAvailable(requireContext())) {
+            viewModel.getProfile(PrefManager(mContext).getvalue(StaticData.id).toString())
+        }else{
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
+        }
         initializeImageResultLaunchers()
         binding.edtName.addTextChangedListener(this)
         binding.edtCategory.addTextChangedListener(this)
@@ -787,11 +791,7 @@ class DjEditProfileFragment : Fragment(), TextWatcher, WorkAdapter.onItemClick, 
                 )
             }
         } else {
-            Toast.makeText(
-                mContext,
-                getString(R.string.str_error_internet_connections),
-                Toast.LENGTH_SHORT
-            ).show()
+            showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 

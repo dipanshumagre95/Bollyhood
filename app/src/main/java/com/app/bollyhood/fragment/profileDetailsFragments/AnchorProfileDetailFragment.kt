@@ -19,7 +19,6 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -152,9 +151,7 @@ class AnchorProfileDetailFragment : Fragment(),OnClickListener,ActorsProfileWork
                         removeBookMarkDialog()
                     }
                 } else {
-                    Toast.makeText(
-                        requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                    ).show()
+                    showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
                 }
             }
 
@@ -164,9 +161,7 @@ class AnchorProfileDetailFragment : Fragment(),OnClickListener,ActorsProfileWork
                         PrefManager(requireContext()).getvalue(StaticData.id).toString()
                     )
                 } else {
-                    Toast.makeText(
-                        requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                    ).show()
+                    showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
                 }
             }
         }
@@ -186,9 +181,7 @@ class AnchorProfileDetailFragment : Fragment(),OnClickListener,ActorsProfileWork
                     ""
                 )
             } else {
-                Toast.makeText(
-                    requireContext(), getString(R.string.str_error_internet_connections), Toast.LENGTH_SHORT
-                ).show()
+                showCustomToast(requireContext(),StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
             }
         }
 
