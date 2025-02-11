@@ -5,7 +5,7 @@
     <string name="str_mobile_number">Mobile Number</string>
     <string name="str_privarcy_policy">By continuing , you agree to our</string>
     <string name="str_verification">OTP Verification</string>
-    <string name="str_code_whatsapp">We Will send you a one time password on</string>
+    <string name="str_code_whatsapp">We Will send you a one time password on Updated Mobile Number</string>
     <string name="str_one_time_password">One Time Password</string>
     <string name="str_code">Code</string>
     <string name="str_resend"><u>Send OTP</u></string>

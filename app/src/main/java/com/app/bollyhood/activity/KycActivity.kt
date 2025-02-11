@@ -1,26 +1,27 @@
 package com.app.bollyhood.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.app.Activity
+import android.animation.ValueAnimator
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
+import android.text.Editable
 import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -29,34 +30,19 @@ import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityKycBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
 import com.app.bollyhood.util.DialogsUtils.showCustomToast
-import com.app.bollyhood.util.PermissionUtils
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
 import com.app.bollyhood.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 @AndroidEntryPoint
-class KycActivity : AppCompatActivity(),OnClickListener {
+class KycActivity : AppCompatActivity(),OnClickListener,TextWatcher {
 
     lateinit var binding:ActivityKycBinding
     private val viewModel: DataViewModel by viewModels()
-    private var isCamera:String=""
-    private var adharFrontPhoto:String=""
-    private var adharBackPhoto:String=""
-    private var selfeePhoto:String=""
+    private var isEditing=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,169 +64,67 @@ class KycActivity : AppCompatActivity(),OnClickListener {
 
         viewModel.successData.observe(this, Observer {
             if (it.status == "1") {
-                   binding.photoView.visibility=View.GONE
-                   binding.succssView.visibility=View.VISIBLE
-                   StartAnimation()
+                showLineAnimation(binding.llLine,binding.percentageAdhaar)
+                showWithSlideAnimation(binding.otpView, binding.addharView, false)
             } else {
-                showCustomToast(this,StaticData.pleaseTryAgain,it.msg,StaticData.alert)
+                showCustomToast(this, StaticData.pleaseTryAgain,it.msg, StaticData.alert)
             }
         })
     }
 
     private fun addListner() {
         binding.apply {
-            ivBack.setOnClickListener(this@KycActivity)
-            btnAdharSubmit.setOnClickListener(this@KycActivity)
-            btnPhotosubmit.setOnClickListener(this@KycActivity)
-            btnphotoUpload.setOnClickListener(this@KycActivity)
-            btnfrontUpload.setOnClickListener(this@KycActivity)
-            btnbackUpload.setOnClickListener(this@KycActivity)
+            btnAgree.setOnClickListener(this@KycActivity)
+            llBack.setOnClickListener(this@KycActivity)
+            btnSubmitNumber.setOnClickListener(this@KycActivity)
+            tvVerify.setOnClickListener(this@KycActivity)
             btnBacktohome.setOnClickListener(this@KycActivity)
+            edtAdharNumber.addTextChangedListener(this@KycActivity)
         }
     }
 
     private fun initUI() {
-        setAdharView()
+        setFrontView(true)
         setSpannableString()
-        binding.photoView.visibility=View.VISIBLE
+        setOtpView()
     }
 
-    private fun setSelfeView()
-    {
+    private fun setFrontView(isFont:Boolean) {
         binding.apply {
-            tvStatus.setText("Smile Please \uD83E\uDD2D")
-
-            percentagePhoto.visibility=View.VISIBLE
-            lluploadphoto.visibility=View.VISIBLE
-            succssView.visibility=View.GONE
-
-            percentageAdhaar.visibility=View.GONE
-            llfrontNback.visibility=View.GONE
-        }
-    }
-
-    private fun setAdharView()
-    {
-        binding.apply {
-            tvStatus.setText("Complete KYC")
-
-            percentagePhoto.visibility=View.GONE
-            lluploadphoto.visibility=View.GONE
-            succssView.visibility=View.GONE
-
-            percentageAdhaar.visibility=View.VISIBLE
-            llfrontNback.visibility=View.VISIBLE
+            if (isFont) {
+                firtpageview.visibility=View.VISIBLE
+                adharCardView.visibility=View.GONE
+            } else {
+                showWithSlideAnimation(adharCardView, firtpageview, false)
+            }
         }
     }
 
     override fun onClick(view: View?) {
         when(view?.id){
 
-            R.id.ivBack ->{
-                onBackPressed()
+            R.id.llBack ->{
+                finish()
             }
 
-            R.id.btn_adharSubmit ->{
-                binding.pbLoadData.visibility=View.VISIBLE
-                GlobalScope.launch(Dispatchers.Main) {
-                    delay(5000)
-                    binding.pbLoadData.visibility=View.GONE
-                    setSelfeView()
-                }
+            R.id.btnAgree ->{
+                setFrontView(false)
             }
 
-            R.id.btn_photosubmit ->{
-                uploadKycApi()
+            R.id.btnSubmitNumber ->{
+               // sendNumberForApi()
+                showLineAnimation(binding.llLine,binding.percentageAdhaar)
+                showWithSlideAnimation(binding.otpView, binding.addharView, false)
             }
 
-            R.id.btnphotoUpload ->{
-                if (PermissionUtils.isCamera(this)){
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT)
-                    startForProfileImageResult.launch(intent)
-                    isCamera=Camera.SELFEE.toString()
-                }else{
-                    PermissionUtils.requestCameraPermission(this)
-                }
-            }
-
-            R.id.btnbackUpload ->{
-                if (PermissionUtils.isCamera(this)) {
-                    openCamera()
-                    isCamera = Camera.ADHARBACK.toString()
-                }else{
-                    PermissionUtils.requestCameraPermission(this)
-                }
-            }
-
-            R.id.btnfrontUpload ->{
-                if (PermissionUtils.isCamera(this)) {
-                    openCamera()
-                    isCamera = Camera.ADHARFRONT.toString()
-                }else{
-                    PermissionUtils.requestCameraPermission(this)
-                }
+            R.id.tvVerify ->{
+                showWithSlideAnimation(binding.succssView,binding.adharCardView,false)
+                StartAnimation()
             }
 
             R.id.btn_backtohome ->{
-                onBackPressed()
+                finish()
             }
-        }
-    }
-
-    private fun openCamera()
-    {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startForProfileImageResult.launch(intent)
-    }
-
-    private fun uploadKycApi()
-    {
-        if (isNetworkAvailable(this)) {
-
-            val user_Id: RequestBody = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                PrefManager(this).getvalue(StaticData.id).toString()
-            )
-
-            var frontImageBody: MultipartBody.Part? = null
-            if (adharFrontPhoto.isNotEmpty()) {
-                val file = File(adharFrontPhoto)
-                val requestFile =
-                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                frontImageBody = MultipartBody.Part.createFormData(
-                    "front_image", file.name, requestFile
-                )
-            }
-
-            var backImageBody: MultipartBody.Part? = null
-            if (adharBackPhoto.isNotEmpty()) {
-                val file = File(adharBackPhoto)
-                val requestFile =
-                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                backImageBody = MultipartBody.Part.createFormData(
-                    "back_image", file.name, requestFile
-                )
-            }
-
-            var selfeePhotoBody: MultipartBody.Part? = null
-            if (selfeePhoto.isNotEmpty()) {
-                val file = File(selfeePhoto)
-                val requestFile =
-                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                selfeePhotoBody = MultipartBody.Part.createFormData(
-                    "image", file.name, requestFile
-                )
-            }
-
-            viewModel.uploadKyc(
-                frontImageBody,
-                backImageBody,
-                selfeePhotoBody,
-                user_Id
-            )
-        } else {
-            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
 
@@ -275,49 +159,55 @@ class KycActivity : AppCompatActivity(),OnClickListener {
         binding.tvWhatsaap.setText(spanTxt, TextView.BufferType.SPANNABLE)
     }
 
-    private val startForProfileImageResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            val resultCode = result.resultCode
+    private fun openWhatsAppChat() {
+        val url = "https://wa.me/9920050859"
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "WhatsApp is not installed", Toast.LENGTH_SHORT).show()
+        }
+    }
 
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                        val imageBitmap = result.data?.extras?.get("data") as Bitmap
+    fun showWithSlideAnimation(viewToShow: View, viewToHide: View, isLeftToRight: Boolean) {
+        ObjectAnimator.ofFloat(viewToHide, "translationX", 0f, if (isLeftToRight) viewToHide.width.toFloat() else -viewToHide.width.toFloat()).apply {
+            duration = 300
+            interpolator = DecelerateInterpolator()
+            start()
+        }.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                viewToHide.visibility = View.GONE
+                viewToShow.translationX = if (isLeftToRight) -viewToShow.width.toFloat() else viewToShow.width.toFloat()
+                viewToShow.visibility = View.VISIBLE
 
-                    when(isCamera){
-                        Camera.SELFEE.toString() ->{
-                            selfeePhoto=saveImageToStorage(imageBitmap).toString()
-                           }
-
-                        Camera.ADHARFRONT.toString() ->{
-                            adharFrontPhoto=saveImageToStorage(imageBitmap).toString()
-                           }
-
-                        Camera.ADHARBACK.toString() ->{
-                            adharBackPhoto=saveImageToStorage(imageBitmap).toString()
-                           }
-                       }
-                    }
-
-                else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                ObjectAnimator.ofFloat(viewToShow, "translationX", viewToShow.translationX, 0f).apply {
+                    duration = 300
+                    interpolator = DecelerateInterpolator()
+                    start()
                 }
             }
-        }
+        })
+    }
 
-    private fun saveImageToStorage(bitmap: Bitmap): String? {
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val imageFileName = "JPEG_$timeStamp.jpg"
-        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    fun showLineAnimation(parentView:View,parsentageView:View)
+    {
+        parentView.post {
+            val parentWidth = parentView.width
+            val targetWidth = parentWidth / 2
 
-        return try {
-            val imageFile = File(storageDir, imageFileName)
-            val fos = FileOutputStream(imageFile)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
-            fos.close()
-            imageFile.absolutePath
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
+            parsentageView.visibility = View.VISIBLE
+
+            val animator = ValueAnimator.ofInt(parsentageView.width, targetWidth)
+            animator.duration = 200
+            animator.addUpdateListener { animation ->
+                val animatedValue = animation.animatedValue as Int
+                val params = parsentageView.layoutParams
+                params.width = animatedValue
+                parsentageView.layoutParams = params
+            }
+            animator.start()
         }
     }
 
@@ -338,25 +228,173 @@ class KycActivity : AppCompatActivity(),OnClickListener {
         animatorSet.start()
     }
 
-    private fun openWhatsAppChat() {
-        val url = "https://wa.me/9920050859"
-        try {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            startActivity(intent)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(this, "WhatsApp is not installed", Toast.LENGTH_SHORT).show()
+    private fun sendNumberForApi()
+    {
+        if (isNetworkAvailable(this)) {
+
+            val user_Id: RequestBody = RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(),
+                PrefManager(this).getvalue(StaticData.id).toString()
+            )
+
+            /*viewModel.uploadKyc(
+                "frontImageBody",
+                "backImageBody",
+                "selfeePhotoBody",
+                user_Id
+            )*/
+        } else {
+            showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }
     }
-}
 
-enum class Camera(val camera: String) {
-    SELFEE("Selfee"),
-    ADHARFRONT("AdharFront"),
-    ADHARBACK("AdharBack");
+    private fun setOtpView()
+    {
+        binding.edtNumber1.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable != null) {
+                    if (editable.length == 1) binding.edtNumber2.requestFocus()
+                }
+            }
+        })
 
-    override fun toString(): String {
-        return camera
+        binding.edtNumber2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable != null) {
+                    if (editable.length == 1) binding.edtNUmber3.requestFocus()
+                }
+            }
+        })
+
+
+        binding.edtNUmber3.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable != null) {
+                    if (editable.length == 1) binding.edtNumber4.requestFocus()
+                }
+            }
+        })
+
+        binding.edtNumber4.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable != null) {
+                    if (editable.length == 1) binding.edtNumber5.requestFocus()
+                }
+            }
+        })
+
+        binding.edtNumber5.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable != null) {
+                    if (editable.length == 1) binding.edtNumber6.requestFocus()
+                }
+            }
+        })
+
+
+        binding.edtNumber1.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+            } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                return@OnKeyListener false
+            }
+            false
+        })
+
+
+        binding.edtNumber2.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                if (binding.edtNumber2.text.toString().trim { it <= ' ' }.isEmpty()) {
+                    binding.edtNumber1.requestFocus()
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                return@OnKeyListener false
+            }
+            false
+        })
+
+
+        binding.edtNUmber3.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                if (binding.edtNUmber3.text.toString().trim { it <= ' ' }.isEmpty()) {
+                    binding.edtNumber2.requestFocus()
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                return@OnKeyListener false
+            }
+            false
+        })
+
+        binding.edtNumber4.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                if (binding.edtNumber4.text.toString().trim { it <= ' ' }.isEmpty()) {
+                    binding.edtNUmber3.requestFocus()
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                return@OnKeyListener false
+            }
+            false
+        })
+
+        binding.edtNumber5.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                if (binding.edtNumber5.text.toString().trim { it <= ' ' }.isEmpty()) {
+                    binding.edtNumber4.requestFocus()
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                return@OnKeyListener false
+            }
+            false
+        })
+
+        binding.edtNumber6.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                //this is for backspace
+                if (binding.edtNumber6.text.toString().trim { it <= ' ' }.isEmpty()) {
+                    binding.edtNumber5.requestFocus()
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                return@OnKeyListener false
+            }
+            false
+        })
+
+    }
+
+    override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {}
+
+    override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {}
+
+    override fun afterTextChanged(text: Editable?) {
+        if (isEditing || text.isNullOrEmpty()) return
+
+        isEditing = true
+
+        val cleanText = text.toString().replace("-", "") // Remove existing dashes
+
+        val limitedText = if (cleanText.length > 12) cleanText.substring(0, 12) else cleanText
+
+        val formattedText = StringBuilder()
+
+        for (i in limitedText.indices) {
+            formattedText.append(limitedText[i])
+            if ((i + 1) % 4 == 0 && i + 1 < limitedText.length) {
+                formattedText.append("-") // Insert dash after every 4 characters
+            }
+        }
+
+        binding.edtAdharNumber.setText(formattedText.toString())
+        binding.edtAdharNumber.setSelection(formattedText.length) // Move cursor to end
+
+        isEditing = false
     }
 }

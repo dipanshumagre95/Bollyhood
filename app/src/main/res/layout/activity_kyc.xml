@@ -8,336 +8,657 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/llBack"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:elevation="@dimen/_10sdp"
+            android:src="@drawable/white_back_icon"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:text="Get KYC Verified"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_centerHorizontal="true"/>
+
         <RelativeLayout
-            android:id="@+id/photo_view"
+            android:id="@+id/firtpageview"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/llBack"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/letStartedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Let’s get started"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semibold"
+                android:maxLines="1"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To ensure the security of your account and protect against fraud, we require you to complete our identity verification process"
+                android:layout_below="@+id/letStartedText"
+                android:textSize="12sp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"/>
+
+            <RelativeLayout
+                android:id="@+id/firstView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_below="@+id/tvDes">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/kyc_person_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textAdharCord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Adhaar Card"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/image1"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="We just need your adhaar card and OTP"
+                    android:textSize="12sp"
+                    android:layout_below="@+id/textAdharCord"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/image1"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/secondView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_below="@+id/firstView">
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/kyc_location_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Video Verification"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/image2"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You’ll have to record video using in app feature to insure smooth process."
+                    android:textSize="12sp"
+                    android:layout_below="@+id/text4"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/image2"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/thirdView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_below="@+id/secondView">
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/kyc_scanner_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Facial recognition ( Optional )"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/image3"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please Use Facial recognition or Passcode to insure your security"
+                    android:textSize="12sp"
+                    android:layout_below="@+id/text5"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/image3"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/llFourthView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Clicking the continue button means that I have read and agreed to the user identity authentication information statement"
+                    android:textSize="12sp"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/poppins_medium"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/btnAgree"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/rectangle_app_background"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_below="@+id/text6"
+                    android:text="Agree and continue"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/adharCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:padding="10dp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/baseline_keyboard_backspace_24"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="KYC"
-            android:textColor="@color/black"
-            android:textSize="18dp"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/montserrat_semibold"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Complete KYC"
-            android:textSize="@dimen/_25sdp"
-            android:textColor="#EF4F6A"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_30sdp"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@+id/ivBack"/>
-
-        <RelativeLayout
-            android:id="@+id/llLine"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/ractangle_passport"
-            android:layout_below="@+id/tvStatus">
-
-            <View
-                android:id="@+id/percentage_adhaar"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:background="@drawable/rectangle_app_background"/>
-
-            <View
-                android:id="@+id/percentage_photo"
-                android:layout_width="@dimen/_180sdp"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:background="@drawable/rectangle_app_background"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/llLine">
-
-        <RelativeLayout
-            android:id="@+id/llfrontNback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:visibility="gone"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/rectangle_chatwhite"
-            android:elevation="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_15sdp">
+            android:layout_below="@+id/llBack">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvtextAdhaar"
+                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Easy Adhaar Card Verification"
-                android:textSize="22dp"
+                android:text="Aadhaar KYC"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="visible"
+                android:textSize="22sp"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_centerHorizontal="true"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvpleaseUpload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Please upload your Aadhar card below \nfor completing your KYC."
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/tvtextAdhaar"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:textSize="@dimen/_13sdp"
-                android:textColor="@color/gray"
-                android:fontFamily="@font/poppins_regular"/>
+                android:fontFamily="@font/poppins_semibold"
+                android:maxLines="1"/>
 
             <RelativeLayout
-                android:id="@+id/rrfrontPhoto"
+                android:id="@+id/llLine"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
-                android:background="@drawable/rectangle_chatwhite"
-                android:elevation="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:layout_below="@+id/tvpleaseUpload">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvfrontUpload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload aadhaar card back photo"
-                    android:textSize="15dp"
-                    android:textColor="@color/gray"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_20sdp"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/btnfrontUpload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:background="@drawable/rectangle_black_button"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:layout_below="@+id/tvfrontUpload"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerHorizontal="true"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:fontFamily="@font/poppins_semibold"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rrBackPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:background="@drawable/rectangle_chatwhite"
-                android:elevation="@dimen/_5sdp"
-                android:layout_below="@+id/rrfrontPhoto">
-
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvbackUpload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload aadhaar card front photo"
-                    android:textSize="15dp"
-                    android:textColor="@color/gray"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_20sdp"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/btnbackUpload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:background="@drawable/rectangle_black_button"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:layout_below="@+id/tvbackUpload"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerHorizontal="true"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:fontFamily="@font/poppins_semibold"/>
-
-            </RelativeLayout>
-            
-            
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/btn_adharSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_33sdp"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
-                android:layout_below="@+id/rrBackPhoto"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginBottom="@dimen/_25sdp"
-                android:background="@drawable/rectangle_app_background"
-                android:text="Submit"
-                android:elevation="5dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:fontFamily="@font/poppins_bold"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/lluploadphoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:visibility="gone"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/rectangle_chatwhite"
-            android:elevation="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_15sdp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvtextphoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Please Upload Your Selfie. "
-                android:textSize="22dp"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:textColor="@color/gray"
-                android:fontFamily="@font/inter_semibold"
-                android:layout_centerHorizontal="true"/>
+                android:background="@drawable/ractangle_passport"
+                android:layout_below="@+id/text">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvpleaseUploadPhoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Its Only For The Verification Purpose. Its Not Going To Be \nVisible AnyWhere."
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/tvtextphoto"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:textSize="@dimen/_8sdp"
-                android:textColor="@color/gray"
-                android:fontFamily="@font/inter_regular"/>
+                <View
+                    android:id="@+id/percentage_adhaar"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:background="@drawable/rectangle_app_background"/>
+
+            </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rrPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
-                android:background="@drawable/rectangle_chatwhite"
-                android:elevation="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:layout_below="@+id/tvpleaseUploadPhoto">
+                android:id="@+id/llItemView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="visible"
+                android:layout_below="@+id/llLine">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvphotoUpload"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/addharView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Upload your Photo"
-                    android:textSize="15dp"
-                    android:textColor="@color/gray"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_20sdp"/>
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:elevation="@dimen/_3sdp"
+                    android:visibility="visible"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_chatwhite">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/btnphotoUpload"
-                    android:layout_width="wrap_content"
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/adhertext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Adhaar Card Instant KYC"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/addarDesText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/adhertext"
+                        android:text="Please upload your Aadhar card below for completing your first step of KYC."
+                        android:textSize="12sp"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAdharText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name as per Adhar Card"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/addarDesText"
+                        android:textSize="16sp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:elevation="@dimen/_3sdp"
+                        android:textSize="14sp"
+                        android:hint="Enter Full Name"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_below="@+id/tvAdharText"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAdharCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Adhaar Card Number"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/edtName"
+                        android:textSize="16sp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_marginStart="@dimen/_8sdp"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtAdharNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/rectangle_grey"
+                        android:elevation="@dimen/_3sdp"
+                        android:textSize="14sp"
+                        android:maxLength="14"
+                        android:phoneNumber="true"
+                        android:hint="Enter Adhar Number"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_below="@+id/tvAdharCard"/>
+
+                    <RelativeLayout
+                        android:id="@+id/llteamNcondition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_below="@+id/edtAdharNumber"
+                        android:layout_marginEnd="24sp">
+
+                        <CheckBox
+                            android:id="@+id/cbteamNcondition"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_gravity="center"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvteam_condition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/cbteamNcondition"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center_vertical"
+                            android:text="I hereby agree that the above document belongs to me &amp; voluntarily give my consent to Fourdegreewater Capital Pvt Ltd (Wint Wealth) to utilize it as my address proof for KYC on purpose only"
+                            android:textSize="12dp"
+                            tools:ignore="TextSizeCheck" />
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/btnSubmitNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/rectangle_app_background"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_below="@+id/llteamNcondition"
+                        android:text="Submit"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/otpView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Upload"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:background="@drawable/rectangle_black_button"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:layout_below="@+id/tvphotoUpload"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerHorizontal="true"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:fontFamily="@font/poppins_bold"/>
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:elevation="@dimen/_3sdp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/rectangle_chatwhite">
+
+                    <LinearLayout
+                        android:id="@+id/lltext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvverification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center"
+                            android:text="@string/str_verification"
+                            android:textColor="#474646"
+                            android:textSize="22sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/str"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/str_code_whatsapp"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="6"
+                        android:layout_below="@+id/lltext">
+
+
+                        <EditText
+                            android:id="@+id/edtNumber1"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:autofillHints="phone"
+                            android:background="@drawable/otp_number_bg"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <EditText
+                            android:id="@+id/edtNumber2"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:autofillHints="phone"
+                            android:background="@drawable/otp_number_bg"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+                        <EditText
+                            android:id="@+id/edtNUmber3"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:autofillHints="phone"
+                            android:background="@drawable/otp_number_bg"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+                        <EditText
+                            android:id="@+id/edtNumber4"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:autofillHints="phone"
+                            android:background="@drawable/otp_number_bg"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <EditText
+                            android:id="@+id/edtNumber5"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:autofillHints="phone"
+                            android:background="@drawable/otp_number_bg"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+                        <EditText
+                            android:id="@+id/edtNumber6"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:autofillHints="phone"
+                            android:background="@drawable/otp_number_bg"
+                            android:fontFamily="@font/urbanist_regular"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lldo_not_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/llCode"
+                        app:layout_constraintBottom_toTopOf="@+id/tvVerify"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Do not send OTP ?"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvsend_otp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/str_resend"
+                            android:textColor="#E9890A"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvVerify"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/rectangle_app_background"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_below="@+id/lldo_not_send"
+                        android:text="Verify Otp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/btn_photosubmit"
+                android:id="@+id/tvWhatsaap"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_33sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
-                android:layout_below="@+id/rrPhoto"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginBottom="@dimen/_25sdp"
-                android:background="@drawable/rectangle_app_background"
-                android:text="Submit"
-                android:elevation="5dp"
+                android:layout_below="@+id/llItemView"
+                android:visibility="visible"
+                android:text="If you are facing any difficulties, please get in touch with us on Whatsapp"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:fontFamily="@font/poppins_bold"/>
-
+                android:textColor="@color/gray"
+                android:textSize="12dp"
+                android:fontFamily="@font/inter_semibold"
+                tools:ignore="TextSizeCheck"/>
         </RelativeLayout>
-
-      </RelativeLayout>
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvWhatsaap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_25sdp"
-            android:layout_marginEnd="@dimen/_25sdp"
-            android:layout_below="@+id/view"
-            android:text="If you are facing any difficulties, please get in \ntouch with us on Whatsapp"
-            android:gravity="center"
-            android:layout_marginTop="-11dp"
-            android:textColor="@color/gray"
-            android:textSize="14dp"
-            android:fontFamily="@font/inter_semibold"/>
-
-    </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/succss_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/successIcon"
@@ -366,12 +687,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/btn_backtohome"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:text="Thanks for submitting your document we’ll verify it \nand complete your KYC as soon as possible"
                 android:textColor="@color/gray"
-                android:textSize="14dp" />
+                android:textSize="12dp" />
 
 
             <RelativeLayout
@@ -405,7 +728,6 @@
             </RelativeLayout>
 
         </RelativeLayout>
-
 
         <ProgressBar
             android:id="@+id/pbLoadData"
