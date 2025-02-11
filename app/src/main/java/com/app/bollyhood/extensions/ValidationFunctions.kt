@@ -55,6 +55,21 @@ fun isvalidName(context: Context, edtName: String): Boolean {
     return isValid
 }
 
+fun isValidAadhaarNumber(context: Context, edtAadhaarNumber: String): Boolean {
+    return if (edtAadhaarNumber.isEmpty() || edtAadhaarNumber.length != 12 || !edtAadhaarNumber.all { it.isDigit() }) {
+        showCustomToast(
+            context,
+            StaticData.actionRequired,
+            context.getString(R.string.str_error_aadhaar_number),
+            StaticData.alert
+        )
+        false
+    } else {
+        true
+    }
+}
+
+
 fun isvalidProductionHouseName(context: Context, edtName: String): Boolean {
     var isValid = true
     if (edtName.isEmpty()) {

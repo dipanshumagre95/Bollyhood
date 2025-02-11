@@ -87,15 +87,13 @@ class MainRepository @Inject constructor(val apiService: ApiService) {
         company_logo)
 
 
-    suspend fun uploadKyc(
-        front_image: MultipartBody.Part?,
-        back_image: MultipartBody.Part?,
-        image: MultipartBody.Part?,
+    suspend fun sendNumberForApi(
+        adhar_name: RequestBody,
+        adhar_number: RequestBody,
         user_Id: RequestBody
-      )=apiService.uploadKyc(
-        front_image,
-        back_image,
-        image,
+      )=apiService.sendNumberForApi(
+        adhar_name,
+        adhar_number,
         user_Id
      )
 

@@ -29,6 +29,8 @@ import androidx.lifecycle.Observer
 import com.app.bollyhood.R
 import com.app.bollyhood.databinding.ActivityKycBinding
 import com.app.bollyhood.extensions.isNetworkAvailable
+import com.app.bollyhood.extensions.isValidAadhaarNumber
+import com.app.bollyhood.extensions.isvalidName
 import com.app.bollyhood.util.DialogsUtils.showCustomToast
 import com.app.bollyhood.util.PrefManager
 import com.app.bollyhood.util.StaticData
@@ -230,19 +232,35 @@ class KycActivity : AppCompatActivity(),OnClickListener,TextWatcher {
 
     private fun sendNumberForApi()
     {
+        val cleanedAadhaar = binding.edtAdharNumber.toString().trim().replace("-", "")
         if (isNetworkAvailable(this)) {
+            if (isvalidName(
+                    this, binding.edtName.text.toString().trim()
+                )&& isValidAadhaarNumber(
+                    this,cleanedAadhaar
+                )) {
 
-            val user_Id: RequestBody = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                PrefManager(this).getvalue(StaticData.id).toString()
-            )
+                val user_Id: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    PrefManager(this).getvalue(StaticData.id).toString()
+                )
 
-            /*viewModel.uploadKyc(
-                "frontImageBody",
-                "backImageBody",
-                "selfeePhotoBody",
-                user_Id
-            )*/
+                val adhar_number: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    cleanedAadhaar
+                )
+
+                val adhar_name: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(),
+                    binding.edtName.text.toString().trim()
+                )
+
+                viewModel.sendNumberForApi(
+                    adhar_name,
+                    adhar_number,
+                    user_Id
+                )
+            }
         } else {
             showCustomToast(this,StaticData.networkIssue,getString(R.string.str_error_internet_connections),StaticData.close)
         }

@@ -391,19 +391,17 @@ class DataViewModel @Inject constructor(@ApplicationContext val Mcontext :Contex
     }
 
 
-    fun uploadKyc(
-        front_image: MultipartBody.Part?,
-        back_image: MultipartBody.Part?,
-        image: MultipartBody.Part?,
+    fun sendNumberForApi(
+        adhar_name: RequestBody,
+        adhar_number: RequestBody,
         user_Id: RequestBody
     ) {
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val response = mainRepository.uploadKyc(
-                    front_image,
-                    back_image,
-                    image,
+                val response = mainRepository.sendNumberForApi(
+                    adhar_name,
+                    adhar_number,
                     user_Id
                 )
 

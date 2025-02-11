@@ -214,10 +214,9 @@ interface ApiService {
 
     @Multipart
     @POST("adhar_kyc.php")
-    suspend fun uploadKyc(
-        @Part front_image: MultipartBody.Part?,
-        @Part back_image: MultipartBody.Part?,
-        @Part image: MultipartBody.Part?,
+    suspend fun sendNumberForApi(
+        @Part ("adhar_name") adhar_name: RequestBody,
+        @Part("adhar_number") adhar_number:RequestBody,
         @Part("uid") uid: RequestBody,
     ):Response<SuccessResponse>
 

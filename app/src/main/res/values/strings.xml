@@ -154,6 +154,7 @@
     <string name="str_error_otp">Please enter valid otp</string>
     <string name="str_upload_profile_picture">Please upload profile picture</string>
     <string name="str_error_name">Please enter name</string>
+    <string name="str_error_aadhaar_number">Please Enter Vaild Adhar Number</string>
     <string name="str_error_email_address">Please enter email address</string>
     <string name="str_error_valid_email_address">Please enter valid email address</string>
     <string name="str_error_category">Please select category</string>
